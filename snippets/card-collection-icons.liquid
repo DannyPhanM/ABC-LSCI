@@ -1,0 +1,91 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - columns: {Number}
+  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
+  - placeholder_image: {String} Placeholder image when collection is empty (optional)
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+{%- liquid
+  assign ratio = 1
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+
+-%}
+
+<div class="{{ collection_card_text_alignment }} card-wrapper animate-arrow {% if wrapper_class and wrapper_class != 'none' %}{{ wrapper_class }}{% else %}collection-card-wrapper{% endif %} {% if custom_icon != 'none' %}card-icon-full{% endif %}">
+  <div class="card {{ card_position }}
+      card--{{ coll_card_style }} {% if custom_icon != 'none' %} card_icon_display{% endif %}
+      {% if coll_image != blank or custom_icon != 'none' %} card--media{% else %} card--text{% endif %}
+      {%- if card_collection == blank and custom_icon == 'none' -%} card-place{% endif %}
+      {%- if card_collection == blank and custom_title == blank -%} card-blank-center{% endif %}
+      {% if coll_card_style == 'card' %} color-{{ collection_card_color_scheme }} gradient{% endif %}
+      {% if text_position == 'over_image' %} color-{{ collection_card_color_scheme }} gradient{% endif %}
+      {% if coll_image == blank and custom_icon == 'none' %} img_icon_none{% endif %}
+      {% if extend_height %} card--extend-height{% endif %}
+      {% if coll_card_style == 'card' %} ratio{% endif %}"
+    style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+    <div class="card__inner {% if coll_image != blank or custom_icon != 'none' or coll_card_style == 'standard' %} ratio{% endif %}"
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+      {% if custom_icon != 'none' %}
+        <div class="card__media">
+          <div class="media media--transparent media--hover-effect">
+            <a {% if custom_url == blank %} role="link" aria-disabled="true" {% else %} href="{{ custom_url }}" {% endif %} class="cardicon full-unstyled-link" title="{{ custom_title | escape }}">
+              {% render 'icon-accordion', icon: custom_icon %}
+            </a>
+          </div>
+        </div>
+      {%- elsif coll_image -%}
+        <div class="card__media">
+          <div class="media media--transparent media--hover-effect">
+            <a {% if custom_url == blank %} role="link" aria-disabled="true" {% else %} href="{{ custom_url }}" {% endif %} class="full-unstyled-link" title="{{ custom_title | escape }}">
+              <img src="{{ coll_image | image_url: width: 50, height: 50 }}"
+              sizes="
+                (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+                (min-width: 768px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+                calc(100vw - 3rem)"
+              alt=""
+              height="50"
+              width="50"
+              loading="lazy"
+              class="motion-reduce">
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if custom_title != blank -%}
+        <div class="card__content">
+          <div class="card__information">
+            <h3 class="card__heading {{ coll_name_size }} {% if uppercase_name == true %}uppercase{% endif %}">
+              <a {% if custom_url == blank %}role="link" aria-disabled="true" {% else %} href="{{ custom_url }}"{% endif %} class="full-unstyled-link" title="{{ custom_title | escape }}">
+                              <span class="col_ic__fontsize">{{- custom_title | escape -}}</span>
+
+              </a>
+            </h3>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if coll_card_style == 'card' or coll_image != blank or custom_icon != 'none' -%}
+      {%- if custom_title != blank -%}
+        <div class="card__content">
+          <div class="card__information">
+            <h3 class="card__heading {{ coll_name_size }} {% if uppercase_name == true %}uppercase{% endif %}">
+              <a {% if custom_url == blank %} role="link" aria-disabled="true" {% else %} href="{{ custom_url }}" {% endif %} class="full-unstyled-link" title="{{ custom_title | escape }}">
+                <span>{{- custom_title | escape -}}</span>
+              </a>
+            </h3>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>

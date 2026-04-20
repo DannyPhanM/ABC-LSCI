@@ -1,0 +1,371 @@
+{{ 'section-promo-code.css' | asset_url | stylesheet_tag: preload: true }}
+{%- style -%}
+.section-{{ section.id }}-padding .section-head strong, .section-{{ section.id }}-padding .section-head b {
+  color: {{ section.settings.headcolor }};
+}
+.section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.45 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.45 | round: 0 }}px;
+}
+@media screen and (min-width: 992px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} isolate gradient promocode">
+  <div class="{% if section.settings.layout == 'full_width' %}section-full {% else %}page-width{% endif %}">
+
+    {%- for block in section.blocks -%}
+      <div class="{{ block.settings.text_align }} promocode_inner">
+        <span class="promo_1{% if block.settings.uppercase_text %} uppercase{% endif %}">{{ block.settings.promo_text }}</span>
+        {% if block.settings.icon != 'none' %}
+          <span class="promo_svg">{% render 'icon-accordion', icon: block.settings.icon %}</span>
+        {% endif %}
+        <span class="promo_2{% if block.settings.uppercase_code %} uppercase{% endif %}">{{ block.settings.promo_code }}</span>
+      </div>
+
+      {%- style -%}
+        .section-{{ section.id }}-padding .promo_svg svg {
+          width: {{ block.settings.icon_size }}px;
+          height: {{ block.settings.icon_size }}px;
+        }
+        .section-{{ section.id }}-padding.promocode .promocode_inner {
+          font-size: {{ block.settings.font_size }}px;
+        }
+        @media (min-width: 992px) and (max-width: 1199px) {
+          .section-{{ section.id }}-padding.promocode .promocode_inner {
+            font-size: {{ block.settings.font_size | times: 0.8 | round: 0 }}px;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 991px) {
+          .section-{{ section.id }}-padding.promocode .promocode_inner {
+            font-size: {{ block.settings.font_size | times: 0.7 | round: 0 }}px;
+          }
+        }
+        @media (max-width: 767px) {
+          .section-{{ section.id }}-padding.promocode .promocode_inner {
+            font-size: 20px;
+          }
+          .section-{{ section.id }}-padding .promo_svg svg {
+            width: 30px;
+            height: 30px;
+          }
+        }
+        {% if block.settings.outline_text %}
+          .section-{{ section.id }}-padding.promocode .promo_1 {
+            -webkit-text-fill-color: rgb(var(--color-background));
+            -webkit-text-stroke-width: 3px;
+            -webkit-text-stroke-color: var(--color-foreground);
+            background: rgb(var(--color-foreground));
+            -webkit-background-clip: text;
+            color: transparent;
+          }
+        {% endif %}
+        {% if block.settings.outline_text2 %}
+          .section-{{ section.id }}-padding.promocode .promo_2 {
+            -webkit-text-fill-color: rgb(var(--color-background));
+            -webkit-text-stroke-width: 3px;
+            -webkit-text-stroke-color: var(--color-foreground);
+            background: rgb(var(--color-foreground));
+            -webkit-background-clip: text;
+            color: transparent;
+          }
+        {% endif %}
+      {%- endstyle -%}
+    {%- endfor -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.promotion_code.name",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "accent-1"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "full_width",
+          "label": "t:sections.slideshow.settings.layout.options__1.label"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.slideshow.settings.layout.options__2.label"
+        }
+      ],
+      "default": "grid",
+      "label": "t:sections.slideshow.settings.layout.label"
+    },
+    
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "promo_text",
+          "label": "t:sections.custom_text.settings.text.label",
+          "default": "Add promotional text here"
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase_text",
+          "default": false,
+          "label": "t:sections.custom_text.settings.upper_text.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "outline_text",
+          "label": "t:sections.scrolling-bar.blocks.settings.outline_text.label",
+          "default": true
+        },
+
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "payment",
+              "label": "Payment"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "shine",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__66.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            }
+          ],
+          "default": "shine",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.label"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "min": 20,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "label": "t:sections.custom_text.settings.icon_size.label",
+          "default": 40
+        },
+
+        {
+          "type": "inline_richtext",
+          "id": "promo_code",
+          "label": "t:sections.custom_text.settings.promo_code.label",
+          "default": "Add promotional code here"
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase_code",
+          "default": false,
+          "label": "t:sections.custom_text.settings.upper_text.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "outline_text2",
+          "label": "t:sections.scrolling-bar.blocks.settings.outline_text.label"
+        },
+
+
+        {
+          "type": "select",
+          "id": "text_align",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.image-banner.settings.desktop_content_alignment.options__1.label"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.image-banner.settings.desktop_content_alignment.options__2.label"
+            },
+            {
+              "value": "right",
+              "label": "t:sections.image-banner.settings.desktop_content_alignment.options__3.label"
+            }
+          ],
+          "default": "center",
+          "label": "t:sections.custom_text.settings.text_align.label"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 20,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "label": "t:sections.custom_text.settings.text_size.label",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.promotion_code.name",
+      "blocks": [
+        {
+          "type": "text"
+        },
+      ]
+    }
+  ]
+}
+{% endschema %}

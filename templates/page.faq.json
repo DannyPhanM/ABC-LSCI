@@ -1,0 +1,360 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "heading_position": "center",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_eH4aC4": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_cxMtak": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Lợi ích khi trở thành thành viên của ABC-MART là gì?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p><strong>Chỉ cần 1 lần đăng ký, bạn đã trở thành thành viên của ABC-MART và được hưởng rất nhiều quyền lợi như sau:</strong></p><ul><li>Tặng ngay 200 điểm - đổi voucher 200k.</li><li>Được lưu trữ thông tin thanh toán để mua sắm nhanh hơn trong lần tiếp theo.</li><li>Cập nhật thông tin tài khoản.</li><li>Theo dõi trạng thái đơn hàng.</li><li>Xem lịch sử mua hàng.</li><li>Tùy chọn đăng ký nhận bản tin ABC-MART để đón đầu các ưu đãi và sự kiện mới nhất.</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_cxMtak"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "<strong>ĐĂNG KÝ THÀNH VIÊN</strong>",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "subtext": "",
+        "heading_position": "left",
+        "layout": "cborder",
+        "color_scheme_bg": "",
+        "content_hsize": "h0",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_tPh83P": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_mxYjTX": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Làm thế nào để mua sắm trên ABC-MART Việt Nam?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Bạn có thể mua sắm các sản phẩm yêu thích của mình một cách dễ dàng, chỉ cần làm theo các bước đơn giản sau:</p><ol><li>Chọn sản phẩm bạn muốn mua.</li><li>Chọn size sản phẩm (lưu ý hạng mục nam, nữ, unisex), sau đó chọn \"Thêm vào giỏ hàng\".</li><li>Để thêm các sản phẩm khác, hãy lặp lại bước 1 và 2.</li><li>Sau khi hoàn tất, hãy nhấp vào “Mua Ngay” ở góc bên phải của hình sản phẩm.</li><li>Xem lại giỏ hàng.</li><li>Nhấp vào \"Mua ngay\" để hoàn tất mua sắm và thanh toán.</li><li>Điền địa chỉ email hợp lệ của bạn và chi tiết địa chỉ giao hàng nếu bạn thanh toán với tư cách khách. Bạn cũng có thể đăng nhập vào tài khoản đã đăng ký tại ABC-MART Việt Nam bằng cách nhấp vào \"Đăng nhập\" (icon người ở góc phải trên cùng trang).</li><li>Hoàn thành địa chỉ giao hàng và phương thức giao hàng của bạn.</li><li>Xem lại đơn đặt hàng của bạn và đảm bảo thông tin đã chính xác, sau đó chọn \"Tiếp theo\".</li><li>Chọn một trong các phương thức thanh toán bên dưới:</li></ol><ul><li>Thẻ Tín Dụng</li><li>Thẻ ATM / Tài khoản ngân hàng</li><li>Ngân hàng di động và ví điện tử</li></ul><ol><li>Nhấp vào \"Đặt hàng\" và hoàn tất thanh toán của bạn.</li><li>Bạn sẽ nhận được thông báo trạng thái đơn hàng trên email của mình.</li></ol>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8kYLPf": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Phương thức mua sắm tại ABC-MART Việt Nam là gì?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Bạn có thể mua sắm tại ABC-MART Việt Nam bằng các phương thức sau:</p><ul><li>Thông qua trang web chính thức của chúng tôi tại ABC-MART Việt Nam.</li><li>Tại các cửa hàng bán lẻ của chúng tôi, vui lòng xem “Hệ thống Cửa Hàng”.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zTtp8Y": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Tôi có thể theo dõi đơn hàng của mình không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Bạn có thể inbox cho admin để được kiểm tra tình trạng đơn hàng chính xác nhất.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_mxYjTX",
+        "collapsible_row_8kYLPf",
+        "collapsible_row_zTtp8Y"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "ĐẶT HÀNG",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "subtext": "",
+        "heading_position": "left",
+        "layout": "cborder",
+        "color_scheme_bg": "",
+        "content_hsize": "h0",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_96XqME": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_W7QxPE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Sản phẩm được bán trên trang web có khác với sản phẩm trên cửa hàng không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Sẽ có một số mẫu chỉ được bán trên cửa hàng hoặc ngược lại, chỉ một số mẫu sẽ chỉ có trên trang web. Tuy nhiên, chúng tôi sẽ cố gắng thể hiện nhiều nhất có thể để khách hàng có thể lựa chọn và mua sắm.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_74hPfj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Có sự khác biệt về giá giữa sản phẩm trên trang web và cửa hàng không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Tất cả các mức giá đều giống nhau, tuy nhiên, trong một số khoảng thời gian nhất định, chúng tôi có thể có các chương trình khuyến mãi đặc biệt trên trang web hoặc chỉ tại các cửa hàng nhất định.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_A78Udi": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Xem kích thước sản phẩm như thế nào?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Vui lòng làm theo các bước sau:</p><ol><li>Truy cập trang sản phẩm.</li><li>Nhấp vào phần \"Size Guide\" dưới tên sản phẩm để xem chính xác size của bạn.</li><li>Lưu ý kỹ mục giày Nam, Nữ, Unisex, dây size US hoặc UK v.v để tránh đặt sai kích thước. Sau khi chọn đúng kích thước, chỉ cần nhấp vào tùy chọn kích thước và thêm sản phẩm vào giỏ hàng của bạn hoặc mua ngay để tránh hết size bạn nhé.</li></ol>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DwDyLn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Các sản phẩm có được bán chính hãng không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Chúng tôi đảm bảo tất cả các sản phẩm được bán trong cửa hàng chính thức của chúng tôi là 100% sản phẩm chính hãng.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_aBygzX": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Sản phẩm có sẵn không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Các sản phẩm chúng tôi có trên trang web của chúng tôi liên tục được cập nhật, do đó chúng tôi không thể đảm bảo tính sẵn có của sản phẩm. Sản phẩm có sẵn nếu kích thước hoặc sản phẩm có thể được chọn hoặc thêm vào giỏ hàng. Nếu không thể nhấp vào sản phẩm và kích thước, thì sản phẩm đó đã hết hàng hoặc hết size.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_XwhUP9": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Sản phẩm được sản xuất tại những quốc gia nào?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Tất cả các sản phẩm từ khu vực châu Á được sản xuất tại Trung Quốc, Việt Nam, Ấn Độ, Indonesia, Nhật Bản. Các sản phẩm sẽ được gửi theo thứ tự ngẫu nhiên và dựa trên tình trạng sẵn có của sản phẩm, do đó chúng tôi không thể xác nhận sản phẩm sản xuất tại quốc gia nào sẽ được gửi cho bạn.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_W7QxPE",
+        "collapsible_row_74hPfj",
+        "collapsible_row_A78Udi",
+        "collapsible_row_DwDyLn",
+        "collapsible_row_aBygzX",
+        "collapsible_row_XwhUP9"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "SẢN PHẨM",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "subtext": "",
+        "heading_position": "left",
+        "layout": "cborder",
+        "color_scheme_bg": "",
+        "content_hsize": "h0",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_Vdine3": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_FGz97E": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Các hình thức thanh toán được chấp nhận trên website ABC Mart Việt Nam?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p><strong>ABC-MART có các hình thức thanh toán tiện lợi như sau:</strong></p><ul><li>Thanh toán online qua cổng thanh toán bằng thẻ thanh toán quốc tế VISA, MasterCard, JCB.</li><li>Thanh toán online bằng thẻ ATM nội địa.</li><li>Thanh toán trực tiếp khi nhận hàng (COD).</li><li>Thanh toán qua ví điện tử.</li></ul><p><strong>THANH TOÁN ONLINE QUA THẺ TÍN DỤNG/THẺ GHI NỢ VISA, MASTER CARD, JCB</strong></p><ul><li>Khách hàng sử dụng các loại thẻ tín dụng/ghi nợ/trả trước VISA, MasterCard, JCB của các Ngân hàng trong nước và nước ngoài phát hành.</li><li>Toàn bộ hệ thống thanh toán được bảo mật theo Tiêu Chuẩn Quốc Tế PCI-DSS, khách hàng có thể hoàn toàn yên tâm khi thanh toán bằng hình thức trả trước qua thẻ tín dụng/thẻ ghi nợ tại website.</li><li>Giao dịch được ghi nhận là thành công khi khách hàng nhận được thông báo từ hệ thống cổng thanh toán trả về trạng thái “Giao dịch thành công” (đảm bảo số dư/hạn mức và xác thực khách hàng theo quy định sử dụng của thẻ).</li></ul><p><strong>THANH TOÁN ONLINE QUA THẺ ATM NỘI ĐỊA</strong></p><ul><li>Khách hàng thanh toán số tiền mua hàng bằng thẻ ATM nội địa của hơn 40 ngân hàng trong nước phát hành có kết nối với cổng thanh toán.</li><li>Hình thức thanh toán đơn giản, dễ sử dụng, trực quan và an toàn chỉ trong 3 bước:</li><li>Ngoài ra, để thanh toán bằng thẻ ngân hàng nội địa, thẻ của khách hàng phải được đăng ký sử dụng tính năng thanh toán trực tuyến, hoặc ngân hàng điện tử của Ngân hàng.</li><li>Giao dịch được ghi nhận là thành công khi khách hàng nhận được thông báo từ hệ thống cổng thanh toán trả về trạng thái “Giao dịch thành công” (đảm bảo số dư/hạn mức và xác thực khách hàng theo quy định sử dụng của thẻ).</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_FGz97E"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "THANH TOÁN",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "subtext": "",
+        "heading_position": "left",
+        "layout": "cborder",
+        "color_scheme_bg": "",
+        "content_hsize": "h0",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_7KQkNW": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_QERGJz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Phí vận chuyển / giao hàng là bao nhiêu?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<ul><li>Chúng tôi áp dụng đồng giá vận chuyển như sau:</li><li>Đối với giao hàng tiêu chuẩn, ABC-MART sẽ miễn phí ship cho đơn hàng từ 3 triệu, đối với đơn hàng dưới 3 triệu sẽ có phí ship là 50.000.</li><li>Đối với giao hàng Hỏa tốc, khách hàng sẽ phải chịu chi phí phát sinh cho dịch vụ này.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_CgKNGh": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Thời gian giao hàng đơn hàng bao lâu?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Thời gian giao hàng ước tính cho các khu vực: </p><ul><li>Nội tỉnh/thành phố là từ 2 đến 5 ngày làm việc </li><li>Ngoại tỉnh là từ 5 đến 10 ngày làm việc </li></ul><p>Lưu ý: Ngày làm việc không bao gồm thứ 7, chủ nhật và ngày các ngày Lễ <br/></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_CKKenJ": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Làm cách nào để theo dõi tình trạng lô hàng / giao hàng của tôi?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Sau khi đặt hàng, bạn có thể inbox cho admin để được kiểm tra tình trạng đơn hàng hoặc kiểm tra email thông báo đơn hàng.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_NTVTgz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Có thể thay đổi địa chỉ sau khi đặt hàng?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<ul><li>Không thể thay đổi chi tiết địa chỉ nếu đơn hàng đã được đơn vị vận chuyển giao theo địa chỉ đã đăng ký trong hệ thống. Vui lòng đảm bảo tất cả dữ liệu địa chỉ giao hàng của bạn là chính xác trước khi thanh toán.</li><li>Việc thay đổi có thể dẫn đến đơn hàng của bạn bị kéo dài hoặc chậm trễ hơn so với dự kiến dù chúng tôi luôn cố gắng hỗ trợ bạn hết mình.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_qAmQTx": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Điều gì sẽ xảy ra nếu có lỗi trong vận chuyển hoặc hư hỏng sản phẩm?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<ul><li>Chúng tôi khuyên bạn nên liên hệ với Dịch vụ Khách hàng của chúng tôi ngay lập tức, không muộn hơn <strong>7 ngày</strong> sau ngày nhận được sản phẩm, như đã nêu trong Chính sách hoàn trả của chúng tôi. Chúng tôi sẽ tiến hành xác minh và kiểm tra chi tiết đơn hàng và sản phẩm của bạn.</li><li>Vui lòng giữ sản phẩm trong tình trạng tốt và trong bao bì gốc.</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_QERGJz",
+        "collapsible_row_CgKNGh",
+        "collapsible_row_CKKenJ",
+        "collapsible_row_NTVTgz",
+        "collapsible_row_qAmQTx"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "VẬN CHUYỂN",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "subtext": "",
+        "heading_position": "left",
+        "layout": "cborder",
+        "color_scheme_bg": "",
+        "content_hsize": "h0",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_xxNT7F": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_CJ3QV4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Tôi có thể đổi lại các sản phẩm tôi đã mua không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<ul><li>Sản phẩm phải được đổi trong vòng <strong>7 ngày</strong> kể từ ngày nhận được hàng.</li><li>Tổng giá của các mặt hàng thay thế phải có giá trị tương đương hoặc lớn hơn. (Nếu giá cao hơn, khách hàng phải trả phần chênh lệch).</li><li>Sản phẩm chưa bị mòn, sửa đổi, giặt hoặc đã qua sử dụng cũng như bị hư hại đồng thời phải trong tình trạng có hộp giày, hóa đơn, thẻ sản phẩm và các phụ kiện khác kèm theo sản phẩm (nếu có) để đủ điều kiện đổi hàng.</li><li>Chúng tôi không chấp nhận trao đổi cho các mặt hàng bán.</li><li><em><strong>Mỗi sản phẩm chỉ được đổi 1 lần.</strong></em></li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_VLHgHp": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Tôi có thể đổi các mặt hàng tôi đã mua không?",
+            "opencollapse": false,
+            "icon": "none",
+            "row_content": "<p>Đổi hàng có giá trị đối với các sản phẩm có các tiêu chí sau:</p><p><strong>Kích thước không chính xác</strong></p><ul><li>Sản phẩm nhận được không khớp với đơn đặt hàng của khách hàng: ví dụ: khách hàng đã đặt hàng số 30, nhưng nhận được kích thước 32</li><li>Kích thước khác nhau giữa sản phẩm vật lý và bao bì / hộp</li><li>Kích cỡ khác nhau giữa trái và phải (ví dụ: giày, dép)</li><li>Sản phẩm nhận được là cùng một mặt (cả giày / dép đều ở bên phải hoặc bên trái)</li></ul><p><strong>Màu sắc không chính xác</strong></p><ul><li>Màu sắc sản phẩm không giống như đã nêu trong mô tả sản phẩm: ví dụ: một khách hàng đã đặt mua giày màu xanh, nhưng nhận được giày màu đỏ</li></ul><p><strong>Thiệt hại / Khiếm khuyết</strong></p><ul><li><strong>Màu sắc sản phẩm</strong>: Nhạt dần hoặc màu khác nhau</li><li><strong>Chất liệu sản phẩm</strong>: Da bị bong tróc, vật liệu rách, vết khâu lỏng lẻo hoặc đan, các bộ phận bị ố hoặc biến dạng, vật liệu rách hoặc thủng</li><li><strong>Các bộ phận của sản phẩm</strong>: Lỏng cúc, khóa kéo bị hỏng, thiếu mảnh / bộ phận, tay cầm bị hỏng, không thể bơm được (đối với bóng)</li><li>Yêu cầu đổi sản phẩm có kích thước hoặc màu sắc hoặc loại/mẫu mã khác không được phép. Tuy nhiên, bạn có thể trả lại sản phẩm của mình để được hoàn lại toàn bộ tiền (miễn là sản phẩm đã đổi đáp ứng các tiêu chí) và đặt hàng mới. Việc trao đổi sản phẩm chỉ có thể được thực hiện với cùng một sản phẩm (cùng một SKU, cùng kích thước, cùng màu, v.v.)</li><li>Yêu cầu đổi sản phẩm phải được thực hiện trong vòng <strong>7 ngày</strong> sau khi nhận được đơn đặt hàng. Sản phẩm đổi phải được nhận tại địa điểm xác định trước không muộn hơn <strong>7 ngày</strong> sau ngày đổi hàng được ABC MART Việt Nam chấp thuận.</li><li>Khi trao đổi sản phẩm, vui lòng sử dụng bao bì / hộp bên ngoài như chúng tôi đã gửi cho bạn và phủ bao bì sản phẩm bằng nhãn dán \"hàng dễ vỡ\" có bao bì chắc chắn để tránh hư hỏng hộp ban đầu trong quá trình vận chuyển. Chúng tôi không chấp nhận bất kỳ hình thức trao đổi nào khi có thiệt hại cho sản phẩm và bao bì / hộp sản phẩm.</li></ul><p><strong>Ngoại lệ</strong></p><ul><li>Chúng tôi không cho phép yêu cầu trao đổi dựa trên sự khác biệt về màu sắc giữa sản phẩm vật lý nhận được và ảnh sản phẩm gây ra bởi hiệu ứng ánh sáng hoặc màn hình máy tính</li><li>Chúng tôi không cho phép các yêu cầu trao đổi dựa trên việc mua sai hoặc thay đổi ý định sau khi mua. Chúng tôi thực sự khuyên bạn nên xem lại giỏ hàng trước khi hoàn tất đơn đặt hàng</li><li>Yêu cầu đổi hàng không áp dụng cho đồ bơi, áo ngực thể thao, đồ thể thao, quần tất (bao gồm quần bó/xà cạp, quần nén/nén, quần short đi xe đạp), vớ, dụng cụ thể dục, phụ kiện thể thao (bao gồm mũ) và các sản phẩm chăm sóc giày hoặc thương hiệu khác có Điều khoản và Điều kiện cụ thể và đã được nêu rõ trong phần mô tả</li><li>ABC-MART Việt Nam có quyền đưa ra quyết định cuối cùng và thay đổi chính sách này bất cứ lúc nào mà không cần thông báo.</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_CJ3QV4",
+        "collapsible_row_VLHgHp"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "<strong>ĐỔI TRẢ HÀNG</strong>",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "subtext": "",
+        "heading_position": "left",
+        "layout": "cborder",
+        "color_scheme_bg": "",
+        "content_hsize": "h0",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_first",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "collapsible_content_eH4aC4",
+    "collapsible_content_tPh83P",
+    "collapsible_content_96XqME",
+    "collapsible_content_Vdine3",
+    "collapsible_content_7KQkNW",
+    "collapsible_content_xxNT7F"
+  ]
+}

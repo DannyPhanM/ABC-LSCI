@@ -1,0 +1,196 @@
+{% if section.blocks.size > 0 %}
+  <div class="page-width store-header">
+    <h1>{{ section.settings.section_header }}</h1>
+    <p>{{ section.blocks.size }} {{'custom_data.data_inner.number_store' | t}}</p>
+  </div>
+  <div class="page-width store-container">
+    {% for block in section.blocks %}
+      <div class="store-info">
+        <div class="store-content ct-left">
+          {% if block.settings.store_image %}
+            <img
+              src="{{ block.settings.store_image | img_url: 'original' }}"
+              width="200px"
+              height="133px"
+              alt="{{ block.settings.store_name }}"
+            >
+          {% endif %}
+          <a href="{{ block.settings.store_url }}" target="_blank">{{'custom_data.data_inner.see_map' | t}}</a>
+        </div>
+        <div class="store-content ct-right">
+          <h3>{{ block.settings.store_name }}</h3>
+          <div class="icon-content">
+            <span>
+              {% render 'icon-navigate' -%}
+            </span>
+            {{- block.settings.store_address }}
+          </div>
+          <div class="icon-content">
+            <span>
+              {% render 'icon-phone' %}
+            </span>
+            <p>Phone: {{ block.settings.store_phone }}</p>
+          </div>
+          <div class="icon-content">
+            <span>
+              {% render 'icon-clock2' -%}
+            </span>
+            <p>
+              {{- block.settings.store_openclose }}
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <style>
+    .icon-content {
+      display: flex;
+      gap: 10px;
+    }
+
+    .icon-content svg {
+      width: 16px;
+      height: 16px;
+    }
+    .store-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      box-sizing: border-box;
+      row-gap: 32px;
+      column-gap: 24px;
+    }
+
+    .store-info {
+      display: flex;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+    .store-info img {
+      border-radius: 4px !important;
+    }
+    @media only screen and (max-width: 992px) {
+      .store-container {
+        grid-template-columns: 1fr;
+      }
+
+      .store-info {
+        flex-direction: column;
+      }
+    }
+
+    @media only screen and (max-width: 446px) {
+      .store-content.ct-left img {
+        width: auto !important;
+        height: auto !important;
+         max-width: 100% !important;
+      }
+    }
+    .store-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .store-content.ct-left a {
+      margin-top: 12px;
+    }
+    .store-content.ct-right h3 {
+      font-family: "Font-1731571647208" !important;
+      margin: 0 0 20px 0;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 28.8px;
+    }
+
+    .store-content.ct-right p {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      text-align: left;
+      color: #444444;
+    }
+    .store-content.ct-right p svg {
+      margin-right: 8px;
+    }
+    .store-header h1 {
+      margin: 24px 0 11px 0;
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 46.8px;
+      text-align: left;
+    }
+    .store-header p {
+      margin-bottom: 32px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 19.2px;
+      text-align: left;
+      color: #444444;
+    }
+    @media screen and (max-width: 767px) {
+      .store-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Store Information",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_header",
+      "label": "Section Header",
+      "default": "Shop Location"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Store",
+      "settings": [
+        {
+          "type": "text",
+          "id": "store_name",
+          "label": "Store Name"
+        },
+        {
+          "type": "richtext",
+          "id": "store_address",
+          "label": "Store Address"
+        },
+        {
+          "type": "image_picker",
+          "id": "store_image",
+          "label": "Store Image"
+        },
+        {
+          "type": "text",
+          "id": "store_phone",
+          "label": "Store Phone Number"
+        },
+        {
+          "type": "url",
+          "id": "store_url",
+          "label": "store google url"
+        },
+        {
+          "type": "text",
+          "id": "store_openclose",
+          "label": "Store Open/Close time"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store Info",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

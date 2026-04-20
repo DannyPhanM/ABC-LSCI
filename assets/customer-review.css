@@ -1,0 +1,375 @@
+/* hide unused elements */
+
+
+:root {
+    --color-accent: #78D64B;
+}
+.jdgm-rev-widg__summary-average {
+  display: none !important;
+}
+.jdgm-row-media {
+  display: none !important;
+}
+
+.jdgm-widget.jdgm-widget {
+  padding-top: 46px !important;
+}
+
+@media screen and (max-width: 992px) {
+  .jdgm-widget.jdgm-widget {
+    padding-top: 16px !important;
+  }
+}
+
+
+/* feedback*/
+@media only screen and (min-width: 992px) {
+  .jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium)
+    .jdgm-rev-widg__summary
+    + .jdgm-histogram,
+  .jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium)
+    .jdgm-rev-widg__summary
+    + .jdgm-widget-actions-wrapper,
+  .jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium)
+    .jdgm-histogram
+    + .jdgm-widget-actions-wrapper {
+    border-left: 1px solid rgba(51, 153, 153, 0.1);
+    border-color: #dfdfdf !important;
+  }
+}
+/* review bar */
+.jdgm-histogram__bar,
+.jdgm-histogram__bar-content {
+  height: 8px !important;
+  border-radius: 8px !important;
+}
+
+/* write rev button */
+.jdgm-write-rev-link.jdgm-write-rev-link, .jdgm-btn--solid, input[type=submit].jdgm-btn--solid {
+  border-radius: 35px !important;
+  background-color: #000000 !important;
+  border: unset !important;
+  border-color: unset !important;
+  padding: 16px 24px !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.jdgm-btn.jdgm-btn--solid.jdgm-submit-rev, 
+.jdgm-btn.jdgm-btn--border.jdgm-cancel-rev,
+.jdgm-write-rev-link.jdgm-write-rev-link {
+  font-size: 18px;
+  text-align: center;
+  justify-content: center;
+  min-height: 52px;
+}
+
+.jdgm-btn.jdgm-btn--solid.jdgm-submit-rev:hover, 
+.jdgm-btn.jdgm-btn--border.jdgm-cancel-rev:hover,
+.jdgm-write-rev-link.jdgm-write-rev-link:hover {
+  opacity: 1 !important;
+  background-color: var(--color-accent) !important;
+  color: #000000 !important;
+}
+
+@media screen and (max-width: 440px) {
+  .jdgm-review-widget--medium .jdgm-write-rev-link {
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jdgm-review-widget--medium .jdgm-write-rev-link {
+    margin-top: 9px !important;
+  }
+}
+/* sorting */
+.jdgm-rev-widg__sort-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 992px) {
+  .jdgm-rev-widg__sort-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.jdgm-sort-dropdown-wrapper::before {
+  content: "Lọc theo:";
+  font-size: 14px;
+  font-weight: 400;
+  padding-right: 6px;
+}
+.jdgm-sort-dropdown {
+  padding-right: 0 !important;
+  margin-right: 10px
+}
+
+/* customer review */
+.jdgm-row-media,
+.jdgm-row-search,
+.jdgm-subtab,
+.jdgm-row-actions,
+.jdgm-quest,
+.jdgm-rev,
+.jdgm-paginate {
+  border-top: 1px solid rgba(51, 153, 153, 0.1);
+  border-color: #dfdfdf !important;
+}
+
+/* customize customer reiview header */
+.jdgm-row-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* custoemr review images*/
+.jdgm-rev__pic-img.jdgm-rev__pic-img {
+  border-radius: 16px !important;
+}
+
+.jdgm-rev__title {
+  font-weight: 400 !important;
+  color: var(--color-accent)
+}
+.jdgm-rev__body {
+  line-height: 24px;
+  font-weight: 300 !important;
+}
+
+.jdgm-rev__author {
+  color: black !important;
+}
+
+/* customize customer review */
+.jdgm-rev {
+  position: relative;
+}
+.jdgm-row-rating {
+  position: absolute;
+  top: 24px;
+  left: 45px;
+}
+
+.jdgm-rev__author-wrapper {
+  top: 49px;
+  position: absolute;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.jdgm-rev__content {
+  padding-top: 33px !important;
+}
+
+.jdgm-rev__icon {
+  border-radius: 25px !important;
+  background-color: rgba(254, 154, 107, 0.2);
+}
+
+
+.jdgm-row-actions {
+  border-top: unset !important;
+  padding-top: 24px !important;
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .jdgm-row-actions {
+    width: unset !important;
+  }
+}
+
+.jdgm-rev-widg__reviews > .jdgm-rev:first-child {
+  border-top: unset !important;
+}
+
+.jdgm-row-stars {
+  border-bottom: 1px solid rgba(51, 153, 153, 0.1);
+  border-color: #dfdfdf !important;
+}
+
+.jdgm-sort-dropdown {
+  color: #000000 !important;
+}
+
+.jdgm-review-widget--small .jdgm-rev-widg,
+.jdgm-review-widget--medium .jdgm-rev-widg {
+  padding: 16px 20px !important;
+}
+
+@media only screen and (min-width: 992px) {
+  .jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium)
+    .jdgm-row-stars {
+    padding-bottom: 44px !important;
+  }
+}
+
+.jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown,
+.jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown-arrow {
+  color: #000000 !important;
+}
+
+.jdgm-review-widget--medium .jdgm-write-rev-link,
+.jdgm-review-widget--medium .jdgm-ask-question-btn {
+  font-weight: 400 !important;
+  margin: 0 !important;
+}
+
+.jdgm-star.jdgm--on:before {
+  padding-right: 4px;
+  font-size: 13px !important;
+}
+
+.jdgm-star.jdgm--off:before {
+  padding-right: 4px;
+  font-size: 13px !important;
+}
+
+.jdgm-rev-widg__title {
+  font-weight: 600 !important;
+  margin-bottom: 24px !important;
+}
+
+.jdgm-rev-widg__title {
+  font-size: 0 !important;
+}
+
+.jdgm-rev-widg__title::after {
+  text-transform: uppercase;
+  content: "Đánh giá từ khách hàng";
+  font-size: 24px !important;
+}
+
+@media screen and (min-width: 992px) {
+  .jdgm-rev-widg__title::after {
+    content: "Đánh giá từ khách hàng";
+    font-size: 36px !important;
+  }
+}
+
+.jdgm-rev {
+  padding: 30px 0 !important;
+}
+
+@media screen and (max-width: 992px) {
+  .jdgm-row-actions {
+    padding-top: unset !important;
+  }
+}
+.jdgm-rev__timestamp {
+  margin-top: 4px !important;
+}
+
+.jdgm-form input[type="text"]:focus,
+.jdgm-form input[type="text"]:focus-visible,
+.jdgm-form input[type="email"]:focus,
+.jdgm-form input[type="email"]:focus-visible,
+.jdgm-form input[type="url"]:focus,
+.jdgm-form input[type="url"]:focus-visible,
+.jdgm-form textarea:focus,
+.jdgm-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-accent) !important;
+}
+
+.jdgm-btn--solid,
+input[type="submit"].jdgm-btn--solid {
+  color: white !important;
+}
+
+.jdgm-btn--border {
+  color: #000000 !important;
+  background-color: white !important;
+  border: 2px solid #000000 !important;
+}
+.jdgm-btn,
+input[type="submit"].jdgm-btn {
+  font-weight: 400 !important;
+  border-radius: 50px !important;
+  height: 52px;
+  display: flex !important;
+  align-items: center;
+  width: fit-content;
+  text-transform: uppercase;
+}
+.jdgm-form__fieldset-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  flex-direction: row !important;
+}
+@media only screen and (min-width: 426px) {
+  .jdgm-btn,
+  input[type="submit"].jdgm-btn {
+    font-weight: 500 !important;
+    border-radius: 50px !important;
+    height: 52px;
+    display: flex !important;
+    align-items: center;
+    width: fit-content;
+  }
+  .jdgm-form__fieldset-actions {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .jdgm-btn.jdgm-btn--solid.jdgm-submit-rev, 
+  .jdgm-btn.jdgm-btn--border.jdgm-cancel-rev {
+    font-size: 14px !important;
+  }
+
+  .jdgm-review-widget--small .jdgm-form__fieldset-actions .jdgm-cancel-rev {
+    margin-top: unset !important;
+  }
+
+  .jdgm-form__fieldset-actions {
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .jdgm-btn, input[type=submit].jdgm-btn {
+    width: auto;
+  }
+
+}
+.jdgm-notification * {
+  color: #000000 !important;
+}
+.jdgm-notification__title:before {
+  background-color: var(--color-accent) !important;
+}
+
+.jdgm-notification__inner > a {
+  color: var(--color-accent) !important;
+}
+
+.product__info-wrapper .jdgm-widget.jdgm-widget {
+    padding-top: 0px !important;
+}
+
+.jdgm-rev-widg__summary-text {
+    font-size: 16px;
+  font-weight: 400px;
+}
+
+.jdgm-btn, input[type=submit].jdgm-btn, .jdgm-write-rev-link.jdgm-write-rev-link {
+  text-transform: unset;
+  transition: var(--duration-medium) ease;
+}
+
+.jdgm-form__fieldset p {
+  font-size: 0px;
+}
+
+.jdgm-form__fieldset p::after {
+  content: "Cảm ơn bạn đã dành thời gian chia sẻ trải nghiệm của mình. Ý kiến của bạn rất quý giá với chúng tôi! ";
+  font-size: 14px;
+}

@@ -1,0 +1,448 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "blocks_BFtU9x": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_161b481_YkMLj4": {
+          "type": "ai_gen_block_161b481",
+          "settings": {
+            "page_width": "full_width",
+            "custom_page_width": 1200,
+            "layout_mode": "full_page",
+            "corner_radius": 0,
+            "desktop_image": "shopify://shop_images/Gift_card_-_long_banner.jpg",
+            "mobile_image": "shopify://shop_images/gift_card_16.jpg",
+            "image_height_mode": "adapt",
+            "custom_height_value": 500,
+            "custom_height_unit": "px",
+            "image_link": "https://abc-mart.com.vn/account/register",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "heading": "",
+            "heading_size": 48,
+            "subheading": "",
+            "subheading_size": 18,
+            "text_color": "#ffffff",
+            "content_position": "center",
+            "content_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "button_bg_color": "#78d64b",
+            "button_text_color": "#ffffff",
+            "button_radius": 26,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 60,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 60,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_161b481_YkMLj4"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badge_FEj7b6": {
+          "type": "badge",
+          "settings": {}
+        },
+        "text_H7gPbM": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }} | {{ product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value }}",
+            "text_upper": true,
+            "text_size": "large",
+            "show_sharebtn": true,
+            "share_label": "Chia Sẻ"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_upper": false,
+            "title_size": "h2"
+          }
+        },
+        "sku_rFqDQL": {
+          "type": "sku",
+          "settings": {
+            "sku_upper": true,
+            "sku_size": "large"
+          }
+        },
+        "text_J3m9jU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value }}",
+            "text_upper": true,
+            "text_size": "medium",
+            "show_sharebtn": true,
+            "share_label": "Share"
+          }
+        },
+        "judge_me_reviews_preview_badge_JFbRPW": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "inventory_4Ci3bD": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 3,
+            "show_inventory_quantity": true
+          }
+        },
+        "qikify_bogo_freegift_free_gift_kExNiD": {
+          "type": "shopify://apps/qikify-upsell/blocks/free_gift/2e94b962-8172-4839-8ad9-7837eb8b017a",
+          "disabled": true,
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "pareto_volume_discount_app_block_WmgMyD": {
+          "type": "shopify://apps/p-quantity-breaks/blocks/app-block/170ada5d-6ed5-4d40-b93c-1aa195de1ccc",
+          "settings": {}
+        },
+        "pareto_order_limit_app_block_QJbQXm": {
+          "type": "shopify://apps/pareto-order-limit/blocks/app-block/6fbe20db-eadd-42b3-bc67-0e44a53ed12f",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "hide_sold_variant": false,
+            "pills_radius": 4,
+            "pswatch_type": "pswatch_image",
+            "pills_style": "fill",
+            "divider_variant": true
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+            "page": "",
+            "text": "Size guide",
+            "divider_qty": true
+          }
+        },
+        "puco_blocks_features_features_01_CVUaTF": {
+          "type": "shopify://apps/puco-blocks/blocks/features-features-01/6ea1fa34-d588-43da-abbd-c69bdc1e3b3b",
+          "disabled": true,
+          "settings": {
+            "feature_svg": "",
+            "feature_content": "HƯỚNG DẪN CHỌN SIZE CHÍNH XÁC:+Sản phẩm NAM/UNISEX: size MEN+Sản phẩm NỮ: size WOMEN+Sản phẩm FILA: size CM",
+            "icon_size": 20,
+            "feature_size": 16,
+            "icon_color": "#137e2d",
+            "feature_color": "#000000",
+            "background_color": "#e8f5e1",
+            "padding_top": 15,
+            "padding_bottom": 15
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "text_TxwLWC": {
+          "type": "text",
+          "settings": {
+            "text": "<em><strong>(*) Gift Card chỉ áp dụng khi mua sắm online tại website abc-mart.com.vn, và không sử dụng được tại cửa hàng. Gift Card không được quy đổi thành tiền mặt và không hoàn lại sau khi mua. Gift card có hạn sử dụng 6 tháng kể từ ngày phát hành. Toàn bộ Gift Card sẽ được gửi đến email của quý khách. Nếu cần hỗ trợ gửi riêng từng email hoặc cần xuất VAT, vui lòng inbox bộ phận CSKH.</strong></em>",
+            "text_upper": false,
+            "text_size": "medium",
+            "show_sharebtn": false,
+            "share_label": "Share"
+          }
+        },
+        "icon_with_text_Gx4846": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "icon_1": "freeshipping",
+            "heading_1": "Miễn phí ship cho đơn hàng từ 3 triệu",
+            "icon_2": "cardpayment",
+            "heading_2": "Phương thức thanh toán tiện lợi và an toàn",
+            "icon_3": "return",
+            "heading_3": "Hỗ trợ đổi trả trong 7 ngày",
+            "icon_4": "cardloyalty",
+            "heading_4": "Ưu đãi khi thăng hạng thành viên",
+            "heading_5": "",
+            "heading_6": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "divider_desc": true
+          }
+        },
+        "collapsible_tab_ADKqaX": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Hướng Dẫn Bảo Quản",
+            "icon": "none",
+            "content": "<p>Đối với các sản phẩm tại ABC MART Việt Nam, quý khách lưu ý:</p><p><strong>Giày dép</strong>: Lau sạch thường xuyên, giữ form bằng cách nhét giấy hoặc xốp vào khi không sử dụng. Bảo dưỡng giày da để duy trì độ bền.</p><p><strong>Quần áo</strong>: Giặt nhẹ tay theo nhãn hướng dẫn, tránh ánh nắng trực tiếp khi phơi.</p><p><strong>Phụ kiện (túi, nón,...)</strong>: Lau bụi bằng vải mềm, bảo quản trong hộp hoặc túi vải để giữ form.</p><p>Chăm sóc sản phẩm đúng cách sẽ sản phẩm của quý khách luôn bền đẹp như mới!</p>",
+            "page": "",
+            "opencollapse": false
+          }
+        },
+        "collapsible_tab_Nf6UT7": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Chính Sách Đổi Trả",
+            "icon": "none",
+            "content": "<p>Để hỗ trợ hủy, đổi hoặc trả đơn hàng, quý khách vui lòng liên hệ với Bộ Phận Chăm Sóc Khách Hàng qua Zalo hoặc Live Chat trong giờ hành chính (từ thứ 2 đến thứ 6). ABC MART Việt Nam luôn sẵn sàng giúp đỡ bạn!</p><p>Đối với những đơn hàng đã được giao hoặc đã đóng gói, ABC MART Việt Nam chỉ có thể hỗ trợ đổi size hoặc áp dụng chính sách đổi trả nếu sản phẩm có lỗi từ nhà sản xuất.</p><p><strong>Điều kiện đổi trả:</strong> Sản phẩm có thể đổi trong vòng 7 ngày nếu chưa qua sử dụng và còn đầy đủ hộp, hóa đơn, phụ kiện kèm theo. ABC MART Việt Nam rất sẵn lòng đổi nếu sản phẩm bị sai kích thước, màu sắc hoặc có hư hại. Xem thông tin chi tiết chính sách đổi trả <a href=\"https://abc-mart.com.vn/pages/chinh-sach-huy-don-va-doi-tra\" target=\"_blank\" title=\"https://abc-mart.com.vn/pages/chinh-sach-huy-don-va-doi-tra\">tại đây</a>.</p><p>Lưu ý: Đối với việc đổi trả trong trường hợp mua nhầm hoặc thay đổi ý định, ABC MART Việt Nam không thể hỗ trợ đổi trả.</p><p>Cảm ơn bạn rất nhiều vì đã hiểu và luôn ủng hộ ABC MART Việt Nam!</p>",
+            "page": "",
+            "opencollapse": false
+          }
+        },
+        "collapsible_tab_MNmDU7": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Câu Hỏi Thường Gặp",
+            "icon": "none",
+            "content": "<p><strong>Tôi có thể theo dõi đơn hàng của mình không?</strong><br/>Bạn có thể inbox cho admin để được kiểm tra tình trạng đơn hàng chính xác nhất.</p><p><strong>Có sự khác biệt về giá giữa sản phẩm trên trang web và cửa hàng không?</strong><br/>Tất cả các mức giá đều giống nhau, tuy nhiên, trong một số khoảng thời gian nhất định, chúng tôi có thể có các chương trình khuyến mãi đặc biệt trên trang web hoặc chỉ tại các cửa hàng nhất định.</p><p><strong>Sản phẩm được sản xuất tại những quốc gia nào?</strong><br/>Tất cả các sản phẩm từ khu vực châu Á được sản xuất tại Trung Quốc, Việt Nam, Ấn Độ, Indonesia, Nhật Bản. Các sản phẩm sẽ được gửi theo thứ tự ngẫu nhiên và dựa trên tình trạng sẵn có của sản phẩm, do đó chúng tôi không thể xác nhận sản phẩm sản xuất tại quốc gia nào sẽ được gửi cho bạn.</p>",
+            "page": "",
+            "opencollapse": false
+          }
+        },
+        "share_button_6N3fmq": {
+          "type": "share_button",
+          "disabled": true,
+          "settings": {
+            "share_text": "Chia Sẻ",
+            "share_facebook": true,
+            "share_twitter": true,
+            "share_pinterest": false
+          }
+        },
+        "payment_method_c3Ljtk": {
+          "type": "payment_method",
+          "disabled": true,
+          "settings": {
+            "heading_2": "We accept",
+            "enable_payment": true
+          }
+        },
+        "complementary_iekb4n": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Sale Is Here",
+            "make_collapsible_row": false,
+            "icon": "price_tag",
+            "product_list_limit": 6,
+            "products_per_page": "2"
+          }
+        }
+      },
+      "block_order": [
+        "badge_FEj7b6",
+        "text_H7gPbM",
+        "title",
+        "sku_rFqDQL",
+        "text_J3m9jU",
+        "judge_me_reviews_preview_badge_JFbRPW",
+        "price",
+        "inventory_4Ci3bD",
+        "qikify_bogo_freegift_free_gift_kExNiD",
+        "pareto_volume_discount_app_block_WmgMyD",
+        "pareto_order_limit_app_block_QJbQXm",
+        "variant_picker",
+        "quantity_selector",
+        "puco_blocks_features_features_01_CVUaTF",
+        "buy_buttons",
+        "text_TxwLWC",
+        "icon_with_text_Gx4846",
+        "description",
+        "collapsible_tab_ADKqaX",
+        "collapsible_tab_Nf6UT7",
+        "collapsible_tab_MNmDU7",
+        "share_button_6N3fmq",
+        "payment_method_c3Ljtk",
+        "complementary_iekb4n"
+      ],
+      "custom_css": [
+        ".product-popup-modal__button.link {display: none !important;}",
+        ".product__text.inline-richtext.medium strong {color: red !important;}",
+        ".product-form__buttons.pro_btn_inline {padding-bottom: 12px; padding-top: 12px !important;}",
+        ".product__tax.caption.rte {display: none !important;}"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "media_size": 50,
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "thumbimage_ratio": "adapt",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": true,
+        "enable_sticky_info": true,
+        "mobile_thumbnails": "show",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "SẢN PHẨM LIÊN QUAN",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_CtfnGU": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_czkcyz": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>BULK ORDER: B2B GIFT CARD (ONLINE)</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_ejDpD9": {
+          "type": "text",
+          "settings": {
+            "text": "<h3><strong>Ưu đãi B2B – Đơn hàng số lượng lớn</strong></h3><p><strong>ABC-MART B2B Gift Card</strong> là giải pháp quà tặng chuyên nghiệp dành cho doanh nghiệp trong các chương trình tri ân khách hàng, đối tác và ghi nhận nhân viên. Dịch vụ hỗ trợ <strong>đặt mua số lượng lớn (bulk order)</strong> với giá trị linh hoạt, thực hiện trực tuyến, giúp doanh nghiệp tối ưu chi phí và thời gian triển khai.</p><p><strong>Chính sách ưu đãi theo giá trị đơn hàng:</strong></p><ul><li>Từ <strong>20 triệu – dưới 50 triệu</strong>: <strong>Ưu đãi 5%</strong><br/></li><li>Từ <strong>50 triệu – dưới 100 triệu</strong>: <strong>Ưu đãi 8%</strong><br/></li><li>Từ<strong> 100 triệu</strong>: <strong>Ưu đãi 10%</strong></li></ul><p><em><strong>Lưu ý:</strong></em><br/>Đối với khách hàng có nhu cầu mua số lượng lớn <strong>(100 triệu trở lên)</strong>, vui lòng liên hệ bộ phận <strong>Chăm sóc Khách hàng</strong> để được hỗ trợ tư vấn chi tiết.</p><ul><li><strong>Email:</strong> <a>info@abc-mart-vietnam.com</a></li><li><strong>Zalo Hotline:</strong> 0971 189 518 </li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_czkcyz",
+        "text_ejDpD9"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "full_width": "full_width",
+        "color_scheme": "background-1",
+        "desktop_content_size": "large",
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "box_layout": false,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_7JwPmL": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_q49Mf8": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>BULK ORDER: B2B  GIFT VOUCHER (OFFLINE)</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_fRVcjn": {
+          "type": "text",
+          "settings": {
+            "text": "<h3><strong>Ưu đãi B2B – Đơn hàng số lượng lớn</strong></h3><p><strong>Ưu đãi 10% cho giá trị đơn hàng mua voucher từ 100,000,000 VND.</strong></p><p>Vui lòng liên hệ chúng tôi để biết thêm chi tiết:</p><ul><li><strong>Email:</strong> <a>info@abc-mart-vietnam.com</a></li><li><strong>Zalo Hotline:</strong> 0971 189 518 </li></ul><p><em><strong>Lưu ý:</strong></em></p><ul><li>Áp dụng cho khách hàng doanh nghiệp và đơn đặt hàng số lượng lớn.</li><li>Voucher được sử dụng tại các cửa hàng của ABC-MART Việt Nam.</li><li>Mệnh giá voucher có thể được tùy chỉnh theo yêu cầu.</li><li>Thời hạn sử dụng phiếu giảm giá có thể được tùy chỉnh theo yêu cầu.</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q49Mf8",
+        "text_fRVcjn"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "full_width": "full_width",
+        "color_scheme": "background-1",
+        "desktop_content_size": "large",
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "box_layout": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_NWPCTE": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_FHK7z8": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "<strong>LƯU Ý KHI MUA GIFT CARD</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_VKEVfR": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<ul><li><strong>Gift Card chỉ được mua riêng lẻ, không thể mua chung với các sản phẩm khác trong cùng đơn hàng.</strong></li><li><strong>Gift Card chỉ áp dụng khi mua sắm online tại website abc-mart.com.vn, và không sử dụng được tại cửa hàng.</strong></li><li><strong>Các chương trình khuyến mãi như “quà tặng kèm” hoặc ưu đãi khác không áp dụng cho đơn hàng mua Gift Card.</strong></li><li><strong>Gift Card không được quy đổi thành tiền mặt và không hoàn lại sau khi mua.<br/></strong></li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FHK7z8",
+        "text_VKEVfR"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "full_width": "full_width",
+        "color_scheme": "background-1",
+        "desktop_content_size": "large",
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "box_layout": false,
+        "padding_top": 0,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "blocks_BFtU9x",
+    "main",
+    "related-products",
+    "rich_text_CtfnGU",
+    "rich_text_7JwPmL",
+    "rich_text_NWPCTE"
+  ]
+}

@@ -1,0 +1,60 @@
+{%- liquid
+  assign has_social_icons = true
+  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+    assign has_social_icons = false
+  endif
+-%}
+
+{%- if stop_bar == true -%}
+  {%- if second_menu != blank or enable_country_selector or enable_language_selector or show_social and has_social_icons -%}
+    <div class="second_menu color-{{ second_color_scheme }} gradient">
+      <div class="{% if layout == 'grid' %}page-width{%- else -%}header_full{% endif %}">
+         <div class="second_menu_inner">
+          {%- if second_menu != blank -%}
+            <div class="smenu_left">
+              <ul class="list-menu list-menu--inline">
+                {{ second_menu }}
+              </ul>
+            </div>
+          {%- endif -%}
+        
+          {%- if enable_country_selector or enable_language_selector or show_social and has_social_icons -%}
+            <div class="smenu_right">
+              {%- if show_social and has_social_icons -%}
+                <div>
+                  {%- render 'social-icons', social_style: block.settings.social_style -%}
+                </div>
+              {%- endif -%}
+        
+              {%- if enable_country_selector or enable_language_selector -%}
+                <div class="header-localization localization-wrapper">
+                  {%- if enable_country_selector and localization.available_countries.size > 1 -%}
+                    <localization-form  class="small-hide medium-hide">
+                      {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
+                        <div>
+                          <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                          {%- render 'country-localization', localPosition: 'AnnouncementCountry' -%}
+                        </div>
+                      {%- endform -%}
+                    </localization-form>
+                  {% endif %}
+        
+                  {%- if enable_language_selector and localization.available_languages.size > 1 and lang_pos=="topbar" -%}
+                    <localization-form style="display: flex; align-items: center" class="small-hide medium-hide">
+                      {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
+                        <div>
+                          <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                          {%- render 'language-localization', localPosition: 'AnnouncementLanguage' -%}
+                        </div>
+                      {%- endform -%}
+                    </localization-form>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

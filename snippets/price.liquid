@@ -1,0 +1,260 @@
+{% comment %}
+  Renders a list of product's price (regular, sale)
+
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+  - price_class: {String} Adds a price class to the price element (optional)
+  - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
+
+  Usage:
+  {% render 'price', product: product %}
+{% endcomment %}
+
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign price_min = product.price_min
+  assign price_max = product.price_max
+  assign available = target.available | default: false
+  assign money_price = price | money
+  assign money_price_min = price_min | money
+  assign money_price_max = price_max | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_price_min = price_min | money_with_currency
+    assign money_price_max = price_max | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+-%}
+<div
+  class="
+    soldout-tag
+    price
+    {%- if price_class %} {{ price_class }}{% endif -%}
+    {%- if available == false %} price--sold-out{% endif -%}
+    {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
+    {%- if compare_at_price > price and product.quantity_price_breaks_configured? %} volume-pricing--sale-badge{% endif -%}
+    {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+    {%- if show_badges %} price--show-badge{% endif -%}
+  "
+>
+  <div class="price__container">
+    {%- comment -%}
+      Explanation of description list:
+      - div.price__regular: Displayed when there are no variants on sale
+      - div.price__sale: Displayed when a variant is a sale
+    {%- endcomment -%}
+    <div class="price__regular">
+      {%- if product.quantity_price_breaks_configured? -%}
+        {%- if show_compare_at_price -%}
+          {%- unless product.price_varies == false and product.compare_at_price_varies %}
+            <span class="visually-hidden visually-hidden--inline">
+              {{- 'products.product.price.regular_price' | t -}}
+            </span>
+            <span>
+                          <s class=" price-item price-item--regular variant-item__old-price">
+
+                {% if settings.currency_code_enabled %}
+                  {{ compare_at_price | money_with_currency }}
+                {% else %}
+                  {{ compare_at_price | money }}
+                {% endif %}
+              </s>
+            </span>
+          {%- endunless -%}
+        {%- endif -%}
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+        <span class="price-item price-item--regular">
+          {{- 'products.product.volume_pricing.price_range' | t: minimum: money_price_min, maximum: money_price_max -}}
+        </span>
+      {%- else -%}
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+        <span class=" price-item price-item--regular default-price">
+          {{ money_price }}
+        </span>
+      {%- endif -%}
+    </div>
+    <div class="price__sale">
+      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+      <span class="price-item price-item--sale price-item--last">
+        {{ money_price }}
+      </span>
+      {%- if money_price != compare_at_price %}
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+        <div>
+          <s class="price-item price-item--regular">
+            {% if settings.currency_code_enabled %}
+              {{ compare_at_price | money_with_currency }}
+            {% else %}
+              {{ compare_at_price | money }}
+            {% endif %}
+          </s>
+        </div>
+      {%- endif -%}
+    </div>
+    <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
+      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+      <span class="price-item price-item--last">
+        <span class="cardunitp">{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+        <span aria-hidden="true">/</span>
+        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+        <span class="cardunitv">
+          {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+            {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+          {%- endif -%}
+          {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+        </span>
+      </span>
+    </small>
+  </div>
+  {% if is_hidden != 'true' %}
+    {%- for tags in product.tags -%}
+      {% assign new_badge = tags | downcase %}
+      {%- if new_badge == 'new' -%}
+        <span
+          id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+          class="onlyp_page badge newbadge{% if settings.uppercase_badge %} uppercase{% endif %}"
+        >
+          {{- 'products.product.new' | t -}}
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if show_badges -%}
+      <span class="badge price__badge-sale salebadge {% if settings.uppercase_badge %} uppercase{% endif %}">
+        {{ 'products.product.on_sale' | t }}
+      </span>
+
+      <span class="badge price__badge-sold-out soldbadge {% if settings.uppercase_badge %} uppercase{% endif %}">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- endif -%}
+    {%- if badge_position == 'beside_price' -%}
+      {%- liquid
+        assign target = product
+        assign compare_at_price = target.compare_at_price
+        assign price = target.price | default: 1999
+        if compare_at_price > price
+          assign badge_percent = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price | round
+          if settings.currency_code_enabled
+            assign badge_amount = compare_at_price | minus: price | money_with_currency
+          else
+            assign badge_amount = compare_at_price | minus: price | money
+          endif
+        endif
+      -%}
+      {% assign product_tags = product.metafields.custom.product_tags.value %}
+      {% if hidden_badges %}
+      {% else %}
+        <div class="product_badge">
+          {%- for i in (0..10) -%}
+                  {%- assign tag_key = 'tag_custom' -%}
+                  {%- assign image_key = 'image_custom' -%}
+                  {%- assign text_key = 'text_custom' -%}
+                  {%- if i > 0 -%}
+                    {%- assign tag_key = tag_key | append: '_' | append: i -%}
+                    {%- assign image_key = image_key | append: '_' | append: i -%}
+                    {%- assign text_key = text_key | append: '_' | append: i -%}
+                  {%- endif -%}
+                  {%- assign color_key = 'color_custom' -%}
+                  {%- assign bg_key = 'bg_custom' -%}
+                  {%- if i > 0 -%}
+                    {%- assign color_key = color_key | append: '_' | append: i -%}
+                    {%- assign bg_key = bg_key | append: '_' | append: i -%}
+                  {%- endif -%}
+                  {%- assign tag_value = settings[tag_key] -%}
+                  {%- assign image_value = settings[image_key] -%}
+                  {%- assign text_value = settings[text_key] -%}
+                  {%- assign color_value = settings[color_key] -%}
+                  {%- assign bg_value = settings[bg_key] -%}
+                  
+                  {%- if tag_value != blank and product.tags contains tag_value and text_value != blank -%}
+                    <span class="badge flash-sales-beadge {% if settings.uppercase_badge %} uppercase{% endif %}"
+                      style="color: {{ color_value | default: settings.color_flash_sales }}; background: {{ bg_value | default: settings.bg_flash_sales }};">
+                      {{ text_value }}
+                    </span>
+                  {%- endif -%}
+                {%- endfor -%}
+
+          {% for tags in product_tags %}
+            <span
+              id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+              class="badge"
+              style="{% if tags.is_exclusive == true %} background: linear-gradient(90deg, #E8E8E8 0%, #A4A4A4 34.38%, #E8E8E8 66.88%, #A4A4A4 100%);
+                    {%  elsif  tags.is_limited == true %} background: linear-gradient(95.1deg, #B98F2F 0%, #FDF195 49.76%, #D5B246 100%);{% else %} background: {{ tags.tag_color }} {% endif %}"
+            >
+              {{ tags.tag_name }}
+            </span>
+          {% endfor %}
+          {%- for tags in product.tags -%}
+            {% assign new_badge = tags | downcase %}
+            {%- if new_badge == 'new' -%}
+              <span
+                id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+                class="badge newbadge{% if settings.uppercase_badge %} uppercase{% endif %}"
+              >
+                {{- 'products.product.new' | t -}}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if settings.badge_type == 'sale' -%}
+            {%- if product.compare_at_price > product.price and product.available == true -%}
+              <span
+                id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+                class="badge salebadge{% if settings.uppercase_badge %} uppercase{% endif %}"
+              >
+                {{ 'products.product.on_sale' | t }}
+              </span>
+            {%- endif -%}
+          {%- elsif settings.badge_type == 'save_amount' -%}
+            <span class="badge salebadge {% if badge_amount == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+              {{ 'products.product.save' | t }}
+              <span>{{ badge_amount }}</span>
+            </span>
+          {%- elsif settings.badge_type == 'save_percentage' -%}
+            <span class="badge salebadge {% if badge_percent == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+              -{{ badge_percent -}}
+              %
+            </span>
+          {%- endif -%}
+                    {%if settings.text_flash_sales and product.tags contains "flash-sales" %}
+          <span class="badge flash-sales-beadge {% if settings.uppercase_badge %} uppercase{% endif %}" style="color: {{ settings.color_flash_sales }}; background: {{ settings.bg_flash_sales }}">
+           {{ settings.text_flash_sales }}
+          </span>
+        {%endif%}
+        </div>
+      {% endif %}
+    {%- endif -%}
+  {% endif %}
+  {% liquid
+      if product.available == false and is_product_page != 'true'
+        assign product_sold_out = true
+      endif
+    
+  %}
+ {% if hidden_badges %}
+  {% else %}
+    {% if products.product.sold_out %}
+      <div class="custom-product-badge">
+        <span
+          id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+          class="badge {% if product_sold_out %}soldbadge {% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}"
+        >
+          {% if product_sold_out %}
+            {{ 'products.product.sold_out' | t }}
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+  {%- endif -%}
+</div>

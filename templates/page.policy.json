@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-policy",
+      "blocks": {
+        "policy_tabs_ATyGbi": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "chinh-sach-ban-hang",
+            "page_tab": "Chính sách bán hàng"
+          }
+        },
+        "policy_tabs_ePYyrN": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "chinh-sach-bao-mat",
+            "page_tab": "Chính sách bảo mật"
+          }
+        },
+        "policy_tabs_yrF89U": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "chinh-sach-van-chuyen",
+            "page_tab": "Chính sách vận chuyển"
+          }
+        },
+        "policy_tabs_EWt9Rf": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "chinh-sach-kiem-hang",
+            "page_tab": "Chính sách kiểm hàng"
+          }
+        },
+        "policy_tabs_rmEWhn": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "chinh-sach-dong-kiem",
+            "page_tab": "Chính sách đồng kiểm"
+          }
+        },
+        "policy_tabs_Qz6FLb": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "chinh-sach-doi-tra-bao-hanh",
+            "page_tab": "Chính sách đổi trả và bảo hành"
+          }
+        },
+        "policy_tabs_Fjr8R7": {
+          "type": "policy-tabs",
+          "settings": {
+            "page_picker": "phuong-thuc-thanh-toan",
+            "page_tab": "Phương thức thanh toán"
+          }
+        }
+      },
+      "block_order": [
+        "policy_tabs_ATyGbi",
+        "policy_tabs_ePYyrN",
+        "policy_tabs_yrF89U",
+        "policy_tabs_EWt9Rf",
+        "policy_tabs_rmEWhn",
+        "policy_tabs_Qz6FLb",
+        "policy_tabs_Fjr8R7"
+      ],
+      "settings": {
+        "policy_heading": "CÁC CHÍNH SÁCH TẠI ABC-MART VIỆT NAM",
+        "heading_position": "center",
+        "layout": "grid",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

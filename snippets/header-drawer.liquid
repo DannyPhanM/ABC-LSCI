@@ -1,0 +1,2211 @@
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+{%- if settings.enable_quick_add or settings.quick_view_button -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag: preload: true }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {% render 'icon-hamburger' %}
+        {% render 'icon-close' %}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+          <nav class="menu-drawer__navigation">
+            <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- for link in section.settings.menu.links -%}
+                {%- liquid
+                  assign contain_mega = false
+                  assign hlink_icon = false
+                  assign high_title_color = ''
+                  for block in blocks
+                    assign menublock_lower = block.settings.menu_title | downcase
+                    assign linkblock_lower = link.title | downcase
+                    assign high_title = block.settings.highlight_title | downcase
+
+                    if linkblock_lower == high_title
+                      assign high_title_color = 'high_link'
+                      assign hlink_icon = block.settings.hlink_icon
+                      assign hlink_color = block.settings.hlink_color
+                    endif
+
+                    if linkblock_lower == menublock_lower
+                      assign contain_mega = true
+                    endif
+                  endfor
+                -%}
+                <li>
+                  {%- if link.links != blank -%}
+                    <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                      <summary
+                        id="HeaderDrawer-{{ link.handle }}"
+                        class="{{ high_title_color }} menu-drawer__menu-item list-menu__item link focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}{% if uppercase_menu %} uppercase{% endif %}"
+                      >
+                        {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                        <a href="{{link.url}}">{{ link.title | escape }}</a>
+                        {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                        {% render 'icon-arrow' %}
+                        {% comment %} {% render 'icon-caret' %} {% endcomment %}
+                      </summary>
+                      <div
+                        id="link-{{ link.handle | escape }}"
+                        class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                        tabindex="-1"
+                      >
+                        <div class="menu-drawer__inner-submenu">
+                          <button class="menu-drawer__close-button link focus-inset" aria-expanded="true">
+                            {% render 'icon-arrow' %}
+                            {{ link.title | escape }}
+                          </button>
+                          <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                            {%- for childlink in link.links -%}
+                              <li>
+                                {%- if childlink.links == blank -%}
+                                  <a
+                                    id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                    href="{{ childlink.url }}"
+                                    class="menu-drawer__menu-item link list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                    {% if childlink.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                  >
+                                    {{ childlink.title | escape }}
+                                  </a>
+                                {%- else -%}
+                                  <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
+                                    <summary
+                                      id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                      class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                    >
+                                      <a
+                                        id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                        href="{{ childlink.url }}"
+                                        class=" list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                        {% if childlink.current %}
+                                          aria-current="page"
+                                        {% endif %}
+                                      >
+                                        {{ childlink.title | escape }}
+                                      </a>
+                                      {% render 'icon-arrow' %}
+                                      {% comment %} {% render 'icon-caret' %} {% endcomment %}
+                                    </summary>
+                                    <div
+                                      id="childlink-{{ childlink.handle | escape }}"
+                                      class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                    >
+                                      <button class="menu-drawer__close-button link focus-inset" aria-expanded="true">
+                                        {% render 'icon-arrow' %}
+                                        {{ childlink.title | escape }}
+                                      </button>
+                                      <ul
+                                        class="menu-drawer__menu list-menu"
+                                        role="list"
+                                        tabindex="-1"
+                                      >
+                                        {%- for grandchildlink in childlink.links -%}
+                                          <li>
+                                            <a
+                                              id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                              href="{{ grandchildlink.url }}"
+                                              class="menu-drawer__menu-item link list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              {% if grandchildlink.current %}
+                                                aria-current="page"
+                                              {% endif %}
+                                            >
+                                              {{ grandchildlink.title | escape }}
+                                            </a>
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+                                    </div>
+                                  </details>
+                                {%- endif -%}
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+
+                          {%- if contain_mega -%}
+                            <div class="m_banner_right">
+                              {%- for block in blocks -%}
+                                {%- liquid
+                                  assign menublock = block.settings.menu_title | downcase
+                                  assign linkblock = link.title | downcase
+                                -%}
+                                {%- if linkblock == menublock -%}
+                                  {%- case block.type -%}
+                                    {% when 'mega-menu-banner' %}
+                                      <div
+                                        class="center mega_banner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                        {% if settings.animations_reveal_on_scroll %}
+                                          data-cascade
+                                          style="--animation-order: {{ forloop.index }};"
+                                        {% endif %}
+                                      >
+                                        <div class="banner--{{ block.settings.banner_height }} banner">
+                                          <div
+                                            class="banner__media media{% if block.settings.banner_image == blank %} placeholder{% endif %}"
+                                            {% if block.settings.banner_height == 'adapt'
+                                              and block.settings.banner_image != blank
+                                            %}
+                                              style="padding-bottom: {{ 1 | divided_by: block.settings.banner_image.aspect_ratio | times: 100 }}%;"
+                                            {% endif %}
+                                            {% if block.settings.banner_height == 'adapt'
+                                              and block.settings.banner_image == blank
+                                            %}
+                                              style="padding-bottom: 100%;"
+                                            {% endif %}
+                                          >
+                                            {%- if block.settings.banner_image != blank -%}
+                                              {%- liquid
+                                                assign banner_height = block.settings.banner_image.width | divided_by: block.settings.banner_image.aspect_ratio | round
+                                              -%}
+                                              {{
+                                                block.settings.banner_image
+                                                | image_url: width: 3840
+                                                | image_tag:
+                                                  loading: 'lazy',
+                                                  width: block.settings.banner_image.width,
+                                                  height: banner_height,
+                                                  sizes: '100vw',
+                                                  widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                                              }}
+                                            {% else %}
+                                              {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                            {%- endif -%}
+                                          </div>
+                                        </div>
+                                        {% if block.settings.heading != blank %}
+                                          <h3 class="inline-richtext" {{ section.shopify_attributes }}>
+                                            {{ block.settings.heading }}
+                                          </h3>
+                                        {% endif %}
+                                        {%- if block.settings.button_label != blank -%}
+                                          <a
+                                            {% if block.settings.button_link == blank %}
+                                              role="link" aria-disabled="true"
+                                            {% else %}
+                                              href="{{ block.settings.button_link }}"
+                                            {% endif %}
+                                            class="menu_banner_btn {% if block.settings.button_style == 'link' %}link underlined-link{% elsif block.settings.button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                                          >
+                                            <span>
+                                              {{- block.settings.button_label | escape -}}
+                                              {%- render 'icon-arrow' -%}
+                                            </span>
+                                          </a>
+                                        {%- endif -%}
+                                      </div>
+                                  {%- endcase -%}
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </div>
+                          {%- endif -%}
+
+                          {%- if contain_mega -%}
+                            <div class="page-width">
+                              {%- for block in blocks -%}
+                                {%- liquid
+                                  assign menublock = block.settings.menu_title | downcase
+                                  assign linkblock = link.title | downcase
+                                -%}
+                                {%- if linkblock == menublock -%}
+                                  {%- case block.type -%}
+                                    {% when 'mega-menu-product' %}
+                                      <ul
+                                        class="mega-menu-product grid grid--{{ block.settings.products_to_show }}-col-desktop"
+                                        role="list"
+                                        aria-label="{{ 'general.slider.name' | t }}"
+                                      >
+                                        {%- for product in block.settings.collection.products
+                                          limit: block.settings.products_to_show
+                                        -%}
+                                          <li
+                                            class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                            {% if settings.animations_reveal_on_scroll %}
+                                              data-cascade
+                                              style="--animation-order: {{ forloop.index }};"
+                                            {% endif %}
+                                          >
+                                            {% render 'card-product',
+                                              card_product: product,
+                                              card_style: settings.card_style,
+                                              media_aspect_ratio: settings.image_ratio,
+                                              show_secondary_image: settings.show_secondary_image,
+                                              show_vendor: settings.show_cardvendor,
+                                              section_id: section.id
+                                            %}
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+
+                                    {% when 'mega-menu-tabcollections' %}
+                                      <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                        <div class="tabs-collapse">
+                                          {%- if block.settings.tab1 != blank -%}
+                                            <span
+                                              class="tab-button active"
+                                              tabindex="0"
+                                              data-id="{{ block.id }}-1mobile"
+                                            >
+                                              {{- block.settings.tab1 -}}
+                                            </span>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab2 != blank -%}
+                                            <span
+                                              class="tab-button {% if block.settings.tab1 == blank %}active{% endif %}"
+                                              tabindex="0"
+                                              data-id="{{ block.id }}-2mobile"
+                                            >
+                                              {{- block.settings.tab2 -}}
+                                            </span>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab3 != blank -%}
+                                            <span
+                                              class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                              tabindex="0"
+                                              data-id="{{ block.id }}-3mobile"
+                                            >
+                                              {{- block.settings.tab3 -}}
+                                            </span>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab4 != blank -%}
+                                            <span
+                                              class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                              tabindex="0"
+                                              data-id="{{ block.id }}-4mobile"
+                                            >
+                                              {{- block.settings.tab4 -}}
+                                            </span>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab5 != blank -%}
+                                            <span
+                                              class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                              tabindex="0"
+                                              data-id="{{ block.id }}-5mobile"
+                                            >
+                                              {{- block.settings.tab5 -}}
+                                            </span>
+                                          {%- endif -%}
+                                        </div>
+                                        <div class="tab-content">
+                                          {%- if block.settings.tab1 != blank -%}
+                                            <div id="{{ block.id }}-1mobile" class="tab-pane fade active" tabindex="-1">
+                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                {%- for collection in block.settings.coll1 -%}
+                                                  <div
+                                                    class="grid__item collection-list__item"
+                                                    {{ block.shopify_attributes }}
+                                                  >
+                                                    {%- assign placeholder_image_index = forloop.index0
+                                                      | modulo: 4
+                                                      | plus: 1
+                                                    -%}
+                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                      | append: placeholder_image_index
+                                                    -%}
+                                                    {% render 'card-collection',
+                                                      card_collection: collection,
+                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                      coll_card_style: block.settings.collection_card_style,
+                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                      columns: columns,
+                                                      placeholder_image: placeholder_image
+                                                    %}
+                                                  </div>
+                                                {%- else -%}
+                                                  {% comment %}
+                                                    {% assign limit = block.settings.columns_desktop %}
+                                                    {%- for i in (1..limit) -%}
+                                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+                                                        {% render 'card-collection',
+                                                          columns: columns,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- endfor -%}
+                                                  {% endcomment %}
+                                                {%- endfor -%}
+                                              </div>
+                                            </div>
+                                          {%- endif -%}
+                                          {%- if block.settings.tab2 != blank -%}
+                                            <div
+                                              id="{{ block.id }}-2mobile"
+                                              class="tab-pane fade {% if block.settings.tab1 == blank %}active{% endif %}"
+                                              tabindex="-1"
+                                            >
+                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                {%- for collection in block.settings.coll2 -%}
+                                                  <div
+                                                    class="grid__item collection-list__item"
+                                                    {{ block.shopify_attributes }}
+                                                  >
+                                                    {%- assign placeholder_image_index = forloop.index0
+                                                      | modulo: 4
+                                                      | plus: 1
+                                                    -%}
+                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                      | append: placeholder_image_index
+                                                    -%}
+                                                    {% render 'card-collection',
+                                                      card_collection: collection,
+                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                      coll_card_style: block.settings.collection_card_style,
+                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                      columns: columns,
+                                                      placeholder_image: placeholder_image
+                                                    %}
+                                                  </div>
+                                                {%- else -%}
+                                                  {% comment %}
+                                                    {% assign limit = block.settings.columns_desktop %}
+                                                    {%- for i in (1..limit) -%}
+                                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+                                                        {% render 'card-collection',
+                                                          columns: columns,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- endfor -%}
+                                                  {% endcomment %}
+                                                {%- endfor -%}
+                                              </div>
+                                            </div>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab3 != blank -%}
+                                            <div
+                                              id="{{ block.id }}-3mobile"
+                                              class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                              tabindex="-1"
+                                            >
+                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                {%- for collection in block.settings.coll3 -%}
+                                                  <div
+                                                    class="grid__item collection-list__item"
+                                                    {{ block.shopify_attributes }}
+                                                  >
+                                                    {%- assign placeholder_image_index = forloop.index0
+                                                      | modulo: 4
+                                                      | plus: 1
+                                                    -%}
+                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                      | append: placeholder_image_index
+                                                    -%}
+                                                    {% render 'card-collection',
+                                                      card_collection: collection,
+                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                      coll_card_style: block.settings.collection_card_style,
+                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                      columns: columns,
+                                                      placeholder_image: placeholder_image
+                                                    %}
+                                                  </div>
+                                                {%- else -%}
+                                                  {% comment %}
+                                                    {% assign limit = block.settings.columns_desktop %}
+                                                    {%- for i in (1..limit) -%}
+                                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+                                                        {% render 'card-collection',
+                                                          columns: columns,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- endfor -%}
+                                                  {% endcomment %}
+                                                {%- endfor -%}
+                                              </div>
+                                            </div>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab4 != blank -%}
+                                            <div
+                                              id="{{ block.id }}-4mobile"
+                                              class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                              tabindex="-1"
+                                            >
+                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                {%- for collection in block.settings.coll4 -%}
+                                                  <div
+                                                    class="grid__item collection-list__item"
+                                                    {{ block.shopify_attributes }}
+                                                  >
+                                                    {%- assign placeholder_image_index = forloop.index0
+                                                      | modulo: 4
+                                                      | plus: 1
+                                                    -%}
+                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                      | append: placeholder_image_index
+                                                    -%}
+                                                    {% render 'card-collection',
+                                                      card_collection: collection,
+                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                      coll_card_style: block.settings.collection_card_style,
+                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                      columns: columns,
+                                                      placeholder_image: placeholder_image
+                                                    %}
+                                                  </div>
+                                                {%- else -%}
+                                                  {% comment %}
+                                                    {% assign limit = block.settings.columns_desktop %}
+                                                    {%- for i in (1..limit) -%}
+                                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+                                                        {% render 'card-collection',
+                                                          columns: columns,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- endfor -%}
+                                                  {% endcomment %}
+                                                {%- endfor -%}
+                                              </div>
+                                            </div>
+                                          {%- endif -%}
+
+                                          {%- if block.settings.tab5 != blank -%}
+                                            <div
+                                              id="{{ block.id }}-5mobile"
+                                              class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                              tabindex="-1"
+                                            >
+                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                {%- for collection in block.settings.coll5 -%}
+                                                  <div
+                                                    class="grid__item collection-list__item"
+                                                    {{ block.shopify_attributes }}
+                                                  >
+                                                    {%- assign placeholder_image_index = forloop.index0
+                                                      | modulo: 4
+                                                      | plus: 1
+                                                    -%}
+                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                      | append: placeholder_image_index
+                                                    -%}
+                                                    {% render 'card-collection',
+                                                      card_collection: collection,
+                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                      coll_card_style: block.settings.collection_card_style,
+                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                      columns: columns,
+                                                      placeholder_image: placeholder_image
+                                                    %}
+                                                  </div>
+                                                {%- else -%}
+                                                  {% comment %}
+                                                    {% assign limit = block.settings.columns_desktop %}
+                                                    {%- for i in (1..limit) -%}
+                                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+                                                        {% render 'card-collection',
+                                                          columns: columns,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- endfor -%}
+                                                  {% endcomment %}
+                                                {%- endfor -%}
+                                              </div>
+                                            </div>
+                                          {%- endif -%}
+                                        </div>
+                                      </div>
+                                      {%- style -%}
+                                        .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                          color: {{ block.settings.activetab_color }};
+                                        }
+                                      {%- endstyle -%}
+                                      <script>
+                                        function megaTab() {
+                                          const tabs = document.querySelector('.mtab-mobile-{{ block.id }}');
+                                          const tabButton = document.querySelectorAll(
+                                            '.mtab-mobile-{{ block.id }} .tab-button'
+                                          );
+                                          const contents = document.querySelectorAll(
+                                            '.mtab-mobile-{{ block.id }} .tab-pane'
+                                          );
+                                          tabs.onclick = (e) => {
+                                            onTabclick(e);
+                                          };
+                                          tabs.addEventListener('keydown', (e) => {
+                                            if (e.keyCode === 13) {
+                                              onTabclick(e);
+                                            }
+                                          });
+
+                                          function onTabclick(e) {
+                                            const id = e.target.dataset.id;
+                                            if (id) {
+                                              tabButton.forEach((btn) => {
+                                                btn.classList.remove('active');
+                                              });
+                                              e.target.classList.add('active');
+
+                                              contents.forEach((content) => {
+                                                content.classList.remove('active');
+                                              });
+                                              const element = document.getElementById(id);
+                                              element.classList.add('active');
+                                            }
+                                          }
+                                        }
+                                        document.addEventListener('shopify:section:load', megaTab);
+                                        megaTab();
+                                      </script>
+
+                                    {% when 'mega-menu-tabinfo' %}
+                                      <div class="mega-menu-tabinfo grid">
+                                        <div class="grid__item tabinfo_left">
+                                          {%- if block.settings.coll_headingleft != blank -%}
+                                            <h3 class="info_heading">{{ block.settings.coll_headingleft }}</h3>
+                                          {%- endif -%}
+                                          <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                            {%- for collection in block.settings.info_coll -%}
+                                              <div
+                                                class="grid__item collection-list__item"
+                                                {{ block.shopify_attributes }}
+                                              >
+                                                {%- assign placeholder_image_index = forloop.index0
+                                                  | modulo: 4
+                                                  | plus: 1
+                                                -%}
+                                                {%- assign placeholder_image = 'collection-apparel-'
+                                                  | append: placeholder_image_index
+                                                -%}
+                                                {% render 'card-collection',
+                                                  card_collection: collection,
+                                                  media_aspect_ratio: block.settings.image_ratio,
+                                                  coll_card_style: block.settings.infocall_card_style,
+                                                  collection_card_text_alignment: block.settings.infocall_alignment,
+                                                  collection_card_color_scheme: block.settings.infocall_color_scheme,
+                                                  columns: columns,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </div>
+                                            {%- else -%}
+                                              {% assign limit = block.settings.columns_desktop %}
+                                              {%- for i in (1..limit) -%}
+                                                <div
+                                                  class="grid__item collection-list__item"
+                                                  {{ block.shopify_attributes }}
+                                                >
+                                                  {%- assign placeholder_image_index = forloop.index0
+                                                    | modulo: 4
+                                                    | plus: 1
+                                                  -%}
+                                                  {%- assign placeholder_image = 'collection-apparel-'
+                                                    | append: placeholder_image_index
+                                                  -%}
+                                                  {% render 'card-collection',
+                                                    columns: columns,
+                                                    collection_card_text_alignment: block.settings.infocall_alignment,
+                                                    placeholder_image: placeholder_image
+                                                  %}
+                                                </div>
+                                              {%- endfor -%}
+                                            {%- endfor -%}
+                                          </div>
+                                        </div>
+                                        <div class="grid__item tabinfo_right cinfo-{{ block.id }}">
+                                          <div>
+                                            {%- if block.settings.info_heading != blank -%}
+                                              <h3 class="info_heading">{{ block.settings.info_heading }}</h3>
+                                            {%- endif -%}
+
+                                            <ul class="tabinfo_ul">
+                                              {%- if block.settings.info_text1 != blank -%}
+                                                <li>
+                                                  {%- if block.settings.info_icon1 != 'none' -%}
+                                                    <span class="tabinfo_svg">
+                                                      {%- render 'icon-accordion', icon: block.settings.info_icon1 -%}
+                                                    </span>
+                                                  {%- endif -%}
+                                                  <span>{{ block.settings.info_text1 }}</span>
+                                                </li>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.info_text2 != blank -%}
+                                                <li>
+                                                  {%- if block.settings.info_icon2 != 'none' -%}
+                                                    <span class="tabinfo_svg">
+                                                      {%- render 'icon-accordion', icon: block.settings.info_icon2 -%}
+                                                    </span>
+                                                  {%- endif -%}
+                                                  <span>{{ block.settings.info_text2 }}</span>
+                                                </li>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.info_text3 != blank -%}
+                                                <li>
+                                                  {%- if block.settings.info_icon3 != 'none' -%}
+                                                    <span class="tabinfo_svg">
+                                                      {%- render 'icon-accordion', icon: block.settings.info_icon3 -%}
+                                                    </span>
+                                                  {%- endif -%}
+                                                  <span>{{ block.settings.info_text3 }}</span>
+                                                </li>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.info_text4 != blank -%}
+                                                <li>
+                                                  {%- if block.settings.info_icon4 != 'none' -%}
+                                                    <span class="tabinfo_svg">
+                                                      {%- render 'icon-accordion', icon: block.settings.info_icon4 -%}
+                                                    </span>
+                                                  {%- endif -%}
+                                                  <span>{{ block.settings.info_text4 }}</span>
+                                                </li>
+                                              {%- endif -%}
+                                            </ul>
+                                          </div>
+                                          <div class="tabinfo_bottom">
+                                            {%- if block.settings.info_heading2 != blank -%}
+                                              <h3 class="info_heading">{{ block.settings.info_heading2 }}</h3>
+                                            {%- endif -%}
+                                            {%- if block.settings.fcontactno != blank -%}
+                                              <div class="info_contact">
+                                                <a href="tel:{{ block.settings.fcontactno }}">
+                                                  {%- render 'icon-call' -%}
+                                                  <span>{{ block.settings.fcontactno }}</span></a
+                                                >
+                                              </div>
+                                            {%- endif -%}
+                                            {%- if block.settings.fcontactid != blank -%}
+                                              <div class="info_mail">
+                                                <a href="mailto:{{ block.settings.fcontactid }}">
+                                                  {%- render 'icon-envelope' -%}
+                                                  <span>{{ block.settings.fcontactid }}</span></a
+                                                >
+                                              </div>
+                                            {%- endif -%}
+                                          </div>
+                                        </div>
+
+                                        {%- style -%}
+                                          .cinfo-{{ block.id }} .tabinfo_svg {
+                                            background: {{ block.settings.icon_bgcolor }};
+                                            color: {{ block.settings.icon_textcolor }};
+                                          }
+                                          .cinfo-{{ block.id }} .tabinfo_svg svg {
+                                            fill: {{ block.settings.icon_textcolor }};
+                                          }
+                                          .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg, .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color {
+                                            fill: none;
+                                          }
+                                          .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color path {
+                                            stroke: {{ block.settings.icon_textcolor }};
+                                          }
+                                          .cinfo-{{ block.id }} .tabinfo_bottom svg {
+                                            fill: {{ block.settings.icon_bottomcolor }};
+                                          }
+                                          .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg {
+                                            stroke: {{ block.settings.icon_bottomcolor }};
+                                          }
+                                        {%- endstyle -%}
+                                      </div>
+                                  {%- endcase -%}
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </details>
+                  {%- else -%}
+                    {%- if contain_mega -%}
+                      <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                        <summary
+                          id="HeaderDrawer-{{ link.handle }}"
+                          class="{{ high_title_color }} menu-drawer__menu-item list-menu__item link focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}{% if uppercase_menu %} uppercase{% endif %}"
+                        >
+                          {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                          <span>{{ link.title | escape }}</span>
+                          {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                          {% render 'icon-arrow' %}
+                          {% comment %} {% render 'icon-caret' %} {% endcomment %}
+                        </summary>
+                        <div
+                          id="link-{{ link.handle | escape }}"
+                          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <button class="menu-drawer__close-button link focus-inset" aria-expanded="true">
+                              {% render 'icon-arrow' %}
+                              {{ link.title | escape }}
+                            </button>
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  {%- if childlink.links == blank -%}
+                                    <a
+                                      id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                      href="{{ childlink.url }}"
+                                      class="menu-drawer__menu-item link list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                      {% if childlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                    >
+                                      {{ childlink.title | escape }}
+                                    </a>
+                                  {%- else -%}
+                                    <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
+                                      <summary
+                                        id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                        class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                      >
+                                        {{ childlink.title | escape }}
+                                        {% render 'icon-arrow' %}
+                                        {% render 'icon-caret' %}
+                                      </summary>
+                                      <div
+                                        id="childlink-{{ childlink.handle | escape }}"
+                                        class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                      >
+                                        <button class="menu-drawer__close-button link focus-inset" aria-expanded="true">
+                                          {% render 'icon-arrow' %}
+                                          {{ childlink.title | escape }}
+                                        </button>
+                                        <ul
+                                          class="menu-drawer__menu list-menu"
+                                          role="list"
+                                          tabindex="-1"
+                                        >
+                                          {%- for grandchildlink in childlink.links -%}
+                                            <li>
+                                              <a
+                                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                                href="{{ grandchildlink.url }}"
+                                                class="menu-drawer__menu-item link list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                                {% if grandchildlink.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ grandchildlink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {%- endfor -%}
+                                        </ul>
+                                      </div>
+                                    </details>
+                                  {%- endif -%}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+
+                            {%- if contain_mega -%}
+                              <div class="m_banner_right">
+                                {%- for block in blocks -%}
+                                  {%- liquid
+                                    assign menublock = block.settings.menu_title | downcase
+                                    assign linkblock = link.title | downcase
+                                  -%}
+                                  {%- if linkblock == menublock -%}
+                                    {%- case block.type -%}
+                                      {% when 'mega-menu-banner' %}
+                                        <div
+                                          class="center mega_banner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                          {% if settings.animations_reveal_on_scroll %}
+                                            data-cascade
+                                            style="--animation-order: {{ forloop.index }};"
+                                          {% endif %}
+                                        >
+                                          <div class="banner--{{ block.settings.banner_height }} banner">
+                                            <div
+                                              class="banner__media media{% if block.settings.banner_image == blank %} placeholder{% endif %}"
+                                              {% if block.settings.banner_height == 'adapt'
+                                                and block.settings.banner_image != blank
+                                              %}
+                                                style="padding-bottom: {{ 1 | divided_by: block.settings.banner_image.aspect_ratio | times: 100 }}%;"
+                                              {% endif %}
+                                              {% if block.settings.banner_height == 'adapt'
+                                                and block.settings.banner_image == blank
+                                              %}
+                                                style="padding-bottom: 100%;"
+                                              {% endif %}
+                                            >
+                                              {%- if block.settings.banner_image != blank -%}
+                                                {%- liquid
+                                                  assign banner_height = block.settings.banner_image.width | divided_by: block.settings.banner_image.aspect_ratio | round
+                                                -%}
+                                                {{
+                                                  block.settings.banner_image
+                                                  | image_url: width: 3840
+                                                  | image_tag:
+                                                    loading: 'lazy',
+                                                    width: block.settings.banner_image.width,
+                                                    height: banner_height,
+                                                    sizes: '100vw',
+                                                    widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                                                }}
+                                              {% else %}
+                                                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                              {%- endif -%}
+                                            </div>
+                                          </div>
+                                          {% if block.settings.heading != blank %}
+                                            <h3 class="inline-richtext" {{ section.shopify_attributes }}>
+                                              {{ block.settings.heading }}
+                                            </h3>
+                                          {% endif %}
+                                          {%- if block.settings.button_label != blank -%}
+                                            <a
+                                              {% if block.settings.button_link == blank %}
+                                                role="link" aria-disabled="true"
+                                              {% else %}
+                                                href="{{ block.settings.button_link }}"
+                                              {% endif %}
+                                              class="menu_banner_btn {% if block.settings.button_style == 'link' %}link underlined-link{% elsif block.settings.button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                                            >
+                                              <span>
+                                                {{- block.settings.button_label | escape -}}
+                                                {%- render 'icon-arrow' -%}
+                                              </span>
+                                            </a>
+                                          {%- endif -%}
+                                        </div>
+                                    {%- endcase -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              </div>
+                            {%- endif -%}
+
+                            {%- if contain_mega -%}
+                              <div class="page-width">
+                                {%- for block in blocks -%}
+                                  {%- liquid
+                                    assign menublock = block.settings.menu_title | downcase
+                                    assign linkblock = link.title | downcase
+                                  -%}
+                                  {%- if linkblock == menublock -%}
+                                    {%- case block.type -%}
+                                      {% when 'mega-menu-product' %}
+                                        <ul
+                                          class="mega-menu-product grid grid--{{ block.settings.products_to_show }}-col-desktop"
+                                          role="list"
+                                          aria-label="{{ 'general.slider.name' | t }}"
+                                        >
+                                          {%- for product in block.settings.collection.products
+                                            limit: block.settings.products_to_show
+                                          -%}
+                                            <li
+                                              class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                              {% if settings.animations_reveal_on_scroll %}
+                                                data-cascade
+                                                style="--animation-order: {{ forloop.index }};"
+                                              {% endif %}
+                                            >
+                                              {% render 'card-product',
+                                                card_product: product,
+                                                card_style: settings.card_style,
+                                                media_aspect_ratio: settings.image_ratio,
+                                                show_secondary_image: settings.show_secondary_image,
+                                                show_vendor: settings.show_cardvendor,
+                                                section_id: section.id
+                                              %}
+                                            </li>
+                                          {%- else -%}
+                                            {%- for i in (1..4) -%}
+                                              <li
+                                                class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                                {% if settings.animations_reveal_on_scroll %}
+                                                  data-cascade
+                                                  style="--animation-order: {{ forloop.index }};"
+                                                {% endif %}
+                                              >
+                                                {%- assign placeholder_image = 'product-apparel-'
+                                                  | append: forloop.rindex
+                                                -%}
+                                                {% render 'card-product',
+                                                  card_style: settings.card_style,
+                                                  show_vendor: settings.show_cardvendor,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </li>
+                                            {%- endfor -%}
+                                          {%- endfor -%}
+                                        </ul>
+
+                                      {% when 'mega-menu-tabcollections' %}
+                                        {% if block.settings.mobile_type == 'dropdown' %}
+                                          <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                            {% assign firstcol = block.settings.coll1 | first %}
+                                            {% if firstcol %}
+                                              <li>
+                                                <details id="Details-menu-drawer-{{ link.handle }}-{{ block.settings.tab1 }}">
+                                                  <summary
+                                                    id="HeaderDrawer-{{ link.handle }}-{{ cblock.settings.tab1 }}"
+                                                    class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                                  >
+                                                    {{ block.settings.tab1 }}
+                                                    {% render 'icon-arrow' %}
+                                                  </summary>
+                                                  <div
+                                                    id="childlink-{{ block.settings.tab1 | escape }}"
+                                                    class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                                  >
+                                                    <button
+                                                      class="menu-drawer__close-button link focus-inset"
+                                                      aria-expanded="true"
+                                                    >
+                                                      {% render 'icon-arrow' %}
+                                                      {{ block.settings.tab1 | escape }}
+                                                    </button>
+                                                    <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                                      <div class="page-width">
+                                                        <div class="tab-content">
+                                                          {%- if block.settings.tab1 != blank -%}
+                                                            <div
+                                                              id="{{ block.id }}-1mobile"
+                                                              class="tab-pane fade active"
+                                                              tabindex="-1"
+                                                            >
+                                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                                {%- for collection in block.settings.coll1 -%}
+                                                                  <div
+                                                                    class="grid__item collection-list__item"
+                                                                    {{ block.shopify_attributes }}
+                                                                  >
+                                                                    {%- assign placeholder_image_index = forloop.index0
+                                                                      | modulo: 4
+                                                                      | plus: 1
+                                                                    -%}
+                                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                                      | append: placeholder_image_index
+                                                                    -%}
+                                                                    {% render 'card-collection',
+                                                                      card_collection: collection,
+                                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                                      coll_card_style: block.settings.collection_card_style,
+                                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                                      columns: columns,
+                                                                      placeholder_image: placeholder_image
+                                                                    %}
+                                                                  </div>
+                                                                {%- endfor -%}
+                                                              </div>
+                                                            </div>
+                                                          {%- endif -%}
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    {%- style -%}
+                                                      .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                                        color: {{ block.settings.activetab_color }};
+                                                      }
+                                                    {%- endstyle -%}
+                                                    <script>
+                                                      function megaTab() {
+                                                        const tabs =
+                                                          document.querySelector('.mtab-mobile-{{ block.id }}');
+                                                        const tabButton = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-button'
+                                                        );
+                                                        const contents = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-pane'
+                                                        );
+                                                        tabs.onclick = (e) => {
+                                                          onTabclick(e);
+                                                        };
+                                                        tabs.addEventListener('keydown', (e) => {
+                                                          if (e.keyCode === 13) {
+                                                            onTabclick(e);
+                                                          }
+                                                        });
+
+                                                        function onTabclick(e) {
+                                                          const id = e.target.dataset.id;
+                                                          if (id) {
+                                                            tabButton.forEach((btn) => {
+                                                              btn.classList.remove('active');
+                                                            });
+                                                            e.target.classList.add('active');
+
+                                                            contents.forEach((content) => {
+                                                              content.classList.remove('active');
+                                                            });
+                                                            const element = document.getElementById(id);
+                                                            element.classList.add('active');
+                                                          }
+                                                        }
+                                                      }
+                                                      document.addEventListener('shopify:section:load', megaTab);
+                                                      megaTab();
+                                                    </script>
+                                                  </div>
+                                                </details>
+                                              </li>
+                                            {% else %}
+                                              {% if block.settings.tab1 != blank %}
+                                                <a
+                                                  id="HeaderDrawer-{{ link.handle }}-{{ block.settings.tab1 }}"
+                                                  href="{{ block.settings.tab1_url }}"
+                                                  class="a-dropdown menu-drawer__menu-item link list-menu__item focus-inset{% if block.settings.tab1_url.current %} menu-drawer__menu-item--active{% endif %}"
+                                                  {% if block.settings.tab1_url.current %}
+                                                    aria-current="page"
+                                                  {% endif %}
+                                                >
+                                                  {{ block.settings.tab1 }}
+                                                </a>
+                                              {% endif %}
+                                            {% endif %}
+
+                                            {% assign firstcol = block.settings.coll2 | first %}
+                                            {% if firstcol %}
+                                              <li>
+                                                <details id="Details-menu-drawer-{{ link.handle }}-{{ block.settings.tab2 }}">
+                                                  <summary
+                                                    id="HeaderDrawer-{{ link.handle }}-{{ cblock.settings.tab2 }}"
+                                                    class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                                  >
+                                                    {{ block.settings.tab2 }}
+                                                    {% render 'icon-arrow' %}
+                                                  </summary>
+                                                  <div
+                                                    id="childlink-{{ block.settings.tab2 | escape }}"
+                                                    class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                                  >
+                                                    <button
+                                                      class="menu-drawer__close-button link focus-inset"
+                                                      aria-expanded="true"
+                                                    >
+                                                      {% render 'icon-arrow' %}
+                                                      {{ block.settings.tab2 | escape }}
+                                                    </button>
+                                                    <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                                      <div class="page-width">
+                                                        <div class="tab-content">
+                                                          {%- if block.settings.tab2 != blank -%}
+                                                            <div
+                                                              id="{{ block.id }}-1mobile"
+                                                              class="tab-pane fade active"
+                                                              tabindex="-1"
+                                                            >
+                                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                                {%- for collection in block.settings.coll1 -%}
+                                                                  <div
+                                                                    class="grid__item collection-list__item"
+                                                                    {{ block.shopify_attributes }}
+                                                                  >
+                                                                    {%- assign placeholder_image_index = forloop.index0
+                                                                      | modulo: 4
+                                                                      | plus: 1
+                                                                    -%}
+                                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                                      | append: placeholder_image_index
+                                                                    -%}
+                                                                    {% render 'card-collection',
+                                                                      card_collection: collection,
+                                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                                      coll_card_style: block.settings.collection_card_style,
+                                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                                      columns: columns,
+                                                                      placeholder_image: placeholder_image
+                                                                    %}
+                                                                  </div>
+                                                                {%- endfor -%}
+                                                              </div>
+                                                            </div>
+                                                          {%- endif -%}
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    {%- style -%}
+                                                      .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                                        color: {{ block.settings.activetab_color }};
+                                                      }
+                                                    {%- endstyle -%}
+                                                    <script>
+                                                      function megaTab() {
+                                                        const tabs =
+                                                          document.querySelector('.mtab-mobile-{{ block.id }}');
+                                                        const tabButton = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-button'
+                                                        );
+                                                        const contents = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-pane'
+                                                        );
+                                                        tabs.onclick = (e) => {
+                                                          onTabclick(e);
+                                                        };
+                                                        tabs.addEventListener('keydown', (e) => {
+                                                          if (e.keyCode === 13) {
+                                                            onTabclick(e);
+                                                          }
+                                                        });
+
+                                                        function onTabclick(e) {
+                                                          const id = e.target.dataset.id;
+                                                          if (id) {
+                                                            tabButton.forEach((btn) => {
+                                                              btn.classList.remove('active');
+                                                            });
+                                                            e.target.classList.add('active');
+
+                                                            contents.forEach((content) => {
+                                                              content.classList.remove('active');
+                                                            });
+                                                            const element = document.getElementById(id);
+                                                            element.classList.add('active');
+                                                          }
+                                                        }
+                                                      }
+                                                      document.addEventListener('shopify:section:load', megaTab);
+                                                      megaTab();
+                                                    </script>
+                                                  </div>
+                                                </details>
+                                              </li>
+                                            {% else %}
+                                              {% if block.settings.tab2 != blank %}
+                                                <a
+                                                  id="HeaderDrawer-{{ link.handle }}-{{ block.settings.tab2 }}"
+                                                  href="{{ block.settings.tab2_url }}"
+                                                  class="a-dropdown menu-drawer__menu-item link list-menu__item focus-inset{% if block.settings.tab2_url.current %} menu-drawer__menu-item--active{% endif %}"
+                                                  {% if block.settings.tab2_url.current %}
+                                                    aria-current="page"
+                                                  {% endif %}
+                                                >
+                                                  {{ block.settings.tab2 }}
+                                                </a>
+                                              {% endif %}
+                                            {% endif %}
+
+                                            {% assign firstcol = block.settings.coll3 | first %}
+                                            {% if firstcol %}
+                                              <li>
+                                                <details id="Details-menu-drawer-{{ link.handle }}-{{ block.settings.tab3 }}">
+                                                  <summary
+                                                    id="HeaderDrawer-{{ link.handle }}-{{ cblock.settings.tab3 }}"
+                                                    class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                                  >
+                                                    {{ block.settings.tab3 }}
+                                                    {% render 'icon-arrow' %}
+                                                  </summary>
+                                                  <div
+                                                    id="childlink-{{ block.settings.tab3 | escape }}"
+                                                    class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                                  >
+                                                    <button
+                                                      class="menu-drawer__close-button link focus-inset"
+                                                      aria-expanded="true"
+                                                    >
+                                                      {% render 'icon-arrow' %}
+                                                      {{ block.settings.tab3 | escape }}
+                                                    </button>
+                                                    <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                                      <div class="page-width">
+                                                        <div class="tab-content">
+                                                          {%- if block.settings.tab3 != blank -%}
+                                                            <div
+                                                              id="{{ block.id }}-1mobile"
+                                                              class="tab-pane fade active"
+                                                              tabindex="-1"
+                                                            >
+                                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                                {%- for collection in block.settings.coll3 -%}
+                                                                  <div
+                                                                    class="grid__item collection-list__item"
+                                                                    {{ block.shopify_attributes }}
+                                                                  >
+                                                                    {%- assign placeholder_image_index = forloop.index0
+                                                                      | modulo: 4
+                                                                      | plus: 1
+                                                                    -%}
+                                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                                      | append: placeholder_image_index
+                                                                    -%}
+                                                                    {% render 'card-collection',
+                                                                      card_collection: collection,
+                                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                                      coll_card_style: block.settings.collection_card_style,
+                                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                                      columns: columns,
+                                                                      placeholder_image: placeholder_image
+                                                                    %}
+                                                                  </div>
+                                                                {%- endfor -%}
+                                                              </div>
+                                                            </div>
+                                                          {%- endif -%}
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    {%- style -%}
+                                                      .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                                        color: {{ block.settings.activetab_color }};
+                                                      }
+                                                    {%- endstyle -%}
+                                                    <script>
+                                                      function megaTab() {
+                                                        const tabs =
+                                                          document.querySelector('.mtab-mobile-{{ block.id }}');
+                                                        const tabButton = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-button'
+                                                        );
+                                                        const contents = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-pane'
+                                                        );
+                                                        tabs.onclick = (e) => {
+                                                          onTabclick(e);
+                                                        };
+                                                        tabs.addEventListener('keydown', (e) => {
+                                                          if (e.keyCode === 13) {
+                                                            onTabclick(e);
+                                                          }
+                                                        });
+
+                                                        function onTabclick(e) {
+                                                          const id = e.target.dataset.id;
+                                                          if (id) {
+                                                            tabButton.forEach((btn) => {
+                                                              btn.classList.remove('active');
+                                                            });
+                                                            e.target.classList.add('active');
+
+                                                            contents.forEach((content) => {
+                                                              content.classList.remove('active');
+                                                            });
+                                                            const element = document.getElementById(id);
+                                                            element.classList.add('active');
+                                                          }
+                                                        }
+                                                      }
+                                                      document.addEventListener('shopify:section:load', megaTab);
+                                                      megaTab();
+                                                    </script>
+                                                  </div>
+                                                </details>
+                                              </li>
+                                            {% else %}
+                                              {% if block.settings.tab3 != blank %}
+                                                <a
+                                                  id="HeaderDrawer-{{ link.handle }}-{{ block.settings.tab3 }}"
+                                                  href="{{ block.settings.tab3_url }}"
+                                                  class="menu-drawer__menu-item link list-menu__item focus-inset{% if block.settings.tab3_url.current %} menu-drawer__menu-item--active{% endif %}"
+                                                  {% if block.settings.tab3_url.current %}
+                                                    aria-current="page"
+                                                  {% endif %}
+                                                >
+                                                  {{ block.settings.tab3 }}
+                                                </a>
+                                              {% endif %}
+                                            {% endif %}
+
+                                            {% assign firstcol = block.settings.coll4 | first %}
+                                            {% if firstcol %}
+                                              <li>
+                                                <details id="Details-menu-drawer-{{ link.handle }}-{{ block.settings.tab4 }}">
+                                                  <summary
+                                                    id="HeaderDrawer-{{ link.handle }}-{{ cblock.settings.tab4 }}"
+                                                    class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                                  >
+                                                    {{ block.settings.tab4 }}
+                                                    {% render 'icon-arrow' %}
+                                                  </summary>
+                                                  <div
+                                                    id="childlink-{{ block.settings.tab4 | escape }}"
+                                                    class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                                  >
+                                                    <button
+                                                      class="menu-drawer__close-button link focus-inset"
+                                                      aria-expanded="true"
+                                                    >
+                                                      {% render 'icon-arrow' %}
+                                                      {{ block.settings.tab4 | escape }}
+                                                    </button>
+                                                    <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                                      <div class="page-width">
+                                                        <div class="tab-content">
+                                                          {%- if block.settings.tab4 != blank -%}
+                                                            <div
+                                                              id="{{ block.id }}-1mobile"
+                                                              class="tab-pane fade active"
+                                                              tabindex="-1"
+                                                            >
+                                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                                {%- for collection in block.settings.coll4 -%}
+                                                                  <div
+                                                                    class="grid__item collection-list__item"
+                                                                    {{ block.shopify_attributes }}
+                                                                  >
+                                                                    {%- assign placeholder_image_index = forloop.index0
+                                                                      | modulo: 4
+                                                                      | plus: 1
+                                                                    -%}
+                                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                                      | append: placeholder_image_index
+                                                                    -%}
+                                                                    {% render 'card-collection',
+                                                                      card_collection: collection,
+                                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                                      coll_card_style: block.settings.collection_card_style,
+                                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                                      columns: columns,
+                                                                      placeholder_image: placeholder_image
+                                                                    %}
+                                                                  </div>
+                                                                {%- endfor -%}
+                                                              </div>
+                                                            </div>
+                                                          {%- endif -%}
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    {%- style -%}
+                                                      .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                                        color: {{ block.settings.activetab_color }};
+                                                      }
+                                                    {%- endstyle -%}
+                                                    <script>
+                                                      function megaTab() {
+                                                        const tabs =
+                                                          document.querySelector('.mtab-mobile-{{ block.id }}');
+                                                        const tabButton = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-button'
+                                                        );
+                                                        const contents = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-pane'
+                                                        );
+                                                        tabs.onclick = (e) => {
+                                                          onTabclick(e);
+                                                        };
+                                                        tabs.addEventListener('keydown', (e) => {
+                                                          if (e.keyCode === 13) {
+                                                            onTabclick(e);
+                                                          }
+                                                        });
+
+                                                        function onTabclick(e) {
+                                                          const id = e.target.dataset.id;
+                                                          if (id) {
+                                                            tabButton.forEach((btn) => {
+                                                              btn.classList.remove('active');
+                                                            });
+                                                            e.target.classList.add('active');
+
+                                                            contents.forEach((content) => {
+                                                              content.classList.remove('active');
+                                                            });
+                                                            const element = document.getElementById(id);
+                                                            element.classList.add('active');
+                                                          }
+                                                        }
+                                                      }
+                                                      document.addEventListener('shopify:section:load', megaTab);
+                                                      megaTab();
+                                                    </script>
+                                                  </div>
+                                                </details>
+                                              </li>
+                                            {% else %}
+                                              {% if block.settings.tab4 != blank %}
+                                                <a
+                                                  id="HeaderDrawer-{{ link.handle }}-{{ block.settings.tab4 }}"
+                                                  href="{{ block.settings.tab4_url }}"
+                                                  class="a-dropdown menu-drawer__menu-item link list-menu__item focus-inset{% if block.settings.tab4_url.current %} menu-drawer__menu-item--active{% endif %}"
+                                                  {% if block.settings.tab4_url.current %}
+                                                    aria-current="page"
+                                                  {% endif %}
+                                                >
+                                                  {{ block.settings.tab4 }}
+                                                </a>
+                                              {% endif %}
+                                            {% endif %}
+
+                                            {% assign firstcol = block.settings.coll5 | first %}
+                                            {% if firstcol %}
+                                              <li>
+                                                <details id="Details-menu-drawer-{{ link.handle }}-{{ block.settings.tab5 }}">
+                                                  <summary
+                                                    id="HeaderDrawer-{{ link.handle }}-{{ cblock.settings.tab5 }}"
+                                                    class="menu-drawer__menu-item link list-menu__item focus-inset"
+                                                  >
+                                                    {{ block.settings.tab5 }}
+                                                    {% render 'icon-arrow' %}
+                                                  </summary>
+                                                  <div
+                                                    id="childlink-{{ block.settings.tab5 | escape }}"
+                                                    class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                                  >
+                                                    <button
+                                                      class="menu-drawer__close-button link focus-inset"
+                                                      aria-expanded="true"
+                                                    >
+                                                      {% render 'icon-arrow' %}
+                                                      {{ block.settings.tab5 | escape }}
+                                                    </button>
+                                                    <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                                      <div class="page-width">
+                                                        <div class="tab-content">
+                                                          {%- if block.settings.tab5 != blank -%}
+                                                            <div
+                                                              id="{{ block.id }}-1mobile"
+                                                              class="tab-pane fade active"
+                                                              tabindex="-1"
+                                                            >
+                                                              <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                                {%- for collection in block.settings.coll5 -%}
+                                                                  <div
+                                                                    class="grid__item collection-list__item"
+                                                                    {{ block.shopify_attributes }}
+                                                                  >
+                                                                    {%- assign placeholder_image_index = forloop.index0
+                                                                      | modulo: 4
+                                                                      | plus: 1
+                                                                    -%}
+                                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                                      | append: placeholder_image_index
+                                                                    -%}
+                                                                    {% render 'card-collection',
+                                                                      card_collection: collection,
+                                                                      media_aspect_ratio: block.settings.image_ratio,
+                                                                      coll_card_style: block.settings.collection_card_style,
+                                                                      collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                                      collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                                      columns: columns,
+                                                                      placeholder_image: placeholder_image
+                                                                    %}
+                                                                  </div>
+                                                                {%- endfor -%}
+                                                              </div>
+                                                            </div>
+                                                          {%- endif -%}
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    {%- style -%}
+                                                      .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                                        color: {{ block.settings.activetab_color }};
+                                                      }
+                                                    {%- endstyle -%}
+                                                    <script>
+                                                      function megaTab() {
+                                                        const tabs =
+                                                          document.querySelector('.mtab-mobile-{{ block.id }}');
+                                                        const tabButton = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-button'
+                                                        );
+                                                        const contents = document.querySelectorAll(
+                                                          '.mtab-mobile-{{ block.id }} .tab-pane'
+                                                        );
+                                                        tabs.onclick = (e) => {
+                                                          onTabclick(e);
+                                                        };
+                                                        tabs.addEventListener('keydown', (e) => {
+                                                          if (e.keyCode === 13) {
+                                                            onTabclick(e);
+                                                          }
+                                                        });
+
+                                                        function onTabclick(e) {
+                                                          const id = e.target.dataset.id;
+                                                          if (id) {
+                                                            tabButton.forEach((btn) => {
+                                                              btn.classList.remove('active');
+                                                            });
+                                                            e.target.classList.add('active');
+
+                                                            contents.forEach((content) => {
+                                                              content.classList.remove('active');
+                                                            });
+                                                            const element = document.getElementById(id);
+                                                            element.classList.add('active');
+                                                          }
+                                                        }
+                                                      }
+                                                      document.addEventListener('shopify:section:load', megaTab);
+                                                      megaTab();
+                                                    </script>
+                                                  </div>
+                                                </details>
+                                              </li>
+                                            {% else %}
+                                              {% if block.settings.tab5 != blank %}
+                                                <a
+                                                  id="HeaderDrawer-{{ link.handle }}-{{ block.settings.tab5 }}"
+                                                  href="{{ block.settings.tab5_url }}"
+                                                  class="a-dropdown menu-drawer__menu-item link list-menu__item focus-inset{% if block.settings.tab5_url.current %} menu-drawer__menu-item--active{% endif %}"
+                                                  {% if block.settings.tab5_url.current %}
+                                                    aria-current="page"
+                                                  {% endif %}
+                                                >
+                                                  {{ block.settings.tab5 }}
+                                                </a>
+                                              {% endif %}
+                                            {% endif %}
+                                          </ul>
+                                        {% else %}
+                                          <div class="mega-menu-collections megamenu_tabcoll mtab-mobile-{{ block.id }}">
+                                            <div class="tabs-collapse">
+                                              {%- if block.settings.tab1 != blank -%}
+                                                <span
+                                                  class="tab-button active"
+                                                  tabindex="0"
+                                                  data-id="{{ block.id }}-1mobile"
+                                                >
+                                                  {{- block.settings.tab1 -}}
+                                                </span>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab2 != blank -%}
+                                                <span
+                                                  class="tab-button {% if block.settings.tab1 == blank %}active{% endif %}"
+                                                  tabindex="0"
+                                                  data-id="{{ block.id }}-2mobile"
+                                                >
+                                                  {{- block.settings.tab2 -}}
+                                                </span>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab3 != blank -%}
+                                                <span
+                                                  class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                                  tabindex="0"
+                                                  data-id="{{ block.id }}-3mobile"
+                                                >
+                                                  {{- block.settings.tab3 -}}
+                                                </span>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab4 != blank -%}
+                                                <span
+                                                  class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                                  tabindex="0"
+                                                  data-id="{{ block.id }}-4mobile"
+                                                >
+                                                  {{- block.settings.tab4 -}}
+                                                </span>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab5 != blank -%}
+                                                <span
+                                                  class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                                  tabindex="0"
+                                                  data-id="{{ block.id }}-5mobile"
+                                                >
+                                                  {{- block.settings.tab5 -}}
+                                                </span>
+                                              {%- endif -%}
+                                            </div>
+                                            <div class="tab-content">
+                                              {%- if block.settings.tab1 != blank -%}
+                                                <div
+                                                  id="{{ block.id }}-1mobile"
+                                                  class="tab-pane fade active"
+                                                  tabindex="-1"
+                                                >
+                                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                    {%- for collection in block.settings.coll1 -%}
+                                                      <div
+                                                        class="grid__item collection-list__item"
+                                                        {{ block.shopify_attributes }}
+                                                      >
+                                                        {%- assign placeholder_image_index = forloop.index0
+                                                          | modulo: 4
+                                                          | plus: 1
+                                                        -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-'
+                                                          | append: placeholder_image_index
+                                                        -%}
+                                                        {% render 'card-collection',
+                                                          card_collection: collection,
+                                                          media_aspect_ratio: block.settings.image_ratio,
+                                                          coll_card_style: block.settings.collection_card_style,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                          columns: columns,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- else -%}
+                                                      {% assign limit = block.settings.columns_desktop %}
+                                                      {%- for i in (1..limit) -%}
+                                                        <div
+                                                          class="grid__item collection-list__item"
+                                                          {{ block.shopify_attributes }}
+                                                        >
+                                                          {%- assign placeholder_image_index = forloop.index0
+                                                            | modulo: 4
+                                                            | plus: 1
+                                                          -%}
+                                                          {%- assign placeholder_image = 'collection-apparel-'
+                                                            | append: placeholder_image_index
+                                                          -%}
+                                                          {% render 'card-collection',
+                                                            columns: columns,
+                                                            collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                            placeholder_image: placeholder_image
+                                                          %}
+                                                        </div>
+                                                      {%- endfor -%}
+                                                    {%- endfor -%}
+                                                  </div>
+                                                </div>
+                                              {%- endif -%}
+                                              {%- if block.settings.tab2 != blank -%}
+                                                <div
+                                                  id="{{ block.id }}-2mobile"
+                                                  class="tab-pane fade {% if block.settings.tab1 == blank %}active{% endif %}"
+                                                  tabindex="-1"
+                                                >
+                                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                    {%- for collection in block.settings.coll2 -%}
+                                                      <div
+                                                        class="grid__item collection-list__item"
+                                                        {{ block.shopify_attributes }}
+                                                      >
+                                                        {%- assign placeholder_image_index = forloop.index0
+                                                          | modulo: 4
+                                                          | plus: 1
+                                                        -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-'
+                                                          | append: placeholder_image_index
+                                                        -%}
+                                                        {% render 'card-collection',
+                                                          card_collection: collection,
+                                                          media_aspect_ratio: block.settings.image_ratio,
+                                                          coll_card_style: block.settings.collection_card_style,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                          columns: columns,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- else -%}
+                                                      {% assign limit = block.settings.columns_desktop %}
+                                                      {%- for i in (1..limit) -%}
+                                                        <div
+                                                          class="grid__item collection-list__item"
+                                                          {{ block.shopify_attributes }}
+                                                        >
+                                                          {%- assign placeholder_image_index = forloop.index0
+                                                            | modulo: 4
+                                                            | plus: 1
+                                                          -%}
+                                                          {%- assign placeholder_image = 'collection-apparel-'
+                                                            | append: placeholder_image_index
+                                                          -%}
+                                                          {% render 'card-collection',
+                                                            columns: columns,
+                                                            collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                            placeholder_image: placeholder_image
+                                                          %}
+                                                        </div>
+                                                      {%- endfor -%}
+                                                    {%- endfor -%}
+                                                  </div>
+                                                </div>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab3 != blank -%}
+                                                <div
+                                                  id="{{ block.id }}-3mobile"
+                                                  class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                                  tabindex="-1"
+                                                >
+                                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                    {%- for collection in block.settings.coll3 -%}
+                                                      <div
+                                                        class="grid__item collection-list__item"
+                                                        {{ block.shopify_attributes }}
+                                                      >
+                                                        {%- assign placeholder_image_index = forloop.index0
+                                                          | modulo: 4
+                                                          | plus: 1
+                                                        -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-'
+                                                          | append: placeholder_image_index
+                                                        -%}
+                                                        {% render 'card-collection',
+                                                          card_collection: collection,
+                                                          media_aspect_ratio: block.settings.image_ratio,
+                                                          coll_card_style: block.settings.collection_card_style,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                          columns: columns,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- else -%}
+                                                      {% assign limit = block.settings.columns_desktop %}
+                                                      {%- for i in (1..limit) -%}
+                                                        <div
+                                                          class="grid__item collection-list__item"
+                                                          {{ block.shopify_attributes }}
+                                                        >
+                                                          {%- assign placeholder_image_index = forloop.index0
+                                                            | modulo: 4
+                                                            | plus: 1
+                                                          -%}
+                                                          {%- assign placeholder_image = 'collection-apparel-'
+                                                            | append: placeholder_image_index
+                                                          -%}
+                                                          {% render 'card-collection',
+                                                            columns: columns,
+                                                            collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                            placeholder_image: placeholder_image
+                                                          %}
+                                                        </div>
+                                                      {%- endfor -%}
+                                                    {%- endfor -%}
+                                                  </div>
+                                                </div>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab4 != blank -%}
+                                                <div
+                                                  id="{{ block.id }}-4mobile"
+                                                  class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                                  tabindex="-1"
+                                                >
+                                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                    {%- for collection in block.settings.coll4 -%}
+                                                      <div
+                                                        class="grid__item collection-list__item"
+                                                        {{ block.shopify_attributes }}
+                                                      >
+                                                        {%- assign placeholder_image_index = forloop.index0
+                                                          | modulo: 4
+                                                          | plus: 1
+                                                        -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-'
+                                                          | append: placeholder_image_index
+                                                        -%}
+                                                        {% render 'card-collection',
+                                                          card_collection: collection,
+                                                          media_aspect_ratio: block.settings.image_ratio,
+                                                          coll_card_style: block.settings.collection_card_style,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                          columns: columns,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- else -%}
+                                                      {% assign limit = block.settings.columns_desktop %}
+                                                      {%- for i in (1..limit) -%}
+                                                        <div
+                                                          class="grid__item collection-list__item"
+                                                          {{ block.shopify_attributes }}
+                                                        >
+                                                          {%- assign placeholder_image_index = forloop.index0
+                                                            | modulo: 4
+                                                            | plus: 1
+                                                          -%}
+                                                          {%- assign placeholder_image = 'collection-apparel-'
+                                                            | append: placeholder_image_index
+                                                          -%}
+                                                          {% render 'card-collection',
+                                                            columns: columns,
+                                                            collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                            placeholder_image: placeholder_image
+                                                          %}
+                                                        </div>
+                                                      {%- endfor -%}
+                                                    {%- endfor -%}
+                                                  </div>
+                                                </div>
+                                              {%- endif -%}
+
+                                              {%- if block.settings.tab5 != blank -%}
+                                                <div
+                                                  id="{{ block.id }}-5mobile"
+                                                  class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                                  tabindex="-1"
+                                                >
+                                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                                    {%- for collection in block.settings.coll5 -%}
+                                                      <div
+                                                        class="grid__item collection-list__item"
+                                                        {{ block.shopify_attributes }}
+                                                      >
+                                                        {%- assign placeholder_image_index = forloop.index0
+                                                          | modulo: 4
+                                                          | plus: 1
+                                                        -%}
+                                                        {%- assign placeholder_image = 'collection-apparel-'
+                                                          | append: placeholder_image_index
+                                                        -%}
+                                                        {% render 'card-collection',
+                                                          card_collection: collection,
+                                                          media_aspect_ratio: block.settings.image_ratio,
+                                                          coll_card_style: block.settings.collection_card_style,
+                                                          collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                          collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                                          columns: columns,
+                                                          placeholder_image: placeholder_image
+                                                        %}
+                                                      </div>
+                                                    {%- else -%}
+                                                      {% assign limit = block.settings.columns_desktop %}
+                                                      {%- for i in (1..limit) -%}
+                                                        <div
+                                                          class="grid__item collection-list__item"
+                                                          {{ block.shopify_attributes }}
+                                                        >
+                                                          {%- assign placeholder_image_index = forloop.index0
+                                                            | modulo: 4
+                                                            | plus: 1
+                                                          -%}
+                                                          {%- assign placeholder_image = 'collection-apparel-'
+                                                            | append: placeholder_image_index
+                                                          -%}
+                                                          {% render 'card-collection',
+                                                            columns: columns,
+                                                            collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                            placeholder_image: placeholder_image
+                                                          %}
+                                                        </div>
+                                                      {%- endfor -%}
+                                                    {%- endfor -%}
+                                                  </div>
+                                                </div>
+                                              {%- endif -%}
+                                            </div>
+                                          </div>
+                                          {%- style -%}
+                                            .mtab-mobile-{{ block.id }} .tabs-collapse span.active, .mtab-mobile-{{ block.id }} .tabs-collapse span:hover {
+                                              color: {{ block.settings.activetab_color }};
+                                            }
+                                          {%- endstyle -%}
+                                          <script>
+                                            function megaTab() {
+                                              const tabs = document.querySelector('.mtab-mobile-{{ block.id }}');
+                                              const tabButton = document.querySelectorAll(
+                                                '.mtab-mobile-{{ block.id }} .tab-button'
+                                              );
+                                              const contents = document.querySelectorAll(
+                                                '.mtab-mobile-{{ block.id }} .tab-pane'
+                                              );
+                                              tabs.onclick = (e) => {
+                                                onTabclick(e);
+                                              };
+                                              tabs.addEventListener('keydown', (e) => {
+                                                if (e.keyCode === 13) {
+                                                  onTabclick(e);
+                                                }
+                                              });
+
+                                              function onTabclick(e) {
+                                                const id = e.target.dataset.id;
+                                                if (id) {
+                                                  tabButton.forEach((btn) => {
+                                                    btn.classList.remove('active');
+                                                  });
+                                                  e.target.classList.add('active');
+
+                                                  contents.forEach((content) => {
+                                                    content.classList.remove('active');
+                                                  });
+                                                  const element = document.getElementById(id);
+                                                  element.classList.add('active');
+                                                }
+                                              }
+                                            }
+                                            document.addEventListener('shopify:section:load', megaTab);
+                                            megaTab();
+                                          </script>
+                                        {% endif %}
+
+                                      {% when 'mega-menu-tabinfo' %}
+                                        <div class="mega-menu-tabinfo grid">
+                                          <div class="grid__item tabinfo_left">
+                                            {%- if block.settings.coll_headingleft != blank -%}
+                                              <h3 class="info_heading">{{ block.settings.coll_headingleft }}</h3>
+                                            {%- endif -%}
+                                            <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                              {%- for collection in block.settings.info_coll -%}
+                                                <div
+                                                  class="grid__item collection-list__item"
+                                                  {{ block.shopify_attributes }}
+                                                >
+                                                  {%- assign placeholder_image_index = forloop.index0
+                                                    | modulo: 4
+                                                    | plus: 1
+                                                  -%}
+                                                  {%- assign placeholder_image = 'collection-apparel-'
+                                                    | append: placeholder_image_index
+                                                  -%}
+                                                  {% render 'card-collection',
+                                                    card_collection: collection,
+                                                    media_aspect_ratio: block.settings.image_ratio,
+                                                    coll_card_style: block.settings.infocall_card_style,
+                                                    collection_card_text_alignment: block.settings.infocall_alignment,
+                                                    collection_card_color_scheme: block.settings.infocall_color_scheme,
+                                                    columns: columns,
+                                                    placeholder_image: placeholder_image
+                                                  %}
+                                                </div>
+                                              {%- else -%}
+                                                {% assign limit = block.settings.columns_desktop %}
+                                                {%- for i in (1..limit) -%}
+                                                  <div
+                                                    class="grid__item collection-list__item"
+                                                    {{ block.shopify_attributes }}
+                                                  >
+                                                    {%- assign placeholder_image_index = forloop.index0
+                                                      | modulo: 4
+                                                      | plus: 1
+                                                    -%}
+                                                    {%- assign placeholder_image = 'collection-apparel-'
+                                                      | append: placeholder_image_index
+                                                    -%}
+                                                    {% render 'card-collection',
+                                                      columns: columns,
+                                                      collection_card_text_alignment: block.settings.infocall_alignment,
+                                                      placeholder_image: placeholder_image
+                                                    %}
+                                                  </div>
+                                                {%- endfor -%}
+                                              {%- endfor -%}
+                                            </div>
+                                          </div>
+                                          <div class="grid__item tabinfo_right cinfo-{{ block.id }}">
+                                            <div>
+                                              {%- if block.settings.info_heading != blank -%}
+                                                <h3 class="info_heading">{{ block.settings.info_heading }}</h3>
+                                              {%- endif -%}
+
+                                              <ul class="tabinfo_ul">
+                                                {%- if block.settings.info_text1 != blank -%}
+                                                  <li>
+                                                    {%- if block.settings.info_icon1 != 'none' -%}
+                                                      <span class="tabinfo_svg">
+                                                        {%- render 'icon-accordion', icon: block.settings.info_icon1 -%}
+                                                      </span>
+                                                    {%- endif -%}
+                                                    <span>{{ block.settings.info_text1 }}</span>
+                                                  </li>
+                                                {%- endif -%}
+
+                                                {%- if block.settings.info_text2 != blank -%}
+                                                  <li>
+                                                    {%- if block.settings.info_icon2 != 'none' -%}
+                                                      <span class="tabinfo_svg">
+                                                        {%- render 'icon-accordion', icon: block.settings.info_icon2 -%}
+                                                      </span>
+                                                    {%- endif -%}
+                                                    <span>{{ block.settings.info_text2 }}</span>
+                                                  </li>
+                                                {%- endif -%}
+
+                                                {%- if block.settings.info_text3 != blank -%}
+                                                  <li>
+                                                    {%- if block.settings.info_icon3 != 'none' -%}
+                                                      <span class="tabinfo_svg">
+                                                        {%- render 'icon-accordion', icon: block.settings.info_icon3 -%}
+                                                      </span>
+                                                    {%- endif -%}
+                                                    <span>{{ block.settings.info_text3 }}</span>
+                                                  </li>
+                                                {%- endif -%}
+
+                                                {%- if block.settings.info_text4 != blank -%}
+                                                  <li>
+                                                    {%- if block.settings.info_icon4 != 'none' -%}
+                                                      <span class="tabinfo_svg">
+                                                        {%- render 'icon-accordion', icon: block.settings.info_icon4 -%}
+                                                      </span>
+                                                    {%- endif -%}
+                                                    <span>{{ block.settings.info_text4 }}</span>
+                                                  </li>
+                                                {%- endif -%}
+                                              </ul>
+                                            </div>
+                                            <div class="tabinfo_bottom">
+                                              {%- if block.settings.info_heading2 != blank -%}
+                                                <h3 class="info_heading">{{ block.settings.info_heading2 }}</h3>
+                                              {%- endif -%}
+                                              {%- if block.settings.fcontactno != blank -%}
+                                                <div class="info_contact">
+                                                  <a href="tel:{{ block.settings.fcontactno }}">
+                                                    {%- render 'icon-call' -%}
+                                                    <span>{{ block.settings.fcontactno }}</span></a
+                                                  >
+                                                </div>
+                                              {%- endif -%}
+                                              {%- if block.settings.fcontactid != blank -%}
+                                                <div class="info_mail">
+                                                  <a href="mailto:{{ block.settings.fcontactid }}">
+                                                    {%- render 'icon-envelope' -%}
+                                                    <span>{{ block.settings.fcontactid }}</span></a
+                                                  >
+                                                </div>
+                                              {%- endif -%}
+                                            </div>
+                                          </div>
+
+                                          {%- style -%}
+                                            .cinfo-{{ block.id }} .tabinfo_svg {
+                                              background: {{ block.settings.icon_bgcolor }};
+                                              color: {{ block.settings.icon_textcolor }};
+                                            }
+                                            .cinfo-{{ block.id }} .tabinfo_svg svg {
+                                              fill: {{ block.settings.icon_textcolor }};
+                                            }
+                                            .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg, .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color {
+                                              fill: none;
+                                            }
+                                            .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color path {
+                                              stroke: {{ block.settings.icon_textcolor }};
+                                            }
+                                            .cinfo-{{ block.id }} .tabinfo_bottom svg {
+                                              fill: {{ block.settings.icon_bottomcolor }};
+                                            }
+                                            .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg {
+                                              stroke: {{ block.settings.icon_bottomcolor }};
+                                            }
+                                          {%- endstyle -%}
+                                        </div>
+                                    {%- endcase -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                        </div>
+                      </details>
+                    {% else %}
+                      <a
+                        id="HeaderDrawer-{{ link.handle }}"
+                        href="{{ link.url }}"
+                        class="{{ high_title_color }} menu-drawer__menu-item list-menu__item link focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}{% if uppercase_menu %} uppercase{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                        <span>{{ link.title | escape }}</span>
+                        {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+                </li>
+                {%- style -%}
+                  #HeaderDrawer-{{ link.handle }}.high_link {
+                    color: {{ hlink_color }} !important;
+                  }
+                  #HeaderDrawer-{{ link.handle }}.high_link * {
+                    color: {{ hlink_color }} !important;
+                  }
+                  #HeaderDrawer-{{ link.handle }}.high_link .header_iconshine {
+                    fill: {{ hlink_color }};
+                  }
+                {%- endstyle -%}
+              {%- endfor -%}
+            </ul>
+          </nav>
+
+          {%- liquid
+            assign has_social_icons = true
+            if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+              assign has_social_icons = false
+            endif
+          -%}
+
+          {%- if second_menu != blank
+            or enable_country_selector
+            or enable_language_selector
+            or show_social
+            and has_social_icons
+          -%}
+            <div class="menu-drawer__utility-links">
+              <div class="second_menu">
+                <div class="second_menu_inner">
+                  {%- if second_menu != blank -%}
+                    <div class="smenu_left">
+                      <ul class="list-menu list-menu--inline">
+                        {{ second_menu }}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if enable_country_selector or enable_language_selector or show_social and has_social_icons -%}
+                    <div class="smenu_right">
+                      {%- if show_social and has_social_icons -%}
+                        <div>
+                          {%- render 'social-icons', social_style: block.settings.social_style -%}
+                        </div>
+                      {%- endif -%}
+
+                      {%- if enable_country_selector or enable_language_selector -%}
+                        <div class="menu-drawer__localization header-localization">
+                          {%- if enable_country_selector and localization.available_countries.size > 1 -%}
+                            <localization-form>
+                              {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                                <div>
+                                  <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                                    {{ 'localization.country_label' | t }}
+                                  </h2>
+                                  {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                                </div>
+                              {%- endform -%}
+                            </localization-form>
+                          {% endif %}
+
+                          {%- if enable_language_selector and localization.available_languages.size > 1 -%}
+                            <localization-form>
+                              {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
+                                <div>
+                                  <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                                    {{ 'localization.language_label' | t }}
+                                  </h2>
+                                  {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
+                                </div>
+                              {%- endform -%}
+                            </localization-form>
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </details>
+</header-drawer>

@@ -1,0 +1,83 @@
+{%  if settings.float_url != blank and  settings.float_banner_image != blank %}
+<floating-image  class="floating-image">
+  <a href="{{ settings.float_url }}" target="_blank">
+    {% if settings.float_banner_image != blank %}
+             {%- liquid
+                assign image_height = settings.image.width | divided_by: block.settings.image.aspect_ratio | round
+                assign widths = '375, 550'
+                assign sizes = '100px'
+              -%}
+              {{
+                settings.float_banner_image
+                | image_url: width: 500
+                | image_tag:
+                  loading: 'lazy',
+                  width: settings.image.width,
+                  height: image_height,
+                  sizes: sizes,
+                  widths: widths
+              }}
+    {% endif %}
+  </a>
+  <button class="close-button">&times;</button>
+</floating-image>
+<style>
+  .floating-image {
+      position: fixed;
+      bottom: 150px;
+      right: 20px;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      z-index: 1000;
+    }
+    .floating-image a {
+      width: 100%;
+      height: 100%;
+    }
+
+      .floating-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+      }
+
+      .floating-image .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        color: #000;
+        border: none;
+        border-radius: 50%;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1100;
+      }
+</style>
+<script>
+  class FloatingImage extends HTMLElement {
+  constructor() {
+    super();
+    this.querySelector('.close-button').addEventListener('click', () => {
+      this.style.display = 'none';
+    });
+  }
+
+  connectedCallback() {
+
+  }
+}
+customElements.define('floating-image', FloatingImage);
+
+</script>
+{% endif %}

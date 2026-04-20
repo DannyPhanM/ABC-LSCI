@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_position": "center",
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    },
+    "single_banner_igBwKh": {
+      "type": "single-banner",
+      "blocks": {
+        "heading_d3AWhi": {
+          "type": "heading",
+          "settings": {
+            "heading": "LIÊN HỆ",
+            "heading_size": "hxl",
+            "uppercase_heading": false
+          }
+        },
+        "text_K7Cpbw": {
+          "type": "text",
+          "settings": {
+            "text": "Liên hệ ngay với chúng tôi để trải nghiệm mua sắm và tư vấn",
+            "text_size": "xlarge"
+          }
+        }
+      },
+      "block_order": [
+        "heading_d3AWhi",
+        "text_K7Cpbw"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "accent-2",
+        "layout": "full_width",
+        "image": "shopify://shop_images/About_Us_photo.jpg",
+        "clickable_image": false,
+        "clickable_image_link": "",
+        "image_overlay_opacity": 50,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "content_bg": false,
+        "content_bg_opacity": 30,
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "mobile_content_position": "center",
+        "show_text_below": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "contact_form_rewbeb": {
+      "type": "contact-form",
+      "blocks": {
+        "text_YwdCLU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "block_color_scheme": "",
+            "space_contact": 30,
+            "block_head": "Heading",
+            "text": "<p>Share information about your brand with your customers.</p>"
+          }
+        },
+        "contact_detail_eJLdxK": {
+          "type": "contact_detail",
+          "settings": {
+            "block_color_scheme": "",
+            "space_contact": 30,
+            "block_head": "Thời gian làm việc",
+            "faddress": "<p><strong>Tất Cả Các Ngày Trong Tuần:</strong></p><ul><li>Thứ 2 - Thứ 6: 9:00 - 17:00</li><li>Thứ 7, Chủ nhật: Nghỉ</li></ul><p>Chúng tôi luôn sẵn sàng phục vụ và hỗ trợ bạn trong suốt thời gian làm việc!</p>",
+            "fcontactno": "",
+            "fcontactid": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_YwdCLU",
+        "contact_detail_eJLdxK"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "sticky_contact": true,
+        "heading": "Liên Hệ Với Chúng Tôi Nếu Bạn Cần Sự Hỗ Trợ!",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "caption": "<p>Với bất kì thắc mắc cần được giải đáp, Quý khách vui lòng liên hệ với Bộ phận Hỗ trợ khách hàng qua địa chỉ </p><p>Email: <a href=\"mailto:info@abc-mart-vietnam.com\" title=\"mailto:info@abc-mart-vietnam.com\">info@abc-mart-vietnam.com</a> </p>",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "single_banner_igBwKh",
+    "contact_form_rewbeb"
+  ]
+}

@@ -1,0 +1,373 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement_bar_CygVc4": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_YMWhP9": {
+          "type": "announcement",
+          "settings": {
+            "icon": "authentic",
+            "text": "Hàng chính hãng 100%",
+            "button_label": "",
+            "button_link": "",
+            "enable_arrow": false
+          }
+        },
+        "announcement_zpkpra": {
+          "type": "announcement",
+          "settings": {
+            "icon": "truck",
+            "text": "Miễn phí ship cho đơn hàng từ 3 triệu",
+            "button_label": "",
+            "button_link": "",
+            "enable_arrow": false
+          }
+        },
+        "announcement_GEHtkb": {
+          "type": "announcement",
+          "settings": {
+            "icon": "giftcard",
+            "text": "<a href=\"https://abc-mart.com.vn/pages/joy-loyalty-page\" title=\"https://abc-mart.com.vn/pages/joy-loyalty-page\">Trở thành hội viên nhận ngay voucher  200K</a>",
+            "button_label": "",
+            "button_link": "",
+            "enable_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "announcement_YMWhP9",
+        "announcement_zpkpra",
+        "announcement_GEHtkb"
+      ],
+      "settings": {
+        "color_scheme": "inverse",
+        "bar_position": "bar_position1",
+        "show_line_separator": false,
+        "uppercase_bar": false,
+        "text_close": false,
+        "text_animation": false,
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "scroll_speed": 18,
+        "marq_direction": "right_left",
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "scrolling_promotion_e9jiJL": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "text_tPnqy9": {
+          "type": "text",
+          "settings": {
+            "scroll_text": "Đơn hàng từ 14/02 – 22/02 sẽ được xử lý vào 23/02.",
+            "icon": "none",
+            "icon_width": 20,
+            "outline_text": false,
+            "evenout_text": false,
+            "upper_button": true,
+            "bold_text": true,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link"
+          }
+        },
+        "text_HEYxmb": {
+          "type": "text",
+          "settings": {
+            "scroll_text": "Đơn hàng đặt từ 09/02 có thể giao chậm do quá tải vận chuyển dịp Lễ, Tết.",
+            "icon": "none",
+            "icon_width": 20,
+            "outline_text": false,
+            "evenout_text": false,
+            "upper_button": true,
+            "bold_text": true,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "text_tPnqy9",
+        "text_HEYxmb"
+      ],
+      "disabled": true,
+      "name": "t:sections.scrolling-bar.presets.name",
+      "settings": {
+        "color_scheme": "scheme-8c108b7e-d1f9-4b41-ba29-a4554f1fffdf",
+        "layout": "full_width",
+        "scroll_space": 30,
+        "scroll_speed": 100,
+        "marq_direction": "right_left",
+        "seprater": "none",
+        "font_size": 14,
+        "pause_hover": true,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "highlight_link_tdNUjR": {
+          "type": "highlight_link",
+          "settings": {
+            "highlight_title": "+ Sale +",
+            "hlink_icon": false,
+            "hlink_color": "#e60000"
+          }
+        },
+        "mega_menu_tabcollections_HAEekt": {
+          "type": "mega-menu-tabcollections",
+          "settings": {
+            "menu_title": "Hàng mới",
+            "columns_desktop": 5,
+            "menutab_sample": false,
+            "mobile_type": "dropdown",
+            "image_ratio": "square",
+            "collection_card_color_scheme": "background-2",
+            "collection_card_style": "standard",
+            "collection_card_text_alignment": "center",
+            "activetab_color": "#78d64b",
+            "tab1": "BỘ SƯU TẬP",
+            "tab1_url": "shopify://collections/puma",
+            "coll1": [
+              "new-balance",
+              "puma",
+              "asics"
+            ],
+            "tab2": "HÀNG MỚI",
+            "tab2_url": "shopify://collections/hang-moi",
+            "coll2": [],
+            "tab3": "ĐỘC QUYỀN",
+            "tab3_url": "shopify://collections/doc-quyen",
+            "coll3": [],
+            "tab4": "XẾP HẠNG",
+            "tab4_url": "shopify://collections/xep-hang",
+            "coll4": [],
+            "tab5": "",
+            "tab5_url": "shopify://collections",
+            "coll5": []
+          }
+        },
+        "mega_menu_product_HWRkKj": {
+          "type": "mega-menu-product",
+          "settings": {
+            "menu_title": "DANH MỤC",
+            "collection": "",
+            "products_to_show": 5,
+            "format_text": true
+          }
+        },
+        "mega_menu_product_F6BehJ": {
+          "type": "mega-menu-product",
+          "settings": {
+            "menu_title": "Thương hiệu",
+            "collection": "",
+            "products_to_show": 5,
+            "format_text": true
+          }
+        }
+      },
+      "block_order": [
+        "highlight_link_tdNUjR",
+        "mega_menu_tabcollections_HAEekt",
+        "mega_menu_product_HWRkKj",
+        "mega_menu_product_F6BehJ"
+      ],
+      "settings": {
+        "layout": "full_width",
+        "stop_bar": false,
+        "lang_position": "header",
+        "second_color_scheme": "",
+        "second_separator": true,
+        "second_menu": "",
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "logo_position": "middle-left",
+        "icon_style": "icon",
+        "search_style": "search_box",
+        "show_user_text": false,
+        "texts_size": "large",
+        "icon_uppercase": true,
+        "separate_line": false,
+        "sticky_header_type": "always",
+        "show_line_separator": false,
+        "heading_popup": "",
+        "subheading_popup": "Theo dõi đơn hàng và thanh toán dễ dàng hơn",
+        "enable_customer_avatar": true,
+        "enable_login": true,
+        "enable_register": true,
+        "uppercase_menu": false,
+        "menu": "header",
+        "menu_align": "center",
+        "dmenu_size": "large",
+        "menu_type_desktop": "inline",
+        "click_dropmenu": true,
+        "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "menu_color_scheme": "background-1",
+        "margin_bottom": 0,
+        "padding_top": 18,
+        "padding_bottom": 18
+      }
+    },
+    "collection_icons_LYrLpn": {
+      "type": "collection-icons",
+      "blocks": {
+        "featured_collection_T3e8Qj": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-women-v2",
+            "icon_color": "#ffffff",
+            "custom_title": "Nữ",
+            "custom_url": "shopify://collections/giay-nu"
+          }
+        },
+        "featured_collection_bkhHEG": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-men-v2",
+            "icon_color": "#ffffff",
+            "custom_title": "Nam",
+            "custom_url": "shopify://collections/giay-nam"
+          }
+        },
+        "featured_collection_6QCkFL": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-shirt-v2",
+            "icon_color": "#ffffff",
+            "coll_image": "shopify://shop_images/Ph_trang.jpg",
+            "custom_title": "Quần áo",
+            "custom_url": "shopify://collections/quần-ao"
+          }
+        },
+        "featured_collection_iwDWWR": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-bag-v2",
+            "icon_color": "#ffffff",
+            "custom_title": "túi & balo",
+            "custom_url": "shopify://collections/tui"
+          }
+        },
+        "featured_collection_pjwgyN": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-cap-v2",
+            "icon_color": "#ffffff",
+            "custom_title": "Nón",
+            "custom_url": "shopify://collections/non"
+          }
+        },
+        "featured_collection_aFpcbt": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-sock-v2",
+            "icon_color": "#ffffff",
+            "custom_title": "Vớ",
+            "custom_url": "shopify://collections/vo"
+          }
+        },
+        "featured_collection_Vzbjzn": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-running-v2",
+            "icon_color": "#ffffff",
+            "coll_image": "shopify://shop_images/Running_shoe.jpg",
+            "custom_title": "Chạy bộ",
+            "custom_url": "shopify://collections/chay-bo"
+          }
+        },
+        "featured_collection_6pxzEi": {
+          "type": "featured_collection",
+          "disabled": true,
+          "settings": {
+            "custom_icon": "icon-kid-v2",
+            "icon_color": "#ffffff",
+            "custom_title": "Trẻ em",
+            "custom_url": "shopify://collections/giay-tre-em"
+          }
+        },
+        "featured_collection_zxK8Kk": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "star",
+            "icon_color": "#ffffff",
+            "coll_image": "shopify://shop_images/star_2.png",
+            "custom_title": "độc quyền",
+            "custom_url": "shopify://collections/exclusive"
+          }
+        },
+        "featured_collection_Rc7qmY": {
+          "type": "featured_collection",
+          "settings": {
+            "custom_icon": "icon-smile-v2",
+            "icon_color": "#000000",
+            "custom_title": "CHĂM SÓC GIÀY",
+            "custom_url": "shopify://collections/cham-soc-giay"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_T3e8Qj",
+        "featured_collection_bkhHEG",
+        "featured_collection_6QCkFL",
+        "featured_collection_iwDWWR",
+        "featured_collection_pjwgyN",
+        "featured_collection_aFpcbt",
+        "featured_collection_Vzbjzn",
+        "featured_collection_6pxzEi",
+        "featured_collection_zxK8Kk",
+        "featured_collection_Rc7qmY"
+      ],
+      "settings": {
+        "color_scheme": "accent-2",
+        "title": "",
+        "headcolor": "#df6334",
+        "heading_size": "h2",
+        "heading_position": "left",
+        "columns_desktop": 10,
+        "columns_mobile": "3",
+        "display_type": "carousel",
+        "collection_card_style": "standard",
+        "card_position": "vertical",
+        "collection_card_color_scheme": "",
+        "collection_card_text_alignment": "center",
+        "coll_name_size": "small",
+        "uppercase_name": true,
+        "card_shadow": false,
+        "card_radius": 10,
+        "show_view_all": false,
+        "view_label": "View all",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "pagination_style": "none",
+        "disable_arrow": false,
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    }
+  },
+  "order": [
+    "announcement_bar_CygVc4",
+    "scrolling_promotion_e9jiJL",
+    "header",
+    "collection_icons_LYrLpn"
+  ]
+}

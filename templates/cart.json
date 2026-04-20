@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "blocks": {
+        "free_shipping_WF3yzp": {
+          "type": "free_shipping",
+          "settings": {}
+        },
+        "custom_text_K89rDC": {
+          "type": "custom_text",
+          "disabled": true,
+          "settings": {
+            "description": "",
+            "label_button": "Show now",
+            "link_button": ""
+          }
+        },
+        "image_neaidj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/GI_HANG_MUA_S_M.jpg",
+            "img_width": 350
+          }
+        },
+        "cart_note_PXRFEz": {
+          "type": "cart_note",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "free_shipping_WF3yzp",
+        "custom_text_K89rDC",
+        "image_neaidj",
+        "cart_note_PXRFEz"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "payment_enable": true,
+        "payment_monochrome": false
+      }
+    }
+  },
+  "order": [
+    "cart-items"
+  ]
+}

@@ -1,0 +1,109 @@
+{%- liquid
+  assign target = product
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  if compare_at_price > price
+    assign badge_percent = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price | round
+    if settings.currency_code_enabled
+      assign badge_amount = compare_at_price | minus: price | money_with_currency
+    else
+      assign badge_amount = compare_at_price | minus: price | money
+    endif
+  endif
+-%}
+{% assign product_tags = product.metafields.custom.product_tags.value %}
+{%- assign product_tags_iden_str = '' -%}
+{%- for i in (0..10) -%}
+  {%- assign tag_key = 'tag_flash_sales' -%}
+  {%- if i > 0 -%}
+    {%- assign tag_key = tag_key | append: '_' | append: i -%}
+  {%- endif -%}
+  {%- assign tag_value = settings[tag_key] -%}
+  {%- if tag_value != blank -%}
+    {%- assign product_tags_iden_str = product_tags_iden_str | append: tag_value | append: ',' -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign product_tags_iden = product_tags_iden_str | split: ',' | compact -%}
+<div class="hidden hide">{{ product_tags_iden_str }}</div>
+{% if product_tags != blank %}
+   <div class="product_badge" style="display: block;padding-bottom: 10px; z-index: 2">
+    {%- for i in (0..10) -%}
+      {%- assign tag_key = 'tag_custom' -%}
+      {%- assign image_key = 'image_custom' -%}
+      {%- assign text_key = 'text_custom' -%}
+      {%- if i > 0 -%}
+        {%- assign tag_key = tag_key | append: '_' | append: i -%}
+        {%- assign image_key = image_key | append: '_' | append: i -%}
+        {%- assign text_key = text_key | append: '_' | append: i -%}
+      {%- endif -%}
+      {%- assign color_key = 'color_custom' -%}
+      {%- assign bg_key = 'bg_custom' -%}
+      {%- if i > 0 -%}
+        {%- assign color_key = color_key | append: '_' | append: i -%}
+        {%- assign bg_key = bg_key | append: '_' | append: i -%}
+      {%- endif -%}
+      {%- assign tag_value = settings[tag_key] -%}
+      {%- assign image_value = settings[image_key] -%}
+      {%- assign text_value = settings[text_key] -%}
+      {%- assign color_value = settings[color_key] -%}
+      {%- assign bg_value = settings[bg_key] -%}
+      {%- if tag_value != blank and product.tags contains tag_value and image_value != blank and text_value != blank -%}
+        <span class="badge flash-sales-beadge {% if settings.uppercase_badge %} uppercase{% endif %}"
+          style="background-image: url({{ image_value | image_url }}); color: {{ color_value | default: settings.color_flash_sales }}; background: {{ bg_value | default: settings.bg_flash_sales }};">
+          {{ text_value }}
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+         
+
+    {% for tags in product_tags %}
+      <span
+        id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+        class="badge"
+        style="{% if tags.is_exclusive == true %} background: linear-gradient(90deg, #E8E8E8 0%, #A4A4A4 34.38%, #E8E8E8 66.88%, #A4A4A4 100%);
+            {%  elsif  tags.is_limited == true %} background: linear-gradient(95.1deg, #B98F2F 0%, #FDF195 49.76%, #D5B246 100%);{% else %} background: {{ tags.tag_color }} {% endif %}"
+      >
+        {{ tags.tag_name }}
+      </span>
+    {% endfor %}
+    {%- if product.available == false -%}
+      <span
+        id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+        class="badge soldbadge{% if settings.uppercase_badge %} uppercase{% endif %}"
+      >
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- endif -%}
+    {%- for tags in product.tags -%}
+      {% assign new_badge = tags | downcase %}
+      {%- if new_badge == 'new' -%}
+        <span
+          id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+          class="badge newbadge{% if settings.uppercase_badge %} uppercase{% endif %}"
+        >
+          {{- 'products.product.new' | t -}}
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+    {% comment %} {%- if settings.badge_type == 'sale' -%}
+      {%- if product.compare_at_price > product.price and product.available == true -%}
+        <span
+          id="NoMediaStandardBadge-{{ section_id }}-{{ product.id }}"
+          class="badge salebadge{% if settings.uppercase_badge %} uppercase{% endif %}"
+        >
+          {{ 'products.product.on_sale' | t }}
+        </span>
+      {%- endif -%}
+    {%- elsif settings.badge_type == 'save_amount' -%}
+      <span class="badge salebadge {% if badge_amount == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+        {{ 'products.product.save' | t }}
+        <span>{{ badge_amount }}</span>
+      </span>
+    {%- elsif settings.badge_type == 'save_percentage' -%}
+      <span class="badge salebadge {% if badge_percent == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+        -{{ badge_percent -}}
+        %
+      </span>
+    {%- endif -%} {% endcomment %}
+  </div>
+{% endif %}

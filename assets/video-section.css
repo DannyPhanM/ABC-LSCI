@@ -1,0 +1,256 @@
+.single_video.play_center .video_position,
+.single_video.play_center
+  .media
+  > *:not(.zoom):not(.deferred-media__poster-button).video_position {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--duration-short) ease,
+    color var(--duration-short) ease;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.single_video.play_center .deferred-media__poster-button {
+  position: unset;
+  transform: unset;
+}
+.play_center .video_position h3 {
+  max-width: 500px;
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+.play_center .video_position h3.h0 {
+  font-size: calc(var(--font-heading-scale) * 48px);
+}
+.play_center .video_position h3.h1 {
+  font-size: calc(var(--font-heading-scale) * 30px);
+}
+.play_center .video_position h3.h2 {
+  font-size: calc(var(--font-heading-scale) * 28px);
+}
+.single_video .deferred-media__poster-button {
+  background-color: transparent;
+  border: 0.1rem solid rgba(var(--color-foreground));
+  color: rgb(var(--color-foreground));
+  height: 40px;
+  width: 40px;
+}
+.single_video .deferred-media__poster-button .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 2px;
+  margin-left: 0.1rem;
+}
+.single_video iframe,
+.single_video video {
+  z-index: 3;
+}
+.single_video .banner__box {
+  z-index: 3;
+}
+.single_video .banner__box.bg-transparent {
+  padding: 0;
+  margin: 0;
+}
+.single_video {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.single_video .banner__content {
+  z-index: unset;
+}
+.single_video .banner_align-left .banner__box {
+  text-align: left;
+}
+.single_video .banner_align-center .banner__box {
+  text-align: center;
+}
+.single_video .banner_align-right .banner__box {
+  text-align: right;
+}
+.single_video .video_heading {
+  margin-bottom: 0;
+}
+.single_video .banner__box .video-content-remove + * {
+  margin-top: 0;
+}
+.single_video .video_heading.h0 {
+  font-size: calc(var(--font-heading-scale) * 24px);
+}
+.single_video .video_heading.h1 {
+  font-size: calc(var(--font-heading-scale) * 20px);
+}
+.single_video .video_heading.h2 {
+  font-size: calc(var(--font-heading-scale) * 18px);
+}
+
+.single_video .video_desc.large {
+  font-size: calc(var(--font-body-scale) * 18px);
+}
+.single_video .video_desc.medium {
+  font-size: calc(var(--font-body-scale) * 16px);
+}
+.single_video .video_desc.small {
+  font-size: calc(var(--font-body-scale) * 14px);
+}
+.single_video .video-section__media {
+  --ratio-percent: unset;
+}
+.single_video .video-section__media.global-media-settings--full-width {
+  padding-bottom: unset;
+}
+.video-content-remove {
+  position: absolute;
+  right: -32px;
+  top: -32px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+  display: none;
+}
+.single_video:hover .video-content-remove {
+  display: inline-flex;
+}
+.single_video .video-section__media {
+  position: absolute;
+}
+
+.video-section__media {
+  --ratio-percent: 56.25%;
+  position: relative;
+  padding-bottom: calc(var(--ratio-percent) - 0px);
+}
+.video_gallery .video-section__media {
+  border-radius: var(--image-radius);
+}
+
+/* Needed for gradient continuity with or without animation so that transparent PNG images come up as we would expect */
+.scroll-trigger:where(.gradient.video-section__media) {
+  background: transparent;
+}
+
+.video-section__media.global-media-settings--full-width {
+  padding-bottom: var(--ratio-percent);
+}
+
+/* .video-section__media.deferred-media {
+  box-shadow: var(--media-shadow-horizontal-offset) var(--media-shadow-vertical-offset) var(--media-shadow-blur-radius)
+    rgba(var(--color-shadow), var(--media-shadow-opacity));
+} */
+
+.video-section__media.deferred-media:after {
+  content: none;
+}
+
+.video-section__poster.deferred-media__poster:focus {
+  outline-offset: 0.3rem;
+}
+
+.video-section__media iframe {
+  background-color: rgba(var(--color-foreground), 0.03);
+  border: 0;
+}
+
+.video-section__poster,
+.video-section__media iframe,
+.video-section__media video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.video-section__media video {
+  background: #000000;
+}
+
+.video-section__media.media-fit-cover video {
+  object-fit: cover;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .single_video .banner__box {
+    max-width: 40rem;
+  }
+}
+@media (min-width: 768px) {
+  .single_video .banner__box {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .single_video .banner__content {
+    padding: 3.2rem;
+  }
+  .single_video.play_bright .deferred-media__poster-button {
+    left: auto;
+    right: 15px;
+    bottom: 15px;
+    top: auto;
+  }
+  .single_video.video--adapt
+    .video-section__media.global-media-settings--full-width {
+    padding-bottom: var(--ratio-percent);
+  }
+  .single_video.video--small::before {
+    content: "";
+    padding-bottom: 40%;
+  }
+  .single_video.video--medium::before {
+    content: "";
+    padding-bottom: 50%;
+  }
+  .single_video.video--large::before {
+    content: "";
+    padding-bottom: 60%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .single_video .banner__box {
+    max-width: 32rem;
+  }
+  .single_video .video_heading {
+    margin-bottom: 8px;
+  }
+}
+@media (max-width: 767px) {
+  .single_video .banner__content {
+    display: none;
+  }
+  .play_center .video_position h3 {
+    margin-top: 8px;
+  }
+  .play_center .video_position h3.h0 {
+    font-size: calc(var(--font-heading-scale) * 16px);
+  }
+  .play_center .video_position h3.h1 {
+    font-size: calc(var(--font-heading-scale) * 14px);
+  }
+  .play_center .video_position h3.h2 {
+    font-size: calc(var(--font-heading-scale) * 13px);
+  }
+  .single_video.videomobile--adapt
+    .video-section__media.global-media-settings--full-width {
+    padding-bottom: var(--ratio-percent);
+  }
+  .single_video.videomobile--small::before {
+    content: "";
+    padding-bottom: 50%;
+  }
+  .single_video.videomobile--medium::before {
+    content: "";
+    padding-bottom: 60%;
+  }
+  .single_video.videomobile--large::before {
+    content: "";
+    padding-bottom: 80%;
+  }
+}
+.image-section__media {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0;
+}

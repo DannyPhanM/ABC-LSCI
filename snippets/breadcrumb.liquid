@@ -1,0 +1,68 @@
+{%- style -%}
+  .breadcrumb.bread_bg {
+  	background: {{ settings.bg_breadcrumb }};
+  	display: block;
+  	padding: 8px 15px;
+  	border-radius: calc(var(--content-radius)* 1 / 2);
+  }
+  .breadcrumb.bread_bg span svg{
+    height: unset;
+    width: unset;
+  }
+{%- endstyle -%}
+{% unless template == 'index' %}
+    <div class="custom-width page-width">
+      <nav class="breadcrumb {% if settings.enable_bread_bg == true %}bread_bg{% endif %}" aria-label="breadcrumbs">
+        <a href="{{ routes.root_url }}" class="full-unstyled-link" title="{{ 'custom_data.data_inner.home' | t }}">
+          {{- 'custom_data.data_inner.home' | t -}}
+        </a>
+        {% if template contains 'page' %}
+          <span>{% render 'icon-breadcrumb' %}</span>
+          {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+          <span>{{ page.title }}</span>
+        {% elsif template contains 'product' %}
+          {% if collection.url %}
+            <span>{% render 'icon-breadcrumb' %}</span>
+            {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+            {{ collection.title | link_to: collection.url }}
+          {% endif %}
+          <span>{% render 'icon-breadcrumb' %}</span>
+          {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+          <span>{{ product.title }}</span>
+        {% elsif template contains 'collection' and collection.handle %}
+          <span aria-hidden="true">/</span>
+          {% if current_tags %}
+            {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+            {{ collection.title | link_to: url }}
+            <span>{% render 'icon-breadcrumb' %}</span>
+            {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+            <span>{{ current_tags | join: ' + ' }}</span>
+          {% else %}
+            <span>{{ collection.title }}</span>
+          {% endif %}
+        {% elsif template == 'blog' %}
+          <span>{% render 'icon-breadcrumb' %}</span>
+          {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+          {% if current_tags %}
+            {{ blog.title | link_to: blog.url }}
+            <span>{% render 'icon-breadcrumb' %}</span>
+            {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+            <span>{{ current_tags | join: ' + ' }}</span>
+          {% else %}
+            <span>{{ blog.title }}</span>
+          {% endif %}
+        {% elsif template == 'article' %}
+          <span>{% render 'icon-breadcrumb' %}</span>
+          {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+          {{ blog.title | link_to: blog.url }}
+          <span>{% render 'icon-breadcrumb' %}</span>
+          {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+          <span>{{ article.title }}</span>
+        {% else %}
+        <span>{% render 'icon-breadcrumb' %}</span>
+          {% comment %} <span aria-hidden="true">&gt;</span> {% endcomment %}
+          <span>{{ page_title }}</span>
+        {% endif %}
+      </nav>
+    </div>
+{% endunless %}

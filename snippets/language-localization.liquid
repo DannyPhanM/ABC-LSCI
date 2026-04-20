@@ -1,0 +1,145 @@
+{%- comment -%}
+  Renders the language picker for the localization form
+
+  Accepts:
+    - localPosition: pass in the position in which the form is coming up to create specific IDs
+    - langPosition:
+    - langPosition:
+    - hidden_popup:
+{%- endcomment -%}
+{% assign firstlang = localization.available_languages.first.iso_code %}
+{% assign secondlang = localization.available_languages.last.iso_code %}
+{% assign activelang = localization.language.iso_code %}
+{% if hidden_popup %}
+  <div class="disclosure">
+    <button
+      style="display: none;"
+      type="button"
+      class=" {% if show-icon %} remove-padding {% endif %} disclosure__button localization-form__select localization-selector link link--text caption-large header-lang"
+      aria-expanded="false"
+      aria-controls="{{ localPosition }}List"
+      aria-describedby="{{ localPosition }}Label"
+      data-value="{{ localization.language.iso_code }}"
+      {% if show-icon %}
+        show-icon
+      {% endif %}
+    >
+      <span class="{% if show-icon == false %} language-text {% endif %}" style="margin-left: 5px;">
+        {% if show-icon %}
+          {{ localization.language.iso_code | upcase }}
+        {% else %}
+          {{ localization.language.endonym_name | upcase }}
+        {% endif -%}
+      </span>
+      {% if show-icon %}
+      {% else %}
+        {% render 'icon-caret' -%}
+      {%- endif %}
+    </button>
+    <a
+      class="link link--text disclosure__link caption-large focus-inset {% if activelang == firstlang %} hidden {% endif %}"
+      href="#"
+      hreflang="{{ firstlang }}"
+      lang="{{ firstlang }}"
+      {% if firstlang == localization.language.iso_code %}
+        aria-current="true"
+      {% endif %}
+      data-value="{{ firstlang }}"
+      custom-data-value="{{ firstlang }}"
+      {% if show-icon %}
+        show-icon
+      {% endif %}
+    >
+      <span style="min-width: fit-content">
+        {% if show-icon %}
+          {{ secondlang | upcase }}
+        {% else %}
+          {{ localization.available_languages.last.endonym_name | upcase }}
+        {% endif %}
+      </span>
+    </a>
+    <a
+      class="link link--text disclosure__link caption-large focus-inset {% if activelang == secondlang %} hidden {% endif %}"
+      href="#"
+      hreflang="{{ secondlang }}"
+      lang="{{ secondlang }}"
+      {% if secondlang == localization.language.iso_code %}
+        aria-current="true"
+      {% endif %}
+      data-value="{{ secondlang }}"
+      custom-data-value="{{ secondlang }}"
+      {% if show-icon %}
+        show-icon
+      {% endif %}
+    >
+      <span style="min-width: fit-content">
+        {% if show-icon %}
+          {{ firstlang | upcase }}
+        {% else %}
+          {{ localization.available_languages.first.endonym_name | upcase }}
+        {% endif %}
+      </span>
+    </a>
+  </div>
+  <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+
+{% else %}
+  <div class="disclosure">
+    <button
+      type="button"
+      class=" {% if show-icon %} remove-padding {% endif %} disclosure__button localization-form__select localization-selector link link--text caption-large header-lang"
+      aria-expanded="false"
+      aria-controls="{{ localPosition }}List"
+      aria-describedby="{{ localPosition }}Label"
+      data-value="{{ localization.language.iso_code }}"
+      {% if show-icon %}
+        show-icon
+      {% endif %}
+    >
+      <span class="{% if show-icon == false %} language-text {% endif %}" style="margin-left: 5px;">
+        {% if show-icon %}
+          {{ localization.language.iso_code | upcase }}
+        {% else %}
+          {{ localization.language.endonym_name | upcase }}
+        {% endif -%}
+      </span>
+      {% if show-icon %}
+      {% else %}
+        {% render 'icon-caret' -%}
+      {%- endif %}
+    </button>
+    <div class="disclosure__list-wrapper  {% if langPosition == "header" %} lang-header {% endif %}" hidden>
+      <ul id="{{ localPosition }}List" role="list" class="disclosure__list list-unstyled">
+        {%- for language in localization.available_languages -%}
+          <li class="disclosure__item" tabindex="-1">
+            <a
+              class="link link--text disclosure__link caption-large focus-inset"
+              href="#"
+              hreflang="{{ language.iso_code }}"
+              lang="{{ language.iso_code }}"
+              {% if language.iso_code == localization.language.iso_code %}
+                aria-current="true"
+              {% endif %}
+              data-value="{{ language.iso_code }}"
+            >
+              <span>
+                {% if show-icon %}
+                  {{ language.iso_code | upcase }}
+                {% else %}
+                  {{ language.endonym_name | upcase }}
+                {% endif %}
+              </span>
+              <span
+                {% if language.iso_code != localization.language.iso_code %}
+                  class="visibility-hidden"
+                {% endif %}
+              >
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+  <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+{% endif %}

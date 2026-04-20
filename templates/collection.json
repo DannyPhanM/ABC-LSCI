@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "custom_css": [],
+      "settings": {
+        "layout": "full_width",
+        "def_image": "{{ collection.metafields.custom.banner_collection.value }}",
+        "show_collection_image": false,
+        "show_collection_description": true,
+        "image_height": "adapt",
+        "desktop_custom_height": 700,
+        "mobile_custom_height": 150,
+        "hero_layout": "overlay",
+        "coll_bgcolor": "#898989",
+        "coll_color": "#ffffff",
+        "coll_overlay": 5,
+        "m_top": 36,
+        "m_bottom": 0
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "products_per_page": 20,
+        "columns_desktop": 4,
+        "listing_mode": "p_grid",
+        "enable_desc": true,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "filter_value": true,
+        "hide_empty": true,
+        "collapse_vfilter": true,
+        "vfilter_open": true,
+        "enable_sorting": true,
+        "enable_count_result": true,
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
+}

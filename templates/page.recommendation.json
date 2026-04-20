@@ -1,0 +1,242 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_position": "center",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collection_list_gQjBHF": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_HnKXzg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "doc-quyen-online",
+            "custom_title": "Exclusive offers when buying online",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_WxRLJ7": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "asics-gel-kayano-14",
+            "custom_title": "ASICS GEL-KAYANO 14",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_qVjCPp": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "fila-echappe-silver-moon",
+            "custom_title": "FILA Echappe MS",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_j9ph3k": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "new-balance",
+            "custom_title": "New Balance Collection",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_HnKXzg",
+        "featured_collection_WxRLJ7",
+        "featured_collection_qVjCPp",
+        "featured_collection_j9ph3k"
+      ],
+      "settings": {
+        "section_space": true,
+        "color_scheme": "",
+        "title": "ĐỀ XUẤT CHO BẠN",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "heading_position": "center",
+        "display_type": "grid",
+        "columns_desktop": 4,
+        "image_ratio": "square",
+        "img_round": false,
+        "collcard_border": true,
+        "img_border": true,
+        "img_border_color": "#78d64b",
+        "collection_card_style": "standard",
+        "collection_card_color_scheme": "background-1",
+        "collection_card_text_alignment": "left",
+        "text_size": "small",
+        "show_view_all": false,
+        "view_label": "View all",
+        "view_all_style": "solid",
+        "view_button_pos": "bottom",
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 20
+      }
+    },
+    "collection_list_9rMH9y": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_PNbdBR": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "danner",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_QKKxBW": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "asics",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_P7HRwU": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "crocs",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_FGxg4B": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "jewel",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_NcmwHE": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hawkins",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_tHbrxi": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "puma",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_QCUPiR": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "patrick",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_rxCezW": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "skechers",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_Kk4m3F": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "stefano-rossi",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        },
+        "featured_collection_Crkjma": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "abc-select",
+            "custom_title": "",
+            "coll_caption": "",
+            "uppercase_caption": true
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_PNbdBR",
+        "featured_collection_QKKxBW",
+        "featured_collection_P7HRwU",
+        "featured_collection_FGxg4B",
+        "featured_collection_NcmwHE",
+        "featured_collection_tHbrxi",
+        "featured_collection_QCUPiR",
+        "featured_collection_rxCezW",
+        "featured_collection_Kk4m3F",
+        "featured_collection_Crkjma"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_space": true,
+        "color_scheme": "",
+        "title": "",
+        "headcolor": "#000000",
+        "heading_size": "h0",
+        "heading_position": "center",
+        "display_type": "grid",
+        "columns_desktop": 5,
+        "image_ratio": "square",
+        "img_round": false,
+        "collcard_border": true,
+        "img_border": true,
+        "img_border_color": "#78d64b",
+        "collection_card_style": "standard",
+        "collection_card_color_scheme": "background-1",
+        "collection_card_text_alignment": "left",
+        "text_size": "small",
+        "show_view_all": false,
+        "view_label": "View all",
+        "view_all_style": "solid",
+        "view_button_pos": "bottom",
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "collection_list_gQjBHF",
+    "collection_list_9rMH9y"
+  ]
+}

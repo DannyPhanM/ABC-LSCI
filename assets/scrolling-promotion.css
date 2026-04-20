@@ -1,0 +1,23 @@
+.marquee .marquee-child{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.marquee {
+  grid: auto / auto-flow max-content;
+  justify-content: center;
+  display: grid;
+  overflow: hidden;
+}
+.marquee p {
+  margin: 0;
+  line-height: normal;
+}
+.marquee .marquee-child svg:not(.placeholder-svg) path{
+  fill: rgb(var(--color-foreground));
+}
+@media (min-width: 992px) {
+  .scroll_textbtn.link {
+    font-size: calc(var(--font-body-scale) * 16px);
+  }
+}

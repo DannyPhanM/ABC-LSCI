@@ -1,0 +1,383 @@
+{{ 'section-map.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .section-{{ section.id }}-padding .section-head strong, .section-{{ section.id }}-padding .section-head b {
+    color: {{ section.settings.headcolor }};
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding section_map">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-head-top {{ section.settings.heading_position }}">
+        <h2 class="section-head inline-richtext {{ section.settings.heading_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    {%- endif -%}
+    <div class="{% if section.blocks.size > 0 %}grid{% endif %} {% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="only_map {% if section.blocks.size > 0 %}grid__item{% endif %}">
+        {%- if section.settings.google_map != blank -%}
+          {{ section.settings.google_map }}
+        {%- else -%}
+          <div class="dummymap">{% render 'icon-pin' %}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="section_map_content grid__item {{ section.settings.desktop_content_alignment }} mapmobile-{{ section.settings.map_column_mobile }}">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.heading != blank or block.settings.heading_address != blank or block.settings.text_address != blank or block.settings.heading_phone != blank or block.settings.text_phone != blank or block.settings.heading_email != blank or block.settings.text_email != blank or block.settings.map_direction != blank -%}
+              <div class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="maphead inline-richtext {{ block.settings.heading_size }}">
+                    {{ block.settings.heading }}
+                  </h3>
+                {%- endif -%}
+
+                {%- if block.settings.heading_address != blank or block.settings.text_address != blank -%}
+                  <div>
+                    <h4 class="maphead_inner">
+                      {{ block.settings.heading_address }}
+                    </h4>
+                    <div class="map_details">{{ block.settings.text_address }}</div>
+                  </div>
+                {%- endif -%}
+
+                <div class="contactemail">
+                  {%- if block.settings.heading_phone != blank or block.settings.text_phone != blank -%}
+                    <div>
+                      <h4 class="maphead_inner">
+                        {{ block.settings.heading_phone }}
+                      </h4>
+                      <div class="map_details">{{ block.settings.text_phone }}</div>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.heading_email != blank or block.settings.text_email != blank -%}
+                    <div class="map_email">
+                      <h4 class="maphead_inner">
+                        {{ block.settings.heading_email }}
+                      </h4>
+                      <div class="map_details">{{ block.settings.text_email }}</div>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                {%- if block.settings.map_direction != blank -%}
+                    <a target="_blank" href="https://www.google.com/maps/place/{{ block.settings.map_direction }}" class="mapbtn {% if block.settings.button_style == 'link' %}link underlined-link{% elsif block.settings.button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}">
+                      <span>{{ 'custom_data.data_inner.get_direction' | t }}</span>
+                    </a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "t:sections.map.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.heading.head"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Our stores",
+      "label": "t:settings_schema.heading.settings.head_text.label_1"
+    },
+    {
+      "type": "color",
+      "id": "headcolor",
+      "label": "t:settings_schema.heading.settings.head_text.txt_color",
+      "default": "#DF6334",
+      "info": "t:settings_schema.heading.settings.head_text.txt_info"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h0",
+      "label": "t:settings_schema.heading.settings.head_text.label_2"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.heading_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.heading_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:settings_schema.heading.settings.head_text.label_3"
+    },
+
+    
+    {
+      "type": "textarea",
+      "id": "google_map",
+      "label": "t:sections.contact-form.settings.embed_code.label",
+      "info": "t:sections.contact-form.settings.embed_code.info"
+    },
+
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "t:sections.main-product.settings.media_position.options__1.label"
+        },
+        {
+          "value": "text_first",
+          "label": "t:sections.main-product.settings.media_position.options__2.label"
+        }
+      ],
+      "default": "text_first",
+      "label": "t:sections.custom_text.settings.map_position.label"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "left",
+      "label": "t:sections.custom_text.settings.content_alignment.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header_mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "map_column_mobile",
+      "default": "2",
+      "label": "Map address display on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
+        }
+      ]
+    },
+
+
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "t:sections.map.settings.store.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Store name",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            }
+          ],
+          "default": "h0",
+          "label": "t:sections.all.heading_size.label"
+        },
+
+        {
+          "type": "header",
+          "content": "t:sections.custom_text.settings.address.content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading_address",
+          "default": "Address",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text_address",
+          "default": "<p>Add address details here</p>",
+          "label": "t:sections.custom_text.settings.text.label"
+        },
+
+        {
+          "type": "header",
+          "content": "t:sections.custom_text.settings.phone.content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading_phone",
+          "default": "Phone",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "text",
+          "id": "text_phone",
+          "default": "123 456 7890",
+          "label": "t:sections.custom_text.settings.text.label"
+        },
+
+        {
+          "type": "header",
+          "content": "t:sections.custom_text.settings.email.content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading_email",
+          "default": "Email",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "text",
+          "id": "text_email",
+          "default": "demo@gmail.com",
+          "label": "t:sections.custom_text.settings.text.label"
+        },
+
+        {
+          "type": "header",
+          "content": "t:sections.custom_text.settings.map_direction.label"
+        },
+        {
+          "type": "text",
+          "id": "map_direction",
+          "default": "1826 S Hutchins St, Lodi, California",
+          "label": "t:sections.custom_text.settings.map_direction.label"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:sections.slideshow.blocks.slide.settings.button_style.label",
+          "options": [
+            {
+              "value": "link",
+              "label": "t:sections.featured-collection.settings.view_all_style.options__1.label"
+            },
+            {
+              "value": "outline",
+              "label": "t:sections.featured-collection.settings.view_all_style.options__2.label"
+            },
+            {
+              "value": "solid",
+              "label": "t:sections.featured-collection.settings.view_all_style.options__3.label"
+            }
+          ],
+          "default": "solid"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.map.name",
+      "blocks": [
+        {
+          "type": "store"
+        },
+        {
+          "type": "store"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

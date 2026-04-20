@@ -1,0 +1,434 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .section-{{ section.id }}-padding .section-head strong, .section-{{ section.id }}-padding .section-head b {
+    color: {{ section.settings.headcolor }};
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient contact_section">
+  <div class="custom-width page-width contact-section">
+    <div class="grid">
+      <div class="grid__item contactleft">
+        <div class="{% if section.settings.sticky_contact == true %}contact_sticky{% endif %}">
+          {%- if section.settings.heading != blank or section.settings.caption != blank -%}
+            <div class="section-head-top {{ section.settings.heading_position }}">
+              <div>
+                <h2 class="section-head inline-richtext {{ section.settings.heading_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ section.settings.heading }}
+                </h2>
+                {%- if section.settings.caption != blank -%}
+                  <p class="contact_sub {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                    {{ section.settings.caption }}
+                  </p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- else -%}
+            <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+          {%- endif -%}
+          <div
+            class="
+              contact_both{% if section.settings.content_type == 'image' and section.settings.image == blank %} contact_right_blank{% endif %}{% if section.settings.content_type == 'google_map' and section.settings.google_map == blank %} contact_right_blank{% endif %}
+
+              {% if section.settings.content_type == 'text' and section.settings.heading1 == blank and section.settings.text1 == blank and section.settings.heading2 == blank and section.settings.text2 == blank and section.settings.heading3 == blank and section.settings.text3 == blank and section.settings.heading4 == blank and section.settings.show_social == blank %} contact_right_blank{% endif %}
+            "
+          >
+            <div class="contact">
+              {%- liquid
+                assign contact_form_class = 'isolate'
+                if settings.animations_reveal_on_scroll
+                  assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+                endif
+              -%}
+              {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+                {%- if form.posted_successfully? -%}
+                  <p class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                    {% render 'icon-success' %}
+                    {{ 'templates.contact.form.post_success' | t }}
+                  </p>
+                {%- elsif form.errors -%}
+                  <div class="form__message">
+                    <p class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                      {% render 'icon-error' %}
+                      {{ 'templates.contact.form.error_heading' | t }}
+                    </p>
+                  </div>
+                  <ul class="form-status-list caption-large" role="list">
+                    <li>
+                      <a href="#ContactForm-email" class="link">
+                        {{ form.errors.translated_fields.email | capitalize }}
+                        {{ form.errors.messages.email }}
+                      </a>
+                    </li>
+                  </ul>
+                {%- endif -%}
+                <div class="field">
+                  <label class="top-label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+                  <input
+                    class="field__input"
+                    autocomplete="name"
+                    type="text"
+                    id="ContactForm-name"
+                    name="contact[{{ 'templates.contact.form.name' | t }}]"
+                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    placeholder="{{ 'templates.contact.form.name' | t }}"
+                  >
+                  <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+                </div>
+                <div class="field field--with-error">
+                  <label class="top-label" for="ContactForm-email">
+                    {{- 'templates.contact.form.email' | t }}
+                    <span aria-hidden="true">*</span></label
+                  >
+                  <input
+                    autocomplete="email"
+                    type="email"
+                    pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+                    id="ContactForm-email"
+                    class="field__input"
+                    name="contact[email]"
+                    spellcheck="false"
+                    autocapitalize="off"
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    aria-required="true"
+                    required
+                    {% if form.errors contains 'email' %}
+                      aria-invalid="true"
+                      aria-describedby="ContactForm-email-error"
+                    {% endif %}
+                    placeholder="{{ 'templates.contact.form.email' | t }}"
+                  >
+                  <label class="field__label" for="ContactForm-email">
+                    {{- 'templates.contact.form.email' | t }}
+                    <span aria-hidden="true">*</span></label
+                  >
+                </div>
+                <div class="field">
+                  <label class="top-label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+                  <input
+                    type="tel"
+                    id="ContactForm-phone"
+                    class="field__input"
+                    autocomplete="tel"
+                    name="contact[{{ 'templates.contact.form.phone' | t }}]"
+                    pattern="[0-9\-]*"
+                    value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                    placeholder="{{ 'templates.contact.form.phone' | t }}"
+                  >
+                  <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+                </div>
+                <div class="field">
+                  <label class="top-label" for="ContactForm-body">
+                    {{- 'templates.contact.form.comment' | t -}}
+                  </label>
+                  <textarea
+                    rows="10"
+                    id="ContactForm-body"
+                    class="text-area field__input"
+                    name="contact[{{ 'templates.contact.form.comment' | t }}]"
+                    placeholder="{{ 'templates.contact.form.comment' | t }}"
+                  >
+                    {{- form.body -}}
+                  </textarea>
+                  <label class="form__label field__label" for="ContactForm-body">
+                    {{- 'templates.contact.form.comment' | t -}}
+                  </label>
+                </div>
+                <div class="contact__button">
+                  <button type="submit" class="button">
+                    <span>{{ 'templates.contact.form.send' | t }}</span>
+                  </button>
+                </div>
+              {%- endform -%}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="grid__item contactright">
+          <div class="contactright_inner">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'text' -%}
+                  <div
+                    class="contacttxt blockcontact contact-{{ block.id }} color-{{ block.settings.block_color_scheme }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {{ block.shopify_attributes }}
+                  >
+                    {% if block.settings.block_head != blank %}
+                      <h3 class="con_block_head">
+                        {{ block.settings.block_head }}
+                      </h3>
+                    {% endif %}
+                    {% if block.settings.text != blank %}
+                      <div class="">
+                        {{ block.settings.text }}
+                      </div>
+                    {% endif %}
+                    {%- style -%}
+                      .contact-{{ block.id }}.blockcontact {
+                        padding: {{ block.settings.space_contact }}px;
+                        border-radius: calc(var(--content-radius) * 1 / 2);
+                      }
+                    {%- endstyle -%}
+                  </div>
+
+                {%- when 'contact_detail' -%}
+                  <div
+                    class="blockcontact contact-{{ block.id }} color-{{ block.settings.block_color_scheme }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {{ block.shopify_attributes }}
+                  >
+                    {% if block.settings.block_head != blank %}
+                      <h3 class="con_block_head">
+                        {{ block.settings.block_head }}
+                      </h3>
+                    {% endif %}
+                    {%- if block.settings.faddress != blank -%}
+                      <div>{{ block.settings.faddress }}</div>
+                    {%- endif -%}
+                    {%- if block.settings.fcontactno != blank -%}
+                      <div class="form-det">
+                        <a href="tel:{{ block.settings.fcontactno }}">
+                          {%- render 'icon-call' -%}
+                          <span>{{ block.settings.fcontactno }}</span></a
+                        >
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.fcontactid != blank -%}
+                      <div class="con_env form-det">
+                        <a href="mailto:{{ block.settings.fcontactid }}">
+                          {%- render 'icon-envelope' -%}
+                          <span>{{ block.settings.fcontactid }}</span></a
+                        >
+                      </div>
+                    {%- endif -%}
+                    {%- style -%}
+                      .contact-{{ block.id }}.blockcontact {
+                        padding: {{ block.settings.space_contact }}px;
+                        border-radius: calc(var(--content-radius) * 1 / 2);
+                      }
+                    {%- endstyle -%}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_contact",
+      "default": true,
+      "label": "Enable sticky content on desktop"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.heading.head"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "t:settings_schema.heading.settings.head_text.label_1"
+    },
+    {
+      "type": "color",
+      "id": "headcolor",
+      "label": "t:settings_schema.heading.settings.head_text.txt_color",
+      "default": "#DF6334",
+      "info": "t:settings_schema.heading.settings.head_text.txt_info"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h0",
+      "label": "t:settings_schema.heading.settings.head_text.label_2"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.heading_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.heading_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:settings_schema.heading.settings.head_text.label_3"
+    },
+    {
+      "type": "richtext",
+      "id": "caption",
+      "default": "<p>Với bất kì thắc mắc cần được giải đáp, Quý khách vui lòng liên hệ với Bộ phận Hỗ trợ khách hàng qua địa chỉ Email:. <br>Thời gian làm việc: Thứ Hai – Thứ Sáu (08:00 – 17:00)</p>",
+      "label": "t:settings_schema.heading.settings.head_text.caption"
+    },
+
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:sections.custom_text.settings.text.label",
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "block_color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "background-2"
+        },
+        {
+          "type": "range",
+          "id": "space_contact",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "t:sections.custom_text.settings.space_contact.label",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "block_head",
+          "label": "t:sections.custom_text.settings.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.image-banner.blocks.text.settings.text.label",
+          "default": "<p>Share information about your brand with your customers.</p>"
+        }
+      ]
+    },
+    {
+      "type": "contact_detail",
+      "name": "t:sections.custom_text.settings.contact_heading.label",
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "block_color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "inverse"
+        },
+        {
+          "type": "range",
+          "id": "space_contact",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "t:sections.custom_text.settings.space_contact.label",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "block_head",
+          "label": "t:sections.custom_text.settings.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "faddress",
+          "label": "t:sections.custom_text.settings.faddress.label",
+          "default": "<p>Mon - Fri: 9AM - 5PM</p><p>Sat: 10AM - 6PM</p><p>Sun: closed</p>"
+        },
+        {
+          "type": "text",
+          "id": "fcontactno",
+          "label": "t:sections.custom_text.settings.phone.content",
+          "default": "0123-456-789"
+        },
+        {
+          "type": "text",
+          "id": "fcontactid",
+          "label": "t:sections.custom_text.settings.email.content",
+          "default": "demo@demo.com"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "contact_detail"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

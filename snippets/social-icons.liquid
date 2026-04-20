@@ -1,0 +1,115 @@
+{% comment %}
+Renders social icons.
+Accepts:
+- class: {String} a class to be added to the <ul> element (optional).
+
+  Usage:
+  {% render 'social-icons',
+  class: 'my-class'
+  %}
+  {% endcomment %}
+
+  <ul
+    class="list-unstyled list-social{% if class %} {{ class }}{% endif %} {% if color_icon == false %} custom-gap {% endif %}"
+    role="list">
+    {%- if settings.social_facebook_link != blank -%}
+    <li class="list-social__item facebook {% if color_icon == false %} social_icon {% endif %} ">
+      <a href="{{ settings.social_facebook_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-facebook' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_tiktok_link != blank -%}
+    <li class="list-social__item tiktok {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_tiktok_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-tiktok' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_instagram_link != blank -%}
+    <li class="list-social__item instagram {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_instagram_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-instagram' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_youtube_link != blank -%}
+    <li class="list-social__item youtube {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_youtube_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-youtube' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_zalo_link != blank -%}
+    <li class="list-social__item social_icon">
+      <a href="{{ settings.social_zalo_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-zalo' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.zalo' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_twitter_link != blank -%}
+    <li class="list-social__item twitter {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_twitter_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-twitter' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_snapchat_link != blank -%}
+    <li class="list-social__item snapchat {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_snapchat_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-snapchat' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_pinterest_link != blank -%}
+    <li class="list-social__item pinterest {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_pinterest_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-pinterest' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_tumblr_link != blank -%}
+    <li class="list-social__item tumblr {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_tumblr_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-tumblr' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- if settings.social_vimeo_link != blank -%}
+    <li class="list-social__item vimeo {% if color_icon == false %} social_icon {% endif %}">
+      <a href="{{ settings.social_vimeo_link }}"
+        target="_blank"
+        class="link list-social__link {% if social_style == 'link' %}link underlined-link{% elsif social_style == 'solid' %}button button--primary{% elsif social_style == 'outline' %}button button--secondary{% endif %}">
+        <span>{%- render 'icon-vimeo' -%}</span>
+        <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+      </a>
+    </li>
+    {%- endif -%}
+  </ul>

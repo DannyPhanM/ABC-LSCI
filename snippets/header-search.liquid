@@ -1,0 +1,560 @@
+{% comment %}
+  Renders a header search modal. Should be used with 'header.liquid'
+
+  Accepts:
+  - input_id: {String} Id for the search input element (required)
+
+  Usage:
+  {% render 'header-search', input_id: 'My-Id'%}
+{% endcomment %}
+<script src="{{ 'search-box.js' | asset_url }}" defer="defer"></script>
+
+{% if icon_style == 'search_box' %}
+  {%- if settings.predictive_search_enabled -%}
+    <predictive-search
+      class="custom-searchbox search-modal__form {% if icon_style == 'search_box' %} enable-search-box {% endif %}"
+      data-loading-text="{{ 'accessibility.loading' | t }}"
+    >
+  {%- else -%}
+    <search-form class="search-modal__form {% if icon_style == 'search_box' %} enable-search-box {% endif %}">
+  {%- endif -%}
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+    <div class="drop_search_inline">
+      <div class="field">
+        <input
+          class="search-box search__input field__input"
+          id="{{ input_id }}"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.search' | t }}"
+          {%- if settings.predictive_search_enabled -%}
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="predictive-search-results"
+            aria-controls="predictive-search-results"
+            aria-haspopup="listbox"
+            aria-autocomplete="list"
+            autocorrect="off"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+          {%- endif -%}
+        >
+        <label class="search-place-holder field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+        <input type="hidden" name="options[prefix]" value="last">
+
+        {%- if settings.predictive_search_enabled -%}
+          <div class="hidden-box hidden">
+            <div class="predictive-search predictive-search--header " tabindex="-1" data-predictive-search>
+              {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+            </div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+
+            {% comment %}Default search{% endcomment %}
+            <div class="grid default--search hidden suggest__search-box">
+              <div class="grid__item default_search_list">
+                <div class="default_search_head">{{ settings.default_shead }}</div>
+                {%- for collection in settings.default_scollection -%}
+                  <div>
+                    <a href="{{ collection.url }}" class="full-unstyled-link" title="{{ collection_title | escape }}">
+                      {%- if collection.title != blank -%}
+                        {{- collection.title | escape -}}
+                      {%- endif -%}
+                    </a>
+                  </div>
+                {%- endfor -%}
+              </div>
+              <div class="grid__item dsearch_banner">
+                <div class="banner--{{ settings.search_banner_height }} banner">
+                  <div class="banner__media media {% if settings.search_banner_image == blank %} placeholder{% endif %}">
+                    {%- if settings.search_banner_image != blank -%}
+                      {%- liquid
+                        assign banner_height = settings.search_banner_image.width | divided_by: settings.search_banner_image.aspect_ratio | round
+                      -%}
+                      {{
+                        settings.search_banner_image
+                        | image_url: width: 3840
+                        | image_tag:
+                          loading: 'lazy',
+                          width: settings.search_banner_image.width,
+                          height: banner_height,
+                          sizes: '100vw',
+                          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                      }}
+                    {% else %}
+                      {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+                  <div class="banner__content color-{{ settings.search_color_scheme }} gradient bg-transparent {{ settings.default_search_alignment }} {{ settings.default_search_position }}">
+                    <div>
+                      {% if settings.search_heading != blank %}
+                        <h3 class="inline-richtext h3" {{ section.shopify_attributes }}>
+                          {{ settings.search_heading }}
+                        </h3>
+                      {% endif %}
+                      {%- if settings.search_button_label != blank -%}
+                        <a
+                          {% if settings.search_button_link == blank %}
+                            role="link" aria-disabled="true"
+                          {% else %}
+                            href="{{ settings.search_button_link }}"
+                          {% endif %}
+                          class="{% if settings.search_button_style == 'link' %}link underlined-link{% elsif settings.search_button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                        >
+                          <span>{{ settings.search_button_label | escape }}</span>
+                        </a>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {%- style -%}
+              {% if settings.search_banner_height == 'adapt' and settings.search_banner_image != blank %}
+                .dsearch_banner .banner--adapt::before {
+                  content: '';
+                  padding-bottom: {{ 1 | divided_by: settings.search_banner_image.aspect_ratio | times: 100 }}%;
+                }
+              {% endif %}
+              {% if settings.search_banner_height == 'adapt' and settings.search_banner_image == blank %}
+                .dsearch_banner .banner--adapt::before {
+                  content: '';
+                  padding-bottom: 100%;
+                }
+              {% endif %}
+            {%- endstyle -%}
+            {% comment %}Default search over{% endcomment %}
+          </div>
+        {%- endif -%}
+
+        <button
+          type="reset"
+          class="reset__button field__button{% if search.terms == blank %} hidden{% endif %} "
+          aria-label="{{ 'general.search.reset' | t }}"
+          style="display: none;"
+        >
+          <svg class="icon icon-close" aria-hidden="true" focusable="false">
+            <use xlink:href="#icon-reset" />
+          </svg>
+        </button>
+        <button
+          class="flag-reset wbsclose reset__button field__button focus-inset hidden"
+          aria-label="{{ 'general.search.reset' | t }}"
+          style="display: none;"
+        >
+          <svg class="icon icon-close" aria-hidden="true" focusable="false">
+            <use xlink:href="#icon-reset"/>
+          </svg>
+        </button>
+        <button class="search-icon search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+          {% render 'icon-search' %}
+        </button>
+      </div>
+    </div>
+  </form>
+  {%- if settings.predictive_search_enabled -%}
+    </predictive-search>
+  {%- else -%}
+    </search-form>
+  {%- endif -%}
+  {%- if settings.predictive_search_enabled -%}
+  {% comment %} Popup {% endcomment %}
+  <div class="overlay__search-box modal-overlay hidden"></div>
+  <div
+    class="search-modal modal__content page-width modal__search-box "
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ 'general.search.search' | t }}"
+  >
+    <div
+      class="color-{{ settings.searchmodal_color_scheme }} gradient search-modal__content {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+      tabindex="-1"
+    >
+      <button
+        type="button"
+        class="search-modal__close-button modal__close-button link link--text focus-inset close_all__button"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        <svg class="icon icon-close" aria-hidden="true" focusable="false">
+          <use href="#icon-close" />
+        </svg>
+      </button>
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search
+          class="custom-searchbox search-modal__form"
+          data-loading-text="{{ 'accessibility.loading' | t }}"
+        >
+      {%- else -%}
+        <search-form class="search-modal__form">
+      {%- endif -%}
+
+      {%- if settings.predictive_search_enabled -%}
+        <div class="show-box">
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+          </div>
+
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+
+          {% comment %}Default search{% endcomment %}
+          <div class="grid default--search hidden suggest__search-box">
+            <div class="grid__item default_search_list">
+              <div class="default_search_head">{{ settings.default_shead }}</div>
+              {%- for collection in settings.default_scollection -%}
+                <div>
+                  <a href="{{ collection.url }}" class="full-unstyled-link" title="{{ collection_title | escape }}">
+                    {%- if collection.title != blank -%}
+                      {{- collection.title | escape -}}
+                    {%- endif -%}
+                  </a>
+                </div>
+              {%- endfor -%}
+            </div>
+            <div class="grid__item dsearch_banner">
+              <div class="banner--{{ settings.search_banner_height }} banner">
+                <div class="banner__media media {% if settings.search_banner_image == blank %} placeholder{% endif %}">
+                  {%- if settings.search_banner_image != blank -%}
+                    {%- liquid
+                      assign banner_height = settings.search_banner_image.width | divided_by: settings.search_banner_image.aspect_ratio | round
+                    -%}
+                    {{
+                      settings.search_banner_image
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        width: settings.search_banner_image.width,
+                        height: banner_height,
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                    }}
+                  {% else %}
+                    {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="banner__content color-{{ settings.search_color_scheme }} gradient bg-transparent {{ settings.default_search_alignment }} {{ settings.default_search_position }}">
+                  <div>
+                    {% if settings.search_heading != blank %}
+                      <h3 class="inline-richtext h3" {{ section.shopify_attributes }}>
+                        {{ settings.search_heading }}
+                      </h3>
+                    {% endif %}
+                    {%- if settings.search_button_label != blank -%}
+                      <a
+                        {% if settings.search_button_link == blank %}
+                          role="link" aria-disabled="true"
+                        {% else %}
+                          href="{{ settings.search_button_link }}"
+                        {% endif %}
+                        class="{% if settings.search_button_style == 'link' %}link underlined-link{% elsif settings.search_button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                      >
+                        <span>{{ settings.search_button_label | escape }}</span>
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%- style -%}
+            {% if settings.search_banner_height == 'adapt' and settings.search_banner_image != blank %}
+              .dsearch_banner .banner--adapt::before {
+                content: '';
+                padding-bottom: {{ 1 | divided_by: settings.search_banner_image.aspect_ratio | times: 100 }}%;
+              }
+            {% endif %}
+            {% if settings.search_banner_height == 'adapt' and settings.search_banner_image == blank %}
+              .dsearch_banner .banner--adapt::before {
+                content: '';
+                padding-bottom: 100%;
+              }
+            {% endif %}
+          {%- endstyle -%}
+          {% comment %}Default search over{% endcomment %}
+        </div>
+        <div class="hold-box hidden">
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+          </div>
+
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+
+          {% comment %}Default search{% endcomment %}
+          <div class="grid default--search hidden suggest__search-box">
+            <div class="grid__item default_search_list">
+              <div class="default_search_head">{{ settings.default_shead }}</div>
+              {%- for collection in settings.default_scollection -%}
+                <div>
+                  <a href="{{ collection.url }}" class="full-unstyled-link" title="{{ collection_title | escape }}">
+                    {%- if collection.title != blank -%}
+                      {{- collection.title | escape -}}
+                    {%- endif -%}
+                  </a>
+                </div>
+              {%- endfor -%}
+            </div>
+            <div class="grid__item dsearch_banner">
+              <div class="banner--{{ settings.search_banner_height }} banner">
+                <div class="banner__media media {% if settings.search_banner_image == blank %} placeholder{% endif %}">
+                  {%- if settings.search_banner_image != blank -%}
+                    {%- liquid
+                      assign banner_height = settings.search_banner_image.width | divided_by: settings.search_banner_image.aspect_ratio | round
+                    -%}
+                    {{
+                      settings.search_banner_image
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        width: settings.search_banner_image.width,
+                        height: banner_height,
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                    }}
+                  {% else %}
+                    {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="banner__content color-{{ settings.search_color_scheme }} gradient bg-transparent {{ settings.default_search_alignment }} {{ settings.default_search_position }}">
+                  <div>
+                    {% if settings.search_heading != blank %}
+                      <h3 class="inline-richtext h3" {{ section.shopify_attributes }}>
+                        {{ settings.search_heading }}
+                      </h3>
+                    {% endif %}
+                    {%- if settings.search_button_label != blank -%}
+                      <a
+                        {% if settings.search_button_link == blank %}
+                          role="link" aria-disabled="true"
+                        {% else %}
+                          href="{{ settings.search_button_link }}"
+                        {% endif %}
+                        class="{% if settings.search_button_style == 'link' %}link underlined-link{% elsif settings.search_button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                      >
+                        <span>{{ settings.search_button_label | escape }}</span>
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%- style -%}
+            {% if settings.search_banner_height == 'adapt' and settings.search_banner_image != blank %}
+              .dsearch_banner .banner--adapt::before {
+                content: '';
+                padding-bottom: {{ 1 | divided_by: settings.search_banner_image.aspect_ratio | times: 100 }}%;
+              }
+            {% endif %}
+            {% if settings.search_banner_height == 'adapt' and settings.search_banner_image == blank %}
+              .dsearch_banner .banner--adapt::before {
+                content: '';
+                padding-bottom: 100%;
+              }
+            {% endif %}
+          {%- endstyle -%}
+          {% comment %}Default search over{% endcomment %}
+        </div>
+      {%- endif -%}
+
+      {%- if settings.predictive_search_enabled -%}
+        </predictive-search>
+      {%- else -%}
+        </search-form>
+      {%- endif -%}
+    </div>
+  </div>
+{% endif %}
+{% endif %}
+
+<details-modal class="header__search {% if separate_line == true %}icon_separate{% endif %} {% if icon_style == 'search_box' %} unable-search-icon {% endif %}">
+  <details class="custom-details">
+    <summary
+      class="header__icon header__icon--search header__icon--summary focus-inset modal__toggle headicon_{{ icon_style }} {{ texts_size }}"
+      aria-haspopup="dialog"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <span class="headicon_span">
+        <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false">
+          <use href="#icon-search" />
+        </svg>
+        <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false">
+          <use href="#icon-close" />
+        </svg>
+      </span>
+      <span class="small-hide {% if icon_uppercase == true %}uppercase{% endif %}">
+        {{- 'general.search.search' | t -}}
+      </span>
+    </summary>
+    <div class="modal-overlay"></div>
+    <div
+      class="search-modal modal__content page-width"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <div
+        class="color-{{ settings.searchmodal_color_scheme }} gradient search-modal__content {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+        tabindex="-1"
+      >
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search
+            class="custom-searchbox  search-modal__form"
+            data-loading-text="{{ 'accessibility.loading' | t }}"
+          >
+        {%- else -%}
+          <search-form class="search-modal__form">
+        {%- endif -%}
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+          <div class="drop_search_inline">
+            <div class="field">
+              <input
+                class="search__input field__input"
+                id="{{ input_id }}"
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ 'general.search.search' | t }}"
+                {%- if settings.predictive_search_enabled -%}
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-owns="predictive-search-results"
+                  aria-controls="predictive-search-results"
+                  aria-haspopup="listbox"
+                  aria-autocomplete="list"
+                  autocorrect="off"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                {%- endif -%}
+              >
+              <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+              <input type="hidden" name="options[prefix]" value="last">
+              <button
+                type="reset"
+                class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+                aria-label="{{ 'general.search.reset' | t }}"
+                style="display: none;"
+              >
+                <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                  <use xlink:href="#icon-reset" />
+                </svg>
+              </button>
+              <button
+                class="wbsclose reset__button field__button focus-inset hidden"
+                aria-label="{{ 'general.search.reset' | t }}"
+                style="display: none;"
+              >
+                <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                  <use xlink:href="#icon-reset"/>
+                </svg>
+              </button>
+              <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                <svg class="icon icon-search" aria-hidden="true" focusable="false">
+                  <use href="#icon-search" />
+                </svg>
+              </button>
+            </div>
+            <button
+              type="button"
+              class="search-modal__close-button modal__close-button link link--text focus-inset"
+              aria-label="{{ 'accessibility.close' | t }}"
+            >
+              <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                <use href="#icon-close" />
+              </svg>
+            </button>
+          </div>
+
+          {%- if settings.predictive_search_enabled -%}
+            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+              {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+            </div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+
+            {% comment %}Default search{% endcomment %}
+            <div class="grid default--search hidden suggest__search-box suggest__search-box__mobile">
+              <div class="grid__item default_search_list">
+                <div class="default_search_head">{{ settings.default_shead }}</div>
+                {%- for collection in settings.default_scollection -%}
+                  <div>
+                    <a href="{{ collection.url }}" class="full-unstyled-link" title="{{ collection_title | escape }}">
+                      {%- if collection.title != blank -%}
+                        {{- collection.title | escape -}}
+                      {%- endif -%}
+                    </a>
+                  </div>
+                {%- endfor -%}
+              </div>
+              <div class="grid__item dsearch_banner">
+                <div class="banner--{{ settings.search_banner_height }} banner">
+                  <div class="banner__media media {% if settings.search_banner_image == blank %} placeholder{% endif %}">
+                    {%- if settings.search_banner_image != blank -%}
+                      {%- liquid
+                        assign banner_height = settings.search_banner_image.width | divided_by: settings.search_banner_image.aspect_ratio | round
+                      -%}
+                      {{
+                        settings.search_banner_image
+                        | image_url: width: 3840
+                        | image_tag:
+                          loading: 'lazy',
+                          width: settings.search_banner_image.width,
+                          height: banner_height,
+                          sizes: '100vw',
+                          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                      }}
+                    {% else %}
+                      {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+                  <div class="banner__content color-{{ settings.search_color_scheme }} gradient bg-transparent {{ settings.default_search_alignment }} {{ settings.default_search_position }}">
+                    <div>
+                      {% if settings.search_heading != blank %}
+                        <h3 class="inline-richtext h3" {{ section.shopify_attributes }}>
+                          {{ settings.search_heading }}
+                        </h3>
+                      {% endif %}
+                      {%- if settings.search_button_label != blank -%}
+                        <a
+                          {% if settings.search_button_link == blank %}
+                            role="link" aria-disabled="true"
+                          {% else %}
+                            href="{{ settings.search_button_link }}"
+                          {% endif %}
+                          class="{% if settings.search_button_style == 'link' %}link underlined-link{% elsif settings.search_button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                        >
+                          <span>{{ settings.search_button_label | escape }}</span>
+                        </a>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {%- style -%}
+              {% if settings.search_banner_height == 'adapt' and settings.search_banner_image != blank %}
+                .dsearch_banner .banner--adapt::before {
+                  content: '';
+                  padding-bottom: {{ 1 | divided_by: settings.search_banner_image.aspect_ratio | times: 100 }}%;
+                }
+              {% endif %}
+              {% if settings.search_banner_height == 'adapt' and settings.search_banner_image == blank %}
+                .dsearch_banner .banner--adapt::before {
+                  content: '';
+                  padding-bottom: 100%;
+                }
+              {% endif %}
+            {%- endstyle -%}
+            {% comment %}Default search over{% endcomment %}
+          {%- endif -%}
+        </form>
+        {%- if settings.predictive_search_enabled -%}
+          </predictive-search>
+        {%- else -%}
+          </search-form>
+        {%- endif -%}
+      </div>
+    </div>
+  </details>
+</details-modal>

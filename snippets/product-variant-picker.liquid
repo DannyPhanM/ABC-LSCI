@@ -1,0 +1,152 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  - update_url: {Boolean} whether or not to update url when changing variants. If false, the url isn't updated. Default: true (optional).
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+{%- unless product.has_only_default_variant -%}
+  {% if product.metafields.custom.product_grouping.value != blank %}
+    <fieldset class="js product-form__input product-form__input--swatch">
+      <div class="{% if block.settings.divider_variant == true %}swatch_divide{% endif %}">
+        {% assign product_color = product.metafields.custom.product_color.value %}
+        <legend class="form__label">
+          {{ 'products.product.color' | t }}: <span>
+            {% for item_color in product_color %}
+              {{ item_color.color_name }}
+              {% unless forloop.last %}
+                /
+              {% endunless %}
+            {% endfor %}
+          </span>
+        </legend>
+        <div class="product_color_main {{ option }}">
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type,
+            is_color: 'true'
+          %}
+        </div>
+      </div>
+    </fieldset>
+  {% endif %}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}"
+    data-url="{{ product.url }}"
+    data-layout="{{ block.settings.picker_type }}"
+    {% if update_url == false %}
+      data-update-url="false"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign swatch_count = option.values | map: 'swatch' | compact | size
+        assign picker_type = block.settings.picker_type
+
+        if swatch_count > 0 and block.settings.swatch_shape != 'none'
+          if block.settings.picker_type == 'dropdown'
+            assign picker_type = 'swatch_dropdown'
+          else
+            assign picker_type = 'swatch'
+          endif
+        endif
+        assign check = block.settings.hide_sold_variant
+        if product.first_available_variant
+          assign check = false
+        endif
+      -%}
+      {%- if check -%}
+      {%- elsif picker_type == 'swatch' -%}
+        <fieldset class="js product-form__input product-form__input--swatch">
+          <div class="{% if block.settings.divider_variant == true %}swatch_divide{% endif %}">
+            <div class="form__label target">
+              {{ option.name | capitalize }}:
+              <span data-selected-swatch-value="{{ option.name }}">
+                {{- option.selected_value -}}
+              </span>
+            </div>
+            <div
+              {% if option.name == 'Color' %}
+                {%- if block.settings.pswatch_type != 'pswatch_text' %}class="product_color_main"{% endif -%}
+              {% endif %}
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </div>
+          </div>
+        </fieldset>
+      {%- elsif picker_type == 'button' -%}
+        <fieldset class="js product-form__input product-form__input--pill">
+          <div class="{% if block.settings.divider_variant == true %}swatch_divide{% endif %}">
+            <div class="form__label target">
+              <div>
+                {{ option.name | capitalize }}:
+                {% assign current_variant = product.selected_or_first_available_variant %}
+                {% if current_variant.option.selected_value != '' %}
+                  <span>{{ option.selected_value }}</span>
+                {% endif %}
+              </div>
+            </div>
+            <div
+              class="variant-grid-custom"
+              {% if option.name == 'Color' %}
+                {%- if block.settings.pswatch_type != 'pswatch_text' %}class="product_color_main"{% endif -%}
+              {% endif %}
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </div>
+          </div>
+        </fieldset>
+      {%- else -%}
+        <div class="product-form__input product-form__input--dropdown">
+          <div class="{% if block.settings.divider_variant == true %}swatch_divide{% endif %}">
+            <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+              {{ option.name }}
+            </label>
+            <div class="select">
+              {%- if picker_type == 'swatch_dropdown' -%}
+                <span data-selected-dropdown-swatch="options[{{ option.name | escape }}]" class="dropdown-swatch">
+                  {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
+                </span>
+              {%- endif -%}
+              <select
+                id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                class="select__select"
+                name="options[{{ option.name | escape }}]"
+                form="{{ product_form_id }}"
+              >
+                {% render 'product-variant-options',
+                  product: product,
+                  option: option,
+                  block: block,
+                  picker_type: picker_type
+                %}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </variant-selects>
+{%- endunless -%}

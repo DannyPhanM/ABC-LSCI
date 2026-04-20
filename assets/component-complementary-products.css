@@ -1,0 +1,125 @@
+.product--thumbnail product-recommendations .product__media-item:not(.is-active), .product--thumbnail_slider product-recommendations .product__media-item:not(.is-active) {
+    display: block;
+}
+.product--thumbnail product-recommendations .product__media-item:not(.is-active):not(:first-child),
+.product--thumbnail_slider product-recommendations .product__media-item:not(.is-active):not(:first-child) {
+  display: none;
+}
+.complementary-products__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+product-recommendations:not(.is-accordion) .complementary-products__container {
+  margin-top: 1.5rem;
+}
+
+.complementary-products__container > details[open] {
+  padding-bottom: 1.5rem;
+}
+
+/* .complementary-slider {
+  margin-top: 0;
+  gap: 0;
+}
+ */
+.complementary-slide {
+  --shadow-padding-sides: calc((var(--shadow-horizontal-offset) + var(--shadow-blur-radius)) * var(--shadow-visible));
+  --shadow-padding-sides-negative: calc(
+    (var(--shadow-horizontal-offset) * -1 + var(--shadow-blur-radius)) * var(--shadow-visible)
+  );
+}
+
+product-recommendations .slider.slider--everywhere .slider__slide {
+    scroll-snap-align: end;
+}
+product-recommendations slider-component {
+  padding: 1px;
+}
+.complementary-slide > ul {
+  /* display: flex;
+  flex-direction: column; */
+/*   gap: var(--grid-mobile-vertical-spacing); */
+}
+
+/* .complementary-slide.complementary-slide--standard > ul {
+  gap: calc(var(--grid-mobile-vertical-spacing) + 8px);
+} */
+
+/* @media screen and (min-width: 768px) {
+  .complementary-slide > ul {
+    gap: var(--grid-desktop-vertical-spacing);
+  }
+
+  .complementary-slide.complementary-slide--standard > ul {
+    gap: calc(var(--grid-desktop-vertical-spacing) + 8px);
+  }
+} */
+
+/* .complementary-slide.grid__item {
+  width: 100%;
+  padding-top: max(var(--focus-outline-padding), var(--shadow-padding-top));
+  padding-bottom: max(var(--focus-outline-padding), var(--shadow-padding-bottom));
+  padding-right: max(var(--focus-outline-padding), var(--shadow-padding-sides));
+  padding-left: max(var(--focus-outline-padding), var(--shadow-padding-sides-negative));
+} */
+
+/* .complementary-slide .card-wrapper {
+  height: auto;
+} */
+
+.complementary-products > .summary__title {
+  display: flex;
+  line-height: 1;
+  padding: 1.5rem 0;
+}
+
+.accordion + product-recommendations .accordion,
+product-recommendations.is-accordion + .accordion {
+  margin-top: 0;
+  border-top: none;
+}
+
+.complementary-products > .summary__title .icon-accordion {
+  fill: rgb(var(--color-foreground));
+  height: calc(var(--font-heading-scale) * 2rem);
+  margin-right: calc(var(--font-heading-scale) * 1rem);
+  width: calc(var(--font-heading-scale) * 2rem);
+}
+.complementary-products__container .icon-wrap {
+  display: flex;
+}
+
+.complementary-products .sold-out-message:not(.hidden) + .icon-wrap {
+  display: none;
+}
+
+.complementary-products__container .quick-add__submit:not(.animate-arrow) .icon-wrap {
+  transition: transform var(--duration-short) ease;
+}
+
+.complementary-products__container .quick-add__submit:not(.animate-arrow):hover .icon-wrap {
+  transform: rotate(90deg);
+}
+@media (max-width: 575px) {
+  .complementary-slider .slider__slide {
+    width: calc(50% - var(--grid-mobile-horizontal-spacing) * 1 / 2);
+    max-width: calc(50% - var(--grid-mobile-horizontal-spacing) * 1 / 2);
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .complementary-slider .slider__slide {
+    width: calc(50% - var(--grid-mobile-horizontal-spacing) * 1 / 2);
+    max-width: calc(50% - var(--grid-mobile-horizontal-spacing) * 1 / 2);
+  }
+  .complementary-slider.grid--3-col-desktop .slider__slide {
+    width: calc(33.33% - var(--grid-mobile-horizontal-spacing) * 2 / 3);
+    max-width: calc(33.33% - var(--grid-mobile-horizontal-spacing) * 2 / 3);
+  }
+}
+
+.complementary-products__container .price__container .price__sale .price-item.price-item--sale, .complementary-products__container .price__container .price__regular .price-item.price-item--regular {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}

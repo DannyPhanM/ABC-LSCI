@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "color_scheme": "background-1",
+        "input_inline": true,
+        "sub_text": "Chào mừng bạn! Đăng nhập ngay để tận hưởng trải nghiệm mua sắm cá nhân hóa và các ưu đãi độc quyền chỉ dành cho bạn.",
+        "image": "shopify://shop_images/LOGIN__SIGN_UP__FORGOT_PW.jpg",
+        "img_width": 350,
+        "content_color_scheme": "background-2",
+        "enable_shop_login_button": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

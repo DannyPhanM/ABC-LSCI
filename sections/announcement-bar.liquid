@@ -1,0 +1,562 @@
+{{ 'component-slideshow.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- style -%}
+{% if section.settings.text_animation == true %}
+  .announce-{{ section.id }} .announcement-bar__message span{
+    background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 4s infinite linear;
+  }
+  .announcement-bar__message a, .announcement-bar__message a.full-unstyled-link span {
+    border-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+    border-image-slice: 1;
+    border-bottom: 1px solid transparent;
+  }
+  .announcement-bar__message a, .announcement-bar__message a.full-unstyled-link[aria-disabled="true"] span {
+    border-image: none
+  }
+  @keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+      -webkit-filter: hue-rotate(-360deg);
+    }
+  }
+{% endif %}
+
+@media (max-width: 767px) {
+  .running-text.left_right {
+    animation: translateLeftAnnounce {{ section.settings.scroll_speed }}s linear infinite;
+    display: flex;
+  }
+  .running-text.right_left {
+    animation: translateRightAnnounce {{ section.settings.scroll_speed }}s linear infinite;
+    display: flex;
+  }
+}
+
+@keyframes translateLeftAnnounce {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes translateRightAnnounce {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+{%- endstyle -%}
+{%- liquid
+  if section.settings.enable_country_selector or section.settings.enable_language_selector
+    assign language_country_selector = true
+  endif
+  if section.blocks.size > 0
+    assign announcement_bar = true
+  endif
+-%}
+
+<script>
+  function announcementClose(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelector('.utility-bar').style.display = "none";
+    
+    let stickyHeaderHeight = 0;
+    document.querySelectorAll('.section-header').forEach(ele =>{
+      stickyHeaderHeight += ele.getBoundingClientRect().height;
+    });
+    let headerHeight = stickyHeaderHeight;
+    document.querySelectorAll('.utility-bar').forEach(ele =>{
+      headerHeight += ele.getBoundingClientRect().height;
+    });
+    document.documentElement.style.setProperty('--header-announce-height', headerHeight+'px');
+    document.documentElement.style.setProperty('--header-sticky-height', stickyHeaderHeight+'px');
+  }
+</script>
+
+{%- if language_country_selector or announcement_bar -%}
+  <div class="custom-height announce-{{ section.id }} {% if section.blocks.size < 1 %}only_announce_hmobile{% endif %} {{ section.settings.bar_position }} utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator %} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}{% if section.settings.text_close == true %} announce_ctop{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="{% if section.blocks.size < 1 %}one_col_lang{% endif %} page-width utility-bar__grid{% if announcement_bar and language_country_selector %} utility-bar__grid--2-col{% elsif language_country_selector %} utility-bar__grid--1-col{% endif %} {% unless language_country_selector %} only_blocks{% endunless %}">
+      {%- if section.blocks.size == 1 -%}
+        <div
+          class="announcement-bar"
+          role="region"
+          aria-label="{{ 'sections.header.announcement' | t }}"
+          {{ block.shopify_attributes }}>
+          {%- if section.blocks.first.settings.text != blank -%}
+            <p class="announcement-bar__message{% if section.settings.uppercase_bar %} uppercase{% endif %}">
+              {% render 'icon-accordion', icon: section.blocks.first.settings.icon %}
+              <span>{{ section.blocks.first.settings.text }}</span>
+
+              {%- if section.blocks.first.settings.button_label != blank -%}
+                <a {% if section.blocks.first.settings.button_link == blank %}role="link" aria-disabled="true" {% else %}href="{{ section.blocks.first.settings.button_link }}" {% endif %}
+                  class="full-unstyled-link" {{ block.shopify_attributes }}>
+                  <span>{{- section.blocks.first.settings.button_label | escape -}}</span>
+                  {%- if section.blocks.first.settings.enable_arrow -%}
+                    {% render 'icon-arrow' %}
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        </div>
+      {%- elsif section.blocks.size > 1 -%}
+        {% if section.settings.auto_rotate %}
+          <div data-section-setting='{{ section.settings | json }}' class="swiper swipeannounce announcement-bar" role="region" aria-roledescription="{{ 'sections.announcements.carousel' | t }}" aria-label="{{ 'sections.announcements.announcement_bar' | t }}">
+            <div class="swiper-wrapper grid--1-col" aria-live="polite">
+              {%- for block in section.blocks -%}
+                <div
+                  class="swiper-slide grid--1-col"
+                  id="Slide-{{ section.id }}-{{ forloop.index }}"
+                  {{ block.shopify_attributes }}
+                  role="group"
+                  aria-roledescription="{{ 'sections.announcements.announcement' | t }}"
+                  aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+                  tabindex="-1">
+                  <div class="announcement-bar__announcement" role="region" aria-label="{{ 'sections.header.announcement' | t }}"
+                    {{ block.shopify_attributes }}>
+                    {%- if block.settings.text != blank -%}
+                      <p class="announcement-bar__message {% if section.settings.uppercase_bar %} uppercase{% endif %}">
+                        {% render 'icon-accordion', icon: block.settings.icon %}
+                        <span>{{ block.settings.text }}</span>
+  
+                        {%- if block.settings.button_label != blank -%}
+                          <a {% if block.settings.button_link == blank %}role="link" aria-disabled="true" {% else %}href="{{ block.settings.button_link }}" {% endif %} class="full-unstyled-link" {{ block.shopify_attributes }}>
+                            <span>{{- block.settings.button_label | escape -}}</span>
+                            {%- if block.settings.enable_arrow -%}
+                              {% render 'icon-arrow' %}
+                            {%- endif -%}
+                          </a>
+                        {%- endif -%}
+                      </p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+            <div class="slide_arrow swiper-button-prev"><div class="button">{% render 'icon-caret' %}</div></div>
+            <div class="slide_arrow swiper-button-next"><div class="button">{% render 'icon-caret' %}</div></div>
+          </div>
+          {% else %}
+          <div data-section-setting='{{ section.settings | json }}' class="swiper swipeannounce announcement-bar" role="region" aria-roledescription="{{ 'sections.announcements.carousel' | t }}" aria-label="{{ 'sections.announcements.announcement_bar' | t }}">
+            <div class=" {% if section.settings.auto_rotate ==false %} running-text {% endif %} {% if section.settings.marq_direction == 'left_right' %}left_right{% else %}right_left{% endif %}  swiper-wrapper grid--1-col" aria-live="polite">
+              {%- for block in section.blocks -%}
+                  <div class="announcement-bar__announcement--no-rotate" role="region" aria-label="{{ 'sections.header.announcement' | t }}"
+                    {{ block.shopify_attributes }}>
+                    {%- if block.settings.text != blank -%}
+                      <p class="announcement-bar__message {% if section.settings.uppercase_bar %} uppercase{% endif %}">
+                        {% render 'icon-accordion', icon: block.settings.icon %}
+                        <span class="no-rotate--text">{{ block.settings.text }}</span>
+  
+                        {%- if block.settings.button_label != blank -%}
+                          <a {% if block.settings.button_link == blank %}role="link" aria-disabled="true" {% else %}href="{{ block.settings.button_link }}" {% endif %} class="full-unstyled-link" {{ block.shopify_attributes }}>
+                            <span>{{- block.settings.button_label | escape -}}</span>
+                            {%- if block.settings.enable_arrow -%}
+                              {% render 'icon-arrow' %}
+                            {%- endif -%}
+                          </a>
+                        {%- endif -%}
+                      </p>
+                    {%- endif -%}
+                  </div>
+              
+              {%- endfor -%}
+            </div>
+          </div>
+        {% endif %}
+        {%- if request.design_mode -%}
+          <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+          <style>
+            /* theme editor power preview fix */
+           /*  .announcement-bar-slider .slider__slide[aria-hidden='true'] {
+              visibility: hidden;
+            } */
+          </style>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
+        <div class="localization-wrapper">
+          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+            <localization-form class="small-hide medium-hide">
+              {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                  {%- render 'country-localization', localPosition: 'AnnouncementCountry' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {% endif %}
+
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <localization-form class="small-hide medium-hide">
+              {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                  {%- render 'language-localization', localPosition: 'AnnouncementLanguage' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.text_close == true -%}
+        <button onclick="announcementClose()" class="announcement_close" aria-label="{{ 'accessibility.close' | t }}">{%- render 'icon-closebold' -%}</button>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+<script>
+function initSwipers(defaults = {}, selector = ".swipeannounce") {
+  let swipers = document.querySelectorAll(selector);
+  swipers.forEach((swiper) => {
+    let optionsData = {};
+
+      if(swiper.dataset.sectionSetting){
+        const sectionSetting = JSON.parse(swiper.dataset.sectionSetting);
+        optionsData = {
+          slidesPerView: 1,
+          dots: false,
+          spaceBetween: 10,
+          loop: false,
+          dragClickables: false,
+          pagination: {
+            clickable: 'true',
+          }
+
+        };
+        if(sectionSetting.auto_rotate == true){
+          optionsData['autoplay'] = {
+            delay: sectionSetting.change_slides_speed * 1000,
+            disableOnInteraction: false,
+          };
+        }
+          optionsData['navigation'] = {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }
+      }
+      let options = {
+        ...defaults,
+        ...optionsData
+      };
+    new Swiper(swiper, options);
+  });
+};
+  document.addEventListener("shopify:section:load", initSwipers);
+  initSwipers();
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "max_blocks": 12,
+  "class": "announcement-bar-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "accent-1"
+    },
+    {
+      "type": "select",
+      "id": "bar_position", 
+      "options": [
+        {
+          "value": "bar_position1",
+          "label": "t:sections.announcement-bar.settings.bar_visibility.bar1.label"
+        },
+        {
+          "value": "bar_position2",
+          "label": "t:sections.announcement-bar.settings.bar_visibility.bar2.label"
+        },
+        {
+          "value": "bar_position3",
+          "label": "t:sections.announcement-bar.settings.bar_visibility.bar3.label"
+        },
+        {
+          "value": "bar_position4",
+          "label": "t:sections.announcement-bar.settings.bar_visibility.bar4.label"
+        }
+      ],
+      "default": "bar_position1",
+      "label": "t:sections.announcement-bar.settings.bar_visibility.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.header__2.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase_bar",
+      "default": false,
+      "label": "t:settings_schema.appearance.settings.uppercase_bar.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_close",
+      "default": true,
+      "label": "Allow users to close announcement"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_animation",
+      "default": true,
+      "label": "Show gradient text animation effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "t:sections.slideshow.settings.auto_rotate.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "unit": "s",
+      "label": "t:sections.slideshow.settings.change_slides_speed.label",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "s",
+      "label": "t:sections.scrolling-bar.settings.speed.label",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "marq_direction",
+      "label": "t:sections.scrolling-bar.settings.marq_direction.label",
+      "options": [
+        {
+          "value": "left_right",
+          "label": "t:sections.scrolling-bar.settings.marq_direction.options__1.label"
+        },
+        {
+          "value": "right_left",
+          "label": "t:sections.scrolling-bar.settings.marq_direction.options__2.label"
+        }
+      ],
+      "default": "right_left"
+    },
+    {
+      "type": "header",
+      "content": "Country/region and language selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.enable_country_selector.label",
+      "info": "t:sections.announcement-bar.settings.header__3.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.enable_language_selector.label",
+      "info": "t:sections.announcement-bar.settings.header__4.info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__1.label"
+            },
+            {
+              "value": "authentic",
+              "label": "Authentic"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__5.label"
+            },
+            {
+              "value": "giftcard",
+              "label": "Gift card"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__10.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__14.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__16.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__20.label"
+            },            {
+              "value": "lock",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__24.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__35.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__43.label"
+            },
+            {
+              "value": "world",
+              "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.options__45.label"
+            }
+          ],
+          "default": "world",
+          "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.icon.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Welcome to our store",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+        },
+
+        {
+          "type": "header",
+          "content": "t:settings_schema.button.name"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:settings_schema.button.settings.button_text.label_1",
+          "info": "t:sections.image-with-text.blocks.button.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:settings_schema.button.settings.button_text.label_2"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_arrow",
+          "default": false,
+          "label": "t:sections.announcement-bar.settings.enable_arrow.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.announcement-bar.presets.name",
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

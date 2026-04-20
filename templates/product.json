@@ -1,0 +1,332 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badge_FEj7b6": {
+          "type": "badge",
+          "settings": {}
+        },
+        "text_H7gPbM": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }} | {{ product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value }}",
+            "text_upper": true,
+            "text_size": "large",
+            "show_sharebtn": true,
+            "share_label": "Chia Sẻ"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_upper": false,
+            "title_size": "h2"
+          }
+        },
+        "sku_rFqDQL": {
+          "type": "sku",
+          "settings": {
+            "sku_upper": true,
+            "sku_size": "large"
+          }
+        },
+        "text_J3m9jU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value }}",
+            "text_upper": true,
+            "text_size": "medium",
+            "show_sharebtn": true,
+            "share_label": "Share"
+          }
+        },
+        "judge_me_reviews_preview_badge_JFbRPW": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "inventory_4Ci3bD": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 3,
+            "show_inventory_quantity": true
+          }
+        },
+        "pareto_volume_discount_app_block_WmgMyD": {
+          "type": "shopify://apps/p-quantity-breaks/blocks/app-block/170ada5d-6ed5-4d40-b93c-1aa195de1ccc",
+          "settings": {}
+        },
+        "pareto_order_limit_app_block_QJbQXm": {
+          "type": "shopify://apps/pareto-order-limit/blocks/app-block/6fbe20db-eadd-42b3-bc67-0e44a53ed12f",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "hide_sold_variant": false,
+            "pills_radius": 4,
+            "pswatch_type": "pswatch_image",
+            "pills_style": "fill",
+            "divider_variant": true
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+            "page": "",
+            "text": "Size guide",
+            "divider_qty": true
+          }
+        },
+        "puco_blocks_features_features_01_CVUaTF": {
+          "type": "shopify://apps/puco-blocks/blocks/features-features-01/6ea1fa34-d588-43da-abbd-c69bdc1e3b3b",
+          "settings": {
+            "feature_svg": "",
+            "feature_content": "<b>HƯỚNG DẪN CHỌN SIZE CHÍNH XÁC:</b><br>+Sản phẩm <b>NAM/UNISEX</b>: size <b>MEN</b><br>+Sản phẩm <b>NỮ</b>: size <b>WOMEN</b><br>+Sản phẩm <b>FILA</b>: size <b>CM</b>",
+            "icon_size": 20,
+            "feature_size": 16,
+            "icon_color": "#137e2d",
+            "feature_color": "#000000",
+            "background_color": "#e8f5e1",
+            "padding_top": 15,
+            "padding_bottom": 15
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "boostly_product_page_enhancer_feature_list_ENHEJM": {
+          "type": "shopify://apps/boostly-product-page-enhancer/blocks/feature_list/340aca85-c061-4ab2-945c-2ce6536f27cc",
+          "disabled": true,
+          "settings": {
+            "first_feature": "LƯU Ý VẬN CHUYỂN",
+            "second_feature": "",
+            "third_feature": "",
+            "fourth_feature": "",
+            "icon_color": "#d60b0b",
+            "text_color": "#d60b0b",
+            "bold_text": false,
+            "text_size": "large",
+            "icon": "truck"
+          }
+        },
+        "boostly_product_page_enhancer_feature_list_9j3F3h": {
+          "type": "shopify://apps/boostly-product-page-enhancer/blocks/feature_list/340aca85-c061-4ab2-945c-2ce6536f27cc",
+          "disabled": true,
+          "settings": {
+            "first_feature": "- Các đơn hàng đặt từ 09/02 có thể giao chậm do quá tải vận chuyển dịp Lễ, Tết",
+            "second_feature": "- Các đơn hàng từ 14/02 – 22/02 sẽ được xử lý vào 23/02.",
+            "third_feature": "",
+            "fourth_feature": "",
+            "icon_color": "#d60b0b",
+            "text_color": "#d60b0b",
+            "bold_text": false,
+            "text_size": "medium",
+            "icon": "none"
+          }
+        },
+        "icon_with_text_Gx4846": {
+          "type": "icon-with-text",
+          "settings": {
+            "icon_1": "freeshipping",
+            "heading_1": "Miễn phí ship cho đơn hàng từ 3 triệu",
+            "icon_2": "cardpayment",
+            "heading_2": "Phương thức thanh toán tiện lợi và an toàn",
+            "icon_3": "return",
+            "heading_3": "Hỗ trợ đổi trả trong 7 ngày",
+            "icon_4": "cardloyalty",
+            "heading_4": "Ưu đãi khi thăng hạng thành viên",
+            "heading_5": "",
+            "heading_6": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "divider_desc": true
+          }
+        },
+        "collapsible_tab_ADKqaX": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Hướng Dẫn Bảo Quản",
+            "icon": "none",
+            "content": "<p>Đối với các sản phẩm tại ABC MART Việt Nam, quý khách lưu ý:</p><p><strong>Giày dép</strong>: Lau sạch thường xuyên, giữ form bằng cách nhét giấy hoặc xốp vào khi không sử dụng. Bảo dưỡng giày da để duy trì độ bền.</p><p><strong>Quần áo</strong>: Giặt nhẹ tay theo nhãn hướng dẫn, tránh ánh nắng trực tiếp khi phơi.</p><p><strong>Phụ kiện (túi, nón,...)</strong>: Lau bụi bằng vải mềm, bảo quản trong hộp hoặc túi vải để giữ form.</p><p>Chăm sóc sản phẩm đúng cách sẽ sản phẩm của quý khách luôn bền đẹp như mới!</p>",
+            "page": "",
+            "opencollapse": false
+          }
+        },
+        "collapsible_tab_Nf6UT7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Chính Sách Đổi Trả",
+            "icon": "none",
+            "content": "<p>Để hỗ trợ hủy, đổi hoặc trả đơn hàng, quý khách vui lòng liên hệ với Bộ Phận Chăm Sóc Khách Hàng qua Zalo hoặc Live Chat trong giờ hành chính (từ thứ 2 đến thứ 6). ABC MART Việt Nam luôn sẵn sàng giúp đỡ bạn!</p><p>Đối với những đơn hàng đã được giao hoặc đã đóng gói, ABC MART Việt Nam chỉ có thể hỗ trợ đổi size hoặc áp dụng chính sách đổi trả nếu sản phẩm có lỗi từ nhà sản xuất.</p><p><strong>Điều kiện đổi trả:</strong> Sản phẩm có thể đổi trong vòng 7 ngày nếu chưa qua sử dụng và còn đầy đủ hộp, hóa đơn, phụ kiện kèm theo. ABC MART Việt Nam rất sẵn lòng đổi nếu sản phẩm bị sai kích thước, màu sắc hoặc có hư hại. Xem thông tin chi tiết chính sách đổi trả <a href=\"https://abc-mart.com.vn/pages/chinh-sach-huy-don-va-doi-tra\" target=\"_blank\" title=\"https://abc-mart.com.vn/pages/chinh-sach-huy-don-va-doi-tra\">tại đây</a>.</p><p>Lưu ý: Đối với việc đổi trả trong trường hợp mua nhầm hoặc thay đổi ý định, ABC MART Việt Nam không thể hỗ trợ đổi trả.</p><p>Cảm ơn bạn rất nhiều vì đã hiểu và luôn ủng hộ ABC MART Việt Nam!</p>",
+            "page": "",
+            "opencollapse": false
+          }
+        },
+        "collapsible_tab_MNmDU7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Câu Hỏi Thường Gặp",
+            "icon": "none",
+            "content": "<p><strong>Tôi có thể theo dõi đơn hàng của mình không?</strong><br/>Bạn có thể inbox cho admin để được kiểm tra tình trạng đơn hàng chính xác nhất.</p><p><strong>Có sự khác biệt về giá giữa sản phẩm trên trang web và cửa hàng không?</strong><br/>Tất cả các mức giá đều giống nhau, tuy nhiên, trong một số khoảng thời gian nhất định, chúng tôi có thể có các chương trình khuyến mãi đặc biệt trên trang web hoặc chỉ tại các cửa hàng nhất định.</p><p><strong>Sản phẩm được sản xuất tại những quốc gia nào?</strong><br/>Tất cả các sản phẩm từ khu vực châu Á được sản xuất tại Trung Quốc, Việt Nam, Ấn Độ, Indonesia, Nhật Bản. Các sản phẩm sẽ được gửi theo thứ tự ngẫu nhiên và dựa trên tình trạng sẵn có của sản phẩm, do đó chúng tôi không thể xác nhận sản phẩm sản xuất tại quốc gia nào sẽ được gửi cho bạn.</p>",
+            "page": "",
+            "opencollapse": false
+          }
+        },
+        "share_button_6N3fmq": {
+          "type": "share_button",
+          "settings": {
+            "share_text": "Chia Sẻ",
+            "share_facebook": true,
+            "share_twitter": true,
+            "share_pinterest": false
+          }
+        },
+        "payment_method_c3Ljtk": {
+          "type": "payment_method",
+          "disabled": true,
+          "settings": {
+            "heading_2": "We accept",
+            "enable_payment": true
+          }
+        },
+        "complementary_iekb4n": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Sale Is Here",
+            "make_collapsible_row": false,
+            "icon": "price_tag",
+            "product_list_limit": 6,
+            "products_per_page": "2"
+          }
+        }
+      },
+      "block_order": [
+        "badge_FEj7b6",
+        "text_H7gPbM",
+        "title",
+        "sku_rFqDQL",
+        "text_J3m9jU",
+        "judge_me_reviews_preview_badge_JFbRPW",
+        "price",
+        "inventory_4Ci3bD",
+        "pareto_volume_discount_app_block_WmgMyD",
+        "pareto_order_limit_app_block_QJbQXm",
+        "variant_picker",
+        "quantity_selector",
+        "puco_blocks_features_features_01_CVUaTF",
+        "buy_buttons",
+        "boostly_product_page_enhancer_feature_list_ENHEJM",
+        "boostly_product_page_enhancer_feature_list_9j3F3h",
+        "icon_with_text_Gx4846",
+        "description",
+        "collapsible_tab_ADKqaX",
+        "collapsible_tab_Nf6UT7",
+        "collapsible_tab_MNmDU7",
+        "share_button_6N3fmq",
+        "payment_method_c3Ljtk",
+        "complementary_iekb4n"
+      ],
+      "custom_css": [
+        ".vcb-features-list__text {line-height: 1.8 !important;}",
+        ".vcb-features-list__text {font-weight: 600;}"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "media_size": 50,
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "thumbimage_ratio": "square",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": true,
+        "enable_sticky_info": true,
+        "mobile_thumbnails": "show",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "quick_order_list_HDikGj": {
+      "type": "quick-order-list",
+      "disabled": true,
+      "settings": {
+        "show_image": true,
+        "show_sku": true,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "173018713958e0e0fe": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_6yiH7d": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_6yiH7d"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "color_scheme": "background-1",
+        "heading": "SẢN PHẨM LIÊN QUAN",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "quick_order_list_HDikGj",
+    "173018713958e0e0fe",
+    "related-products"
+  ]
+}

@@ -1,0 +1,1532 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "countdown_RaAUJW": {
+      "type": "countdown",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 32px; font-weight: 700;}",
+        "b {font-size: 24px; font-weight: 600;}",
+        "span {font-size: 18px; font-weight: 700;}",
+        "div {font-size: 14px; font-weight: 500;}"
+      ],
+      "name": "Countdown",
+      "settings": {
+        "image": "shopify://shop_images/Teacher_Day.jpg",
+        "image_height": "fixed",
+        "wb_enddate": "2025/12/02",
+        "uppercase_head": true,
+        "heading": "BLACK FRIDAY SALE",
+        "subheading": "<b> SALE UP TO 50% OFF + BUY 2 EXTRA 20% </b>",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "content_bg": true,
+        "content_bg_opacity": 90,
+        "color_scheme": "#ffffff",
+        "button_style": "solid",
+        "button_label": "MUA NGAY",
+        "button_link": "shopify://collections/black-friday",
+        "padding_top": 0,
+        "padding_bottom": 28
+      }
+    },
+    "slideshow_YBEk7V": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_RhTJje": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_link": "",
+            "image": "shopify://shop_images/Hero_banner.png",
+            "mobile_image": "shopify://shop_images/Hero_banner.png",
+            "overlay": false,
+            "subheading": "",
+            "enable_hide_subheading": true,
+            "subheading_size": "xlarge",
+            "subheading_size_px": 14,
+            "weight_heading": 700,
+            "heading": "",
+            "enable_hide_heading": true,
+            "heading_size": "h1",
+            "heading_size_px": 16,
+            "heading_border": false,
+            "p_description": "",
+            "desc_size": "medium",
+            "enable_hide_button": false,
+            "button_label": "",
+            "button_arrow": false,
+            "link": "shopify://collections/mega-sale",
+            "button_style": "solid",
+            "box_align": "bottom-left",
+            "text_alignment": "left",
+            "color_scheme": "accent-2",
+            "text_alignment_mobile": "left",
+            "show_bottom_content": true
+          }
+        },
+        "slide_rFMw8e": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_link": "https://cdn.shopify.com/videos/c/o/v/7246f18b6ec04dbbb420d58320c14445.mp4",
+            "image": "shopify://shop_images/ON_Cloudmonster_3_banner.jpg",
+            "mobile_image": "shopify://shop_images/ON_Cloudmonster_3_banner.jpg",
+            "overlay": false,
+            "subheading": "",
+            "enable_hide_subheading": true,
+            "subheading_size": "medium",
+            "subheading_size_px": 14,
+            "weight_heading": 700,
+            "heading": "",
+            "enable_hide_heading": true,
+            "heading_size": "h2",
+            "heading_size_px": 16,
+            "heading_border": true,
+            "p_description": "",
+            "desc_size": "medium",
+            "enable_hide_button": false,
+            "button_label": "",
+            "button_arrow": false,
+            "link": "shopify://collections/on",
+            "button_style": "solid",
+            "box_align": "bottom-left",
+            "text_alignment": "left",
+            "color_scheme": "accent-2",
+            "text_alignment_mobile": "left",
+            "show_bottom_content": true
+          }
+        },
+        "slide_HJLrqk": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_link": "",
+            "image": "shopify://shop_images/FILA_GLIO_16-9.jpg",
+            "mobile_image": "shopify://shop_images/FILA_GLIO_16-9.jpg",
+            "overlay": true,
+            "subheading": "",
+            "enable_hide_subheading": true,
+            "subheading_size": "xlarge",
+            "subheading_size_px": 14,
+            "weight_heading": 700,
+            "heading": "",
+            "enable_hide_heading": true,
+            "heading_size": "h1",
+            "heading_size_px": 16,
+            "heading_border": false,
+            "p_description": "",
+            "desc_size": "medium",
+            "enable_hide_button": false,
+            "button_label": "",
+            "button_arrow": false,
+            "link": "shopify://collections/fila",
+            "button_style": "solid",
+            "box_align": "bottom-left",
+            "text_alignment": "left",
+            "color_scheme": "accent-2",
+            "text_alignment_mobile": "left",
+            "show_bottom_content": true
+          }
+        },
+        "slide_G7MFC6": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_link": "/",
+            "image": "shopify://shop_images/TOKYO_LIBERTY_hero_banner.jpg",
+            "mobile_image": "shopify://shop_images/TOKYO_LIBERTY_hero_banner.jpg",
+            "overlay": false,
+            "subheading": "",
+            "enable_hide_subheading": true,
+            "subheading_size": "xlarge",
+            "subheading_size_px": 14,
+            "weight_heading": 700,
+            "heading": "",
+            "enable_hide_heading": true,
+            "heading_size": "h1",
+            "heading_size_px": 16,
+            "heading_border": false,
+            "p_description": "",
+            "desc_size": "medium",
+            "enable_hide_button": false,
+            "button_label": "",
+            "button_arrow": false,
+            "link": "shopify://collections/adidas",
+            "button_style": "solid",
+            "box_align": "bottom-left",
+            "text_alignment": "left",
+            "color_scheme": "accent-2",
+            "text_alignment_mobile": "left",
+            "show_bottom_content": true
+          }
+        },
+        "slide_zcFN8Y": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_link": "",
+            "image": "shopify://shop_images/4Rau_banner_website.png",
+            "mobile_image": "shopify://shop_images/4Rau_banner_website.png",
+            "overlay": false,
+            "subheading": "",
+            "enable_hide_subheading": false,
+            "subheading_size": "medium",
+            "subheading_size_px": 14,
+            "weight_heading": 700,
+            "heading": "",
+            "enable_hide_heading": true,
+            "heading_size": "h2",
+            "heading_size_px": 16,
+            "heading_border": true,
+            "p_description": "",
+            "desc_size": "medium",
+            "enable_hide_button": true,
+            "button_label": "",
+            "button_arrow": false,
+            "link": "shopify://collections/hawkins",
+            "button_style": "link",
+            "box_align": "bottom-left",
+            "text_alignment": "left",
+            "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+            "text_alignment_mobile": "left",
+            "show_bottom_content": true
+          }
+        }
+      },
+      "block_order": [
+        "slide_RhTJje",
+        "slide_rFMw8e",
+        "slide_HJLrqk",
+        "slide_G7MFC6",
+        "slide_zcFN8Y"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "content_type": true,
+        "slide_height": "adapt_image",
+        "transition": "tran_slide",
+        "enable_loop": true,
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "enable_slide_arrow": true,
+        "disable_arrow": true,
+        "page_arrow_bg": "#ffffff",
+        "page_arrow_text": "#000000",
+        "pagination_position": "below_img",
+        "pagination_style": "none",
+        "page_bg": "#e4e7ec",
+        "page_text": "#11195c",
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_q8hXCW": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "caption": "",
+        "title": "<strong>BACK TO SCHOOL</strong>",
+        "headcolor": "#df6334",
+        "heading_size": "h1",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#f61616",
+        "wb_enddate": "2025/08/03",
+        "collection": "back-to-school",
+        "products_to_show": 20,
+        "columns_desktop": 5,
+        "show_row_on_desktop": "1",
+        "disable_fquickview": false,
+        "disable_faddcart": false,
+        "disable_fvariant": false,
+        "show_number": true,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "none",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "View all",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_UV7YGp": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "layout": "grid",
+        "caption": "",
+        "title": "MEGA SALE",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#df6334",
+        "wb_enddate": "",
+        "collection": "mega-sale",
+        "products_to_show": 20,
+        "columns_desktop": 5,
+        "show_row_on_desktop": "1",
+        "disable_fquickview": false,
+        "disable_faddcart": false,
+        "disable_fvariant": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "View all",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "promotion_cards_QgkJf7": {
+      "type": "promotion-cards",
+      "blocks": {
+        "social_image_8bXrU7": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/EC_banner_009ec08d-15a5-4a10-971c-207d5a05442b.jpg",
+            "link": "shopify://collections/new-balance",
+            "subheading": "",
+            "heading": "NEW BALANCE COLLECTION",
+            "uppercase_head": false
+          }
+        },
+        "social_image_bHFLWh": {
+          "type": "social_image",
+          "disabled": true,
+          "settings": {
+            "link": "",
+            "subheading": "",
+            "heading": "Heading",
+            "uppercase_head": false
+          }
+        },
+        "social_image_6MUGcM": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/ASICS_1.jpg",
+            "link": "shopify://collections/asics",
+            "subheading": "",
+            "heading": "ASICS NEW DROP",
+            "uppercase_head": false
+          }
+        },
+        "social_image_qUXpxi": {
+          "type": "social_image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/2_-_Gel-Kayano_14.jpg",
+            "link": "shopify://collections/asics-gel-kayano-14",
+            "subheading": "",
+            "heading": "ASICS GEL-KAYANO 14",
+            "uppercase_head": false
+          }
+        },
+        "social_image_Vf9FLN": {
+          "type": "social_image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/NEW_DROP_Square_banner.jpg",
+            "link": "shopify://collections/asics-collection",
+            "subheading": "ASICS NEW DROP",
+            "heading": "",
+            "uppercase_head": false
+          }
+        },
+        "social_image_ECTGDy": {
+          "type": "social_image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Banner_web.jpg",
+            "link": "shopify://collections/rainy-season-sandal",
+            "subheading": "",
+            "heading": "RAINY SEASON SANDAL",
+            "uppercase_head": false
+          }
+        },
+        "social_image_r78F3G": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/17_SNS__LOGO__1080X1080_A.png",
+            "link": "shopify://collections/adidas",
+            "subheading": "ADIDAS COLLECTION",
+            "heading": "",
+            "uppercase_head": false
+          }
+        },
+        "social_image_PtncE6": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/MIZUNO_1.jpg",
+            "link": "shopify://collections/mizuno",
+            "subheading": "MIZUNO COLLECTION",
+            "heading": "",
+            "uppercase_head": false
+          }
+        }
+      },
+      "block_order": [
+        "social_image_8bXrU7",
+        "social_image_bHFLWh",
+        "social_image_6MUGcM",
+        "social_image_qUXpxi",
+        "social_image_Vf9FLN",
+        "social_image_ECTGDy",
+        "social_image_r78F3G",
+        "social_image_PtncE6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "layout": "grid",
+        "remove_top_space": false,
+        "title": "",
+        "headcolor": "#63c13e",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "view_label": "",
+        "view_link": "shopify://collections/online-exclusive-launch",
+        "view_all_style": "link",
+        "stretch_img": true,
+        "stretch_color": "#d7dcff",
+        "display_type": "carousel",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "square",
+        "border_around": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "text_size": "extra_large",
+        "text_alignment": "left",
+        "pagination_style": "arrows",
+        "disable_arrow": false,
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "gallery_6VFgPX": {
+      "type": "gallery",
+      "blocks": {
+        "gallery_8LDUYA": {
+          "type": "gallery",
+          "settings": {
+            "image": "shopify://shop_images/Banner_cao_2.jpg",
+            "clickable_image": true,
+            "clickable_image_link": "shopify://collections/nike",
+            "overlay": true,
+            "subheading": "",
+            "heading": "NIKE",
+            "uppercase_head": true,
+            "heading_size": "h1",
+            "text": "",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "shopify://collections/nike",
+            "button_style": "solid",
+            "desktop_content_position": "bottom-center",
+            "desktop_content_alignment": "center",
+            "content_bg": true,
+            "content_bg_opacity": 50,
+            "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+            "mobile_content_alignment": "center",
+            "image_behavior": "none"
+          }
+        },
+        "gallery_Uanhqn": {
+          "type": "gallery",
+          "settings": {
+            "image": "shopify://shop_images/Banner_cao_9.jpg",
+            "clickable_image": true,
+            "clickable_image_link": "shopify://collections/adidas",
+            "overlay": false,
+            "subheading": "",
+            "heading": "ADIDAS",
+            "uppercase_head": true,
+            "heading_size": "h1",
+            "text": "",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "shopify://collections/adidas",
+            "button_style": "solid",
+            "desktop_content_position": "bottom-center",
+            "desktop_content_alignment": "center",
+            "content_bg": true,
+            "content_bg_opacity": 50,
+            "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+            "mobile_content_alignment": "center",
+            "image_behavior": "none"
+          }
+        },
+        "gallery_9QJJJM": {
+          "type": "gallery",
+          "settings": {
+            "image": "shopify://shop_images/Banner_cao_10.jpg",
+            "clickable_image": true,
+            "clickable_image_link": "shopify://collections/new-balance",
+            "overlay": false,
+            "subheading": "",
+            "heading": "NEW BALANCE",
+            "uppercase_head": true,
+            "heading_size": "h1",
+            "text": "",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "#",
+            "button_style": "solid",
+            "desktop_content_position": "bottom-center",
+            "desktop_content_alignment": "center",
+            "content_bg": true,
+            "content_bg_opacity": 50,
+            "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+            "mobile_content_alignment": "center",
+            "image_behavior": "none"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_8LDUYA",
+        "gallery_Uanhqn",
+        "gallery_9QJJJM"
+      ],
+      "settings": {
+        "section_color_scheme": "",
+        "layout": "grid",
+        "title": "THƯƠNG HIỆU NỔI BẬT",
+        "headcolor": "#63c13e",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "columns_desktop": 3,
+        "image_height": "adapt",
+        "zoom_img": true,
+        "view_label": "Xem thêm",
+        "view_link": "shopify://pages/thuong-hieu",
+        "view_all_style": "link",
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "promotion_cards_jyPkkn": {
+      "type": "promotion-cards",
+      "blocks": {
+        "social_image_UL68pm": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/ASICS_3.jpg",
+            "link": "shopify://collections/asics",
+            "subheading": "",
+            "heading": "ASICS",
+            "uppercase_head": false
+          }
+        },
+        "social_image_HKmAwH": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/40797403_1_cdfeb090-2cb8-4465-bebd-4e63617f4c29.jpg",
+            "link": "shopify://collections/puma",
+            "subheading": "",
+            "heading": "PUMA",
+            "uppercase_head": false
+          }
+        },
+        "social_image_KAN464": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/FIla_Glio.jpg",
+            "link": "shopify://collections/fila",
+            "subheading": "",
+            "heading": "FILA",
+            "uppercase_head": false
+          }
+        },
+        "social_image_BCbFGx": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/ON_7.jpg",
+            "link": "shopify://collections/on",
+            "subheading": "",
+            "heading": "ON",
+            "uppercase_head": false
+          }
+        }
+      },
+      "block_order": [
+        "social_image_UL68pm",
+        "social_image_HKmAwH",
+        "social_image_KAN464",
+        "social_image_BCbFGx"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "remove_top_space": true,
+        "title": "",
+        "headcolor": "#df6334",
+        "heading_size": "h1",
+        "heading_position": "left",
+        "view_label": "",
+        "view_link": "",
+        "view_all_style": "link",
+        "stretch_img": true,
+        "stretch_color": "#d7dcff",
+        "display_type": "grid",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "image_ratio": "square",
+        "border_around": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "text_size": "extra_large",
+        "text_alignment": "left",
+        "pagination_style": "none",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "logo_list_EXFyjr": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_image_CxnCLH": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1321317060.png",
+            "link": ""
+          }
+        },
+        "logo_image_V6yMEL": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/Layer_1.png",
+            "link": ""
+          }
+        },
+        "logo_image_hzEttm": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/Group_2.png",
+            "link": ""
+          }
+        },
+        "logo_image_hKiMc7": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/Group_6.png",
+            "link": ""
+          }
+        },
+        "logo_image_JLmQFM": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/Converse-Logotipo-2017-Presente.png",
+            "link": ""
+          }
+        },
+        "logo_image_fK8MMK": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify://shop_images/Layer_1_1.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_image_CxnCLH",
+        "logo_image_V6yMEL",
+        "logo_image_hzEttm",
+        "logo_image_hKiMc7",
+        "logo_image_JLmQFM",
+        "logo_image_fK8MMK"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-8c108b7e-d1f9-4b41-ba29-a4554f1fffdf",
+        "layout": "full_width",
+        "sec_bg": false,
+        "sec_bg_color": "#f9f9f9",
+        "title": "",
+        "headcolor": "#df6334",
+        "heading_size": "h2",
+        "heading_position": "left",
+        "display_type": "carousel",
+        "columns_desktop": 6,
+        "bgcolor_show": false,
+        "space_image": 76,
+        "bgcolor_scheme": "",
+        "animation_mode": "scroll",
+        "pagination_style": "none",
+        "disable_arrow": true,
+        "auto_rotate": true,
+        "scroll_speed": 20,
+        "marq_direction": "right_left",
+        "change_slides_speed": 9,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "scrolling_promotion_YAdr9z": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_zmgn46": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Swoosh_Black.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_FLbgip": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Jumpman_Black.png",
+            "image_width1": 90,
+            "img_radius1": 0
+          }
+        },
+        "image_66NJCR": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/702280000101.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_z4wWmX": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/nb_0a276f75-97dd-4fff-be3e-d91fc1965463.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_LTn7ic": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Group_1321317060_1.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_Ew37y9": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Group_1_3eea6295-99ac-4583-960a-842468852122.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_XWmEXG": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Converse-Logotipo-2017-Presente.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_3TNVGQ": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/crocs-uae-logo-png_seeklogo-443833.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_MAiyRw": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Layer_1_9fd6a1c0-cbf8-4c27-8922-e197f74e2e0a.png",
+            "image_width1": 30,
+            "img_radius1": 0
+          }
+        },
+        "image_AFV9J4": {
+          "type": "image",
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Group.png",
+            "image_width1": 50,
+            "img_radius1": 0
+          }
+        },
+        "image_wEVDdX": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "marquee_image1": "shopify://shop_images/702280000101_1_41f8bcf1-ff92-4597-9c50-fe83ccf548b3.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        },
+        "image_W6E3GY": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "marquee_image1": "shopify://shop_images/Layer_1_1_90e9673f-97b5-4b97-8f8a-91c4de4957bf.png",
+            "image_width1": 100,
+            "img_radius1": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_zmgn46",
+        "image_FLbgip",
+        "image_66NJCR",
+        "image_z4wWmX",
+        "image_LTn7ic",
+        "image_Ew37y9",
+        "image_XWmEXG",
+        "image_3TNVGQ",
+        "image_MAiyRw",
+        "image_AFV9J4",
+        "image_wEVDdX",
+        "image_W6E3GY"
+      ],
+      "settings": {
+        "color_scheme": "accent-1",
+        "layout": "full_width",
+        "scroll_space": 70,
+        "scroll_speed": 60,
+        "marq_direction": "right_left",
+        "seprater": "none",
+        "font_size": 14,
+        "pause_hover": true,
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    },
+    "featured_collection_yDHTya": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "background-1",
+        "layout": "grid",
+        "caption": "",
+        "title": "XU HƯỚNG TUẦN NÀY",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#df6334",
+        "wb_enddate": "",
+        "collection": "nike",
+        "products_to_show": 20,
+        "columns_desktop": 5,
+        "show_row_on_desktop": "4",
+        "disable_fquickview": true,
+        "disable_faddcart": true,
+        "disable_fvariant": true,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "Xem thêm",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_custom_zgQ6zx": {
+      "type": "featured-collection-custom",
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "caption": "",
+        "title": "XU HƯỚNG TUẦN NÀY",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#df6334",
+        "wb_enddate": "",
+        "collection": "nike",
+        "products_per_page": 20,
+        "columns_desktop": 5,
+        "show_row_on_desktop": "1",
+        "disable_fquickview": false,
+        "disable_faddcart": false,
+        "disable_fvariant": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "Xem thêm",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "columns_mobile": "2"
+      }
+    },
+    "scrolling_promotion_nVX39w": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "text_dp3WXP": {
+          "type": "text",
+          "settings": {
+            "scroll_text": "Thật nhiều thương hiệu chỉ với một cửa hàng!",
+            "icon": "none",
+            "icon_width": 20,
+            "outline_text": false,
+            "evenout_text": false,
+            "upper_button": false,
+            "bold_text": true,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link"
+          }
+        },
+        "text_fgQXde": {
+          "type": "text",
+          "settings": {
+            "scroll_text": "All Brands in One Shop!",
+            "icon": "none",
+            "icon_width": 20,
+            "outline_text": false,
+            "evenout_text": false,
+            "upper_button": false,
+            "bold_text": true,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "text_dp3WXP",
+        "text_fgQXde"
+      ],
+      "settings": {
+        "color_scheme": "inverse",
+        "layout": "full_width",
+        "scroll_space": 90,
+        "scroll_speed": 60,
+        "marq_direction": "right_left",
+        "seprater": "none",
+        "font_size": 32,
+        "pause_hover": true,
+        "padding_top": 34,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_TykDX9": {
+      "type": "featured-collection",
+      "blocks": {
+        "featured_collection_JqtgcH": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "adidas",
+            "collection_name": "Hàng mới"
+          }
+        },
+        "featured_collection_XY6hDm": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "converse",
+            "collection_name": "Nổi bật"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_JqtgcH",
+        "featured_collection_XY6hDm"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "layout": "grid",
+        "caption": "",
+        "title": "BỘ SƯU TẬP NỔI BẬT",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#df6334",
+        "wb_enddate": "",
+        "collection": "converse",
+        "products_to_show": 20,
+        "columns_desktop": 5,
+        "show_row_on_desktop": "4",
+        "disable_fquickview": true,
+        "disable_faddcart": true,
+        "disable_fvariant": true,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "none",
+        "disable_arrow": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "Xem thêm",
+        "view_all_style": "link",
+        "view_button_pos": "both",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_custom_QRAP8x": {
+      "type": "featured-collection-custom",
+      "blocks": {
+        "featured_collection_cAc9xf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "asics",
+            "collection_name": ""
+          }
+        },
+        "featured_collection_wHRnar": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "puma",
+            "collection_name": ""
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_cAc9xf",
+        "featured_collection_wHRnar"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "caption": "",
+        "title": "BỘ SƯU TẬP NỔI BẬT",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#df6334",
+        "wb_enddate": "",
+        "collection": "",
+        "products_per_page": 20,
+        "columns_desktop": 5,
+        "show_row_on_desktop": "1",
+        "disable_fquickview": false,
+        "disable_faddcart": false,
+        "disable_fvariant": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "View all",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "columns_mobile": "2"
+      }
+    },
+    "video_gallery_product_DdVAXF": {
+      "type": "video-gallery-product",
+      "blocks": {
+        "product_image_jGTBgr": {
+          "type": "product_image",
+          "disabled": true,
+          "settings": {
+            "media_type": "image",
+            "video_link": "/",
+            "image": "shopify://shop_images/NingNing_5512d58a-126a-440e-ba8d-8f965a7e0e09.jpg",
+            "product_img": "giay-fila-echappe-ms-grey-white-white"
+          }
+        },
+        "product_image_anFC6X": {
+          "type": "product_image",
+          "settings": {
+            "media_type": "image",
+            "video_link": "",
+            "image": "shopify://shop_images/style_5854f7e5-16af-4578-b71e-39a93137edb9.jpg",
+            "product_img": "giay-u204lswd-silver-metallic"
+          }
+        },
+        "product_image_rwqyjR": {
+          "type": "product_image",
+          "settings": {
+            "media_type": "image",
+            "video_link": "/",
+            "image": "shopify://shop_images/CATI.jpg",
+            "product_img": "giay-nu-lifewalker-heritage-khaki-khaki"
+          }
+        },
+        "product_image_LH94L8": {
+          "type": "product_image",
+          "settings": {
+            "media_type": "image",
+            "video_link": "/",
+            "image": "shopify://shop_images/Cati_0eccb194-263d-43e2-81d9-1c43669d1071.jpg",
+            "product_img": "giay-nu-ws-soft-loafer-dkbrown"
+          }
+        },
+        "product_image_EjCd4b": {
+          "type": "product_image",
+          "settings": {
+            "media_type": "image",
+            "video_link": "/",
+            "image": "shopify://shop_images/2s2s2s2.jpg",
+            "product_img": "ao-thun-what-it-isnt-x-abc-mart-no-days-off-black"
+          }
+        }
+      },
+      "block_order": [
+        "product_image_jGTBgr",
+        "product_image_anFC6X",
+        "product_image_rwqyjR",
+        "product_image_LH94L8",
+        "product_image_EjCd4b"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "title": "PHONG CÁCH",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "display_type": "carousel",
+        "enable_video_looping": true,
+        "video_height": 500,
+        "video_height_mobile": 350,
+        "show_product": true,
+        "product_position": "below_video",
+        "product_color_scheme": "",
+        "view_label": "",
+        "view_link": "",
+        "view_all_style": "link",
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": true,
+        "change_slides_speed": 4,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "countdown_zjhx7q": {
+      "type": "countdown",
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/winter2024-slide1-1_b76cad54-e121-41b8-b5b0-039b4d31034c.jpg",
+        "image_height": "fixed",
+        "wb_enddate": "2025/10/05",
+        "uppercase_head": true,
+        "heading": "Flash sale: 30% off",
+        "subheading": "Limited Time Offer",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "content_bg": true,
+        "content_bg_opacity": 60,
+        "color_scheme": "#ffffff",
+        "button_style": "solid",
+        "button_label": "XEM NGAY",
+        "button_link": "shopify://collections/converse",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "promotion_cards_WUqLqJ": {
+      "type": "promotion-cards",
+      "blocks": {
+        "social_image_jP9hhj": {
+          "type": "social_image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/12.12_EC.jpg",
+            "link": "shopify://collections/all-collections",
+            "subheading": "",
+            "heading": "",
+            "uppercase_head": false
+          }
+        },
+        "social_image_6KVd4N": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/Sale_banner.jpg",
+            "link": "shopify://collections/sale-item",
+            "subheading": "",
+            "heading": "",
+            "uppercase_head": false
+          }
+        },
+        "social_image_cLg8Fe": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/loyalty_page_banner.jpg",
+            "link": "shopify://pages/joy-loyalty-page",
+            "subheading": "",
+            "heading": "",
+            "uppercase_head": false
+          }
+        }
+      },
+      "block_order": [
+        "social_image_jP9hhj",
+        "social_image_6KVd4N",
+        "social_image_cLg8Fe"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "remove_top_space": false,
+        "title": "<strong>ƯU ĐÃI GIẢM GIÁ</strong>",
+        "headcolor": "#ea3402",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "view_label": "",
+        "view_link": "shopify://collections/doc-quyen",
+        "view_all_style": "link",
+        "stretch_img": true,
+        "stretch_color": "#d7dcff",
+        "display_type": "grid",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "image_ratio": "adapt",
+        "border_around": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "text_size": "medium",
+        "text_alignment": "left",
+        "pagination_style": "none",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "scrolling_promotion_TdPizN": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "text_Ki3mVm": {
+          "type": "text",
+          "settings": {
+            "scroll_text": "Đơn hàng từ 14/02 – 22/02 sẽ được xử lý vào 23/02.",
+            "icon": "none",
+            "icon_width": 20,
+            "outline_text": false,
+            "evenout_text": false,
+            "upper_button": true,
+            "bold_text": true,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link"
+          }
+        },
+        "text_wzrWND": {
+          "type": "text",
+          "settings": {
+            "scroll_text": "Đơn hàng đặt từ 09/02 có thể giao chậm do quá tải vận chuyển dịp Lễ, Tết.",
+            "icon": "none",
+            "icon_width": 20,
+            "outline_text": false,
+            "evenout_text": false,
+            "upper_button": true,
+            "bold_text": true,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "text_Ki3mVm",
+        "text_wzrWND"
+      ],
+      "disabled": true,
+      "name": "t:sections.scrolling-bar.presets.name",
+      "settings": {
+        "color_scheme": "scheme-8c108b7e-d1f9-4b41-ba29-a4554f1fffdf",
+        "layout": "full_width",
+        "scroll_space": 30,
+        "scroll_speed": 80,
+        "marq_direction": "right_left",
+        "seprater": "none",
+        "font_size": 14,
+        "pause_hover": true,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "gallery_BfQHTU": {
+      "type": "gallery",
+      "blocks": {
+        "gallery_qWeAqk": {
+          "type": "gallery",
+          "name": "ƯU ĐÃI GIẢM GIÁ",
+          "settings": {
+            "image": "shopify://shop_images/END_OF_SUMMER_SALE_1600_x_900_px.png",
+            "clickable_image": true,
+            "clickable_image_link": "shopify://collections/summer-sale",
+            "overlay": false,
+            "subheading": "",
+            "heading": "",
+            "uppercase_head": true,
+            "heading_size": "h1",
+            "text": "",
+            "text_style": "body",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link",
+            "desktop_content_position": "bottom-center",
+            "desktop_content_alignment": "center",
+            "content_bg": true,
+            "content_bg_opacity": 50,
+            "color_scheme": "",
+            "mobile_content_alignment": "center",
+            "image_behavior": "none"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_qWeAqk"
+      ],
+      "disabled": true,
+      "name": "Gallery with text overlay",
+      "settings": {
+        "section_color_scheme": "",
+        "layout": "grid",
+        "title": "<strong>ƯU ĐÃI GIẢM GIÁ</strong>",
+        "headcolor": "#ff3700",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "columns_desktop": 3,
+        "image_height": "adapt",
+        "zoom_img": true,
+        "view_label": "",
+        "view_link": "shopify://collections/8-8",
+        "view_all_style": "link",
+        "columns_mobile": "2",
+        "padding_top": 0,
+        "padding_bottom": 32
+      }
+    },
+    "featured_blog_xr3YA9": {
+      "type": "featured-blog",
+      "blocks": {
+        "social_icon_kigUbV": {
+          "type": "social_icon",
+          "settings": {
+            "heading": "MẠNG XÃ HỘI",
+            "headcolor1": "#df6334",
+            "heading_size": "h0",
+            "heading_position": "left",
+            "color_icon": false,
+            "fb_link": "https://www.facebook.com/ABCMARTVNOFFICIAL/",
+            "fb_follow": "80K",
+            "insta_link": "https://www.instagram.com/abcmartvietnam/",
+            "insta_follow": "17.3K",
+            "zalo_link": "https://abc-mart.com.vn/pages/zalo",
+            "zalo_number": "6.5K",
+            "youtube_link": "",
+            "youtube_follow": "40.2k",
+            "tiktok_link": "https://www.tiktok.com/@abcmartvietnam",
+            "tiktok_follow": "18.3K",
+            "twitter_link": "",
+            "twitter_follow": "20.2k",
+            "snapchat_link": "",
+            "snapchat_follow": "6.2k",
+            "pinterest_link": "",
+            "pinterest_follow": "9.2k",
+            "tumblr_link": "",
+            "tumblr_follow": "2.2k",
+            "vimeo_link": "",
+            "vimeo_follow": "5.2k"
+          }
+        },
+        "collapse_content_9hYCWy": {
+          "type": "collapse_content",
+          "settings": {
+            "heading": "CÂU HỎI THƯỜNG GẶP",
+            "headcolor1": "#df6334",
+            "heading_size": "h0",
+            "heading_position": "left",
+            "faq_view_label": "Xem thêm",
+            "faq_view_link": "shopify://pages/cau-hoi-thuong-gap",
+            "faq_view_style": "link",
+            "collapse_heading1": "Lợi ích khi trở thành thành viên của ABC-MART Việt Nam là gì?",
+            "opencollapse1": false,
+            "row_content1": "<p><strong>Chỉ cần 1 lần đăng ký, bạn đã trở thành thành viên của ABC-MART và được hưởng rất nhiều quyền lợi như sau: </strong></p><ul><li>Tặng ngay 200 điểm - đổi voucher 200k.</li><li>Được lưu trữ thông tin thanh toán để mua sắm nhanh hơn trong lần tiếp theo.</li><li>Cập nhật thông tin tài khoản.</li><li>Theo dõi trạng thái đơn hàng.</li><li>Xem lịch sử mua hàng.</li><li>Tùy chọn đăng ký nhận bản tin ABC-MART để đón đầu các ưu đãi và sự kiện mới nhất.</li></ul>",
+            "collapse_heading2": "Làm thế nào để mua sắm trên ABC-MART Việt Nam?",
+            "opencollapse2": false,
+            "row_content2": "<p>Bạn có thể mua sắm các sản phẩm yêu thích của mình một cách dễ dàng, chỉ cần làm theo các bước đơn giản sau:</p><ol><li>Chọn sản phẩm bạn muốn mua.</li><li>Chọn size sản phẩm (lưu ý hạng mục nam, nữ, unisex), sau đó chọn \"Thêm vào giỏ hàng\".</li><li>Để thêm các sản phẩm khác, hãy lặp lại bước 1 và 2.</li><li>Sau khi hoàn tất, hãy nhấp vào “Mua Ngay” ở góc bên phải của hình sản phẩm.</li><li>Xem lại giỏ hàng.</li><li>Nhấp vào \"Mua ngay\" để hoàn tất mua sắm và thanh toán.</li><li>Điền địa chỉ email hợp lệ của bạn và chi tiết địa chỉ giao hàng nếu bạn thanh toán với tư cách khách. Bạn cũng có thể đăng nhập vào tài khoản đã đăng ký tại ABC-MART Việt Nam bằng cách nhấp vào \"Đăng nhập\" (icon người ở góc phải trên cùng trang).</li><li>Hoàn thành địa chỉ giao hàng và phương thức giao hàng của bạn.</li><li>Xem lại đơn đặt hàng của bạn và đảm bảo thông tin đã chính xác, sau đó chọn \"Tiếp theo\".</li><li>Chọn một trong các phương thức thanh toán bên dưới:</li></ol><ul><li>Thẻ Tín Dụng</li><li>Thẻ ATM / Tài khoản ngân hàng</li><li>Ngân hàng di động và ví điện tử</li></ul><ol><li>Nhấp vào \"Đặt hàng\" và hoàn tất thanh toán của bạn.</li><li>Bạn sẽ nhận được thông báo trạng thái đơn hàng trên email của mình.</li></ol>",
+            "collapse_heading3": "Xem kích thước sản phẩm như thế nào?",
+            "opencollapse3": false,
+            "row_content3": "<p>Vui lòng làm theo các bước sau:</p><ol><li>Truy cập trang sản phẩm.</li><li>Nhấp vào phần \"Size Guide\" dưới tên sản phẩm để xem chính xác size của bạn.</li><li>Lưu ý kỹ mục giày Nam, Nữ, Unisex, dây size US hoặc UK v.v để tránh đặt sai kích thước. Sau khi chọn đúng kích thước, chỉ cần nhấp vào tùy chọn kích thước và thêm sản phẩm vào giỏ hàng của bạn hoặc mua ngay để tránh hết size bạn nhé.</li></ol>",
+            "collapse_heading4": "Các hình thức thanh toán nào được chấp nhận trên website ABC-MART Việt Nam?",
+            "opencollapse4": false,
+            "row_content4": "<p><strong>ABC-MART có các hình thức thanh toán tiện lợi như sau:</strong></p><ul><li>Thanh toán online qua cổng thanh toán bằng thẻ thanh toán quốc tế VISA, MasterCard, JCB.</li><li>Thanh toán online bằng thẻ ATM nội địa.</li><li>Thanh toán trực tiếp khi nhận hàng (COD).</li><li>Thanh toán qua ví điện tử.</li></ul><p><strong>THANH TOÁN ONLINE QUA THẺ TÍN DỤNG/THẺ GHI NỢ VISA, MASTER CARD, JCB</strong></p><ul><li>Khách hàng sử dụng các loại thẻ tín dụng/ghi nợ/trả trước VISA, MasterCard, JCB của các Ngân hàng trong nước và nước ngoài phát hành.</li><li>Toàn bộ hệ thống thanh toán được bảo mật theo Tiêu Chuẩn Quốc Tế PCI-DSS, khách hàng có thể hoàn toàn yên tâm khi thanh toán bằng hình thức trả trước qua thẻ tín dụng/thẻ ghi nợ tại website.</li><li>Giao dịch được ghi nhận là thành công khi khách hàng nhận được thông báo từ hệ thống cổng thanh toán trả về trạng thái “Giao dịch thành công” (đảm bảo số dư/hạn mức và xác thực khách hàng theo quy định sử dụng của thẻ).</li></ul><p><strong>THANH TOÁN ONLINE QUA THẺ ATM NỘI ĐỊA</strong></p><ul><li>Khách hàng thanh toán số tiền mua hàng bằng thẻ ATM nội địa của hơn 40 ngân hàng trong nước phát hành có kết nối với cổng thanh toán.</li><li>Hình thức thanh toán đơn giản, dễ sử dụng, trực quan và an toàn chỉ trong 3 bước:</li><li>Ngoài ra, để thanh toán bằng thẻ ngân hàng nội địa, thẻ của khách hàng phải được đăng ký sử dụng tính năng thanh toán trực tuyến, hoặc ngân hàng điện tử của Ngân hàng.</li><li>Giao dịch được ghi nhận là thành công khi khách hàng nhận được thông báo từ hệ thống cổng thanh toán trả về trạng thái “Giao dịch thành công” (đảm bảo số dư/hạn mức và xác thực khách hàng theo quy định sử dụng của thẻ).</li></ul>",
+            "collapse_heading5": "Phí vận chuyển / giao hàng là bao nhiêu?",
+            "opencollapse5": false,
+            "row_content5": "<ul><li>Chúng tôi áp dụng đồng giá vận chuyển như sau:</li><li>Đối với giao hàng tiêu chuẩn, ABC-MART sẽ miễn phí ship cho hóa đơn từ 3 triệu. Hóa đơn dưới 3 triệu, sẽ có phí ship là 50.000.</li><li>Đối với giao hàng Hỏa tốc, khách hàng sẽ phải chịu chi phí phát sinh cho dịch vụ này.</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "social_icon_kigUbV",
+        "collapse_content_9hYCWy"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "heading": "BÀI VIẾT",
+        "headcolor": "#df6334",
+        "heading_size": "h0",
+        "heading_position": "left",
+        "blog": "news",
+        "display_type": "grid",
+        "post_limit": 3,
+        "columns_desktop": 1,
+        "blog_card_color_scheme": "",
+        "blog_position": "horizontal",
+        "blog_card_style": "standard",
+        "blogcard_border": false,
+        "blogcard_border_color": "#eeeeee",
+        "blog_card_text_alignment": "left",
+        "image_height": "medium",
+        "blog_title": "large",
+        "show_date": false,
+        "show_author": false,
+        "show_comment": false,
+        "show_excerpt": true,
+        "excerpt_size": "medium",
+        "show_tag": true,
+        "show_tag_over": false,
+        "tag_bg": "#d9fda5",
+        "tag_text": "#000000",
+        "show_read_more": true,
+        "read_more_style": "link",
+        "show_view_all": true,
+        "view_label": "Xem thêm",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "pagination_style": "none",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "countdown_P7UYwd": {
+      "type": "countdown",
+      "disabled": true,
+      "settings": {
+        "image_height": "fixed",
+        "wb_enddate": "",
+        "uppercase_head": false,
+        "heading": "Gallery Section",
+        "subheading": "Subheading example text",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "content_bg": true,
+        "content_bg_opacity": 80,
+        "color_scheme": "#ffffff",
+        "button_style": "solid",
+        "button_label": "Click Here",
+        "button_link": "",
+        "padding_top": 0,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "countdown_RaAUJW",
+    "slideshow_YBEk7V",
+    "featured_collection_q8hXCW",
+    "featured_collection_UV7YGp",
+    "promotion_cards_QgkJf7",
+    "gallery_6VFgPX",
+    "promotion_cards_jyPkkn",
+    "logo_list_EXFyjr",
+    "scrolling_promotion_YAdr9z",
+    "featured_collection_yDHTya",
+    "featured_collection_custom_zgQ6zx",
+    "scrolling_promotion_nVX39w",
+    "featured_collection_TykDX9",
+    "featured_collection_custom_QRAP8x",
+    "video_gallery_product_DdVAXF",
+    "countdown_zjhx7q",
+    "promotion_cards_WUqLqJ",
+    "scrolling_promotion_TdPizN",
+    "gallery_BfQHTU",
+    "featured_blog_xr3YA9",
+    "countdown_P7UYwd"
+  ]
+}

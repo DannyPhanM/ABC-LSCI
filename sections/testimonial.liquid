@@ -1,0 +1,476 @@
+{{ 'testimonial.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  {%- if section.settings.show_border == true -%}
+    .section-{{ section.id }}-padding .single_inner {
+      border: 1px solid rgba(var(--color-foreground),0.08);
+      border-radius: var(--content-radius);
+      padding: 15px;
+    }
+  {%- endif %}
+  .section-{{ section.id }}-padding .section-head strong, .section-{{ section.id }}-padding .section-head b {
+    color: {{ section.settings.headcolor }};
+  }
+  .section-{{ section.id }}-padding .review_rating svg{
+    fill: {{ section.settings.rating_color }};
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.45 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.45 | round: 0 }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<div class="single_testimonial section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} isolate gradient">
+  <div class="page-width">
+
+    {%- if section.settings.title != blank -%}
+      <div class="section-head-top {{ section.settings.heading_position }}">
+        <h2 class="section-head inline-richtext {{ section.settings.heading_size }}">
+          {{ section.settings.title }}
+        </h2>
+      </div>
+    {%- endif %}  
+
+    <slider-carousel data-breakpoints='{ "0": 1, "768": 2, "1200": {{ section.settings.columns_desktop }} }' data-spacing-grid-horizontal='{{ settings.spacing_grid_horizontal }}' data-section-setting='{{ section.settings | json }}'>
+      <div data-section-setting='{{ section.settings | json}}' class="swiper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="swiper-wrapper grid grid--{{ section.settings.columns_desktop }}-col-desktop {{ section.settings.content_alignment }}">
+        {% for block in section.blocks %}
+          <div class="swiper-slide grid__item"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}>
+            <div class="single_inner">
+
+              {% if section.settings.display_quote == true %}
+                {% render 'icon-quote' %}
+              {% endif %}
+
+              {%- if section.settings.display_rating -%}
+                <div class="review_rating">
+                  {%- liquid
+                    assign rating_full = block.settings.rating_number | floor
+                    assign rating_half = block.settings.rating_number | floor | minus: block.settings.rating_number
+                  -%}
+                  {%- for i in (1..rating_full) -%}
+                    {% render 'icon-star' %}
+                  {%- endfor -%}
+                  {%- if rating_half != 0 -%}
+                    {% render 'icon-halfstar' %}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {% if block.settings.review_desc != blank %}
+                <div class="review_content inline-richtext {{ section.settings.text_content }}">{{ block.settings.review_desc }}</div>
+              {% endif %}
+
+              <div class="single_author_image">
+                {% if block.settings.image != blank %}
+                  <div class="{{ section.settings.testi_image_shape }}">
+                    <img class="img-fluid lazyload"
+                      srcset="{{ block.settings.image | image_url: width: 70, height: 70 }}"
+                      src="{{ block.settings.image | image_url: width: 70, height: 70 }}"
+                      width="70"
+                      height="70"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"/>
+                  </div>
+                {% endif %}
+                <div>
+                  {% if block.settings.author != blank %}
+                    <div class="review_author inline-richtext">{{ block.settings.author }}</div>
+                  {% endif %}
+                  {% if block.settings.author_profession != blank %}
+                    <div class="review_prof inline-richtext">{{ block.settings.author_profession }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="testi_product color-{{ section.settings.product_color_scheme }} gradient">
+                {%- if block.settings.product != blank -%}
+                  <div>
+                    {% if block.settings.product.featured_media %}
+                      <a class="img" href="{{ block.settings.product.url }}" title="{{ block.settings.product.title | escape }}">
+                        <img loading="lazy" alt="{{ block.settings.product.featured_media.alt | escape }}"
+                        class="img-fluid mx-auto lazyload"
+                        srcset="{{ block.settings.product.featured_media | image_url: width: 120 }} 80w"
+                        src="{{ block.settings.product.featured_media | image_url: width: 120 }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 992px) calc((100vw - 130px) / 4), (min-width: 768px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                        width="120"
+                        height="{{ 120 | divided_by: block.settings.product.featured_media.aspect_ratio | ceil }}">
+                      </a>
+                    {% endif %}
+                    <div class="left">
+                      <h3><a href="{{ block.settings.product.url }}" title="{{ block.settings.product.title | escape }}" class="full-unstyled-link">{{ block.settings.product.title }}</a></h3>
+                      {% render 'price', product: block.settings.product, price_class: '', show_compare_at_price: true, badge_position: 'beside_price' %}
+                    </div>
+                  </div>
+                {% else %}
+                  <div>
+                    <a role="link" class="full-unstyled-link img">
+                      
+                      {% liquid
+                        assign ridx = forloop.rindex
+                        if ridx == 5
+                          assign ridx = 1
+                        endif
+                        if ridx == 6
+                          assign ridx = 2
+                        endif
+                        assign placeholder_image = 'product-apparel-' | append: ridx
+                      %}
+                      <div class="dummyimg">
+                        {%- if placeholder_image -%}
+                          {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- else -%}
+                          {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {% endif %}
+                      </div>
+                    </a>
+                    <div class="left">
+                      <div class="card_vendor">{{ 'products.product.vendor' | t }}</div>
+                      <h3><a role="link" aria-disabled="true" class="full-unstyled-link">{{ 'onboarding.product_title' | t }}</a></h3>
+                      {% render 'price' %}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+        {% unless section.settings.pagination_style == 'none' %}
+          {% if section.settings.pagination_style == 'arrows' %}
+            <div class="slide_arrow swiper-button-prev {{ settings.carousel_position }} {% if section.settings.disable_arrow == true %}hide_carrow{% endif %}">
+              <div class="button {{ settings.carousel_style }}">
+                <span>{% render 'icon-caret' %}</span>
+              </div>
+            </div>
+            <div class="slide_arrow swiper-button-next {{ settings.carousel_position }} {% if section.settings.disable_arrow == true %}hide_carrow{% endif %}">
+              <div class="button {{ settings.carousel_style }}">
+                <span>{% render 'icon-caret' %}</span>
+              </div>
+            </div>
+          {% endif %}
+          <div class="swiper-pagination pagi_{{ section.settings.pagination_style }}"></div>
+        {% endunless %}
+      </div>
+    </slider-carousel>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.testimonial.name",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.heading.head"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:settings_schema.heading.settings.head_text.label_1",
+      "default": "Title"
+    },
+    {
+      "type": "color",
+      "id": "headcolor",
+      "label": "t:settings_schema.heading.settings.head_text.txt_color",
+      "default": "#DF6334",
+      "info": "t:settings_schema.heading.settings.head_text.txt_info"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h0",
+      "label": "t:settings_schema.heading.settings.head_text.label_2"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.heading_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.heading_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:settings_schema.heading.settings.head_text.label_3"
+    },
+
+    {
+      "type": "header",
+      "content": "t:sections.custom_text.settings.content.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "t:sections.custom_text.settings.show_border.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.multicolumn.settings.columns_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.heading_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.heading_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.custom_text.settings.content_alignment.label"
+    },
+    {
+      "type": "select",
+      "id": "testi_image_shape",
+      "options": [
+        {
+          "value": "orginal",
+          "label": "t:sections.custom_text.settings.testi_image_shape.options__1.label"
+        },
+        {
+          "value": "curve",
+          "label": "t:sections.custom_text.settings.testi_image_shape.options__2.label"
+        },
+        {
+          "value": "circle",
+          "label": "t:sections.custom_text.settings.testi_image_shape.options__3.label"
+        }
+      ],
+      "default": "curve",
+      "label": "t:sections.custom_text.settings.testi_image_shape.label"
+    },
+    {
+      "type": "select",
+      "id": "text_content",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.all.heading_size.options__3.label"
+        } 
+      ],
+      "default": "large",
+      "label": "t:sections.custom_text.settings.text_size.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_rating",
+      "label": "t:sections.custom_text.settings.display_rating.label",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "rating_color",
+      "label": "t:sections.custom_text.settings.rating_color.label",
+      "default": "#ffbb40"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_quote",
+      "label": "t:sections.custom_text.settings.display_quote.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "product_color_scheme",
+      "label": "t:sections.custom_text.settings.product_color_scheme.label",
+      "default": "background-1"
+    },
+
+    {
+      "type": "header",
+      "content": "t:sections.slideshow.settings.slider_visual.header"
+    },
+    {
+      "type": "select",
+      "id": "pagination_style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.slideshow.settings.slider_visual.options__6.label"
+        },
+        {
+          "value": "dots",
+          "label": "t:sections.slideshow.settings.slider_visual.options__2.label"
+        },
+        {
+          "value": "arrows",
+          "label": "t:sections.slideshow.settings.slider_visual.options__4.label"
+        }
+      ],
+      "default": "arrows",
+      "label": "t:sections.slideshow.settings.slider_visual.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_arrow",
+      "label": "t:sections.slideshow.settings.disable_arrow.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "t:sections.slideshow.settings.auto_rotate.label",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "unit": "s",
+      "label": "t:sections.slideshow.settings.change_slides_speed.label",
+      "default": 5
+    },
+
+
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:sections.testimonial.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "author",
+          "label": "t:sections.custom_text.settings.author.label",
+          "default": "Author name"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "author_profession",
+          "label": "t:sections.custom_text.settings.author_profession.label",
+          "default": "Author profession"
+        },
+        {
+          "type": "richtext",
+          "id": "review_desc",
+          "label": "t:sections.custom_text.settings.text.label",
+          "default": "<p>Add customer reviews and testimonials to showcase your store's happy customers.</p>"
+        },
+        {
+          "type": "range",
+          "id": "rating_number",
+          "min": 1,
+          "max": 5,
+          "step": 0.5,
+          "label": "t:sections.custom_text.settings.rating_number.label",
+          "default": 5
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.custom_text.settings.product.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.testimonial.name",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

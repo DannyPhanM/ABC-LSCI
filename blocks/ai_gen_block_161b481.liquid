@@ -1,0 +1,750 @@
+{% doc %}
+  @prompt
+    Layout settings
+    
+    Page width:
+    
+    Full width
+    
+    Custom page width
+    
+    Layout mode:
+    
+    Full page
+    
+    Wide
+    
+    Corner radius:
+    
+    Default value = 0
+    
+    Radius is applied only when user sets a value
+    
+    When radius = 0, image must be perfectly square (no rounded corners at all)
+    
+    Image settings
+    
+    Separate image upload for:
+    
+    Desktop
+    
+    Mobile
+    
+    Image height options:
+    
+    Adapt to image
+    
+    Custom height (px / vh)
+    
+    Image must load in square/straight edges by default
+    
+    Corner radius should be controlled only via setting, not hardcoded in CSS
+    
+    Content settings
+    
+    Text content:
+    
+    Heading
+    
+    Subheading
+    
+    Button:
+    
+    Button text
+    
+    Button link
+    
+    Image link (optional, separate from button)
+    
+    Spacing settings
+    
+    Padding:
+    
+    Desktop padding (top / bottom / left / right)
+    
+    Mobile padding (top / bottom / left / right)
+    
+    Behavior requirement
+    
+    The image must not have any corner radius by default
+    
+    Radius should be a configurable option, applied only when needed
+    
+    When layout is Full page, image must span edge-to-edge with no border radius, Please check padding setting not work 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign layout_mode = block.settings.layout_mode
+  assign page_width = block.settings.page_width
+  assign custom_width = block.settings.custom_page_width
+  assign corner_radius = block.settings.corner_radius
+  assign desktop_image = block.settings.desktop_image
+  assign mobile_image = block.settings.mobile_image
+  assign image_height_mode = block.settings.image_height_mode
+  assign custom_height_value = block.settings.custom_height_value
+  assign custom_height_unit = block.settings.custom_height_unit
+  assign heading = block.settings.heading
+  assign subheading = block.settings.subheading
+  assign button_text = block.settings.button_text
+  assign button_link = block.settings.button_link
+  assign image_link = block.settings.image_link
+  assign content_position = block.settings.content_position
+  assign content_alignment = block.settings.content_alignment
+  assign text_color = block.settings.text_color
+  assign button_bg_color = block.settings.button_bg_color
+  assign button_text_color = block.settings.button_text_color
+  assign overlay_opacity = block.settings.overlay_opacity
+  assign overlay_color = block.settings.overlay_color
+
+  if layout_mode == 'wide'
+    assign container_width = '1540px'
+  elsif page_width == 'custom'
+    assign container_width = custom_width | append: 'px'
+  else
+    assign container_width = '100%'
+  endif
+
+  if image_height_mode == 'custom'
+    assign image_height = custom_height_value | append: custom_height_unit
+  else
+    assign image_height = 'auto'
+  endif
+%}
+
+{% style %}
+  .ai-image-banner-{{ ai_gen_id }} {
+    width: 100%;
+    position: relative;
+    padding-top: {{ block.settings.padding_top_desktop }}px;
+    padding-bottom: {{ block.settings.padding_bottom_desktop }}px;
+    padding-left: {{ block.settings.padding_left_desktop }}px;
+    padding-right: {{ block.settings.padding_right_desktop }}px;
+    {% if layout_mode == 'full_page' %}
+      margin: 0;
+    {% else %}
+      max-width: {{ container_width }};
+      margin: 0 auto;
+    {% endif %}
+  }
+
+  .ai-image-banner-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    {% if layout_mode == 'full_page' and corner_radius == 0 %}
+      border-radius: 0;
+    {% else %}
+      border-radius: {{ corner_radius }}px;
+    {% endif %}
+  }
+
+  .ai-image-banner-link-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+  }
+
+  .ai-image-banner-image-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    {% if image_height_mode == 'custom' %}
+      height: {{ image_height }};
+    {% else %}
+      height: auto;
+    {% endif %}
+  }
+
+  .ai-image-banner-image-{{ ai_gen_id }} {
+    width: 100%;
+    {% if image_height_mode == 'custom' %}
+      height: 100%;
+      object-fit: cover;
+    {% else %}
+      height: auto;
+      display: block;
+    {% endif %}
+    {% if layout_mode == 'full_page' and corner_radius == 0 %}
+      border-radius: 0;
+    {% else %}
+      border-radius: {{ corner_radius }}px;
+    {% endif %}
+  }
+
+  .ai-image-banner-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    {% if image_height_mode == 'custom' %}
+      height: {{ image_height }};
+    {% else %}
+      min-height: 400px;
+    {% endif %}
+    {% if layout_mode == 'full_page' and corner_radius == 0 %}
+      border-radius: 0;
+    {% else %}
+      border-radius: {{ corner_radius }}px;
+    {% endif %}
+  }
+
+  .ai-image-banner-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .ai-image-banner-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ overlay_color }};
+    opacity: {{ overlay_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+    {% if layout_mode == 'full_page' and corner_radius == 0 %}
+      border-radius: 0;
+    {% else %}
+      border-radius: {{ corner_radius }}px;
+    {% endif %}
+  }
+
+  .ai-image-banner-content-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 40px;
+    {% if content_position == 'top' %}
+      align-items: flex-start;
+    {% elsif content_position == 'center' %}
+      align-items: center;
+    {% else %}
+      align-items: flex-end;
+    {% endif %}
+    {% if content_alignment == 'left' %}
+      justify-content: flex-start;
+      text-align: left;
+    {% elsif content_alignment == 'center' %}
+      justify-content: center;
+      text-align: center;
+    {% else %}
+      justify-content: flex-end;
+      text-align: right;
+    {% endif %}
+  }
+
+  .ai-image-banner-content-inner-{{ ai_gen_id }} {
+    max-width: 600px;
+    z-index: 2;
+  }
+
+  .ai-image-banner-heading-{{ ai_gen_id }} {
+    color: {{ text_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .ai-image-banner-subheading-{{ ai_gen_id }} {
+    color: {{ text_color }};
+    font-size: {{ block.settings.subheading_size }}px;
+    margin: 0 0 20px;
+  }
+
+  .ai-image-banner-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: {{ button_bg_color }};
+    color: {{ button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_radius }}px;
+    font-size: 16px;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-image-banner-button-{{ ai_gen_id }}:hover {
+    opacity: 0.85;
+  }
+
+  .ai-image-banner-mobile-image-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-banner-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.padding_top_mobile }}px;
+      padding-bottom: {{ block.settings.padding_bottom_mobile }}px;
+      padding-left: {{ block.settings.padding_left_mobile }}px;
+      padding-right: {{ block.settings.padding_right_mobile }}px;
+    }
+
+    .ai-image-banner-desktop-image-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-image-banner-mobile-image-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-image-banner-content-{{ ai_gen_id }} {
+      padding: 20px;
+    }
+
+    .ai-image-banner-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-image-banner-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.85 }}px;
+    }
+
+    .ai-image-banner-content-inner-{{ ai_gen_id }} {
+      max-width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-image-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-image-banner-wrapper-{{ ai_gen_id }}">
+    {% if image_link != blank %}
+      <a href="{{ image_link }}" class="ai-image-banner-link-{{ ai_gen_id }}">
+    {% endif %}
+
+    <div class="ai-image-banner-image-container-{{ ai_gen_id }}">
+      {% if desktop_image != blank %}
+        <div class="ai-image-banner-desktop-image-{{ ai_gen_id }}">
+          <img
+            src="{{ desktop_image | image_url: width: 2000 }}"
+            alt="{{ desktop_image.alt | escape }}"
+            loading="lazy"
+            width="{{ desktop_image.width }}"
+            height="{{ desktop_image.height }}"
+            class="ai-image-banner-image-{{ ai_gen_id }}"
+          >
+        </div>
+      {% else %}
+        <div class="ai-image-banner-desktop-image-{{ ai_gen_id }}">
+          <div class="ai-image-banner-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if mobile_image != blank %}
+        <div class="ai-image-banner-mobile-image-{{ ai_gen_id }}">
+          <img
+            src="{{ mobile_image | image_url: width: 1000 }}"
+            alt="{{ mobile_image.alt | escape }}"
+            loading="lazy"
+            width="{{ mobile_image.width }}"
+            height="{{ mobile_image.height }}"
+            class="ai-image-banner-image-{{ ai_gen_id }}"
+          >
+        </div>
+      {% elsif desktop_image != blank %}
+        <div class="ai-image-banner-mobile-image-{{ ai_gen_id }}">
+          <img
+            src="{{ desktop_image | image_url: width: 1000 }}"
+            alt="{{ desktop_image.alt | escape }}"
+            loading="lazy"
+            width="{{ desktop_image.width }}"
+            height="{{ desktop_image.height }}"
+            class="ai-image-banner-image-{{ ai_gen_id }}"
+          >
+        </div>
+      {% else %}
+        <div class="ai-image-banner-mobile-image-{{ ai_gen_id }}">
+          <div class="ai-image-banner-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if overlay_opacity > 0 %}
+        <div class="ai-image-banner-overlay-{{ ai_gen_id }}"></div>
+      {% endif %}
+    </div>
+
+    {% if image_link != blank %}
+      </a>
+    {% endif %}
+
+    {% if heading != blank or subheading != blank or button_text != blank %}
+      <div class="ai-image-banner-content-{{ ai_gen_id }}">
+        <div class="ai-image-banner-content-inner-{{ ai_gen_id }}">
+          {% if heading != blank %}
+            <h2 class="ai-image-banner-heading-{{ ai_gen_id }}">{{ heading }}</h2>
+          {% endif %}
+
+          {% if subheading != blank %}
+            <div class="ai-image-banner-subheading-{{ ai_gen_id }}">{{ subheading }}</div>
+          {% endif %}
+
+          {% if button_text != blank and button_link != blank %}
+            <a href="{{ button_link }}" class="ai-image-banner-button-{{ ai_gen_id }}">
+              {{ button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout settings"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "label": "Page width",
+      "options": [
+        {
+          "value": "full_width",
+          "label": "Full width"
+        },
+        {
+          "value": "custom",
+          "label": "Custom page width"
+        }
+      ],
+      "default": "full_width"
+    },
+    {
+      "type": "range",
+      "id": "custom_page_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 10,
+      "unit": "px",
+      "label": "Custom width",
+      "default": 1200
+    },
+    {
+      "type": "select",
+      "id": "layout_mode",
+      "label": "Layout mode",
+      "options": [
+        {
+          "value": "full_page",
+          "label": "Full page"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "full_page"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "select",
+      "id": "image_height_mode",
+      "label": "Image height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "custom",
+          "label": "Custom height"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "range",
+      "id": "custom_height_value",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "label": "Custom height value",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "custom_height_unit",
+      "label": "Height unit",
+      "options": [
+        {
+          "value": "px",
+          "label": "px"
+        },
+        {
+          "value": "vh",
+          "label": "vh"
+        }
+      ],
+      "default": "px"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "Image link"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Content settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 48
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Subheading size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#78d64b"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button radius",
+      "default": 26
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image banner"
+    }
+  ]
+}
+{% endschema %}

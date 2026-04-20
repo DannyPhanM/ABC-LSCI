@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_position": "center",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "store_locator_FqAYhz": {
+      "type": "store-locator",
+      "blocks": {
+        "store_B7fbc8": {
+          "type": "store",
+          "disabled": true,
+          "settings": {
+            "store_name": "ABC-MART Grand Stage Dong Khoi",
+            "store_address": "<p>Parkson Saigontourist Plaza, 45 Đ. Lê Thánh Tôn, Bến Nghé, Quận 1, Hồ Chí Minh</p>",
+            "store_image": "shopify://shop_images/g_Kh.jpg",
+            "store_phone": "028 3535 7608",
+            "store_url": "https://maps.app.goo.gl/vMa9jBu9rZGzNgYR8",
+            "store_openclose": "Thứ Hai - Chủ Nhật: 10:00 - 22:00"
+          }
+        },
+        "store_nLXYk4": {
+          "type": "store",
+          "settings": {
+            "store_name": "ABC-MART Grand Stage Saigon Centre",
+            "store_address": "<p>TTTM Saigon Centre, 65 Đ. Lê Lợi, Bến Nghé, Quận 1, Hồ Chí Minh</p>",
+            "store_image": "shopify://shop_images/Saigon_Centre.jpg",
+            "store_phone": "028 3636 0722",
+            "store_url": "https://maps.app.goo.gl/SmTZY6UvX1KQsM3u7",
+            "store_openclose": "Thứ Hai - Chủ Nhật: 9:30 - 21:30"
+          }
+        },
+        "store_PACEtC": {
+          "type": "store",
+          "settings": {
+            "store_name": "ABC-MART Grand Stage Thiso Mall",
+            "store_address": "<p>TTTM Thiso Sala, 8-10 Đ. Mai Chí Thọ, Thủ Thiêm, Thành Phố Thủ Đức, Hồ Chí Minh</p>",
+            "store_image": "shopify://shop_images/Thiso_Mall.jpg",
+            "store_phone": "028 3535 6627",
+            "store_url": "https://maps.app.goo.gl/FTyxjvrzDFEFLTDSA",
+            "store_openclose": "Thứ Hai - Chủ Nhật: 10:00 - 22:00"
+          }
+        },
+        "store_FcEbMU": {
+          "type": "store",
+          "settings": {
+            "store_name": "ABC-MART Grand Stage The Loop IPH",
+            "store_address": "<p>TTTM The Loop SC, 241 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội</p>",
+            "store_image": "shopify://shop_images/The_Loop_IPH.jpg",
+            "store_phone": "024 5678 0099",
+            "store_url": "https://maps.app.goo.gl/8qc557npwooBfhEe6",
+            "store_openclose": "Thứ Hai - Chủ Nhật: 9:30 - 21:30"
+          }
+        },
+        "store_4K9eCD": {
+          "type": "store",
+          "settings": {
+            "store_name": "ABC-MART Grand Stage SORA gardens SC",
+            "store_address": "<p>Lô C19 Đường Hùng Vương, Phú Mỹ, Thủ Dầu Một, Bình Dương</p>",
+            "store_image": "shopify://shop_images/SORA_GARDENS_SC.jpg",
+            "store_phone": "028 3535 7608",
+            "store_url": "https://maps.app.goo.gl/Dh9hyZxFLW57Rv5HA",
+            "store_openclose": "Thứ Hai - Chủ Nhật: 10:00 - 22:00"
+          }
+        }
+      },
+      "block_order": [
+        "store_B7fbc8",
+        "store_nLXYk4",
+        "store_PACEtC",
+        "store_FcEbMU",
+        "store_4K9eCD"
+      ],
+      "settings": {
+        "section_header": "HỆ THỐNG CỬA HÀNG"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "store_locator_FqAYhz"
+  ]
+}

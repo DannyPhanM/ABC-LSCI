@@ -1,0 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "custom_css": [
+        "@media screen and (min-width: 990px) {.article-template__hero-container .media {padding-bottom: 0 !important; height: auto !important; } .article-template__hero-container img {position: relative !important; width: 100%; height: auto !important; object-fit: cover; } /* giữ text + share overlay trên ảnh (desktop) */ .article-template__hero-container .card__content {position: absolute; inset: 0; display: flex; align-items: flex-end; }}"
+      ],
+      "settings": {
+        "over_color_scheme": "background-1",
+        "blog_over_img": true,
+        "image_height": "adapt",
+        "show_excerpt": true,
+        "blog_show_date": false,
+        "blog_show_author": false,
+        "image_corners": "orginal",
+        "sharebtn": true,
+        "share_label": "Chia sẻ",
+        "share_button_style": "solid",
+        "color_icon": false,
+        "social_button": "Theo dõi chúng tôi",
+        "recent_heading": "Bài viết gần đây",
+        "brecent_view": "News",
+        "recent_post_limit": 5,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

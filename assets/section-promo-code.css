@@ -1,0 +1,26 @@
+.promo_svg svg {
+  fill: rgba(var(--color-foreground));
+}
+.promocode_inner {
+  display: flex;
+  gap: 30px;
+  word-break: break-word;
+}
+.promocode_inner.left {
+  justify-content: left;
+}
+.promocode_inner.center {
+  justify-content: center;
+}
+.promocode_inner.right {
+  justify-content: end;
+}
+.promocode_inner span {
+  font-weight: 700;
+}
+@media (max-width: 767px) {
+  .promocode_inner {
+    display: grid;
+    gap: 5px;
+  }
+}

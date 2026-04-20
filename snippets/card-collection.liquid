@@ -1,0 +1,221 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - columns: {Number}
+  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
+  - placeholder_image: {String} Placeholder image when collection is empty (optional)
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+{%- liquid
+  assign ratio = 1
+  if card_collection.featured_image and media_aspect_ratio == 'portrait'
+    assign ratio = 0.8
+  elsif card_collection.featured_image and media_aspect_ratio == 'adapt'
+    assign ratio = card_collection.featured_image.aspect_ratio
+  endif
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+
+  if custom_title != blank
+    assign collection_title = custom_title
+  else
+    assign collection_title = card_collection.title
+  endif
+-%}
+
+<div class="{{ collection_card_text_alignment }} card-wrapper animate-arrow {% if wrapper_class and wrapper_class != 'none' %}{{ wrapper_class }}{% else %}collection-card-wrapper{% endif %}">
+  <div
+    class="
+      card
+      card--{{ coll_card_style }}
+      card--media
+      {%- if card_collection == blank -%} card-place{% endif %}
+      {% if coll_card_style == 'card' %} color-{{ collection_card_color_scheme }} gradient{% endif %}
+      {% if extend_height %} card--extend-height{% endif %}
+      {% if card_collection.featured_image == nil and coll_card_style == 'card' %} ratio{% endif %}
+    "
+    style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+  >
+    <div
+      class="card__inner {% if coll_card_style == 'standard' %}color-{{ collection_card_color_scheme }} gradient{% endif %}{% if card_collection.featured_image or coll_card_style == 'standard' %} ratio{% endif %}"
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+    >
+    {% if alternative_img %}
+      <div class="card__media">
+        <div class="media media--transparent media--hover-effect">
+          <a
+            {% if card_collection == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ card_collection.url }}"
+            {% endif %}
+            class="full-unstyled-link"
+            title="{{ collection_title | escape }}"
+          >
+            <img
+              srcset="
+                {%- if alternative_img.width >= 165 -%}{{ alternative_img | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if alternative_img.width >= 330 -%}{{ alternative_img | image_url: width: 330 }} 330w,{%- endif -%}
+                {%- if alternative_img.width >= 535 -%}{{ alternative_img | image_url: width: 535 }} 535w,{%- endif -%}
+                {%- if alternative_img.width >= 750 -%}{{ alternative_img | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if alternative_img.width >= 1000 -%}{{ alternative_img | image_url: width: 1000 }} 1000w,{%- endif -%}
+                {%- if alternative_img.width >= 1500 -%}{{ alternative_img | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if alternative_img.width >= 3000 -%}{{ alternative_img | image_url: width: 3000 }} 3000w,{%- endif -%}
+                {{ alternative_img | image_url }} {{ alternative_img.width }}w
+              "
+              src="{{ alternative_img | image_url: width: 1500 }}"
+              sizes="
+                (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+                (min-width: 768px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+                calc(100vw - 3rem)
+              "
+              alt="{{ alternative_img.alt | escape }}"
+              height="{{ alternative_img.height }}"
+              width="{{ alternative_img.width }}"
+              loading="lazy"
+              class="motion-reduce"
+            >
+          </a>
+        </div>
+      </div>
+      {% else %}
+      {%- if card_collection.featured_image -%}
+        <div class="card__media">
+          <div class="media media--transparent media--hover-effect">
+            <a
+              {% if card_collection == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ card_collection.url }}"
+              {% endif %}
+              class="full-unstyled-link"
+              title="{{ collection_title | escape }}"
+            >
+              <img
+                srcset="
+                  {%- if card_collection.featured_image.width >= 165 -%}{{ card_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if card_collection.featured_image.width >= 330 -%}{{ card_collection.featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+                  {%- if card_collection.featured_image.width >= 535 -%}{{ card_collection.featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+                  {%- if card_collection.featured_image.width >= 750 -%}{{ card_collection.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                  {%- if card_collection.featured_image.width >= 1000 -%}{{ card_collection.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                  {%- if card_collection.featured_image.width >= 1500 -%}{{ card_collection.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                  {%- if card_collection.featured_image.width >= 3000 -%}{{ card_collection.featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                  {{ card_collection.featured_image | image_url }} {{ card_collection.featured_image.width }}w
+                "
+                src="{{ card_collection.featured_image | image_url: width: 1500 }}"
+                sizes="
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+                  (min-width: 768px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+                  calc(100vw - 3rem)
+                "
+                alt="{{ card_collection.featured_image.alt | escape }}"
+                height="{{ card_collection.featured_image.height }}"
+                width="{{ card_collection.featured_image.width }}"
+                loading="lazy"
+                class="motion-reduce"
+              >
+            </a>
+          </div>
+        </div>
+      {% elsif settings.global_banner_image %}
+        <div class="card__media">
+          <div class="media media--transparent media--hover-effect">
+            <a
+              {% if card_collection == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ card_collection.url }}"
+              {% endif %}
+              class="full-unstyled-link"
+              title="{{ collection_title | escape }}"
+            >
+              <img
+                srcset="
+                  {%- if settings.global_banner_image.width >= 165 -%}{{ settings.global_banner_image | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if settings.global_banner_image.width >= 330 -%}{{ settings.global_banner_image | image_url: width: 330 }} 330w,{%- endif -%}
+                  {%- if settings.global_banner_image.width >= 535 -%}{{ settings.global_banner_image | image_url: width: 535 }} 535w,{%- endif -%}
+                  {%- if settings.global_banner_image.width >= 750 -%}{{ settings.global_banner_image | image_url: width: 750 }} 750w,{%- endif -%}
+                  {%- if settings.global_banner_image.width >= 1000 -%}{{ settings.global_banner_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                  {%- if settings.global_banner_image.width >= 1500 -%}{{ settings.global_banner_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                  {%- if settings.global_banner_image.width >= 3000 -%}{{ settings.global_banner_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                  {{ settings.global_banner_image | image_url }} {{ settings.global_banner_image.width }}w
+                "
+                src="{{ settings.global_banner_image | image_url: width: 1500 }}"
+                sizes="
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+                  (min-width: 768px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+                  calc(100vw - 3rem)
+                "
+                alt="{{ settings.global_banner_image.alt | escape }}"
+                height="{{ settings.global_banner_image.height }}"
+                width="{{ settings.global_banner_image.width }}"
+                loading="lazy"
+                class="motion-reduce"
+              >
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+    {% endif %}
+    
+      {%- if card_collection == blank -%}
+        <div class="card__media">
+          {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="card__content">
+      <div class="card__information">
+        <h3 class="card__heading">
+          <a
+            {% if card_collection == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ card_collection.url }}"
+            {% endif %}
+            class="{{ text_size }} full-unstyled-link custom-collection-title"
+            title="{{ collection_title | escape }}"
+          >
+            {%- if collection_title != blank -%}
+              {{- collection_title | escape -}}
+            {%- endif -%}
+          </a>
+        </h3>
+        {%- if collection_description and card_collection.description != blank -%}
+          <p class="coll_card__caption">
+            {{- card_collection.description | strip_html | truncatewords: 12 -}}
+          </p>
+        {%- endif -%}
+
+        {%- if coll_caption != blank -%}
+          <div class="coll_caption {% if uppercase_caption != blank %}uppercase{% endif %}">{{ coll_caption }}</div>
+        {%- endif -%}
+        {% if show_item_count %}
+          <p class="collection_count">
+            {{ card_collection.all_products_count }}
+            {{ 'custom_data.data_inner.items' | t }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+    {%- if card_collection == blank -%}
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading card__heading--placeholder">
+            <a role="link" aria-disabled="true" class="full-unstyled-link {{ text_size }}">
+              <span>{{ 'onboarding.collection_title' | t }}</span>
+            </a>
+          </h3>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

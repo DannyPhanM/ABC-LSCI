@@ -1,0 +1,1718 @@
+{% comment %}
+  Renders a standard dropdown style menu for the header.
+
+  Usage:
+  {% render 'header-dropdown-menu' %}
+{% endcomment %}
+
+{%- if settings.enable_quick_add or settings.quick_view_button -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag: preload: true }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<desktop-webi-menu class="header__inline-menu mainheader_menu" data-drop="mouseover">
+  <ul class="main-menu list-menu list-menu--inline wbmenu_js" role="list">
+    {%- for link in section.settings.menu.links -%}
+      {%- liquid
+        assign mega_menu_banner = ''
+        assign hlink_icon = false
+        assign contain_mega = false
+        assign high_title_color = ''
+        for block in blocks
+          assign menublock_lower = block.settings.menu_title | downcase
+          assign linkblock_lower = link.title | downcase
+          assign high_title = block.settings.highlight_title | downcase
+
+          if linkblock_lower == high_title
+            assign high_title_color = 'high_link'
+            assign hlink_icon = block.settings.hlink_icon
+            assign hlink_color = block.settings.hlink_color
+          endif
+
+          if linkblock_lower == menublock_lower
+            assign contain_mega = true
+            case block.type
+              when 'mega-menu-banner'
+                assign mega_menu_banner = 'mega_menu_banner'
+            endcase
+          endif
+        endfor
+      -%}
+      <li
+        class="menu_space {% if link.links != blank or contain_mega == true %}onlychild_focus{% endif %}"
+        {% if link.links != blank or contain_mega == true %}
+          tabindex="0"
+        {% endif %}
+        collection_tab="{{- link.title | escape -}}"
+      >
+        {%- if link.links != blank -%}
+          <div>
+            <div
+              id="Details-HeaderMenu-{{ forloop.index }}"
+              class="menudetails mega-menu{% if link.links.size < 4 and contain_mega == false %} menu_short{% endif %}{% if click_dropmenu == true and contain_mega == false %} click_dropmenu{% endif %}"
+            >
+              <a
+                href="{{link.url}}"
+                id="HeaderMenu-{{ link.handle }}"
+                class="summary {{ high_title_color }} header__menu-item list-menu__item link focus-inset {{ dmenu_size }} {% if uppercase_menu %}uppercase{% endif %}"
+              >
+                <span
+                  {% if link.child_active %}
+                    class="header__active-menu-item"
+                  {% endif %}
+                >
+                  {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                  <span>{{- link.title | escape -}}</span>
+                  {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                </span>
+                {% render 'icon-caret' %}
+              </a>
+
+              {%- if click_dropmenu == true and contain_mega == false -%}
+                <ul
+                  id="HeaderMenu-MenuList-{{ forloop.index }}"
+                  class=" add-margin-top resize-header__submenu menudrop_hover header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+                  role="list"
+                  tabindex="-1"
+                  collection_tab="{{- link.title | escape -}}"
+                >
+                  {%- for childlink in link.links -%}
+                    <li class="submenu_child">
+                      {%- if childlink.links == blank -%}
+                        <a
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          href="{{ childlink.url }}"
+                          class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
+                          {% if childlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                        </a>
+                      {%- else -%}
+                        <div id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
+                          <a
+                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                            href="{{ childlink.url }}"
+                            class="header__menu-item list-menu__item link link--text focus-inset caption-large summary"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            <span>{{ childlink.title | escape }}</span>
+                            {% render 'icon-caret' %}
+                          </a>
+                          <ul
+                            id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                            class="header__submenu list-menu motion-reduce"
+                          >
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- else -%}
+                <div
+                  id="HeaderMenu-MenuList-{{ forloop.index }}"
+                  class=" add-margin-top resize-header__submenu menudrop_hover header__submenu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce"
+                  role="list"
+                  tabindex="-1"
+                  collection_tab="{{- link.title | escape -}}"
+                >
+                  <div class="adjust-submenu page-width {{ mega_menu_banner }} {% if link.links != blank %}menu_not_blank{% endif %}">
+                    {%- if link.links != blank -%}
+                      <div class="menu-{{ mega_menu_banner }}">
+                        {% for block in blocks %}
+                          {% if block.type == 'mega-menu-product' %}
+                            {%- liquid
+                              assign menublock = block.settings.menu_title | downcase
+                              assign linkblock = link.title | downcase
+                            -%}
+                            {%- if linkblock == menublock and block.settings.format_text -%}
+                              {% assign format_text = true %}
+                            {% else %}
+                              {% assign format_text = false %}
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                        <ul class="megamenu_sub subinner-{{ link.links.size }} {% if format_text %} no-gap {% endif %}">
+                          {%- for childlink in link.links -%}
+                            {%- if link.links.size < 4 and contain_mega == false -%}
+                              <div class="menu_short_inner">
+                            {%- endif -%}
+                            <li
+                              class="manual_width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                              {% if settings.animations_reveal_on_scroll %}
+                                data-cascade
+                                style="--animation-order: {{ forloop.index }};"
+                              {% endif %}
+                            >
+                              <a
+                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                                href="{{ childlink.url }}"
+                                class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}  {% if format_text %} custom-size {% endif %}"
+                                {% if childlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                              >
+                                {{ childlink.title | escape }}
+                              </a>
+                              {%- if childlink.links != blank -%}
+                                <ul class="list-unstyled" role="list">
+                                  {%- for grandchildlink in childlink.links -%}
+                                    <li>
+                                      <a
+                                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                        href="{{ grandchildlink.url }}"
+                                        class="custom-size mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                        {% if grandchildlink.current %}
+                                          aria-current="page"
+                                        {% endif %}
+                                      >
+                                        {{ grandchildlink.title | escape }}
+                                      </a>
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- endif -%}
+                            </li>
+                            {%- if link.links.size < 4 and contain_mega == false -%}</div>{%- endif -%}
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                    {%- endif -%}
+
+                    {%- if contain_mega -%}
+                      <div class="m_banner_right">
+                        {%- for block in blocks -%}
+                          {%- liquid
+                            assign menublock = block.settings.menu_title | downcase
+                            assign linkblock = link.title | downcase
+                          -%}
+                          {%- if linkblock == menublock -%}
+                            {%- case block.type -%}
+                              {% when 'mega-menu-banner' %}
+                                <div
+                                  class="center mega_banner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                  {% if settings.animations_reveal_on_scroll %}
+                                    data-cascade
+                                    style="--animation-order: {{ forloop.index }};"
+                                  {% endif %}
+                                >
+                                  <div class="banner--{{ block.settings.banner_height }} banner">
+                                    <div
+                                      class="banner__media media{% if block.settings.banner_image == blank %} placeholder{% endif %}"
+                                      {% if block.settings.banner_height == 'adapt'
+                                        and block.settings.banner_image != blank
+                                      %}
+                                        style="padding-bottom: {{ 1 | divided_by: block.settings.banner_image.aspect_ratio | times: 100 }}%;"
+                                      {% endif %}
+                                      {% if block.settings.banner_height == 'adapt'
+                                        and block.settings.banner_image == blank
+                                      %}
+                                        style="padding-bottom: 100%;"
+                                      {% endif %}
+                                    >
+                                      {%- if block.settings.banner_image != blank -%}
+                                        {%- liquid
+                                          assign banner_height = block.settings.banner_image.width | divided_by: block.settings.banner_image.aspect_ratio | round
+                                        -%}
+                                        {{
+                                          block.settings.banner_image
+                                          | image_url: width: 3840
+                                          | image_tag:
+                                            loading: 'lazy',
+                                            width: block.settings.banner_image.width,
+                                            height: banner_height,
+                                            sizes: '100vw',
+                                            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                                        }}
+                                      {% else %}
+                                        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                      {%- endif -%}
+                                    </div>
+                                  </div>
+                                  {% if block.settings.heading != blank %}
+                                    <h3 class="inline-richtext" {{ section.shopify_attributes }}>
+                                      {{ block.settings.heading }}
+                                    </h3>
+                                  {% endif %}
+                                  {%- if block.settings.button_label != blank -%}
+                                    <a
+                                      {% if block.settings.button_link == blank %}
+                                        role="link" aria-disabled="true"
+                                      {% else %}
+                                        href="{{ block.settings.button_link }}"
+                                      {% endif %}
+                                      class="menu_banner_btn {% if block.settings.button_style == 'link' %}link underlined-link{% elsif block.settings.button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                                    >
+                                      <span>
+                                        {{- block.settings.button_label | escape -}}
+                                        {%- render 'icon-arrow' -%}
+                                      </span>
+                                    </a>
+                                  {%- endif -%}
+                                </div>
+                            {%- endcase -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if contain_mega -%}
+                    <div class="page-width">
+                      {%- for block in blocks -%}
+                        {%- liquid
+                          assign menublock = block.settings.menu_title | downcase
+                          assign linkblock = link.title | downcase
+                        -%}
+                        {%- if linkblock == menublock -%}
+                          {%- case block.type -%}
+                            {% when 'mega-menu-product' %}
+                              <ul
+                                class="mega-menu-product grid grid--{{ block.settings.products_to_show }}-col-desktop"
+                                role="list"
+                                aria-label="{{ 'general.slider.name' | t }}"
+                              >
+                                {%- for product in block.settings.collection.products
+                                  limit: block.settings.products_to_show
+                                -%}
+                                  <li
+                                    class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                    {% if settings.animations_reveal_on_scroll %}
+                                      data-cascade
+                                      style="--animation-order: {{ forloop.index }};"
+                                    {% endif %}
+                                  >
+                                    {% render 'card-product',
+                                      card_style: settings.card_style,
+                                      card_product: product,
+                                      media_aspect_ratio: settings.image_ratio,
+                                      show_secondary_image: settings.show_secondary_image,
+                                      show_vendor: settings.show_cardvendor,
+                                      section_id: section.id
+                                    %}
+                                  </li>
+                                  {% comment %}
+                                    {%- else -%}
+                                    {%- assign limit = block.settings.products_to_show -%}
+                                    {%- for i in (1..limit) -%}
+                                      <li
+                                        class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                        {% if settings.animations_reveal_on_scroll %}
+                                          data-cascade
+                                          style="--animation-order: {{ forloop.index }};"
+                                        {% endif %}>
+                                        {% liquid
+                                          assign ridx = forloop.rindex
+                                          if ridx == 5
+                                            assign ridx = 1
+                                          endif
+                                          assign placeholder_image = 'product-apparel-' | append: ridx
+                                        %}
+                                        {% render 'card-product',
+                                          card_style: settings.card_style,
+                                          show_vendor: settings.show_cardvendor,
+                                          placeholder_image: placeholder_image
+                                        %}
+                                      </li>
+                                    {%- endfor -%}
+                                  {% endcomment %}
+                                {%- endfor -%}
+                              </ul>
+
+                            {% when 'mega-menu-tabcollections' %}
+                              <div class="mega-menu-collections megamenu_tabcoll mtab-{{ block.id }}">
+                                <div class="tabs-collapse">
+                                  {%- if block.settings.tab1 != blank -%}
+                                    <span class="tab-button active" tabindex="0" data-id="{{ block.id }}-1">
+                                      {{- block.settings.tab1 -}}
+                                    </span>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab2 != blank -%}
+                                    <span
+                                      class="tab-button {% if block.settings.tab1 == blank %}active{% endif %}"
+                                      tabindex="0"
+                                      data-id="{{ block.id }}-2"
+                                    >
+                                      {{- block.settings.tab2 -}}
+                                    </span>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab3 != blank -%}
+                                    <span
+                                      class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                      tabindex="0"
+                                      data-id="{{ block.id }}-3"
+                                    >
+                                      {{- block.settings.tab3 -}}
+                                    </span>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab4 != blank -%}
+                                    <span
+                                      class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                      tabindex="0"
+                                      data-id="{{ block.id }}-4"
+                                    >
+                                      {{- block.settings.tab4 -}}
+                                    </span>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab5 != blank -%}
+                                    <span
+                                      class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                      tabindex="0"
+                                      data-id="{{ block.id }}-5"
+                                    >
+                                      {{- block.settings.tab5 -}}
+                                    </span>
+                                  {%- endif -%}
+                                </div>
+                                <div class="tab-content">
+                                  {%- if block.settings.tab1 != blank -%}
+                                    <div id="{{ block.id }}-1" class="tab-pane fade active" tabindex="-1">
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll1 -%}
+                                          <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% assign limit = block.settings.columns_desktop %}
+                                          {%- for i in (1..limit) -%}
+                                            <div
+                                              class="grid__item collection-list__item"
+                                              {{ block.shopify_attributes }}
+                                            >
+                                              {%- assign placeholder_image_index = forloop.index0
+                                                | modulo: 4
+                                                | plus: 1
+                                              -%}
+                                              {%- assign placeholder_image = 'collection-apparel-'
+                                                | append: placeholder_image_index
+                                              -%}
+                                              {% render 'card-collection',
+                                                columns: columns,
+                                                collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                placeholder_image: placeholder_image
+                                              %}
+                                            </div>
+                                          {%- endfor -%}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+                                  {%- if block.settings.tab2 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-2"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll2 -%}
+                                          <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% assign limit = block.settings.columns_desktop %}
+                                          {%- for i in (1..limit) -%}
+                                            <div
+                                              class="grid__item collection-list__item"
+                                              {{ block.shopify_attributes }}
+                                            >
+                                              {%- assign placeholder_image_index = forloop.index0
+                                                | modulo: 4
+                                                | plus: 1
+                                              -%}
+                                              {%- assign placeholder_image = 'collection-apparel-'
+                                                | append: placeholder_image_index
+                                              -%}
+                                              {% render 'card-collection',
+                                                columns: columns,
+                                                collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                placeholder_image: placeholder_image
+                                              %}
+                                            </div>
+                                          {%- endfor -%}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab3 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-3"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll3 -%}
+                                          <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% assign limit = block.settings.columns_desktop %}
+                                          {%- for i in (1..limit) -%}
+                                            <div
+                                              class="grid__item collection-list__item"
+                                              {{ block.shopify_attributes }}
+                                            >
+                                              {%- assign placeholder_image_index = forloop.index0
+                                                | modulo: 4
+                                                | plus: 1
+                                              -%}
+                                              {%- assign placeholder_image = 'collection-apparel-'
+                                                | append: placeholder_image_index
+                                              -%}
+                                              {% render 'card-collection',
+                                                columns: columns,
+                                                collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                placeholder_image: placeholder_image
+                                              %}
+                                            </div>
+                                          {%- endfor -%}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab4 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-4"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll4 -%}
+                                          <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% assign limit = block.settings.columns_desktop %}
+                                          {%- for i in (1..limit) -%}
+                                            <div
+                                              class="grid__item collection-list__item"
+                                              {{ block.shopify_attributes }}
+                                            >
+                                              {%- assign placeholder_image_index = forloop.index0
+                                                | modulo: 4
+                                                | plus: 1
+                                              -%}
+                                              {%- assign placeholder_image = 'collection-apparel-'
+                                                | append: placeholder_image_index
+                                              -%}
+                                              {% render 'card-collection',
+                                                columns: columns,
+                                                collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                placeholder_image: placeholder_image
+                                              %}
+                                            </div>
+                                          {%- endfor -%}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab5 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-5"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll5 -%}
+                                          <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% assign limit = block.settings.columns_desktop %}
+                                          {%- for i in (1..limit) -%}
+                                            <div
+                                              class="grid__item collection-list__item"
+                                              {{ block.shopify_attributes }}
+                                            >
+                                              {%- assign placeholder_image_index = forloop.index0
+                                                | modulo: 4
+                                                | plus: 1
+                                              -%}
+                                              {%- assign placeholder_image = 'collection-apparel-'
+                                                | append: placeholder_image_index
+                                              -%}
+                                              {% render 'card-collection',
+                                                columns: columns,
+                                                collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                placeholder_image: placeholder_image
+                                              %}
+                                            </div>
+                                          {%- endfor -%}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                              {%- style -%}
+                                .mtab-{{ block.id }} .tabs-collapse span.active, .mtab-{{ block.id }} .tabs-collapse span:hover {
+                                  color: {{ block.settings.activetab_color }};
+                                }
+                              {%- endstyle -%}
+                              <script>
+                                function megaTab() {
+                                  const tabs = document.querySelector('.mtab-{{ block.id }}');
+                                  const tabButton = document.querySelectorAll('.mtab-{{ block.id }} .tab-button');
+                                  const contents = document.querySelectorAll('.mtab-{{ block.id }} .tab-pane');
+                                  tabs.onclick = (e) => {
+                                    onTabclick(e);
+                                  };
+                                  tabs.addEventListener('keydown', (e) => {
+                                    if (e.keyCode === 13) {
+                                      onTabclick(e);
+                                    }
+                                  });
+
+                                  function onTabclick(e) {
+                                    const id = e.target.dataset.id;
+                                    if (id) {
+                                      tabButton.forEach((btn) => {
+                                        btn.classList.remove('active');
+                                      });
+                                      e.target.classList.add('active');
+
+                                      contents.forEach((content) => {
+                                        content.classList.remove('active');
+                                      });
+                                      const element = document.getElementById(id);
+                                      element.classList.add('active');
+                                    }
+                                  }
+                                }
+                                document.addEventListener('shopify:section:load', megaTab);
+                                megaTab();
+                              </script>
+
+                            {% when 'mega-menu-tabinfo' %}
+                              <div class="mega-menu-tabinfo grid">
+                                <div class="grid__item tabinfo_left">
+                                  {%- if block.settings.coll_headingleft != blank -%}
+                                    <h3 class="info_heading">{{ block.settings.coll_headingleft }}</h3>
+                                  {%- endif -%}
+                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                    {%- for collection in block.settings.info_coll -%}
+                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                        {%- assign placeholder_image = 'collection-apparel-'
+                                          | append: placeholder_image_index
+                                        -%}
+                                        {% render 'card-collection',
+                                          card_collection: collection,
+                                          media_aspect_ratio: block.settings.image_ratio,
+                                          coll_card_style: block.settings.infocall_card_style,
+                                          collection_card_text_alignment: block.settings.infocall_alignment,
+                                          collection_card_color_scheme: block.settings.infocall_color_scheme,
+                                          columns: columns,
+                                          placeholder_image: placeholder_image
+                                        %}
+                                      </div>
+                                    {%- else -%}
+                                      {% assign limit = block.settings.columns_desktop %}
+                                      {%- for i in (1..limit) -%}
+                                        <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                          {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                          {%- assign placeholder_image = 'collection-apparel-'
+                                            | append: placeholder_image_index
+                                          -%}
+                                          {% render 'card-collection',
+                                            columns: columns,
+                                            collection_card_text_alignment: block.settings.infocall_alignment,
+                                            placeholder_image: placeholder_image
+                                          %}
+                                        </div>
+                                      {%- endfor -%}
+                                    {%- endfor -%}
+                                  </div>
+                                </div>
+                                <div class="grid__item tabinfo_right cinfo-{{ block.id }}">
+                                  <div>
+                                    {%- if block.settings.info_heading != blank -%}
+                                      <h3 class="info_heading">{{ block.settings.info_heading }}</h3>
+                                    {%- endif -%}
+
+                                    <ul class="tabinfo_ul">
+                                      {%- if block.settings.info_text1 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon1 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon1 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text1 }}</span>
+                                        </li>
+                                      {%- endif -%}
+
+                                      {%- if block.settings.info_text2 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon2 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon2 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text2 }}</span>
+                                        </li>
+                                      {%- endif -%}
+
+                                      {%- if block.settings.info_text3 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon3 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon3 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text3 }}</span>
+                                        </li>
+                                      {%- endif -%}
+
+                                      {%- if block.settings.info_text4 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon4 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon4 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text4 }}</span>
+                                        </li>
+                                      {%- endif -%}
+                                    </ul>
+                                  </div>
+                                  <div class="tabinfo_bottom">
+                                    {%- if block.settings.info_heading2 != blank -%}
+                                      <h3 class="info_heading">{{ block.settings.info_heading2 }}</h3>
+                                    {%- endif -%}
+                                    {%- if block.settings.fcontactno != blank -%}
+                                      <div class="info_contact">
+                                        <a href="tel:{{ block.settings.fcontactno }}">
+                                          {%- render 'icon-call' -%}
+                                          <span>{{ block.settings.fcontactno }}</span></a
+                                        >
+                                      </div>
+                                    {%- endif -%}
+                                    {%- if block.settings.fcontactid != blank -%}
+                                      <div class="info_mail">
+                                        <a href="mailto:{{ block.settings.fcontactid }}">
+                                          {%- render 'icon-envelope' -%}
+                                          <span>{{ block.settings.fcontactid }}</span></a
+                                        >
+                                      </div>
+                                    {%- endif -%}
+                                  </div>
+                                </div>
+
+                                {%- style -%}
+                                  .cinfo-{{ block.id }} .tabinfo_svg {
+                                    background: {{ block.settings.icon_bgcolor }};
+                                    color: {{ block.settings.icon_textcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_svg svg {
+                                    fill: {{ block.settings.icon_textcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg, .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color {
+                                    fill: none;
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color path {
+                                    stroke: {{ block.settings.icon_textcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_bottom svg {
+                                    fill: {{ block.settings.icon_bottomcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg {
+                                    stroke: {{ block.settings.icon_bottomcolor }};
+                                  }
+                                {%- endstyle -%}
+                              </div>
+                          {%- endcase -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- else -%}
+          {%- if contain_mega -%}
+            <div>
+              <div
+                id="Details-HeaderMenu-{{ forloop.index }}"
+                class="menudetails mega-menu {% if link.links.size < 4 and contain_mega == false %}menu_short{% endif %}"
+              >
+                <a
+                  href="{{link.url}}"
+                  id="HeaderMenu-{{ link.handle }}"
+                  class="summary {{ high_title_color }} header__menu-item list-menu__item link focus-inset {{ dmenu_size }} {% if uppercase_menu %}uppercase{% endif %}"
+                >
+                  <span
+                    href="{{link.url}}"
+                    {% if link.child_active %}
+                      class="header__active-menu-item"
+                    {% endif %}
+                  >
+                    {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                    <span>{{- link.title | escape -}}</span>
+                    {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                  </span>
+                  {% render 'icon-caret' %}
+                </a>
+                <div
+                  id="HeaderMenu-MenuList-{{ forloop.index }}"
+                  class="add-margin-top resize-header__submenu menudrop_hover header__submenu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce"
+                  role="list"
+                  tabindex="-1"
+                  collection_tab="{{- link.title | escape -}}"
+                >
+                  <div class="page-width {{ mega_menu_banner }} {% if link.links != blank %}menu_not_blank{% endif %}">
+                    {%- if link.links != blank -%}
+                      <div class="menu-{{ mega_menu_banner }}">
+                        <ul class="megamenu_sub subinner-{{ link.links.size }}">
+                          {%- for childlink in link.links -%}
+                            {%- if link.links.size < 4 and contain_mega == false -%}
+                              <div class="menu_short_inner">
+                            {%- endif -%}
+                            <li
+                              class="manual_width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                              {% if settings.animations_reveal_on_scroll %}
+                                data-cascade
+                                style="--animation-order: {{ forloop.index }};"
+                              {% endif %}
+                            >
+                              <a
+                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                                href="{{ childlink.url }}"
+                                class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                                {% if childlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                              >
+                                {{ childlink.title | escape }}
+                              </a>
+                              {%- if childlink.links != blank -%}
+                                <ul class="list-unstyled" role="list">
+                                  {%- for grandchildlink in childlink.links -%}
+                                    <li>
+                                      <a
+                                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                        href="{{ grandchildlink.url }}"
+                                        class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                        {% if grandchildlink.current %}
+                                          aria-current="page"
+                                        {% endif %}
+                                      >
+                                        {{ grandchildlink.title | escape }}
+                                      </a>
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              {%- endif -%}
+                            </li>
+                            {%- if link.links.size < 4 and contain_mega == false -%}</div>{%- endif -%}
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                    {%- endif -%}
+
+                    {%- if contain_mega -%}
+                      <div class="m_banner_right">
+                        {%- for block in blocks -%}
+                          {%- liquid
+                            assign menublock = block.settings.menu_title | downcase
+                            assign linkblock = link.title | downcase
+                          -%}
+                          {%- if linkblock == menublock -%}
+                            {%- case block.type -%}
+                              {% when 'mega-menu-banner' %}
+                                <div
+                                  class="center mega_banner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                  {% if settings.animations_reveal_on_scroll %}
+                                    data-cascade
+                                    style="--animation-order: {{ forloop.index }};"
+                                  {% endif %}
+                                >
+                                  <div class="banner--{{ block.settings.banner_height }} banner">
+                                    <div
+                                      class="banner__media media{% if block.settings.banner_image == blank %} placeholder{% endif %}"
+                                      {% if block.settings.banner_height == 'adapt'
+                                        and block.settings.banner_image != blank
+                                      %}
+                                        style="padding-bottom: {{ 1 | divided_by: block.settings.banner_image.aspect_ratio | times: 100 }}%;"
+                                      {% endif %}
+                                      {% if block.settings.banner_height == 'adapt'
+                                        and block.settings.banner_image == blank
+                                      %}
+                                        style="padding-bottom: 100%;"
+                                      {% endif %}
+                                    >
+                                      {%- if block.settings.banner_image != blank -%}
+                                        {%- liquid
+                                          assign banner_height = block.settings.banner_image.width | divided_by: block.settings.banner_image.aspect_ratio | round
+                                        -%}
+                                        {{
+                                          block.settings.banner_image
+                                          | image_url: width: 3840
+                                          | image_tag:
+                                            loading: 'lazy',
+                                            width: block.settings.banner_image.width,
+                                            height: banner_height,
+                                            sizes: '100vw',
+                                            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                                        }}
+                                      {% else %}
+                                        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                      {%- endif -%}
+                                    </div>
+                                  </div>
+                                  {% if block.settings.heading != blank %}
+                                    <h3 class="inline-richtext" {{ section.shopify_attributes }}>
+                                      {{ block.settings.heading }}
+                                    </h3>
+                                  {% endif %}
+                                  {%- if block.settings.button_label != blank -%}
+                                    <a
+                                      {% if block.settings.button_link == blank %}
+                                        role="link" aria-disabled="true"
+                                      {% else %}
+                                        href="{{ block.settings.button_link }}"
+                                      {% endif %}
+                                      class="menu_banner_btn {% if block.settings.button_style == 'link' %}link underlined-link{% elsif block.settings.button_style == 'solid' %}button button--primary{% else %}button button--secondary{% endif %}"
+                                    >
+                                      <span>
+                                        {{- block.settings.button_label | escape -}}
+                                        {%- render 'icon-arrow' -%}
+                                      </span>
+                                    </a>
+                                  {%- endif -%}
+                                </div>
+                            {%- endcase -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if contain_mega -%}
+                    <div class="page-width unset-width">
+                      {%- for block in blocks -%}
+                        {%- liquid
+                          assign menublock = block.settings.menu_title | downcase
+                          assign linkblock = link.title | downcase
+                        -%}
+                        {%- if linkblock == menublock -%}
+                          {%- case block.type -%}
+                            {% when 'mega-menu-product' %}
+                              <ul
+                                class="mega-menu-product grid grid--{{ block.settings.products_to_show }}-col-desktop"
+                                role="list"
+                                aria-label="{{ 'general.slider.name' | t }}"
+                              >
+                                {%- for product in block.settings.collection.products
+                                  limit: block.settings.products_to_show
+                                -%}
+                                  <li
+                                    class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                    {% if settings.animations_reveal_on_scroll %}
+                                      data-cascade
+                                      style="--animation-order: {{ forloop.index }};"
+                                    {% endif %}
+                                  >
+                                    {% render 'card-product',
+                                      card_style: settings.card_style,
+                                      card_product: product,
+                                      media_aspect_ratio: settings.image_ratio,
+                                      show_secondary_image: settings.show_secondary_image,
+                                      show_vendor: settings.show_cardvendor,
+                                      section_id: section.id
+                                    %}
+                                  </li>
+                                {%- else -%}
+                                  {%- for i in (1..4) -%}
+                                    <li
+                                      class="grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                                      {% if settings.animations_reveal_on_scroll %}
+                                        data-cascade
+                                        style="--animation-order: {{ forloop.index }};"
+                                      {% endif %}
+                                    >
+                                      {%- assign placeholder_image = 'product-apparel-' | append: forloop.rindex -%}
+                                      {% render 'card-product',
+                                        card_style: settings.card_style,
+                                        show_vendor: settings.show_cardvendor,
+                                        placeholder_image: placeholder_image
+                                      %}
+                                    </li>
+                                  {%- endfor -%}
+                                {%- endfor -%}
+                              </ul>
+
+                            {% when 'mega-menu-tabcollections' %}
+                              <div class="mega-menu-collections megamenu_tabcoll mtab-{{ block.id }}">
+                                <div class="tabs-collapse">
+                                  {%- if block.settings.tab1 != blank -%}
+                                    {% if block.settings.tab1_url != blank %}
+                                      <span
+                                        ><a
+                                          href="{{block.settings.tab1_url}}"
+                                          class="tab-button active"
+                                          tabindex="0"
+                                          data-id="{{ block.id }}-1"
+                                        >
+                                          {{- block.settings.tab1 -}}
+                                        </a>
+                                      </span>
+                                    {% else %}
+                                      <span class="tab-button active" tabindex="0" data-id="{{ block.id }}-1">
+                                        {{- block.settings.tab1 -}}
+                                      </span>
+                                    {% endif %}
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab2 != blank -%}
+                                    {% if block.settings.tab2_url != blank %}
+                                      <span
+                                        ><a
+                                          href="{{ block.settings.tab2_url }}"
+                                          class="tab-link tab-button {% if block.settings.tab1 == blank %}active{% endif %}"
+                                          tabindex="0"
+                                          data-id="{{ block.id }}-2"
+                                        >
+                                          {{- block.settings.tab2 -}}
+                                        </a>
+                                      </span>
+                                    {% else %}
+                                      <span
+                                        class="tab-button {% if block.settings.tab1 == blank %}active{% endif %}"
+                                        tabindex="0"
+                                        data-id="{{ block.id }}-2"
+                                      >
+                                        {{- block.settings.tab2 -}}
+                                      </span>
+                                    {% endif %}
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab3 != blank -%}
+                                    {% if block.settings.tab3_url != blank %}
+                                      <span>
+                                        <a
+                                          href="{{ block.settings.tab3_url }}"
+                                          class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                          tabindex="0"
+                                          data-id="{{ block.id }}-3"
+                                        >
+                                          {{- block.settings.tab3 -}}
+                                        </a>
+                                      </span>
+                                    {% else %}
+                                      <span
+                                        class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                        tabindex="0"
+                                        data-id="{{ block.id }}-3"
+                                      >
+                                        {{- block.settings.tab3 -}}
+                                      </span>
+                                    {% endif %}
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab4 != blank -%}
+                                    {% if block.settings.tab4_url != blank %}
+                                      <span>
+                                        <a
+                                          href="{{block.settings.tab4_url}}"
+                                          class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                          tabindex="0"
+                                          data-id="{{ block.id }}-4"
+                                        >
+                                          {{- block.settings.tab4 -}}
+                                        </a>
+                                      </span>
+                                    {% else %}
+                                      <span
+                                        class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                        tabindex="0"
+                                        data-id="{{ block.id }}-4"
+                                      >
+                                        {{- block.settings.tab4 -}}
+                                      </span>
+                                    {% endif %}
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab5 != blank -%}
+                                    {% if block.settings.tab5_url != blank %}
+                                      <span>
+                                        <a
+                                          href="{{ block.settings.tab5_url }}"
+                                          class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                          tabindex="0"
+                                          data-id="{{ block.id }}-5"
+                                        >
+                                          {{- block.settings.tab5 -}}
+                                        </a>
+                                      </span>
+                                    {% else %}
+                                      <span
+                                        class="tab-button {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                        tabindex="0"
+                                        data-id="{{ block.id }}-5"
+                                      >
+                                        {{- block.settings.tab5 -}}
+                                      </span>
+                                    {% endif %}
+                                  {%- endif -%}
+                                </div>
+                                <div class="tab-content">
+                                  {%- if block.settings.tab1 != blank -%}
+                                    <div id="{{ block.id }}-1" class="tab-pane fade active" tabindex="-1">
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop custom-gap-list">
+                                        {%- for collection in block.settings.coll1 -%}
+                                          <div
+                                            class="custom-width-item grid__item collection-list__item"
+                                            {{ block.shopify_attributes }}
+                                          >
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% if block.settings.menutab_sample %}
+                                            {% assign limit = block.settings.columns_desktop %}
+                                            {%- for i in (1..limit) -%}
+                                              <div
+                                                class="grid__item collection-list__item"
+                                                {{ block.shopify_attributes }}
+                                              >
+                                                {%- assign placeholder_image_index = forloop.index0
+                                                  | modulo: 4
+                                                  | plus: 1
+                                                -%}
+                                                {%- assign placeholder_image = 'collection-apparel-'
+                                                  | append: placeholder_image_index
+                                                -%}
+                                                {% render 'card-collection',
+                                                  columns: columns,
+                                                  collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </div>
+                                            {%- endfor -%}
+                                          {% endif %}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+                                  {%- if block.settings.tab2 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-2"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll2 -%}
+                                          <div
+                                            class="custom-width-item grid__item collection-list__item"
+                                            {{ block.shopify_attributes }}
+                                          >
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% if block.settings.menutab_sample %}
+                                            {% assign limit = block.settings.columns_desktop %}
+                                            {%- for i in (1..limit) -%}
+                                              <div
+                                                class="grid__item collection-list__item"
+                                                {{ block.shopify_attributes }}
+                                              >
+                                                {%- assign placeholder_image_index = forloop.index0
+                                                  | modulo: 4
+                                                  | plus: 1
+                                                -%}
+                                                {%- assign placeholder_image = 'collection-apparel-'
+                                                  | append: placeholder_image_index
+                                                -%}
+                                                {% render 'card-collection',
+                                                  columns: columns,
+                                                  collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </div>
+                                            {%- endfor -%}
+                                          {% endif %}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab3 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-3"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll3 -%}
+                                          <div
+                                            class="custom-width-item grid__item collection-list__item"
+                                            {{ block.shopify_attributes }}
+                                          >
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% if block.settings.menutab_sample %}
+                                            {% assign limit = block.settings.columns_desktop %}
+                                            {%- for i in (1..limit) -%}
+                                              <div
+                                                class="grid__item collection-list__item"
+                                                {{ block.shopify_attributes }}
+                                              >
+                                                {%- assign placeholder_image_index = forloop.index0
+                                                  | modulo: 4
+                                                  | plus: 1
+                                                -%}
+                                                {%- assign placeholder_image = 'collection-apparel-'
+                                                  | append: placeholder_image_index
+                                                -%}
+                                                {% render 'card-collection',
+                                                  columns: columns,
+                                                  collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </div>
+                                            {%- endfor -%}
+                                          {% endif %}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab4 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-4"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll4 -%}
+                                          <div
+                                            class="custom-width-item grid__item collection-list__item"
+                                            {{ block.shopify_attributes }}
+                                          >
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% if block.settings.menutab_sample %}
+                                            {% assign limit = block.settings.columns_desktop %}
+                                            {%- for i in (1..limit) -%}
+                                              <div
+                                                class="grid__item collection-list__item"
+                                                {{ block.shopify_attributes }}
+                                              >
+                                                {%- assign placeholder_image_index = forloop.index0
+                                                  | modulo: 4
+                                                  | plus: 1
+                                                -%}
+                                                {%- assign placeholder_image = 'collection-apparel-'
+                                                  | append: placeholder_image_index
+                                                -%}
+                                                {% render 'card-collection',
+                                                  columns: columns,
+                                                  collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </div>
+                                            {%- endfor -%}
+                                          {% endif %}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+
+                                  {%- if block.settings.tab5 != blank -%}
+                                    <div
+                                      id="{{ block.id }}-5"
+                                      class="tab-pane fade {% if block.settings.tab1 == blank and block.settings.tab2 == blank and block.settings.tab3 == blank and block.settings.tab4 == blank %}active{% endif %}"
+                                      tabindex="-1"
+                                    >
+                                      <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                        {%- for collection in block.settings.coll5 -%}
+                                          <div
+                                            class="custom-width-item grid__item collection-list__item"
+                                            {{ block.shopify_attributes }}
+                                          >
+                                            {%- assign placeholder_image_index = forloop.index0
+                                              | modulo: 4
+                                              | plus: 1
+                                            -%}
+                                            {%- assign placeholder_image = 'collection-apparel-'
+                                              | append: placeholder_image_index
+                                            -%}
+                                            {% render 'card-collection',
+                                              card_collection: collection,
+                                              media_aspect_ratio: block.settings.image_ratio,
+                                              coll_card_style: block.settings.collection_card_style,
+                                              collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                              collection_card_color_scheme: block.settings.collection_card_color_scheme,
+                                              columns: columns,
+                                              placeholder_image: placeholder_image
+                                            %}
+                                          </div>
+                                        {%- else -%}
+                                          {% if block.settings.menutab_sample %}
+                                            {% assign limit = block.settings.columns_desktop %}
+                                            {%- for i in (1..limit) -%}
+                                              <div
+                                                class="grid__item collection-list__item"
+                                                {{ block.shopify_attributes }}
+                                              >
+                                                {%- assign placeholder_image_index = forloop.index0
+                                                  | modulo: 4
+                                                  | plus: 1
+                                                -%}
+                                                {%- assign placeholder_image = 'collection-apparel-'
+                                                  | append: placeholder_image_index
+                                                -%}
+                                                {% render 'card-collection',
+                                                  columns: columns,
+                                                  collection_card_text_alignment: block.settings.collection_card_text_alignment,
+                                                  placeholder_image: placeholder_image
+                                                %}
+                                              </div>
+                                            {%- endfor -%}
+                                          {% endif %}
+                                        {%- endfor -%}
+                                      </div>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                              {%- style -%}
+                                .mtab-{{ block.id }} .tabs-collapse span.active, .mtab-{{ block.id }} .tabs-collapse span:hover {
+                                  color: {{ block.settings.activetab_color }};
+                                  border-bottom: 0.1rem solid {{ block.settings.activetab_color }};
+
+                                }
+                              {%- endstyle -%}
+                              <script>
+                                function megaTab() {
+                                  const tabs = document.querySelector('.mtab-{{ block.id }}');
+                                  const tabButton = document.querySelectorAll('.mtab-{{ block.id }} .tab-button');
+                                  const contents = document.querySelectorAll('.mtab-{{ block.id }} .tab-pane');
+                                  tabs.onclick = (e) => {
+                                    onTabclick(e);
+                                  };
+                                  tabs.addEventListener('keydown', (e) => {
+                                    if (e.keyCode === 13) {
+                                      onTabclick(e);
+                                    }
+                                  });
+
+                                  function onTabclick(e) {
+                                    const id = e.target.dataset.id;
+                                    if (id) {
+                                      tabButton.forEach((btn) => {
+                                        btn.classList.remove('active');
+                                      });
+                                      e.target.classList.add('active');
+
+                                      contents.forEach((content) => {
+                                        content.classList.remove('active');
+                                      });
+                                      const element = document.getElementById(id);
+                                      element.classList.add('active');
+                                    }
+                                  }
+                                }
+                                document.addEventListener('shopify:section:load', megaTab);
+                                megaTab();
+                              </script>
+
+                            {% when 'mega-menu-tabinfo' %}
+                              <div class="mega-menu-tabinfo grid">
+                                <div class="grid__item tabinfo_left">
+                                  {%- if block.settings.coll_headingleft != blank -%}
+                                    <h3 class="info_heading">{{ block.settings.coll_headingleft }}</h3>
+                                  {%- endif -%}
+                                  <div class="grid grid--{{ block.settings.columns_desktop }}-col-desktop">
+                                    {%- for collection in block.settings.info_coll -%}
+                                      <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                        {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                        {%- assign placeholder_image = 'collection-apparel-'
+                                          | append: placeholder_image_index
+                                        -%}
+                                        {% render 'card-collection',
+                                          card_collection: collection,
+                                          media_aspect_ratio: block.settings.image_ratio,
+                                          coll_card_style: block.settings.infocall_card_style,
+                                          collection_card_text_alignment: block.settings.infocall_alignment,
+                                          collection_card_color_scheme: block.settings.infocall_color_scheme,
+                                          columns: columns,
+                                          placeholder_image: placeholder_image
+                                        %}
+                                      </div>
+                                    {%- else -%}
+                                      {% assign limit = block.settings.columns_desktop %}
+                                      {%- for i in (1..limit) -%}
+                                        <div class="grid__item collection-list__item" {{ block.shopify_attributes }}>
+                                          {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                          {%- assign placeholder_image = 'collection-apparel-'
+                                            | append: placeholder_image_index
+                                          -%}
+                                          {% render 'card-collection',
+                                            columns: columns,
+                                            collection_card_text_alignment: block.settings.infocall_alignment,
+                                            placeholder_image: placeholder_image
+                                          %}
+                                        </div>
+                                      {%- endfor -%}
+                                    {%- endfor -%}
+                                  </div>
+                                </div>
+                                <div class="grid__item tabinfo_right cinfo-{{ block.id }}">
+                                  <div>
+                                    {%- if block.settings.info_heading != blank -%}
+                                      <h3 class="info_heading">{{ block.settings.info_heading }}</h3>
+                                    {%- endif -%}
+
+                                    <ul class="tabinfo_ul">
+                                      {%- if block.settings.info_text1 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon1 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon1 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text1 }}</span>
+                                        </li>
+                                      {%- endif -%}
+
+                                      {%- if block.settings.info_text2 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon2 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon2 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text2 }}</span>
+                                        </li>
+                                      {%- endif -%}
+
+                                      {%- if block.settings.info_text3 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon3 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon3 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text3 }}</span>
+                                        </li>
+                                      {%- endif -%}
+
+                                      {%- if block.settings.info_text4 != blank -%}
+                                        <li>
+                                          {%- if block.settings.info_icon4 != 'none' -%}
+                                            <span class="tabinfo_svg">
+                                              {%- render 'icon-accordion', icon: block.settings.info_icon4 -%}
+                                            </span>
+                                          {%- endif -%}
+                                          <span>{{ block.settings.info_text4 }}</span>
+                                        </li>
+                                      {%- endif -%}
+                                    </ul>
+                                  </div>
+                                  <div class="tabinfo_bottom">
+                                    {%- if block.settings.info_heading2 != blank -%}
+                                      <h3 class="info_heading">{{ block.settings.info_heading2 }}</h3>
+                                    {%- endif -%}
+                                    {%- if block.settings.fcontactno != blank -%}
+                                      <div class="info_contact">
+                                        <a href="tel:{{ block.settings.fcontactno }}">
+                                          {%- render 'icon-call' -%}
+                                          <span>{{ block.settings.fcontactno }}</span></a
+                                        >
+                                      </div>
+                                    {%- endif -%}
+                                    {%- if block.settings.fcontactid != blank -%}
+                                      <div class="info_mail">
+                                        <a href="mailto:{{ block.settings.fcontactid }}">
+                                          {%- render 'icon-envelope' -%}
+                                          <span>{{ block.settings.fcontactid }}</span></a
+                                        >
+                                      </div>
+                                    {%- endif -%}
+                                  </div>
+                                </div>
+
+                                {%- style -%}
+                                  .cinfo-{{ block.id }} .tabinfo_svg {
+                                    background: {{ block.settings.icon_bgcolor }};
+                                    color: {{ block.settings.icon_textcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_svg svg {
+                                    fill: {{ block.settings.icon_textcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg, .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color {
+                                    fill: none;
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_svg svg.stroke_color path {
+                                    stroke: {{ block.settings.icon_textcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_bottom svg {
+                                    fill: {{ block.settings.icon_bottomcolor }};
+                                  }
+                                  .cinfo-{{ block.id }} .tabinfo_bottom .info_mail svg {
+                                    stroke: {{ block.settings.icon_bottomcolor }};
+                                  }
+                                {%- endstyle -%}
+                              </div>
+                          {%- endcase -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <a
+              id="HeaderMenu-{{ link.handle }}"
+              href="{{ link.url }}"
+              class="header__menu-item list-menu__item link focus-inset {{ dmenu_size }} {% if uppercase_menu %}uppercase{% endif %} {{ high_title_color }}"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              <span
+                {%- if link.current %}
+                  class="header__active-menu-item"
+                {% endif %}
+              >
+                {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+                <span>{{- link.title | escape -}}</span>
+                {%- if hlink_icon -%}{% render 'icon-highlight-star' %}{%- endif -%}
+              </span>
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+        {%- style -%}
+                    #HeaderMenu-sale.high_link *, #HeaderMenu-sale.high_link .header__active-menu-item {
+              color: #e60000;
+              stroke: red;
+          }
+                    #HeaderMenu-{{ link.handle }}.high_link .header_iconshine {
+                      fill: {{ hlink_color }};
+                    }
+        {%- endstyle -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</desktop-webi-menu>
+<script>
+  {% comment %} function checkAndApplyMargin() {
+    let div = document.querySelector('sticky-header');
+    let height = div.offsetHeight;
+    console.log("height div: ", height);
+
+    height = height - 60;
+
+    console.log("height div after: ", height);
+
+    const menu = document.querySelector('desktop-webi-menu');
+    const menulist = document.querySelector('.main-menu');
+    const submenus = document.querySelectorAll('.resize-header__submenu');
+
+    const menuWidth = parseFloat(getComputedStyle(menu).width);
+    const menulistWidth = parseFloat(getComputedStyle(menulist).width);
+
+    const container = document.querySelector('.main-menu');
+
+    submenus.forEach((submenu) => {
+      submenu.style.marginTop = '30px';
+    });
+
+    if (menuWidth === menulistWidth) {
+      submenus.forEach((submenu) => (submenu.style.marginTop = `${height}px`));
+      const children = Array.from(container.children);
+
+      const firstRowTop = children[0].getBoundingClientRect().top;
+      console.log(firstRowTop, "firstRowTop");
+
+      children.forEach((child) => {
+        if (child.getBoundingClientRect().top > firstRowTop) {
+          console.log(child.getBoundingClientRect().top, "nextRowTop");
+          const collectionName = child.getAttribute('collection_tab');
+          console.log(collectionName, "collectionName");
+
+          submenus.forEach((submenu) => {
+            if (submenu.getAttribute('collection_tab') === collectionName) {
+              submenu.style.marginTop = '20px';
+            }
+          });
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', checkAndApplyMargin); {% endcomment %}
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      checkAndApplyMargin();
+    }, 200); // Adjust delay as needed
+  });
+</script>

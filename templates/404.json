@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "padding_top": 48,
+        "padding_bottom": 80
+      }
+    },
+    "featured_collection_MVaHYq": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "caption": "",
+        "title": "Featured collection",
+        "headcolor": "#df6334",
+        "heading_size": "h1",
+        "heading_position": "left",
+        "description": "",
+        "show_description": false,
+        "description_style": "medium",
+        "show_section_count": false,
+        "timercolor": "#df6334",
+        "wb_enddate": "",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_row_on_desktop": "1",
+        "disable_fquickview": false,
+        "disable_faddcart": false,
+        "disable_fvariant": false,
+        "show_number": true,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_view_all": true,
+        "view_label": "See more",
+        "view_all_style": "link",
+        "view_button_pos": "top",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured_collection_MVaHYq"
+  ]
+}

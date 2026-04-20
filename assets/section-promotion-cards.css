@@ -1,0 +1,94 @@
+.border_pcard .promocard_inr {
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  border-radius: var(--image-radius);
+}
+.border_pcard .promo_card_content {
+  padding: 15px;
+}
+.promo_card_space .grid__item .ratio {
+  padding: 15px;
+  border-radius: var(--image-radius);
+}
+.promo_card_space .card_number {
+  top: 15px;
+}
+.promo_card .dummysvg svg {
+  width: 100%;
+  height: 100%;
+}
+.promo_card .grid__item a:not([href]) {
+  cursor: unset;
+}
+.promo_card .media {
+  width: 100%;
+  background-color: transparent;
+}
+.promo_subhead {
+  margin-top: 1.5rem;
+  word-break: break-word;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+}
+.promo_head {
+  margin-bottom: 0;
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  letter-spacing: var(--font-body-spacing);
+  margin-top: 15px;
+  /* text-transform: uppercase; */
+}
+.promo_head.small {
+  font-size: calc(var(--font-body-scale) * 14px);
+}
+.promo_head.medium {
+  font-size: calc(var(--font-body-scale) * 16px);
+}
+.promo_head.large {
+  font-size: calc(var(--font-body-scale) * 18px);
+}
+.promo_head.extra_large {
+  font-size: calc(var(--font-body-scale) * 20px);
+}
+.swipepromo .grid {
+  margin-bottom: 0;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  /* .promo_card .grid__item {
+    width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+  } */
+}
+@media (max-width: 767px) {
+  .promo_card .gridmobile--2 .grid__item {
+    width: calc(50% - var(--grid-mobile-horizontal-spacing) * 1 / 2);
+    max-width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .promo_subhead {
+    margin-top: 1.5rem;
+    word-break: break-word;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .promo_head.extra_large {
+    font-size: calc(var(--font-body-scale) * 16px);
+  }
+  .promo_head.small {
+    font-size: calc(var(--font-body-scale) * 13px);
+  }
+  .promo_head.medium {
+    font-size: calc(var(--font-body-scale) * 14px);
+  }
+  .promo_head.large {
+    font-size: calc(var(--font-body-scale) * 16px);
+  }
+  .promo_head {
+    margin-top: 5px;
+  }
+  .promo_card .gridmobile--1 .grid__item {
+    width: 100%;
+    max-width: 100%;
+  }
+}

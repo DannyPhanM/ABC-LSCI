@@ -1,0 +1,61 @@
+{%- if settings.sbottom_bar == true -%}
+  <div class="sticky_bottombar color-{{ settings.sbarcolor_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    
+    {%- if settings.stickybar_icon1 != 'none' or settings.stickybar_text1 != blank -%}
+      {%- if settings.stickybar_link1 != blank -%}<a href="{{ settings.stickybar_link1 }}">{%- endif -%}
+        <div class="sbarinner">
+          {%- if settings.stickybar_icon1 != 'none' -%}{% render 'icon-accordion', icon: settings.stickybar_icon1 %}{%- endif -%}
+          {%- if settings.stickybar_text1 != blank -%}
+            <span>{{ settings.stickybar_text1 }}</span>
+          {%- endif -%}
+        </div>
+      {%- if settings.stickybar_link1 != blank -%}</a>{%- endif -%}
+    {%- endif -%}
+    
+
+    {%- if settings.stickybar_icon2 != 'none' or settings.stickybar_text2 != blank -%}
+      {%- if settings.cart_type == "drawer" and template != 'cart' -%}
+        <div class="sbarinner" data-action="mobile_cart">
+          {%- if settings.stickybar_icon2 != 'none' -%}{% render 'icon-accordion', icon: settings.stickybar_icon2 %}{%- endif -%}
+          {%- if settings.stickybar_text2 != blank -%}
+            <span>{{ settings.stickybar_text2 }}</span>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <a href="{{ routes.cart_url }}">
+          <div class="sbarinner">
+            {%- if settings.stickybar_icon2 != 'none' -%}{% render 'icon-accordion', icon: settings.stickybar_icon2 %}{%- endif -%}
+            {%- if settings.stickybar_text2 != blank -%}
+              <span>{{ settings.stickybar_text2 }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+
+
+    {%- if settings.stickybar_icon3 != 'none' or settings.stickybar_text3 != blank -%}
+      {%- if settings.stickybar_link3 != blank -%}<a href="{{ settings.stickybar_link3 }}">{%- endif -%}
+        <div class="sbarinner">
+          {%- if settings.stickybar_icon3 != 'none' -%}{% render 'icon-accordion', icon: settings.stickybar_icon3 %}{%- endif -%}
+          {%- if settings.stickybar_text3 != blank -%}
+            <span>{{ settings.stickybar_text3 }}</span>
+          {%- endif -%}
+        </div>
+      {%- if settings.stickybar_link3 != blank -%}</a>{%- endif -%}
+    {%- endif -%}
+
+    {%- if settings.stickybar_icon4 != 'none' or settings.stickybar_text4 != blank -%}
+      {%- if settings.stickybar_link4 != blank -%}<a href="{{ settings.stickybar_link4 }}">{%- endif -%}
+        <div class="sbarinner">
+          {%- if settings.stickybar_icon4 != 'none' -%}{% render 'icon-accordion', icon: settings.stickybar_icon4 %}{%- endif -%}
+          {%- if settings.stickybar_text4 != blank -%}
+            <span>{{ settings.stickybar_text4 }}</span>
+          {%- endif -%}
+        </div>
+      {%- if settings.stickybar_link4 != blank -%}</a>{%- endif -%}
+    {%- endif -%}
+
+
+  </div>
+{%- endif -%}

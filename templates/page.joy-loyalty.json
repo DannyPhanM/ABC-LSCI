@@ -1,0 +1,485 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_position": "center",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "17656989090aee985b": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_161b481_gmAdLb": {
+          "type": "ai_gen_block_161b481",
+          "settings": {
+            "page_width": "full_width",
+            "custom_page_width": 1200,
+            "layout_mode": "full_page",
+            "corner_radius": 0,
+            "desktop_image": "shopify://shop_images/loyalty_page_3800_x_800_px_1.jpg",
+            "mobile_image": "shopify://shop_images/loyalty_page_3800_x_800_px_12.jpg",
+            "image_height_mode": "adapt",
+            "custom_height_value": 500,
+            "custom_height_unit": "px",
+            "image_link": "https://abc-mart.com.vn/account/register",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "heading": "",
+            "heading_size": 48,
+            "subheading": "",
+            "subheading_size": 18,
+            "text_color": "#ffffff",
+            "content_position": "center",
+            "content_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "button_bg_color": "#78d64b",
+            "button_text_color": "#ffffff",
+            "button_radius": 26,
+            "padding_top_desktop": 40,
+            "padding_bottom_desktop": 76,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 60,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_161b481_gmAdLb"
+      ],
+      "settings": {}
+    },
+    "promotion_cards_QqtTMf": {
+      "type": "promotion-cards",
+      "blocks": {
+        "social_image_fExAM7": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/CH_NG_TRINH_THANH_VIEN_1_91bab138-70fe-44bc-b945-cdcb56ca359a.jpg",
+            "link": "https://abc-mart.com.vn/account/login",
+            "subheading": "",
+            "heading": "<a href=\"https://abc-mart.com.vn/account/login\" title=\"https://abc-mart.com.vn/account/login\"><strong>Đăng ký tài khoản thành công: nhận ngay 200 điểm, đổi voucher 200K. Áp dụng cho tất cả sản phẩm trừ limited</strong></a>",
+            "uppercase_head": false
+          }
+        },
+        "social_image_TkMmzQ": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/loyalty_page_1_2.jpg",
+            "link": "https://abc-mart.com.vn/account/login",
+            "subheading": "",
+            "heading": "<a href=\"https://abc-mart.com.vn/account/login\" title=\"https://abc-mart.com.vn/account/login\"><strong>Giới thiệu bạn bè cùng trở thành thành viên ABC-MART để nhận ngay voucher ưu đãi 10%</strong></a>",
+            "uppercase_head": false
+          }
+        }
+      },
+      "block_order": [
+        "social_image_fExAM7",
+        "social_image_TkMmzQ"
+      ],
+      "name": "t:sections.prmotion_card.name",
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "remove_top_space": false,
+        "title": "QUYỀN LỢI THÀNH VIÊN",
+        "headcolor": "#50b122",
+        "heading_size": "h0",
+        "heading_position": "center",
+        "view_label": "",
+        "view_link": "",
+        "view_all_style": "link",
+        "stretch_img": true,
+        "stretch_color": "#d7dcff",
+        "display_type": "grid",
+        "columns_desktop": 2,
+        "columns_mobile": "1",
+        "image_ratio": "adapt",
+        "border_around": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "text_size": "large",
+        "text_alignment": "center",
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "padding_top": 0,
+        "padding_bottom": 80
+      }
+    },
+    "promotion_cards_U6GpW7": {
+      "type": "promotion-cards",
+      "blocks": {
+        "social_image_zpV66h": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/loyalty_page_3800_x_800_px_1_f913c009-66e8-4207-a0bb-f66fed6f8017.jpg",
+            "link": "https://abc-mart.com.vn/account/login",
+            "subheading": "BƯỚC 1",
+            "heading": "<strong>Click </strong><a href=\"https://abc-mart.com.vn/account/login\" title=\"https://abc-mart.com.vn/account/login\"><strong>Tạo tài khoản</strong></a><strong> để đi đến trang đăng ký thành viên</strong>",
+            "uppercase_head": false
+          }
+        },
+        "social_image_7PCxrr": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/loyalty_page_1_3.jpg",
+            "link": "https://abc-mart.com.vn/account/login",
+            "subheading": "BƯỚC 2",
+            "heading": "<strong>Hãy nhập đầy đủ thông tin của bạn và \"</strong><a href=\"https://abc-mart.com.vn/account/login\" title=\"https://abc-mart.com.vn/account/login\"><strong>tạo ngay</strong></a><strong>\" tài khoản nhé</strong>",
+            "uppercase_head": false
+          }
+        },
+        "social_image_HpriYz": {
+          "type": "social_image",
+          "settings": {
+            "image": "shopify://shop_images/loyalty_page_3800_x_800_px_4.jpg",
+            "link": "https://abc-mart.com.vn/account/login",
+            "subheading": "BƯỚC 3",
+            "heading": "Kích hoạt tài khoản, đổi voucher và thỏa sức mua sắm tại ABC-MART",
+            "uppercase_head": false
+          }
+        }
+      },
+      "block_order": [
+        "social_image_zpV66h",
+        "social_image_7PCxrr",
+        "social_image_HpriYz"
+      ],
+      "name": "t:sections.prmotion_card.name",
+      "settings": {
+        "color_scheme": "",
+        "layout": "grid",
+        "remove_top_space": false,
+        "title": "CÁCH THỨC THAM GIA",
+        "headcolor": "#50b122",
+        "heading_size": "h0",
+        "heading_position": "center",
+        "view_label": "",
+        "view_link": "",
+        "view_all_style": "link",
+        "stretch_img": true,
+        "stretch_color": "#d7dcff",
+        "display_type": "grid",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "image_ratio": "adapt",
+        "border_around": false,
+        "show_number": false,
+        "show_number_bg": "#ffffff",
+        "show_number_text": "#000000",
+        "show_number_border": "#ffffff",
+        "number_radius": 40,
+        "text_size": "medium",
+        "text_alignment": "left",
+        "pagination_style": "arrows",
+        "disable_arrow": true,
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "padding_top": 0,
+        "padding_bottom": 80
+      }
+    },
+    "blocks_UjR4AG": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a2ebed6_EApWcJ": {
+          "type": "ai_gen_block_a2ebed6",
+          "settings": {
+            "heading": "<strong>HƯỚNG DẪN QUY ĐỔI ĐIỂM THÀNH VIÊN</strong>",
+            "content": "",
+            "container_width": 1200,
+            "text_alignment": "center",
+            "background_color": "#ffffff",
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "link_color": "#78d64b",
+            "link_hover_color": "#000000",
+            "heading_size": 36,
+            "heading_size_mobile": 24,
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "heading_spacing": 0,
+            "paragraph_spacing": 0,
+            "padding_top": 5,
+            "padding_bottom": 20,
+            "padding_horizontal": 20,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 20,
+            "padding_horizontal_mobile": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a2ebed6_EApWcJ"
+      ],
+      "name": "TITLE",
+      "settings": {}
+    },
+    "blocks_GrmAjG": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_161b481_mJbcbx": {
+          "type": "ai_gen_block_161b481",
+          "settings": {
+            "page_width": "full_width",
+            "custom_page_width": 1200,
+            "layout_mode": "full_page",
+            "corner_radius": 0,
+            "desktop_image": "shopify://shop_images/loyalty_page_3800_x_800_px_9.jpg",
+            "mobile_image": "shopify://shop_images/loyalty_page_1.jpg",
+            "image_height_mode": "adapt",
+            "custom_height_value": 500,
+            "custom_height_unit": "px",
+            "image_link": "https://abc-mart.com.vn/account/register",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "heading": "",
+            "heading_size": 48,
+            "subheading": "",
+            "subheading_size": 18,
+            "text_color": "#ffffff",
+            "content_position": "center",
+            "content_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "button_bg_color": "#78d64b",
+            "button_text_color": "#ffffff",
+            "button_radius": 26,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 60,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 60,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_161b481_mJbcbx"
+      ],
+      "settings": {}
+    },
+    "blocks_JDTGYg": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a2ebed6_XPN39b": {
+          "type": "ai_gen_block_a2ebed6",
+          "settings": {
+            "heading": "<strong>HƯỚNG DẪN GIỚI THIỆU BẠN BÈ NHẬN ƯU ĐÃI 10% </strong>",
+            "content": "",
+            "container_width": 1200,
+            "text_alignment": "center",
+            "background_color": "#ffffff",
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "link_color": "#78d64b",
+            "link_hover_color": "#000000",
+            "heading_size": 36,
+            "heading_size_mobile": 24,
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "heading_spacing": 0,
+            "paragraph_spacing": 0,
+            "padding_top": 0,
+            "padding_bottom": 20,
+            "padding_horizontal": 20,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 20,
+            "padding_horizontal_mobile": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a2ebed6_XPN39b"
+      ],
+      "name": "TITLE",
+      "settings": {}
+    },
+    "blocks_MnPKMd": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_161b481_MbhJrN": {
+          "type": "ai_gen_block_161b481",
+          "settings": {
+            "page_width": "full_width",
+            "custom_page_width": 1200,
+            "layout_mode": "full_page",
+            "corner_radius": 0,
+            "desktop_image": "shopify://shop_images/loyalty_page_3800_x_800_px_11.jpg",
+            "mobile_image": "shopify://shop_images/loyalty_page_1_1.jpg",
+            "image_height_mode": "adapt",
+            "custom_height_value": 500,
+            "custom_height_unit": "px",
+            "image_link": "https://abc-mart.com.vn/account/register",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "heading": "",
+            "heading_size": 48,
+            "subheading": "",
+            "subheading_size": 18,
+            "text_color": "#ffffff",
+            "content_position": "center",
+            "content_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "button_bg_color": "#78d64b",
+            "button_text_color": "#ffffff",
+            "button_radius": 26,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 60,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 20,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_161b481_MbhJrN"
+      ],
+      "settings": {}
+    },
+    "single_banner_LF9bmx": {
+      "type": "single-banner",
+      "blocks": {
+        "heading_Ni3b3z": {
+          "type": "heading",
+          "settings": {
+            "heading": "CHƯƠNG TRÌNH KHÁCH HÀNG THÂN THIẾT",
+            "heading_size": "hxl",
+            "uppercase_heading": true
+          }
+        },
+        "text_FGpBAE": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Đăng ký thành viên</strong> ABC-MART Việt Nam, <strong>nhận ngay 200 điểm</strong> mà chưa cần phát sinh đơn hàng!",
+            "text_size": "medium"
+          }
+        },
+        "buttons_CNtQ8K": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Tham gia ngay",
+            "button_link": "https://abc-mart.com.vn/account/register",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Ni3b3z",
+        "text_FGpBAE",
+        "buttons_CNtQ8K"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "layout": "grid",
+        "image": "shopify://shop_images/final_final.jpg",
+        "clickable_image": false,
+        "clickable_image_link": "",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "content_bg": true,
+        "content_bg_opacity": 50,
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "mobile_content_position": "center",
+        "show_text_below": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_text_4AxbDL": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_yU6Tit": {
+          "type": "heading",
+          "settings": {
+            "heading": "GIỚI THIỆU BẠN BÈ",
+            "heading_size": "h0"
+          }
+        },
+        "text_jHhFyn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Giới thiệu bạn bè cùng trở thành viên ABC-MART để nhận ngay voucher ưu đãi 10%</p><p><strong>- Khách mua hàng</strong> bằng link giới thiệu sẽ được hưởng <strong>ưu đãi 10% trên đơn hàng</strong>.</p><p><strong>- Người giới thiệu</strong> được tặng phần thưởng là <strong>ưu đãi 10% khi đơn hàng</strong> giới thiệu được ghi nhận<strong> thành công</strong>.</p>"
+          }
+        },
+        "button_BeTJri": {
+          "type": "button",
+          "settings": {
+            "button_label": "Tham Gia",
+            "button_link": "https://abc-mart.com.vn/account/login",
+            "button_style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "heading_yU6Tit",
+        "text_jHhFyn",
+        "button_BeTJri"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "page_layout": "grid",
+        "image": "shopify://shop_images/LOGIN__SIGN_UP__FORGOT_PW.jpg",
+        "height": "adapt",
+        "desktop_image_width": 50,
+        "layout": "image_first",
+        "content_color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "desktop_content_layout": "no_overlap",
+        "mobile_content_alignment": "left",
+        "image_behavior": "none",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17656989090aee985b",
+    "promotion_cards_QqtTMf",
+    "promotion_cards_U6GpW7",
+    "blocks_UjR4AG",
+    "blocks_GrmAjG",
+    "blocks_JDTGYg",
+    "blocks_MnPKMd",
+    "single_banner_LF9bmx",
+    "image_with_text_4AxbDL"
+  ]
+}

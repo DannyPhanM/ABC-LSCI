@@ -1,0 +1,71 @@
+.policy-tabs--container {
+  display: flex;
+  margin-bottom: 2.8rem;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.policy-tabs--container::-webkit-scrollbar {
+  display: none;
+}
+
+.policy-tab--title {
+  padding: 1px 4px;
+  font-family: Lato_Regular !important;
+  color: #898989;
+  margin-right: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  background-color: transparent;
+  border-width: 0;
+  cursor: pointer;
+  min-width: fit-content;
+}
+.policy-tab--title:hover {
+  color: #78d64b;
+}
+.policy-tab--title[active] {
+  color: #78d64b;
+  border-bottom: 1px solid #78d64b !important;
+  font-weight: 700;
+}
+
+.policy-content h2{
+  font-weight: 700;
+  font-size: 18px;
+}
+.policy-content p {
+  color: #444444;
+}
+.scrollale-page {
+  overflow: scroll;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title-policy {
+  font-size: 24px;
+  font-weight: 600;
+}
+@media screen and (min-width: 768px) {
+  .title-policy {
+    font-size: 36px;
+    font-weight: 600;
+  }
+  .policy-tab--title {
+    color: #898989;
+    margin-right: 32px;
+    font-weight: 400;
+    font-size: 16px;
+    background-color: transparent;
+    border-width: 0;
+    cursor: pointer;
+    min-width: fit-content;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .policy-tabs--container {
+    justify-content: center;
+  }
+}
