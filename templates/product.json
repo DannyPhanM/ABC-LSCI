@@ -86,19 +86,27 @@
             "divider_variant": true
           }
         },
+        "size_guide_box_LjiTGY": {
+          "type": "size_guide_box",
+          "settings": {
+            "show_note": true,
+            "description": "<p>Vui lòng chọn size theo giới tính:<br/>Men (nam/unisex), Women (nữ). FILA dùng size tính bằng cm.</p>",
+            "text": "Size guide",
+            "page": ""
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {
-            "page": "",
-            "text": "Size guide",
             "divider_qty": true
           }
         },
         "puco_blocks_features_features_01_CVUaTF": {
           "type": "shopify://apps/puco-blocks/blocks/features-features-01/6ea1fa34-d588-43da-abbd-c69bdc1e3b3b",
+          "disabled": true,
           "settings": {
             "feature_svg": "",
-            "feature_content": "<b>HƯỚNG DẪN CHỌN SIZE CHÍNH XÁC:</b><br>+Sản phẩm <b>NAM/UNISEX</b>: size <b>MEN</b><br>+Sản phẩm <b>NỮ</b>: size <b>WOMEN</b><br>+Sản phẩm <b>FILA</b>: size <b>CM</b>",
+            "feature_content": "HƯỚNG DẪN CHỌN SIZE CHÍNH XÁC:+Sản phẩm NAM/UNISEX: size MEN+Sản phẩm NỮ: size WOMEN+Sản phẩm FILA: size CM",
             "icon_size": 20,
             "feature_size": 16,
             "icon_color": "#137e2d",
@@ -112,7 +120,8 @@
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "show_gift_card_recipient": true,
+            "divider_qty": false
           }
         },
         "boostly_product_page_enhancer_feature_list_ENHEJM": {
@@ -148,14 +157,16 @@
         "icon_with_text_Gx4846": {
           "type": "icon-with-text",
           "settings": {
-            "icon_1": "freeshipping",
-            "heading_1": "Miễn phí ship cho đơn hàng từ 3 triệu",
+            "icon_1": "cardpayment",
+            "heading_1": "Phương thức thanh toán tiện lợi và an toàn",
+            "show_payment_icons_1": true,
+            "payment_icons_list": "visa,master,paypal,discover",
             "icon_2": "cardpayment",
-            "heading_2": "Phương thức thanh toán tiện lợi và an toàn",
+            "heading_2": "Miễn phí ship cho đơn hàng từ 3 triệu",
             "icon_3": "return",
             "heading_3": "Hỗ trợ đổi trả trong 7 ngày",
-            "icon_4": "cardloyalty",
-            "heading_4": "Ưu đãi khi thăng hạng thành viên",
+            "icon_4": "likeauthentic",
+            "heading_4": "",
             "heading_5": "",
             "heading_6": ""
           }
@@ -198,6 +209,7 @@
         },
         "share_button_6N3fmq": {
           "type": "share_button",
+          "disabled": true,
           "settings": {
             "share_text": "Chia Sẻ",
             "share_facebook": true,
@@ -236,6 +248,7 @@
         "pareto_volume_discount_app_block_WmgMyD",
         "pareto_order_limit_app_block_QJbQXm",
         "variant_picker",
+        "size_guide_box_LjiTGY",
         "quantity_selector",
         "puco_blocks_features_features_01_CVUaTF",
         "buy_buttons",
@@ -260,7 +273,7 @@
         "constrain_to_viewport": true,
         "media_fit": "cover",
         "media_position": "left",
-        "gallery_layout": "thumbnail_slider",
+        "gallery_layout": "left_slider",
         "thumbimage_ratio": "square",
         "image_zoom": "lightbox",
         "hide_variants": false,
