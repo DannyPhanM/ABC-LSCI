@@ -1,0 +1,103 @@
+.footer-trust-bar {
+  background-color: #f4f4f4; /* Light grey from the image */
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.footer-trust-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-trust-bar__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 25%;
+  padding: 1.5rem 1rem;
+  position: relative;
+  gap: 1rem;
+}
+
+/* Vertical dividers for desktop */
+@media screen and (min-width: 990px) {
+  .footer-trust-bar__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background-color: rgba(var(--color-foreground), 0.15);
+  }
+}
+
+.footer-trust-bar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.footer-trust-bar__icon svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: rgb(var(--color-foreground));
+}
+
+.footer-trust-bar__icon svg path {
+  fill: currentColor;
+}
+
+.footer-trust-bar__icon svg[fill="none"] path {
+  fill: none;
+  stroke: currentColor;
+}
+
+.footer-trust-bar__text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgb(var(--color-foreground));
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 989px) {
+  .footer-trust-bar__item {
+    flex: 1 1 50%;
+    padding: 1.2rem 1rem;
+  }
+  
+  .footer-trust-bar__item:nth-child(odd)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background-color: rgba(var(--color-foreground), 0.15);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .footer-trust-bar__item {
+    flex: 1 1 100%;
+    padding: 1rem;
+    justify-content: flex-start;
+    padding-left: 2rem;
+  }
+  
+  .footer-trust-bar__item::after {
+    display: none !important;
+  }
+  
+  .footer-trust-bar__item:not(:last-child) {
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.05);
+  }
+  
+  .footer-trust-bar__text {
+    font-size: 1.1rem;
+  }
+}

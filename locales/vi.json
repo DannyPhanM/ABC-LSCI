@@ -127,6 +127,7 @@
       "on_sale": "Giảm giá",
       "product_variants": "Mẫu mã sản phẩm",
       "color": "Màu sắc",
+      "size_chart_note": "Ghi chú",
       "quantity": {
         "label": "Số lượng",
         "input_label": "Số lượng của {{ product }}",

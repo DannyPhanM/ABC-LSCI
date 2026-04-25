@@ -132,6 +132,7 @@
       "inventory_low_stock_show_count": "Hurry, only {{ quantity }} left in stock",
       "inventory_out_of_stock": "Out of stock",
       "inventory_out_of_stock_continue_selling": "In stock",
+      "size_chart_note": "Note",
       "sku": "SKU",
       "on_sale": "Sale",
       "product_variants": "Product variants",

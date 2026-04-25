@@ -81,6 +81,14 @@
       <span class="inline-richtext">
         {{- block.settings.heading_1 -}}
       </span>
+      {%- if block.settings.show_payment_icons_1 and block.settings.payment_icons_list != blank -%}
+        <div class="icon-with-text__payment-icons">
+          {%- assign icons = block.settings.payment_icons_list | split: ',' -%}
+          {%- for icon in icons -%}
+            {{ icon | strip | payment_type_svg_tag: class: 'icon icon--full-color' }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </li>
   {%- endunless -%}
   {%- unless heading_2_empty -%}

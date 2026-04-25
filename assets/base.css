@@ -3121,6 +3121,11 @@ details-disclosure > details {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
+.badge {
+  border-radius: 8px 0 8px 0;
+  padding: 6px 12px;
+}
+
 .gradient {
   background: rgb(var(--color-background));
   background: var(--gradient-background);
