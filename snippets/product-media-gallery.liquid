@@ -46,15 +46,15 @@
   {% if section.settings.enable_sticky_info %} class="product__column-sticky" {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
   <div class="productpart thumb-{{ section.settings.gallery_layout }} {% if section.settings.gallery_layout == 'left_slider' or section.settings.gallery_layout == 'right_slider' %} thumb_leftright{% endif %}">
-     {% if product %}
-      {% render 'product-badge', product: product, isSticky: true %}
-    {% endif %}
+
     <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
     <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter productpart_1">
       <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
         {{ 'accessibility.skip_to_product_info' | t }}
       </a>
-
+      {% if product %}
+        {% render 'product-badge', product: product, isSticky: true %}
+      {% endif %}
       <ul
         id="Slider-Gallery-{{ section.id }}"
         class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"

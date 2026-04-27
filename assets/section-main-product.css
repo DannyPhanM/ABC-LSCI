@@ -2265,3 +2265,14 @@ media-gallery slider-component img.tesst{
 .qty_size .quantity__label {
   display: none;
 }
+
+.size-chart-desc {
+  display: flex;
+  gap: 10px;
+}
+
+.size-guide-box {
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--Gray-2, #898989);
+}
