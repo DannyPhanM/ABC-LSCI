@@ -75,6 +75,9 @@
   display: initial;
   flex-direction: row;
   flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .price--center {

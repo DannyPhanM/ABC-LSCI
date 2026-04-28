@@ -109,29 +109,38 @@
                 {% render block %}
 
               {%- when 'text' -%}
-                {% if block.settings.text.size > 0 %}
                   <div
                     class="{% if block.settings.show_sharebtn == true %}pshare_both{% endif %}"
                     {{ block.shopify_attributes }}
                   >
-                    <p
+                    <div
                       class="product__text inline-richtext {{ block.settings.text_size }} {% if block.settings.text_upper == true %}uppercase{% endif %}"
                       {{ block.shopify_attributes }}
                     >
-                      {{- block.settings.text -}}
-                    </p>
+                      {%- liquid
+                        assign vendor_logo = product.metafields.custom.vendor.value.image.value
+                      -%}
+                      {%- if vendor_logo != blank -%}
+                        {{ vendor_logo | image_url: width: 64 | image_tag: loading: 'lazy' }}
+                      {%- else -%}
+                        {{- block.settings.text -}}
+                      {%- endif -%}
+                    </div>
                                   
-                {% if product.selected_or_first_available_variant.sku.size > 0 %}
-                  <p
-                    class="product__sku {{ block.settings.sku_size }} {% if block.settings.sku_upper == true %}uppercase{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
-                    id="Sku-{{ section.id }}"
-                    role="status"
-                    {{ block.shopify_attributes }}
-                  >
-                    <span class="">{{ 'products.product.sku' | t }}: </span>
-                    {{- product.selected_or_first_available_variant.sku -}}
-                  </p>
-                {% endif %}
+                    {% if product.selected_or_first_available_variant.sku.size > 0 %}
+                      <div
+                        class="product__sku {{ block.settings.sku_size }} {% if block.settings.sku_upper == true %}uppercase{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+                        id="Sku-{{ section.id }}"
+                        role="status"
+                        {{ block.shopify_attributes }}
+                      >
+                        <a href="{{ product.metafields.custom.vendor.value.collection_links.value.url | default: '#' }}">
+                          {{- product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value -}}
+                        </a>
+                        <span class="">| {{ 'products.product.sku' | t }}: </span>
+                        {{- product.selected_or_first_available_variant.sku -}}
+                      </div>
+                    {% endif %}
                     {%- if block.settings.show_sharebtn == true -%}
                       {% liquid
                         assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
@@ -139,7 +148,6 @@
                       %}
                     {%- endif -%}
                   </div>
-                {% endif %}
 
               {%- when 'title' -%}
                 <div
