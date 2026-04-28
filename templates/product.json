@@ -266,10 +266,7 @@
         "payment_method_c3Ljtk",
         "complementary_iekb4n"
       ],
-      "custom_css": [
-        ".vcb-features-list__text {line-height: 1.8 !important;}",
-        ".vcb-features-list__text {font-weight: 600;}"
-      ],
+      "custom_css": [],
       "settings": {
         "color_scheme": "background-1",
         "media_size": 50,
