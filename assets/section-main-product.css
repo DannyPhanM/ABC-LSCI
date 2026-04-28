@@ -2324,6 +2324,7 @@ ul.product__media-list.grid {
 
 .product__info-container .product__text:first-child {
   color: #898989 !important;
+  margin-bottom: 0;
 }
 
 .product__info-container
