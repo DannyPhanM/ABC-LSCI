@@ -2419,7 +2419,7 @@ product-form .shopify-payment-button__button,.product-form__buttons.pro_btn_inli
   transition: none !important;
 }
 
-product-form .shopify-payment-button__button::after {
+product-form .shopify-payment-button__button::after, product-form .shopify-payment-button__button::before {
   content: none !important;
 }
 
