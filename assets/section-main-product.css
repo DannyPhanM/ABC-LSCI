@@ -1048,7 +1048,7 @@ ul.product__media-list.grid {
     padding: 15px 0 37px 0;
   }
   .product-form__buttons-row .qty_size {
-    flex: 0 0 80px;
+    flex: 0 0 100px;
   }
   .product__info-wrapper .product-form__quantity .quantity__button {
     width: 25px;
