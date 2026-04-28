@@ -91,7 +91,7 @@
           "settings": {
             "show_note": true,
             "description": "<p>Vui lòng chọn size theo giới tính:<br/>Men (nam/unisex), Women (nữ). FILA dùng size tính bằng cm.</p>",
-            "text": "Size guide",
+            "text": "Hướng dẫn chọn size chính xác",
             "page": ""
           }
         },
@@ -158,13 +158,16 @@
           "type": "icon-with-text",
           "settings": {
             "icon_1": "cardpayment",
+            "image_1": "shopify://shop_images/Frame_1.svg",
             "heading_1": "Phương thức thanh toán tiện lợi và an toàn",
             "show_payment_icons_1": true,
-            "payment_icons_list": "visa,master,paypal,discover",
+            "payment_icons_list": "visa,master,paypal,discove",
             "icon_2": "cardpayment",
-            "heading_2": "Miễn phí ship cho đơn hàng từ 3 triệu",
+            "image_2": "shopify://shop_images/Frame.svg",
+            "heading_2": "Miễn phí ship cho đơn hàng từ<strong> 3 triệu</strong>",
             "icon_3": "return",
-            "heading_3": "Hỗ trợ đổi trả trong 7 ngày",
+            "image_3": "shopify://shop_images/Frame_2.svg",
+            "heading_3": "Hỗ trợ đổi trả trong <strong>7 ngày</strong>",
             "icon_4": "likeauthentic",
             "heading_4": "",
             "heading_5": "",
