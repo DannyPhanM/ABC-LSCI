@@ -50,6 +50,7 @@
         "announcement_zpkpra",
         "announcement_GEHtkb"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "inverse",
         "bar_position": "bar_position1",
