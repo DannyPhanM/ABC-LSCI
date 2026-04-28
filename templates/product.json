@@ -19,7 +19,7 @@
         "text_H7gPbM": {
           "type": "text",
           "settings": {
-            "text": "{{ product.vendor }} | {{ product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value }}",
+            "text": "",
             "text_upper": true,
             "text_size": "large",
             "show_sharebtn": true,
@@ -125,7 +125,7 @@
           }
         },
         "boostly_product_page_enhancer_feature_list_ENHEJM": {
-          "type": "shopify://apps/boostly-product-page-enhancer/blocks/feature_list/340aca85-c061-4ab2-945c-2ce6536f27cc",
+          "type": "shopify://apps/boostly/blocks/feature_list/340aca85-c061-4ab2-945c-2ce6536f27cc",
           "disabled": true,
           "settings": {
             "first_feature": "LƯU Ý VẬN CHUYỂN",
@@ -140,7 +140,7 @@
           }
         },
         "boostly_product_page_enhancer_feature_list_9j3F3h": {
-          "type": "shopify://apps/boostly-product-page-enhancer/blocks/feature_list/340aca85-c061-4ab2-945c-2ce6536f27cc",
+          "type": "shopify://apps/boostly/blocks/feature_list/340aca85-c061-4ab2-945c-2ce6536f27cc",
           "disabled": true,
           "settings": {
             "first_feature": "- Các đơn hàng đặt từ 09/02 có thể giao chậm do quá tải vận chuyển dịp Lễ, Tết",
