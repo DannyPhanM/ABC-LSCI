@@ -195,7 +195,8 @@
         "minimum": "Hơn {{ quantity }}",
         "price_at_each": "với giá {{ price }}/chiếc",
         "price_range": "{{ minimum }} - {{ maximum }}"
-      }
+      },
+      "change_variant": "Thay đổi"
     },
     "modal": {
       "label": "Thư viện phương tiện"

@@ -1,0 +1,167 @@
+<div id="sticky-add-to-cart" class="sticky-add-to-cart mobile-only color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="sticky-add-to-cart__content">
+      <div class="sticky-add-to-cart__info">
+        <div class="sticky-add-to-cart__image">
+          <img
+            src="{{ product.featured_media | image_url: width: 150 }}"
+            alt="{{ product.title | escape }}"
+            loading="lazy"
+            width="75"
+            height="75"
+          >
+        </div>
+        <div class="sticky-add-to-cart__details">
+          <h3 class="sticky-add-to-cart__title">{{ product.title }}</h3>
+          <div class="sticky-add-to-cart__variant-info">
+            <span class="sticky-add-to-cart__variant-text">
+              {%- if product.has_only_default_variant -%}
+                {{ 'products.product.default_variant_title' | t }}
+              {%- else -%}
+                {%- for option in product.options_with_values -%}
+                  {{ option.name | upcase }} {{ option.selected_value }}{% unless forloop.last %} | {% endunless %}
+                {%- endfor -%}
+              {%- endif -%}
+            </span>
+            <button type="button" class="link sticky-add-to-cart__change-btn" onclick="scrollToVariantPicker()">
+              {{ 'products.product.change_variant' | t | default: 'Thay đổi' }}
+            </button>
+          </div>
+          <div class="sticky-add-to-cart__price" id="price-sticky-{{ section.id }}">
+            {%- render 'main-product-price',
+              product: product,
+              use_variant: true,
+              show_badges: false,
+              price_class: 'price--small',
+              is_product_page: 'true'
+            -%}
+          </div>
+        </div>
+      </div>
+      
+      <div class="sticky-add-to-cart__actions">
+        <div class="sticky-add-to-cart__qty">
+           <quantity-input class="quantity">
+            <button class="quantity__button" name="minus" type="button">
+              <span class="visually-hidden">
+                {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+              </span>
+              {% render 'icon-minus' %}
+            </button>
+            <input
+              class="quantity__input"
+              type="number"
+              name="quantity"
+              min="1"
+              value="1"
+              form="{{ product_form_id }}"
+            >
+            <button class="quantity__button" name="plus" type="button">
+              <span class="visually-hidden">
+                {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+              </span>
+              {% render 'icon-plus' %}
+            </button>
+          </quantity-input>
+        </div>
+        <button
+          type="submit"
+          form="{{ product_form_id }}"
+          class="sticky-add-to-cart__submit button button--full-width"
+          {% if product.selected_or_first_available_variant.available == false %}
+            disabled
+          {% endif %}
+        >
+          <span>
+            {% render 'icon-plus' %}
+            {%- if product.selected_or_first_available_variant.available == false -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- endif -%}
+          </span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function scrollToVariantPicker() {
+    const picker = document.getElementById('variant-selects-{{ section.id }}') || document.querySelector('variant-radios');
+    if (picker) {
+      picker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth >= 768) return;
+
+    const mainAddToCartBtn = document.getElementById('ProductSubmitButton-{{ section.id }}');
+    const stickyBar = document.getElementById('sticky-add-to-cart');
+    
+    if (mainAddToCartBtn && stickyBar) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            stickyBar.classList.add('is-visible');
+          } else {
+            stickyBar.classList.remove('is-visible');
+          }
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '0px 0px -100px 0px' // Adjust to trigger earlier or later
+      });
+      
+      observer.observe(mainAddToCartBtn);
+    }
+
+    // Sync quantity inputs
+    const mainQtyInput = document.getElementById('Quantity-{{ section.id }}');
+    const stickyQtyInput = stickyBar.querySelector('.quantity__input');
+
+    if (mainQtyInput && stickyQtyInput) {
+      mainQtyInput.addEventListener('change', () => {
+        stickyQtyInput.value = mainQtyInput.value;
+      });
+      stickyQtyInput.addEventListener('change', () => {
+        mainQtyInput.value = stickyQtyInput.value;
+      });
+    }
+
+    // Subscribe to variant changes to update price and variant text
+    if (typeof subscribe === 'function') {
+      subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+        if (event.data.sectionId !== '{{ section.id }}') return;
+        
+        // Update price
+        const stickyPrice = document.getElementById('price-sticky-{{ section.id }}');
+        const updatedPrice = event.data.html.getElementById('price-{{ section.id }}');
+        if (stickyPrice && updatedPrice) {
+          stickyPrice.innerHTML = updatedPrice.innerHTML;
+        }
+
+        // Update variant text
+        const variantText = stickyBar.querySelector('.sticky-add-to-cart__variant-text');
+        if (variantText) {
+          // This part is a bit tricky since event.data.html might not have a clean variant text
+          // We can try to extract it from the select or radios
+          const selectedVariant = event.data.variant;
+          if (selectedVariant) {
+            variantText.textContent = selectedVariant.title;
+          }
+        }
+
+        // Update submit button state
+        const stickySubmit = stickyBar.querySelector('.sticky-add-to-cart__submit');
+        const mainSubmit = event.data.html.getElementById('ProductSubmitButton-{{ section.id }}');
+        if (stickySubmit && mainSubmit) {
+          stickySubmit.disabled = mainSubmit.disabled;
+          stickySubmit.querySelector('span').innerHTML = mainSubmit.querySelector('span').innerHTML;
+        }
+      });
+    }
+  });
+</script>

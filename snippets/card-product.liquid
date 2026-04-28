@@ -63,23 +63,24 @@
             {%- for media in card_product.media -%}
               {%- if media_to_render contains media.id -%}
                 <div class="product__media-item" data-media-id="{{ section.id }}-{{ card_product.id }}-{{ media.id }}">
-                   {% comment %} {% assign product_tags_iden  = settings.tag_flash_sales %} {% endcomment %}
-{%- assign product_tags_arr = '' -%}
-{%- for i in (0..10) -%}
-  {%- assign tag_key = 'tag_custom' -%}
-  {%- if i > 0 -%}
-    {%- assign tag_key = tag_key | append: '_' | append: i -%}
-  {%- endif -%}
-  {%- assign tag_value = settings[tag_key] -%}
-  {%- if tag_value != blank -%}
-    {%- assign product_tags_arr = product_tags_arr | append: tag_value | append: ',' -%}
-  {%- endif -%}
-{%- endfor -%}
-{%- assign product_tags_arr = product_tags_arr | split: ',' | compact -%}
+                  {% comment %} {% assign product_tags_iden  = settings.tag_flash_sales %} {% endcomment %}
+                  {%- assign product_tags_arr = '' -%}
+                  {%- for i in (0..10) -%}
+                    {%- assign tag_key = 'tag_custom' -%}
+                    {%- if i > 0 -%}
+                      {%- assign tag_key = tag_key | append: '_' | append: i -%}
+                    {%- endif -%}
+                    {%- assign tag_value = settings[tag_key] -%}
+                    {%- if tag_value != blank -%}
+                      {%- assign product_tags_arr = product_tags_arr | append: tag_value | append: ',' -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- assign product_tags_arr = product_tags_arr | split: ',' | compact -%}
 
-                  <a   {% for tag in product_tags_arr %}
-    data-tag="{{ tag }}"
-  {% endfor %}
+                  <a
+                    {% for tag in product_tags_arr %}
+                      data-tag="{{ tag }}"
+                    {% endfor %}
                     class="media media--transparent media--hover-effect"
                     href="{{ card_product.url | append: '?variant=' | append: card_product.selected_or_first_available_variant.id | default: '#' }}"
                     title="{{ card_product.title | escape }}"
@@ -148,37 +149,38 @@
                         </video>
                       {% endif %}
                     {% endif %}
-               
-               
-               {%- assign show_flash_sale_image = false -%}
-                                {%- for i in (0..10) -%}
-                                  {%- assign tag_key = 'tag_custom' -%}
-                                  {%- assign image_key = 'image_custom' -%}
-                                  {%- if i > 0 -%}
-                                    {%- assign tag_key = tag_key | append: '_' | append: i -%}
-                                    {%- assign image_key = image_key | append: '_' | append: i -%}
-                                  {%- endif -%}
-                                  {%- assign tag_value = settings[tag_key] -%}
-                                  {%- assign image_value = settings[image_key] -%}
-                                  {%- if tag_value != blank and card_product.tags contains tag_value and image_value != blank -%}
-                                    <img
-                                      src="{{ image_value | image_url }}"
-                                      {% if image_value.alt != blank %}
-                                        alt="{{ image_value.alt | escape }}"
-                                      {% else %}
-                                        role="presentation"
-                                      {% endif %}
-                                      height="auto"
-                                      width="auto"
-                                      loading="lazy"
-                                      class="tesst "
-                                    >
-                                  {%- endif -%}
-                                {%- endfor -%}
 
-                                
-                    {%- if card_product.selected_or_first_available_variant.available == false %}<span class="sold_out_wrapper"><span class="sold_out_label">{{ 'products.product.sold_out' | t }}</span></span>{% endif -%}
-                
+                    {%- assign show_flash_sale_image = false -%}
+                    {%- for i in (0..10) -%}
+                      {%- assign tag_key = 'tag_custom' -%}
+                      {%- assign image_key = 'image_custom' -%}
+                      {%- if i > 0 -%}
+                        {%- assign tag_key = tag_key | append: '_' | append: i -%}
+                        {%- assign image_key = image_key | append: '_' | append: i -%}
+                      {%- endif -%}
+                      {%- assign tag_value = settings[tag_key] -%}
+                      {%- assign image_value = settings[image_key] -%}
+                      {%- if tag_value != blank and card_product.tags contains tag_value and image_value != blank -%}
+                        <img
+                          src="{{ image_value | image_url }}"
+                          {% if image_value.alt != blank %}
+                            alt="{{ image_value.alt | escape }}"
+                          {% else %}
+                            role="presentation"
+                          {% endif %}
+                          height="auto"
+                          width="auto"
+                          loading="lazy"
+                          class="tesst "
+                        >
+                      {%- endif -%}
+                    {%- endfor -%}
+
+                    {%- if card_product.selected_or_first_available_variant.available == false -%}
+                      <span class="sold_out_wrapper"
+                        ><span class="sold_out_label">{{ 'products.product.sold_out' | t }}</span></span
+                      >
+                    {%- endif -%}
                   </a>
                 </div>
               {%- endif -%}
@@ -239,9 +241,15 @@
                   </span>
                 {%- endif -%}
               {%- elsif settings.badge_type == 'save_amount' -%}
-                <span class="badge salebadge {% if badge_amount == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
-                  {{ 'products.product.save' | t }}
-                  <span>{{ badge_amount }}</span>
+                {% comment %}
+                  <span class="badge salebadge {% if badge_amount == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+                    {{ 'products.product.save' | t }}
+                    <span>{{ badge_amount }}</span>
+                  </span>
+                {% endcomment %}
+                <span class="badge salebadge  tessssss{% if badge_percent == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+                  {{ badge_percent -}}
+                  {{- 'products.product.save_percentage' | t }}
                 </span>
               {%- elsif settings.badge_type == 'save_percentage' -%}
                 <span class="badge salebadge {% if badge_percent == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
@@ -250,7 +258,8 @@
                 </span>
               {%- endif -%}
 
-                {% comment %} {%- for i in (0..10) -%}
+              {% comment %}
+                {%- for i in (0..10) -%}
                   {%- assign tag_key = 'tag_custom' -%}
                   {%- assign image_key = 'image_custom' -%}
                   {%- assign text_key = 'text_custom' -%}
@@ -270,16 +279,15 @@
                   {%- assign text_value = settings[text_key] -%}
                   {%- assign color_value = settings[color_key] -%}
                   {%- assign bg_value = settings[bg_key] -%}
-                  
+
                   {%- if tag_value != blank and card_product.tags contains tag_value and text_value != blank -%}
                     <span class="badge flash-sales-beadge {% if settings.uppercase_badge %} uppercase{% endif %}"
                       style="color: {{ color_value | default: settings.color_flash_sales }}; background: {{ bg_value | default: settings.bg_flash_sales }};">
                       {{ text_value }}
                     </span>
                   {%- endif -%}
-                {%- endfor -%} {% endcomment %}
-
-
+                {%- endfor -%}
+              {% endcomment %}
             </div>
           {%- endif -%}
 
@@ -360,8 +368,11 @@
                   height="{{ media.preview_image.height }}"
                   alt="{{ media.preview_image.alt | escape }}"
                 >
-                {%- if card_product.selected_or_first_available_variant.available == false %}<span class="sold_out_wrapper"><span class="sold_out_label">{{ 'products.product.sold_out' | t }}</span></span>{% endif -%}
-          
+                {%- if card_product.selected_or_first_available_variant.available == false -%}
+                  <span class="sold_out_wrapper"
+                    ><span class="sold_out_label">{{ 'products.product.sold_out' | t }}</span></span
+                  >
+                {%- endif -%}
               </a>
             </div>
           </div>
@@ -447,7 +458,10 @@
                 {% assign gender_meta = card_product.metafields.custom.gender.value %}
 
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                <div class="card_vendor {% if settings.vendor_uppercase == true %}uppercase{% endif %}" data="{{ gender_meta.gender }}">
+                <div
+                  class="card_vendor {% if settings.vendor_uppercase == true %}uppercase{% endif %}"
+                  data="{{ gender_meta.gender }}"
+                >
                   {{ card_product.vendor }} | {{ gender_meta.gender }}
                 </div>
               {%- endif -%}
@@ -1532,7 +1546,7 @@
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-              <div class="card_vendor test123">{{ 'products.product.vendor' | t }} </div>
+              <div class="card_vendor test123">{{ 'products.product.vendor' | t }}</div>
             {%- endif -%}
             <h3 class="card__heading card__heading--placeholder">
               <a role="link" aria-disabled="true" class="full-unstyled-link">

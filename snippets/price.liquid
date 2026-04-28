@@ -156,7 +156,7 @@
       {% assign product_tags = product.metafields.custom.product_tags.value %}
       {% if hidden_badges %}
       {% else %}
-        <div class="product_badge">
+        <div class=" test product_badge">
           {%- for i in (0..10) -%}
                   {%- assign tag_key = 'tag_custom' -%}
                   {%- assign image_key = 'image_custom' -%}
@@ -217,9 +217,13 @@
               </span>
             {%- endif -%}
           {%- elsif settings.badge_type == 'save_amount' -%}
-            <span class="badge salebadge {% if badge_amount == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+            {% comment %} <span class="badge salebadge {% if badge_amount == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
               {{ 'products.product.save' | t }}
               <span>{{ badge_amount }}</span>
+            </span> {% endcomment %}
+            <span class="badge salebadge {% if badge_percent == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
+              -{{ badge_percent -}}
+              %
             </span>
           {%- elsif settings.badge_type == 'save_percentage' -%}
             <span class="badge salebadge {% if badge_percent == null %}hidden{% endif %}{% if settings.uppercase_badge %} uppercase{% endif %}">
