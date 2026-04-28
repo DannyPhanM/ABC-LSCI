@@ -89,7 +89,7 @@
 }
 @media (max-width: 991px) {
   .product__info-wrapper .accordion__title {
-    font-size: calc(var(--font-body-scale) * 16px);
+    font-size: 14px;
   }
 }
 .accordion summary.faq-title {
@@ -99,7 +99,4 @@
 .toggle.collapsed svg {
   transition: transform 0.3s ease;
 
-}
-
-.toggle.collapsed.active svg {
 }

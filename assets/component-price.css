@@ -120,19 +120,17 @@
     font-size: calc(var(--font-body-scale) * 20px) !important;
   }
 
-  .product__info-container
-    .price__container
-    .price__sale
-    .price-item.price-item--sale {
-    font-size: 20px !important;
-    color: #ea3402 !important;
+  .product__info-container .price__container .price__sale .price-item.price-item--sale {
+    font-size: 24px !important;
+    color: red !important;
   }
-
-  .product__info-container
-    .price__container
-    .price__regular
-    .price-item.price-item--regular {
-    font-size: 20px !important;
+  .product__info-container .price__container .price__sale .price-item--regular {
+    font-size: 16px !important;
+  }
+  .price--on-sale .price__sale {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 }
 .black-price {

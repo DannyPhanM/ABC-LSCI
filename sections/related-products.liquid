@@ -60,36 +60,88 @@
           </h2>
         </div>
       {%- endif %}
-      <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-        role="list"
-      >
-        {% for recommendation in recommendations.products %}
-          <li class="grid__item">
-            {% render 'card-product',
-              card_product: recommendation,
-              media_aspect_ratio: settings.image_ratio,
-              show_secondary_image: settings.show_secondary_image,
-              show_vendor: settings.show_cardvendor,
-              show_number: section.settings.show_number,
-              show_color_swatch: settings.show_color_swatch,
-              quick_view_button: settings.quick_view_button,
-              card_style: settings.card_style,
-              show_variants: settings.show_variants,
-              picker_type: settings.picker_type,
-              show_colorswatch: settings.show_colorswatch,
-              only_addcart: false,
-              disable_fquickview: false,
-              disable_faddcart: false,
-              disable_fvariant: false,
-              forloop_number: forloop.index,
-              show_quantity: settings.show_quantity,
-              quick_add: settings.quick_add,
-              section_id: section.id
-            %}
-          </li>
-        {% endfor %}
-      </ul>
+      {%- liquid
+        assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+        assign show_mobile_carousel = false
+        if section.settings.enable_mobile_carousel and recommendations.products_count > columns_mobile_int
+          assign show_mobile_carousel = true
+        endif
+      -%}
+
+      {% if show_mobile_carousel %}
+        <slider-carousel
+          data-breakpoints='{ "0": 2.1, "768": 2.5, "992": {{ section.settings.columns_desktop }} }'
+          data-spacing-grid-horizontal='{{ settings.spacing_grid_horizontal | default: 30 }}'
+          data-section-setting='{{ section.settings | json }}'
+        >
+          <div class="swiper related-products-swiper swiper-mobile-only">
+            <ul
+              class="swiper-wrapper grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+              role="list"
+            >
+              {% for recommendation in recommendations.products %}
+                <li class="grid__item swiper-slide">
+                  {% render 'card-product',
+                    card_product: recommendation,
+                    media_aspect_ratio: settings.image_ratio,
+                    show_secondary_image: settings.show_secondary_image,
+                    show_vendor: settings.show_cardvendor,
+                    show_number: section.settings.show_number,
+                    show_color_swatch: settings.show_color_swatch,
+                    quick_view_button: settings.quick_view_button,
+                    card_style: settings.card_style,
+                    show_variants: settings.show_variants,
+                    picker_type: settings.picker_type,
+                    show_colorswatch: settings.show_colorswatch,
+                    only_addcart: false,
+                    disable_fquickview: false,
+                    disable_faddcart: false,
+                    disable_fvariant: false,
+                    forloop_number: forloop.index,
+                    show_quantity: settings.show_quantity,
+                    quick_add: settings.quick_add,
+                    section_id: section.id
+                  %}
+                </li>
+              {% endfor %}
+            </ul>
+            {% if section.settings.pagination_style != 'none' %}
+              <div class="swiper-pagination pagi_{{ section.settings.pagination_style }} mobile-only"></div>
+            {% endif %}
+          </div>
+        </slider-carousel>
+      {% else %}
+        <ul
+          class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+          role="list"
+        >
+          {% for recommendation in recommendations.products %}
+            <li class="grid__item">
+              {% render 'card-product',
+                card_product: recommendation,
+                media_aspect_ratio: settings.image_ratio,
+                show_secondary_image: settings.show_secondary_image,
+                show_vendor: settings.show_cardvendor,
+                show_number: section.settings.show_number,
+                show_color_swatch: settings.show_color_swatch,
+                quick_view_button: settings.quick_view_button,
+                card_style: settings.card_style,
+                show_variants: settings.show_variants,
+                picker_type: settings.picker_type,
+                show_colorswatch: settings.show_colorswatch,
+                only_addcart: false,
+                disable_fquickview: false,
+                disable_faddcart: false,
+                disable_fvariant: false,
+                forloop_number: forloop.index,
+                show_quantity: settings.show_quantity,
+                quick_add: settings.quick_add,
+                section_id: section.id
+              %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     {% endif %}
   </product-recommendations>
 </div>
@@ -180,6 +232,36 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.related-products.settings.columns_desktop.label"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_carousel",
+      "label": "Enable Carousel on Mobile",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "pagination_style",
+      "label": "Pagination Style",
+      "default": "progressbar",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dots",
+          "label": "Dots"
+        },
+        {
+          "value": "progressbar",
+          "label": "Progress Bar"
+        }
+      ]
     },
 
     {

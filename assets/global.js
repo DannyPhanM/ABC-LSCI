@@ -1828,7 +1828,7 @@ class SliderCarousel extends HTMLElement {
         };
       }
 
-      if(sectionSetting.pagination_style == 'dots' || sectionSetting.pagination_style == 'line' || sectionSetting.pagination_style == 'counter' || sectionSetting.pagination_style == 'numbers'){
+      if(sectionSetting.pagination_style == 'dots' || sectionSetting.pagination_style == 'line' || sectionSetting.pagination_style == 'counter' || sectionSetting.pagination_style == 'numbers' || sectionSetting.pagination_style == 'progressbar'){
         optionsData['pagination']['el'] = '.swiper-pagination';
       }
       if(sectionSetting.pagination_style == 'line') {
@@ -1847,6 +1847,9 @@ class SliderCarousel extends HTMLElement {
         optionsData['pagination']['renderBullet'] = function (index, className) {
           return `<span class="${className}">${index + 1}</span>`
         };
+      }
+      if(sectionSetting.pagination_style == 'progressbar'){
+        optionsData['pagination']['type'] = 'progressbar';
       }
     }
     this.options = {

@@ -21,6 +21,11 @@
     display: flex;
     align-items: center;
   }
+  @media(max-width: 767px) {
+    .page-width-with-bread_bg .breadcrumb {
+      margin-bottom: 16px;
+    }
+  }
 {%- endstyle -%}
 {% unless template == 'index' %}
     <div class="custom-width page-width {% if template == 'product' %}page-width-with-bread_bg{% endif %}">
