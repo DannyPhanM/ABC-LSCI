@@ -259,10 +259,6 @@ media-gallery .slider-buttons .slider-counter {
     align-items: center;
   }
 
-  .product__sku a, .product__sku span {
-    font-size: 12px !important;
-  }
-
   .sticky-add-to-cart__qty {
     flex: 0 0 100px;
   }
@@ -2553,5 +2549,9 @@ jdgm-rev-widg__header {
     padding: 0;
     padding-bottom: 15px;
     margin-bottom: 15px;
+  }
+
+  .product__sku a, .product__sku span {
+    font-size: 12px !important;
   }
 }
