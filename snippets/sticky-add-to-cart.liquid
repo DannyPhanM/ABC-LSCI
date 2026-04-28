@@ -19,7 +19,7 @@
                 {{ 'products.product.default_variant_title' | t }}
               {%- else -%}
                 {%- for option in product.options_with_values -%}
-                  {{ option.name | upcase }} {{ option.selected_value }}{% unless forloop.last %} | {% endunless %}
+                  {{ option.selected_value }}{% unless forloop.last %} | {% endunless %}
                 {%- endfor -%}
               {%- endif -%}
             </span>
