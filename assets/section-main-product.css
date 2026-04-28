@@ -249,6 +249,10 @@ media-gallery .slider-buttons .slider-counter {
     margin-top: 4px;
   }
 
+  .sticky-add-to-cart__details .price-item--regular{
+    font-size: 14px;
+  }
+
   .sticky-add-to-cart__actions {
     display: flex;
     gap: 10px;
