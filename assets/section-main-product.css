@@ -259,6 +259,10 @@ media-gallery .slider-buttons .slider-counter {
     align-items: center;
   }
 
+  .product__sku a {
+    font-size: 12px;
+  }
+
   .sticky-add-to-cart__qty {
     flex: 0 0 100px;
   }
