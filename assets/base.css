@@ -2415,6 +2415,14 @@ product-info .loading__spinner:not(.hidden) ~ *,
   }
 }
 
+product-form .shopify-payment-button__button,.product-form__buttons.pro_btn_inline .product-form__submit {
+  transition: none !important;
+}
+
+product-form .shopify-payment-button__button::after {
+  content: none !important;
+}
+
 @media screen and (min-width: 1057px) {
   .button,
   .button-label,
