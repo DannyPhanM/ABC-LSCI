@@ -15,13 +15,17 @@
           <h3 class="sticky-add-to-cart__title">{{ product.title }}</h3>
           <div class="sticky-add-to-cart__variant-info">
             <span class="sticky-add-to-cart__variant-text">
-              {%- if product.has_only_default_variant -%}
-                {{ 'products.product.default_variant_title' | t }}
-              {%- else -%}
+              {% assign product_color = product.metafields.custom.product_color.value %}
+              {% for item_color in product_color %}
+                {{ item_color.color_name }}{% unless forloop.last %}/{% endunless %}
+              {% endfor %}
+              
+              {%- unless product.has_only_default_variant -%}
+                <span class="separator"> | </span>
                 {%- for option in product.options_with_values -%}
                   {{ option.selected_value }}{% unless forloop.last %} | {% endunless %}
                 {%- endfor -%}
-              {%- endif -%}
+              {%- endunless -%}
             </span>
             <button type="button" class="link sticky-add-to-cart__change-btn" onclick="scrollToVariantPicker()">
               {{ 'products.product.change_variant' | t | default: 'Thay đổi' }}

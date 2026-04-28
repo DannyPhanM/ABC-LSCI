@@ -2552,7 +2552,7 @@ jdgm-rev-widg__header {
     margin-bottom: 15px;
   }
 
-  .product__sku a, .product__sku span, .product__sku {
+  .product__sku a, .product__sku span, .product__sku, .product__inventory {
     font-size: 12px !important;
   }
 }
