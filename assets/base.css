@@ -2407,6 +2407,9 @@ product-info .loading__spinner:not(.hidden) ~ *,
     min-height: 4.4rem;
     padding: 14px 1.3rem;
   }
+  .product-form__buttons-row {
+    gap: 10px !important;
+  }
 }
 
 @media screen and (min-width: 1057px) {
