@@ -1178,6 +1178,9 @@ button.shopify-payment-button__button--unbranded,
   font-weight: 500;
   text-transform: var(--button-text-style);
 }
+product-form .shopify-payment-button__button {
+  font-family: Lato_Regular !important;
+}
 @media (max-width: 991px) {
   .button,
   .shopify-challenge__button,
@@ -2407,7 +2410,7 @@ product-info .loading__spinner:not(.hidden) ~ *,
     min-height: 4.4rem;
     padding: 14px 1.3rem;
   }
-  .product-form__buttons-row {
+  .product-form__buttons-row, .product-form__buttons.pro_btn_inline {
     gap: 10px !important;
   }
 }
