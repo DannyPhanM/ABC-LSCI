@@ -259,7 +259,7 @@ media-gallery .slider-buttons .slider-counter {
     align-items: center;
   }
 
-  .product__sku a {
+  .product__sku a, .product__sku span {
     font-size: 12px;
   }
 
