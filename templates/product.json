@@ -174,7 +174,10 @@
         "description": {
           "type": "description",
           "settings": {
-            "divider_desc": true
+            "divider_desc": true,
+            "heading": "Description",
+            "use_accordion": true,
+            "opencollapse": true
           }
         },
         "collapsible_tab_ADKqaX": {

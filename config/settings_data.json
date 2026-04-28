@@ -266,7 +266,7 @@
           "text": "#000000",
           "link_hover": "#78d64b",
           "input_border": "#eeeeee",
-          "button": "#78d64b",
+          "button": "#000000",
           "button_label": "#ffffff",
           "button_hover": "#000000",
           "button_label_hover": "#ffffff",
