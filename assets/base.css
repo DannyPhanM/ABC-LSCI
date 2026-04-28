@@ -2403,7 +2403,7 @@ product-info .loading__spinner:not(.hidden) ~ *,
   }
 
   product-form .shopify-payment-button__button {
-    font-size: calc(var(--font-body-scale) * 16px);
+    font-size: 16px !important;
     min-height: 4.4rem;
     padding: 14px 1.3rem;
   }
