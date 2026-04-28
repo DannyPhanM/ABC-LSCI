@@ -87,7 +87,6 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="custom-width page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} {% if section.settings.gallery_layout != 'columns' %}product--thumbnail_slider{% endif %}  product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col grid--2-col-tablet">
-      <!-- {% render 'product-badge', product: product %} -->
     <div class="grid__item product__media-wrapper {% if section.settings.image_zoom == 'lightbox' %} lightbox_image{% endif %}">
         {% render 'product-media-gallery',
           variant_images: variant_images,
@@ -173,7 +172,7 @@
                   </div>
                 {%- endif -%}
                 {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                  <div class="product__tax caption rte">
+                  <div class="product__tax caption rte hidden">
                     {%- if cart.duties_included and cart.taxes_included -%}
                       {{ 'products.product.duties_and_taxes_included' | t }}
                     {%- elsif cart.taxes_included -%}
@@ -333,7 +332,7 @@
                   >
                     {%- if block.settings.show_note -%}
                       <div class="size-chart-desc">
-                        <span>
+                        <span style="white-space: nowrap">
                           {{ 'products.product.size_chart_note' | t }}:
                         </span> 
                         <span>{{ block.settings.description }}</span>
@@ -725,8 +724,8 @@
                 and size_chart_gender == product_gender.gender
               %}
 
-                <img src="{{ s.size_chart_image |  image_url: width: 700 }}" alt="">
-                <img src="{{ size_guide |  image_url: width: 700 }}" alt="">
+                {{ s.size_chart_image | image_url: width: 700 | image_tag: loading: 'lazy' }}
+                {{ size_guide | image_url: width: 700 | image_tag: loading: 'lazy' }}
               {% endif %}
             {% endfor %}
             {% endpaginate %}

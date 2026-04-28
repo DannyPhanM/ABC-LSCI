@@ -69,13 +69,21 @@
     {%- render 'loading-spinner' -%}
     <div class="product__media media media--transparent">
       {%- assign data_height = 1946 | divided_by: media.preview_image.aspect_ratio | ceil -%}
+      {%- assign fetchpriority = 'auto' -%}
+      {%- assign preload = false -%}
+      {%- if lazy == nil -%}
+        {%- assign fetchpriority = 'high' -%}
+        {%- assign preload = true -%}
+      {%- endif -%}
       {{ media.preview_image | image_url: width: 1946 | image_tag:
         class: image_class,
         loading: lazy,
         sizes: sizes,
         widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',
         data-width: "1946",
-        data-height: data_height
+        data-height: data_height,
+        fetchpriority: fetchpriority,
+        preload: preload
       }}
     </div>
     <button class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">

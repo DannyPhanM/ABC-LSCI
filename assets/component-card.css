@@ -461,6 +461,7 @@ fieldset.product_form_input {
 }
 .product-form__input input[type="radio"].disabled + label {
   text-decoration: unset;
+  box-shadow: inset 0px 0px 0px 1px #C4C4C4;
 }
 .product-card-wrapper .wbswatchclr input[type="radio"].disabled + label:after,
 .product__info-wrapper .wbswatchclr input[type="radio"].disabled + label:after,
