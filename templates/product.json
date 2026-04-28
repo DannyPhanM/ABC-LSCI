@@ -159,7 +159,7 @@
           "settings": {
             "icon_1": "cardpayment",
             "image_1": "shopify://shop_images/Frame_1.svg",
-            "heading_1": "Phương thức thanh toán tiện lợi và an toàn",
+            "heading_1": "Thanh toán nhanh",
             "show_payment_icons_1": true,
             "payment_icons_list": "visa,master,paypal,discove",
             "icon_2": "cardpayment",
@@ -328,6 +328,8 @@
         "heading_position": "left",
         "products_to_show": 5,
         "columns_desktop": 5,
+        "enable_mobile_carousel": true,
+        "pagination_style": "progressbar",
         "show_number": false,
         "show_number_bg": "#ffffff",
         "show_number_text": "#000000",
