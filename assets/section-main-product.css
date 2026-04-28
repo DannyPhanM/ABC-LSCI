@@ -2043,7 +2043,7 @@ ul.product__media-list.grid {
 @media screen and (max-width: 767px) {
   .pshare_both .share-button {
     justify-content: start;
-    margin-top: 5px;
+    margin-top: 0;
   }
 }
 
