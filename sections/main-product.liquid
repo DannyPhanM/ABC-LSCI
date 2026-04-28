@@ -137,7 +137,7 @@
                         <a href="{{ product.metafields.custom.vendor.value.collection_links.value.url | default: '#' }}">
                           {{- product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value -}}
                         </a>
-                        <span class="">| {{ 'products.product.sku' | t }}: </span>
+                        
                         {{- product.selected_or_first_available_variant.sku -}}
                       </div>
                     {% endif %}
