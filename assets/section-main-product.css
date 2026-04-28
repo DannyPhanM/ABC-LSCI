@@ -627,7 +627,7 @@ variant-selects {
 .product__info-wrapper .product-form__input input[type="radio"] + label {
   margin-right: 8px;
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 @media screen and (forced-colors: active) {
