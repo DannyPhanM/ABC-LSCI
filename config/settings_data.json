@@ -63,7 +63,6 @@
     "content_radius": 12,
     "popup_radius": 12,
     "tag_custom": "Mega Sale",
-    "image_custom": "shopify://shop_images/Mega_sale_ab669aff-03a1-4861-82c7-90a77a3dfc11.png",
     "tag_custom_1": "",
     "image_custom_1": "shopify://shop_images/khung_hinh_sale_19.png",
     "default_empty_image": "shopify://shop_images/Logo_Default_1.jpg",
@@ -100,7 +99,7 @@
     "badge_text_size": 12,
     "uppercase_badge": true,
     "badge_type": "save_amount",
-    "sale_bg_color": "#003087",
+    "sale_bg_color": "#ea3402",
     "sale_text_color": "#ffffff",
     "sold_bg_color": "#777777",
     "sold_text_color": "#ffffff",
@@ -203,44 +202,9 @@
         "disabled": true,
         "settings": {}
       },
-      "14986560714151112628": {
-        "type": "shopify://apps/popspin/blocks/spin_wheel/062afb0e-1312-4d62-9f82-ead950c73e9a",
-        "disabled": true,
-        "settings": {}
-      },
-      "4015264832934714879": {
-        "type": "shopify://apps/sendwill-email-popups/blocks/app/a5670cf8-5705-4b01-ad9e-447033feae26",
-        "disabled": true,
-        "settings": {}
-      },
-      "9468172321995857178": {
-        "type": "shopify://apps/qikify-upsell/blocks/app-embed/2e94b962-8172-4839-8ad9-7837eb8b017a",
-        "disabled": true,
-        "settings": {}
-      },
-      "1854489755362259810": {
-        "type": "shopify://apps/pareto-order-limit/blocks/app-embed-block/6fbe20db-eadd-42b3-bc67-0e44a53ed12f",
-        "disabled": true,
-        "settings": {}
-      },
-      "16559847531084589941": {
-        "type": "shopify://apps/p-quantity-breaks/blocks/app-embed-block/170ada5d-6ed5-4d40-b93c-1aa195de1ccc",
-        "disabled": true,
-        "settings": {}
-      },
-      "7584948915495707528": {
-        "type": "shopify://apps/joy-loyalty-program/blocks/app-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
-        "disabled": true,
-        "settings": {}
-      },
-      "10746902591489815047": {
-        "type": "shopify://apps/rt-google-fonts-custom-fonts/blocks/app-embed/2caf2c68-0038-455e-b0b9-066a7c2ad923",
-        "disabled": true,
-        "settings": {}
-      },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "button_color": "#23c83c",
           "secondary_color": "#ffffff",
@@ -252,9 +216,55 @@
           "greeting_message": "Chào mừng bạn đến cửa hàng ABC-Mart Việt Nam. Nhắn tin ngay với chúng tôi để giải đáp thắc mắc của bạn."
         }
       },
+      "7584948915495707528": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/app-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {}
+      },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": true,
+        "disabled": false,
+        "settings": {}
+      },
+      "10746902591489815047": {
+        "type": "shopify://apps/rt-google-fonts-custom-fonts/blocks/app-embed/2caf2c68-0038-455e-b0b9-066a7c2ad923",
+        "disabled": false,
+        "settings": {}
+      },
+      "1854489755362259810": {
+        "type": "shopify://apps/pareto-order-limit/blocks/app-embed-block/6fbe20db-eadd-42b3-bc67-0e44a53ed12f",
+        "disabled": false,
+        "settings": {}
+      },
+      "16559847531084589941": {
+        "type": "shopify://apps/p-quantity-breaks/blocks/app-embed-block/170ada5d-6ed5-4d40-b93c-1aa195de1ccc",
+        "disabled": false,
+        "settings": {}
+      },
+      "6159598353363395418": {
+        "type": "shopify://apps/google-youtube/blocks/store_widget/14ec7bd0-ac77-49a9-9417-90752398bdff",
+        "disabled": false,
+        "settings": {
+          "widget_position": "LEFT_BOTTOM",
+          "side_margin": 36,
+          "bottom_margin": 36,
+          "mobile_side_margin": 16,
+          "mobile_bottom_margin": 46
+        }
+      },
+      "14986560714151112628": {
+        "type": "shopify://apps/popspin/blocks/spin_wheel/062afb0e-1312-4d62-9f82-ead950c73e9a",
+        "disabled": false,
+        "settings": {}
+      },
+      "4015264832934714879": {
+        "type": "shopify://apps/sendwill-email-popups/blocks/app/a5670cf8-5705-4b01-ad9e-447033feae26",
+        "disabled": false,
+        "settings": {}
+      },
+      "9468172321995857178": {
+        "type": "shopify://apps/qikify-upsell/blocks/app-embed/2e94b962-8172-4839-8ad9-7837eb8b017a",
+        "disabled": false,
         "settings": {}
       }
     },

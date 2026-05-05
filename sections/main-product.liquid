@@ -123,7 +123,7 @@
                       {%- if vendor_logo != blank -%}
                         {{ vendor_logo | image_url: width: 64 | image_tag: loading: 'lazy' }}
                       {%- else -%}
-                        {{- block.settings.text -}}
+                        {{- product.metafields.custom.vendor.value.name.value -}}
                       {%- endif -%}
                     </div>
                                   
@@ -137,7 +137,7 @@
                         <a href="{{ product.metafields.custom.vendor.value.collection_links.value.url | default: '#' }}">
                           {{- product.metafields.custom.category.value.category.value }} {{ product.metafields.custom.gender.value.gender.value -}}
                         </a>
-                        <span class="">| </span>
+                                                <span class="">| </span>
 
                         {{- product.selected_or_first_available_variant.sku -}}
                       </div>
@@ -766,7 +766,8 @@
       {{ product | structured_data }}
     </script>
   </div>
-  {%- render 'sticky-add-to-cart', product: product, product_form_id: product_form_id -%}
+    {%- render 'sticky-add-to-cart', product: product, product_form_id: product_form_id -%}
+
 </section>
 
 

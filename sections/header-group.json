@@ -51,7 +51,7 @@
         "announcement_GEHtkb"
       ],
       "settings": {
-        "color_scheme": "accent-2",
+        "color_scheme": "inverse",
         "bar_position": "bar_position1",
         "show_line_separator": false,
         "uppercase_bar": false,
@@ -334,7 +334,6 @@
         "featured_collection_zxK8Kk",
         "featured_collection_Rc7qmY"
       ],
-      "disabled": true,
       "settings": {
         "color_scheme": "accent-2",
         "title": "",

@@ -193,9 +193,11 @@
           </div>
 
           {%- if show_dynamic_checkout -%}
+            {% unless  product.selected_or_first_available_variant.available == false or quantity_rule_soldout  %}
             <div class="product-form__dynamic-checkout">
               {{ form | payment_button }}
             </div>
+            {%  endunless %}
           {%- endif -%}
         </div>
       {%- endform -%}

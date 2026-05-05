@@ -23,9 +23,7 @@
           "type": "title",
           "settings": {
             "title_upper": false,
-            "title_size": "h2",
-            "show_sharebtn": true,
-            "share_label": "Share"
+            "title_size": "h2"
           }
         },
         "price": {
@@ -77,9 +75,7 @@
             "heading_3": "Heading",
             "icon_4": "color_recycle",
             "heading_4": "Heading",
-            "icon_5": "color_flower",
             "heading_5": "Heading",
-            "icon_6": "color_iron",
             "heading_6": "Heading"
           }
         },
@@ -254,7 +250,6 @@
         "layout": "full_width",
         "scroll_space": 20,
         "scroll_speed": 70,
-        "marq_diection": "right_left",
         "seprater": "none",
         "font_size": 30,
         "pause_hover": true,

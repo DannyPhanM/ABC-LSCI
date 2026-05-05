@@ -121,7 +121,7 @@
  
 <div class="section-{{ section.id }}-padding {% unless section.settings.slide_height == 'adapt_image' %}slider_height {% endunless %} slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% else %} slide_full{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}">
   
-    <div class="{{ section.settings.pagination_position }} {% if section.settings.content_type == true %}slidebutton_inner{% else %}slidebutton_out{% endif %}  swiper swipeslideshow" data-section-setting='{{ section.settings | json }}'>
+    <div class="{{ section.settings.pagination_position }} {% if section.settings.content_type == true %}slidebutton_inner{% else %}slidebutton_out{% endif %}  swiper swipeslideshow" data-section-setting="{{ section.settings | json | escape }}">
       <div
         class="swiper-wrapper slideshow banner banner--{{ section.settings.slide_height }} {% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank and section.blocks.first.settings.mobile_image == blank %} slideshow--placeholder{% endif %}" id="Slider-{{ section.id }}" aria-live="polite" aria-atomic="true">
         {%- for block in section.blocks -%}
@@ -310,107 +310,113 @@
   function initSwipers(defaults = {}, selector = ".swipeslideshow") {
     const swipers = document.querySelectorAll(selector);
     swipers.forEach((swiper) => {
+      // Avoid multiple initializations
+      if (swiper.classList.contains('swiper-initialized')) return;
+
       let optionsData = {};
       if (swiper.dataset.sectionSetting) {
-        const sectionSetting = JSON.parse(swiper.dataset.sectionSetting);
+        try {
+          const sectionSetting = JSON.parse(swiper.dataset.sectionSetting);
 
-        const space = {{ settings.spacing_grid_horizontal | default: 20 }};
-        const spacemobile = {{ settings.spacing_grid_horizontal | divided_by: 2 | default: 10 }};
-        
-        optionsData = {
-          slidesPerView: 1,
-          spaceBetween: space,
-          updateOnWindowResize: true,
-          pagination: { clickable: true },
-        };
-
-        if (sectionSetting.content_type) {
-          optionsData.breakpoints = {
-            0: { spaceBetween: spacemobile, centeredSlides: true, slidesPerView: 1.15 },
-            768: { slidesPerView: 1.2, centeredSlides: true, spaceBetween: space },
-            992: { slidesPerView: 1.9, centeredSlides: true, spaceBetween: space },
+          const space = {{ settings.spacing_grid_horizontal | default: 20 }};
+          const spacemobile = {{ settings.spacing_grid_horizontal | divided_by: 2 | default: 10 }};
+          
+          optionsData = {
+            slidesPerView: 1,
+            spaceBetween: space,
+            updateOnWindowResize: true,
+            pagination: { clickable: true },
           };
-        } else {
-          optionsData.breakpoints = {
-            0: { spaceBetween: spacemobile, centeredSlides: false, slidesPerView: 1 },
-            768: { slidesPerView: 1, centeredSlides: false, spaceBetween: space },
-          };
-        }
 
-        if (sectionSetting.enable_loop) optionsData.loop = true;
-        if (sectionSetting.transition === "tran_slide") optionsData.effect = "slide";
-        if (sectionSetting.transition === "tran_card") optionsData.effect = "cards";
-        if (sectionSetting.transition === "tran_coverflow") optionsData.effect = "coverflow";
-
-        if (sectionSetting.auto_rotate) {
-          optionsData.autoplay = {
-            delay: sectionSetting.change_slides_speed * 1000,
-            disableOnInteraction: false,
-          };
-        }
-
-        if (sectionSetting.enable_slide_arrow) {
-          optionsData.navigation = {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          };
-        }
-
-        if (
-          ["dots", "line", "counter", "numbers"].includes(sectionSetting.pagination_style)
-        ) {
-          optionsData.pagination = { el: ".swiper-pagination" };
-
-          if (sectionSetting.pagination_style === "line") {
-            optionsData.pagination.type = "bullets";
-            optionsData.pagination.renderBullet = (index, className) =>
-              `<span class="${className}"><i></i><b></b></span>`;
+          if (sectionSetting.content_type) {
+            optionsData.breakpoints = {
+              0: { spaceBetween: spacemobile, centeredSlides: true, slidesPerView: 1.15 },
+              768: { slidesPerView: 1.2, centeredSlides: true, spaceBetween: space },
+              992: { slidesPerView: 1.9, centeredSlides: true, spaceBetween: space },
+            };
+          } else {
+            optionsData.breakpoints = {
+              0: { spaceBetween: spacemobile, centeredSlides: false, slidesPerView: 1 },
+              768: { slidesPerView: 1, centeredSlides: false, spaceBetween: space },
+            };
           }
 
-          if (sectionSetting.pagination_style === "counter") {
-            optionsData.pagination.type = "fraction";
+          if (sectionSetting.enable_loop) optionsData.loop = true;
+          if (sectionSetting.transition === "tran_slide") optionsData.effect = "slide";
+          if (sectionSetting.transition === "tran_card") optionsData.effect = "cards";
+          if (sectionSetting.transition === "tran_coverflow") optionsData.effect = "coverflow";
+
+          if (sectionSetting.auto_rotate) {
+            optionsData.autoplay = {
+              delay: sectionSetting.change_slides_speed * 1000,
+              disableOnInteraction: false,
+            };
           }
 
-          if (sectionSetting.pagination_style === "numbers") {
-            optionsData.pagination.renderBullet = (index, className) =>
-              `<span class="${className}">${index + 1}</span>`;
+          if (sectionSetting.enable_slide_arrow) {
+            optionsData.navigation = {
+              nextEl: swiper.querySelector(".swiper-button-next") || ".swiper-button-next",
+              prevEl: swiper.querySelector(".swiper-button-prev") || ".swiper-button-prev",
+            };
           }
+
+          if (
+            ["dots", "line", "counter", "numbers"].includes(sectionSetting.pagination_style)
+          ) {
+            optionsData.pagination = { 
+              el: swiper.querySelector(".swiper-pagination") || ".swiper-pagination",
+              clickable: true 
+            };
+
+            if (sectionSetting.pagination_style === "line") {
+              optionsData.pagination.type = "bullets";
+              optionsData.pagination.renderBullet = (index, className) =>
+                `<span class="${className}"><i></i><b></b></span>`;
+            }
+
+            if (sectionSetting.pagination_style === "counter") {
+              optionsData.pagination.type = "fraction";
+            }
+
+            if (sectionSetting.pagination_style === "numbers") {
+              optionsData.pagination.renderBullet = (index, className) =>
+                `<span class="${className}">${index + 1}</span>`;
+            }
+          }
+
+          const options = { ...defaults, ...optionsData };
+          if (typeof Swiper !== 'undefined') {
+            new Swiper(swiper, options);
+          } else {
+            console.error('Swiper is not defined. Please ensure swiper-bundle.js is loaded.');
+          }
+        } catch (e) {
+          console.error('Error parsing section settings JSON:', e, swiper.dataset.sectionSetting);
         }
       }
-
-      const options = { ...defaults, ...optionsData };
-      new Swiper(swiper, options);
     });
   }
 
   function setHeight() {
-  const imageContainer = document.querySelector('[index-id="1"]');
-  const specificDiv = document.querySelector(".swiper-wrapper.slideshow.banner.banner--adapt_image");
+    const imageContainer = document.querySelector('[index-id="1"]');
+    const specificDiv = document.querySelector(".swiper-wrapper.slideshow.banner.banner--adapt_image");
 
-  if (imageContainer) {
-     const firstImg = imageContainer.querySelector(".slideshow__media");
+    if (imageContainer) {
+       const firstImg = imageContainer.querySelector(".slideshow__media");
 
-    if (firstImg) {
-      const childHeight = firstImg.offsetHeight;
-
-      if (window.matchMedia("(max-width: 767px)").matches) {
-        imageContainer.style.height = "auto";
-
-        if (specificDiv) {
-          specificDiv.style.height = "auto";
-        }
-      } else {
-        imageContainer.style.height = "auto";
-
-        if (specificDiv) {
-          specificDiv.style.height = "auto";
+      if (firstImg) {
+        if (window.matchMedia("(max-width: 767px)").matches) {
+          imageContainer.style.height = "auto";
+          if (specificDiv) specificDiv.style.height = "auto";
+        } else {
+          imageContainer.style.height = "auto";
+          if (specificDiv) specificDiv.style.height = "auto";
         }
       }
     }
   }
-}
 
-
+  // Shopify theme editor support
   document.addEventListener("shopify:section:load", () => {
     initSwipers();
     setHeight();
@@ -424,9 +430,21 @@
     }, 300);
   });
 
-  // Initial execution
-  initSwipers();
-  setHeight();
+  // Wait for Swiper to be available before initializing
+  function checkSwiperAndInit() {
+    if (typeof Swiper !== 'undefined') {
+      initSwipers();
+      setHeight();
+    } else {
+      setTimeout(checkSwiperAndInit, 100);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkSwiperAndInit);
+  } else {
+    checkSwiperAndInit();
+  }
 </script>
 
 {% schema %}
