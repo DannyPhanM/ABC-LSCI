@@ -96,7 +96,7 @@
     "badge_position": "beside_price",
     "badge_fonts": "body_font",
     "badge_corner_radius": 30,
-    "badge_text_size": 12,
+    "badge_text_size": 10,
     "uppercase_badge": true,
     "badge_type": "save_amount",
     "sale_bg_color": "#ea3402",

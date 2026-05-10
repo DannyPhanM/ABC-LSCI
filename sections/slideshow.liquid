@@ -45,16 +45,57 @@
     height: 100%;
     z-index: 1;
 }
-.section-{{ section.id }}-padding .swipeslideshow .slide_arrow.swiper-button-prev > svg,
-.section-{{ section.id }}-padding .swipeslideshow .slide_arrow.swiper-button-next > svg {
-  fill: {{ section.settings.page_arrow_bg }};
-}
-@media screen and (min-width: 992px) {
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+  .section-{{ section.id }}-padding .swipeslideshow .slide_arrow.swiper-button-prev > svg,
+  .section-{{ section.id }}-padding .swipeslideshow .slide_arrow.swiper-button-next > svg {
+    fill: {{ section.settings.page_arrow_bg }};
   }
-}
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Pre-initialization styles for multi-slide layout */
+  .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide {
+    flex-shrink: 0;
+  }
+  .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide:last-child {
+    order: -1; /* Move last slide to the left of the first slide */
+  }
+  
+  @media screen and (min-width: 992px) {
+    .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide:last-child {
+      margin-left: calc(50% - (52.63% * 1.5) - {{ settings.spacing_grid_horizontal | default: 20 }}px);
+    }
+    .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide {
+      width: 52.63%;
+      margin-right: {{ settings.spacing_grid_horizontal | default: 20 }}px;
+    }
+  }
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide:last-child {
+      margin-left: calc(50% - (83.33% * 1.5) - {{ settings.spacing_grid_horizontal | default: 20 }}px);
+    }
+    .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide {
+      width: 83.33%;
+      margin-right: {{ settings.spacing_grid_horizontal | default: 20 }}px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide:last-child {
+      margin-left: calc(50% - (86.95% * 1.5) - {{ settings.spacing_grid_horizontal | divided_by: 2 | default: 10 }}px);
+    }
+    .swipeslideshow.slideshow--multiple:not(.swiper-initialized) .swiper-slide {
+      width: 86.95%;
+      margin-right: {{ settings.spacing_grid_horizontal | divided_by: 2 | default: 10 }}px;
+    }
+  }
 {%- endstyle -%}
 {%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank and section.settings.content_type == false -%}
   {%- style -%}
@@ -121,7 +162,7 @@
  
 <div class="section-{{ section.id }}-padding {% unless section.settings.slide_height == 'adapt_image' %}slider_height {% endunless %} slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% else %} slide_full{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}">
   
-    <div class="{{ section.settings.pagination_position }} {% if section.settings.content_type == true %}slidebutton_inner{% else %}slidebutton_out{% endif %}  swiper swipeslideshow" data-section-setting="{{ section.settings | json | escape }}">
+    <div class="{{ section.settings.pagination_position }} {% if section.settings.content_type == true %}slidebutton_inner slideshow--multiple{% else %}slidebutton_out{% endif %}  swiper swipeslideshow" data-section-setting="{{ section.settings | json | escape }}">
       <div
         class="swiper-wrapper slideshow banner banner--{{ section.settings.slide_height }} {% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank and section.blocks.first.settings.mobile_image == blank %} slideshow--placeholder{% endif %}" id="Slider-{{ section.id }}" aria-live="polite" aria-atomic="true">
         {%- for block in section.blocks -%}
@@ -397,29 +438,23 @@
     });
   }
 
-  function setHeight() {
-    const imageContainer = document.querySelector('[index-id="1"]');
-    const specificDiv = document.querySelector(".swiper-wrapper.slideshow.banner.banner--adapt_image");
+  function setHeight(sectionId) {
+    const section = sectionId ? document.querySelector(`.section-${sectionId}-padding`) : document;
+    if (!section) return;
+
+    const imageContainer = section.querySelector('[index-id="1"]');
+    const specificDiv = section.querySelector(".swiper-wrapper.slideshow.banner.banner--adapt_image");
 
     if (imageContainer) {
-       const firstImg = imageContainer.querySelector(".slideshow__media");
-
-      if (firstImg) {
-        if (window.matchMedia("(max-width: 767px)").matches) {
-          imageContainer.style.height = "auto";
-          if (specificDiv) specificDiv.style.height = "auto";
-        } else {
-          imageContainer.style.height = "auto";
-          if (specificDiv) specificDiv.style.height = "auto";
-        }
-      }
+      imageContainer.style.height = "auto";
+      if (specificDiv) specificDiv.style.height = "auto";
     }
   }
 
   // Shopify theme editor support
-  document.addEventListener("shopify:section:load", () => {
+  document.addEventListener("shopify:section:load", (event) => {
     initSwipers();
-    setHeight();
+    setHeight(event.detail.sectionId);
   });
 
   let resizeTimerSlide;

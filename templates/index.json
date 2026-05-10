@@ -46,8 +46,8 @@
           "settings": {
             "media_type": "image",
             "video_link": "",
-            "image": "shopify://shop_images/May_deals_16-9.jpg",
-            "mobile_image": "shopify://shop_images/May_deals_16-9.jpg",
+            "image": "shopify://shop_images/HOT_MAY_DEALS.jpg",
+            "mobile_image": "shopify://shop_images/HOT_MAY_DEALS.jpg",
             "overlay": false,
             "subheading": "",
             "enable_hide_subheading": true,
@@ -73,14 +73,14 @@
             "show_bottom_content": true
           }
         },
-        "slide_tWQiXX": {
+        "slide_8zVNNi": {
           "type": "slide",
           "settings": {
             "media_type": "image",
-            "video_link": "",
-            "image": "shopify://shop_images/FILA_GLIO_16-9.jpg",
-            "mobile_image": "shopify://shop_images/FILA_GLIO_16-9.jpg",
-            "overlay": true,
+            "video_link": "/",
+            "image": "shopify://shop_images/16-9_nb_204.jpg",
+            "mobile_image": "shopify://shop_images/16-9_nb_204.jpg",
+            "overlay": false,
             "subheading": "",
             "enable_hide_subheading": true,
             "subheading_size": "xlarge",
@@ -96,7 +96,7 @@
             "enable_hide_button": false,
             "button_label": "",
             "button_arrow": false,
-            "link": "shopify://collections/fila",
+            "link": "shopify://collections/new-balance",
             "button_style": "solid",
             "box_align": "bottom-left",
             "text_alignment": "left",
@@ -169,14 +169,14 @@
             "show_bottom_content": true
           }
         },
-        "slide_8zVNNi": {
+        "slide_tWQiXX": {
           "type": "slide",
           "settings": {
             "media_type": "image",
-            "video_link": "/",
-            "image": "shopify://shop_images/16-9_nb_204.jpg",
-            "mobile_image": "shopify://shop_images/16-9_nb_204.jpg",
-            "overlay": false,
+            "video_link": "",
+            "image": "shopify://shop_images/FILLA_ILLIT_GWP_16x9_71285f66-7a62-4d04-aef8-2720264ce78f.png",
+            "mobile_image": "shopify://shop_images/FILLA_ILLIT_GWP_16x9_71285f66-7a62-4d04-aef8-2720264ce78f.png",
+            "overlay": true,
             "subheading": "",
             "enable_hide_subheading": true,
             "subheading_size": "xlarge",
@@ -192,7 +192,7 @@
             "enable_hide_button": false,
             "button_label": "",
             "button_arrow": false,
-            "link": "shopify://collections/new-balance",
+            "link": "shopify://collections/fila",
             "button_style": "solid",
             "box_align": "bottom-left",
             "text_alignment": "left",
@@ -204,10 +204,10 @@
       },
       "block_order": [
         "slide_4dceXW",
-        "slide_tWQiXX",
+        "slide_8zVNNi",
         "slide_tKRFU6",
         "slide_bJi79A",
-        "slide_8zVNNi"
+        "slide_tWQiXX"
       ],
       "settings": {
         "layout": "full_bleed",
@@ -1215,8 +1215,8 @@
         "social_image_6KVd4N": {
           "type": "social_image",
           "settings": {
-            "image": "shopify://shop_images/Sale_banner.jpg",
-            "link": "shopify://collections/sale-item",
+            "image": "shopify://shop_images/FILLA_ILLIT_GWP_16x9_71285f66-7a62-4d04-aef8-2720264ce78f.png",
+            "link": "shopify://collections/fila",
             "subheading": "",
             "heading": "",
             "uppercase_head": false
