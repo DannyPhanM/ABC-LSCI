@@ -1,0 +1,45 @@
+{%- liquid
+  assign alignment_mobile_horizontal = alignment_mobile_horizontal | default: settings.alignment_mobile_horizontal | downcase | default: 'center'
+  assign alignment_desktop_horizontal = alignment_desktop_horizontal | default: settings.alignment_desktop_horizontal | downcase | default: 'center'
+  assign alignment_mobile_vertical = alignment_mobile_vertical | default: settings.alignment_mobile_vertical | downcase | default: 'center'
+  assign alignment_desktop_vertical = alignment_desktop_vertical | default: settings.alignment_desktop_vertical | downcase | default: 'center'
+
+  assign classes_alignment = 'flex flex-col'
+
+  case alignment_mobile_horizontal
+    when 'left'
+      assign classes_alignment = classes_alignment | append: ' items-start text-start'
+    when 'center'
+      assign classes_alignment = classes_alignment | append: ' items-center text-center'
+    when 'right'
+      assign classes_alignment = classes_alignment | append: ' items-end text-end'
+  endcase
+
+  case alignment_desktop_horizontal
+    when 'left'
+      assign classes_alignment = classes_alignment | append: ' md:items-start md:text-start'
+    when 'center'
+      assign classes_alignment = classes_alignment | append: ' md:items-center md:text-center'
+    when 'right'
+      assign classes_alignment = classes_alignment | append: ' md:items-end md:text-end'
+  endcase
+
+  case alignment_mobile_vertical
+    when 'top'
+      assign classes_alignment = classes_alignment | append: ' justify-start'
+    when 'center', 'middle'
+      assign classes_alignment = classes_alignment | append: ' justify-center'
+    when 'bottom'
+      assign classes_alignment = classes_alignment | append: ' justify-end'
+  endcase
+
+  case alignment_desktop_vertical
+    when 'top'
+      assign classes_alignment = classes_alignment | append: ' md:justify-start'
+    when 'center', 'middle'
+      assign classes_alignment = classes_alignment | append: ' md:justify-center'
+    when 'bottom'
+      assign classes_alignment = classes_alignment | append: ' md:justify-end'
+  endcase
+-%}
+{{- classes_alignment -}}

@@ -1,0 +1,49 @@
+{%- liquid
+  assign classes_spacing = ''
+
+  case settings.margin_top
+    when 'none'
+      assign classes_spacing = classes_spacing | append: ' mt-0'
+    when 'small'
+      assign classes_spacing = classes_spacing | append: ' mt-6'
+    when 'medium'
+      assign classes_spacing = classes_spacing | append: ' mt-10'
+    when 'large'
+      assign classes_spacing = classes_spacing | append: ' mt-20'
+  endcase
+
+  case settings.margin_bottom
+    when 'none'
+      assign classes_spacing = classes_spacing | append: ' mb-0'
+    when 'small'
+      assign classes_spacing = classes_spacing | append: ' mb-6'
+    when 'medium'
+      assign classes_spacing = classes_spacing | append: ' mb-10'
+    when 'large'
+      assign classes_spacing = classes_spacing | append: ' mb-20'
+  endcase
+
+  case settings.margin_top_desktop
+    when 'none'
+      assign classes_spacing = classes_spacing | append: ' md:mt-0'
+    when 'small'
+      assign classes_spacing = classes_spacing | append: ' md:mt-10'
+    when 'medium'
+      assign classes_spacing = classes_spacing | append: ' md:mt-16'
+    when 'large'
+      assign classes_spacing = classes_spacing | append: ' md:mt-28'
+  endcase
+
+  case settings.margin_bottom_desktop
+    when 'none'
+      assign classes_spacing = classes_spacing | append: ' md:mb-0'
+    when 'small'
+      assign classes_spacing = classes_spacing | append: ' md:mb-10'
+    when 'medium'
+      assign classes_spacing = classes_spacing | append: ' md:mb-16'
+    when 'large'
+      assign classes_spacing = classes_spacing | append: ' md:mb-28'
+  endcase
+
+  echo classes_spacing
+-%}

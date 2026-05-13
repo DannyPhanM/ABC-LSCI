@@ -67,7 +67,7 @@ class FacetFiltersForm extends HTMLElement {
         FacetFiltersForm.renderFilters(html, event);
         FacetFiltersForm.renderProductGridContainer(html);
         FacetFiltersForm.renderProductCount(html);
-        if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);
+        if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html);
       });
   }
 
@@ -76,7 +76,7 @@ class FacetFiltersForm extends HTMLElement {
     FacetFiltersForm.renderFilters(html, event);
     FacetFiltersForm.renderProductGridContainer(html);
     FacetFiltersForm.renderProductCount(html);
-    if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);
+    if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html);
   }
 
   static renderProductGridContainer(html) {
@@ -93,15 +93,23 @@ class FacetFiltersForm extends HTMLElement {
   }
 
   static renderProductCount(html) {
-    const count = new DOMParser().parseFromString(html, 'text/html').getElementById('ProductCount').innerHTML;
+    const parsedHTML = new DOMParser().parseFromString(html, 'text/html');
+    const countElement = parsedHTML.getElementById('ProductCount') || parsedHTML.getElementById('ProductCountDesktop');
+    if (!countElement) return;
+
+    const count = countElement.innerHTML;
     const container = document.getElementById('ProductCount');
     const containerDesktop = document.getElementById('ProductCountDesktop');
-    container.innerHTML = count;
-    container.classList.remove('loading');
+
+    if (container) {
+      container.innerHTML = count;
+      container.classList.remove('loading');
+    }
     if (containerDesktop) {
       containerDesktop.innerHTML = count;
       containerDesktop.classList.remove('loading');
     }
+
     const loadingSpinners = document.querySelectorAll(
       '.facets-container .loading__spinner, facet-filters-form .loading__spinner'
     );

@@ -7,6 +7,8 @@
 {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag: preload: true }}
 {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+{{ 'load-more.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'load-more.js' | asset_url }}" defer="defer"></script>
 {% unless card_product.has_only_default_variant %}
   {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
   {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -76,7 +78,7 @@
           <form class="facets-vertical-form" id="FacetSortForm">
             {%- if section.settings.enable_count_result == true -%}
               <div class="product-count-vertical" role="status">
-                <h2 class="product-count__text text-body">
+                <p class="product-count__text text-body">
                   <span id="ProductCountDesktop">
                     {%- if collection.results_count -%}
                       {{
@@ -92,13 +94,13 @@
                       }}
                     {%- endif -%}
                   </span>
-                </h2>
+                </p>
                 {%- render 'loading-spinner' -%}
               </div>
             {%- endif -%}
 
             <div class="sorting_switcher">
-              <div class="button_switcher">
+              <div class="button_switcher" style="display: none">
                 <div
                   class="{% if section.settings.listing_mode == 'p_grid' %}active{% endif %} list_grid show_grid"
                   tabindex="0"
@@ -170,6 +172,8 @@
             filter_value: section.settings.filter_value,
             listing_mode: section.settings.listing_mode,
             hide_empty: section.settings.hide_empty,
+            enable_price_checkbox: section.settings.enable_price_checkbox,
+            price_ranges: section.settings.price_ranges,
             paginate: paginate
           %}
         </aside>
@@ -402,7 +406,11 @@
             </ul>
 
             {%- if paginate.pages > 1 -%}
-              {% render 'pagination', paginate: paginate, anchor: '' %}
+              {% if section.settings.pagination_type == 'load_more' %}
+                {% render 'load-more-button', paginate: paginate %}
+              {% else %}
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+              {% endif %}
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -463,6 +471,22 @@
       "step": 4,
       "default": 16,
       "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "options": [
+        {
+          "value": "numeric",
+          "label": "Numeric"
+        },
+        {
+          "value": "load_more",
+          "label": "Load More"
+        }
+      ],
+      "default": "numeric",
+      "label": "Pagination type"
     },
     {
       "type": "range",
@@ -613,6 +637,23 @@
       "id": "enable_count_result",
       "default": true,
       "label": "Enable results count"
+    },
+    {
+      "type": "header",
+      "content": "Price Filter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_price_checkbox",
+      "default": false,
+      "label": "Enable price checkboxes instead of range"
+    },
+    {
+      "type": "textarea",
+      "id": "price_ranges",
+      "label": "Price ranges",
+      "default": "0-1000000, 1000000-2000000, 2000000-5000000, 5000000-0",
+      "info": "Format: min-max, min-max. Use 0 for no limit. Example: 0-100, 100-200, 200-0"
     },
 
     {

@@ -115,8 +115,8 @@
   flex-wrap: wrap;
   align-items: center;
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 8px;
+  left: 8px;
 }
 .product_badge.product_over_badge .badge.newbadge,
 .product_badge.product_over_badge .badge.soldbadge {
@@ -268,9 +268,8 @@
   padding: 1px 0;
 }
 .card_vendor {
-  color: rgba(var(--color-foreground), 0.7);
-  font-size: calc(var(--font-body-scale) * 12px);
-  color: #898989;
+  font-size: 9px;
+  color: #888888;
 }
 .card-information > .card_vendor {
   margin-bottom: 0px;
@@ -1112,7 +1111,7 @@ ul.product-grid {
     font-size: calc(var(--font-body-scale) * 14px);
   }
   .card_vendor {
-    font-size: calc(var(--font-body-scale) * 10px);
+    font-size: 9px;
   }
   .product-card-wrapper .quick-add__submit {
     font-size: calc(var(--font-body-scale) * 12px);

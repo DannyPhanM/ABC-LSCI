@@ -1,0 +1,121 @@
+{% comment %}
+    Renders price checkboxes.
+    Accepts:
+    - filter: {Object} Filter object
+    - price_ranges: {String} Comma separated ranges (e.g. 0-10, 10-20)
+    - id_prefix: {String} ID prefix
+{% endcomment %}
+
+{% style %}
+  .price-checkboxes-wrapper .facets__list {
+    padding: 0;
+  }
+  .price-checkboxes-wrapper .facet-checkbox {
+
+  }
+  .price-checkboxes-wrapper .facet-checkbox input[type='checkbox'] {
+
+  }
+  .price-checkboxes-wrapper .facet-checkbox .icon-checkmark {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+  }
+{% endstyle %}
+
+<price-checkboxes class="price-checkboxes-wrapper" data-id-prefix="{{ id_prefix }}">
+  <ul class="facets__list list-unstyled facets-layout-list--text " role="list">
+    {%- assign ranges = price_ranges | split: ',' -%}
+    {%- for range in ranges -%}
+      {%- assign clean_range = range | strip -%}
+      {%- assign min_max = clean_range | split: '-' -%}
+      {%- assign min = min_max[0] | strip -%}
+      {%- assign max = min_max[1] | strip -%}
+
+      {%- liquid
+        assign label = ''
+        if min == '0'
+          assign amount = max | times: 100 | money
+          assign label = 'Dưới ' | append: amount
+        elsif max == '0'
+          assign amount = min | times: 100 | money
+          assign label = 'Trên ' | append: amount
+        else
+          assign min_amount = min | times: 100 | money
+          assign max_amount = max | times: 100 | money
+          assign label = min_amount | append: ' - ' | append: max_amount
+        endif
+
+        assign current_min_value = filter.min_value.value | default: 0
+        assign current_max_value = filter.max_value.value | default: 0
+        
+        assign min_subunits = min | times: 100
+        assign max_subunits = max | times: 100
+
+        assign checked = false
+        if current_min_value != 0 or current_max_value != 0
+          assign min_in_range = false
+          if min_subunits >= current_min_value
+            assign min_in_range = true
+          endif
+
+          assign max_in_range = false
+          if current_max_value == 0
+            assign max_in_range = true
+          elsif max_subunits != 0 and max_subunits <= current_max_value
+            assign max_in_range = true
+          endif
+
+          if min_in_range and max_in_range
+            assign checked = true
+          endif
+        endif
+      -%}
+
+      <li class="list-menu__item facets__item">
+        <label for="{{ id_prefix }}-Price-{{ forloop.index }}" class="facet-checkbox">
+          <input
+            type="checkbox"
+            name="price-range-option"
+            value="{{ min }}-{{ max }}"
+            id="{{ id_prefix }}-Price-{{ forloop.index }}"
+            {% if checked %}checked{% endif %}
+            class="price-range-checkbox"
+            data-min="{{ min | times: 100 }}"
+            data-max="{{ max | times: 100 }}"
+          >
+          <svg
+            width="1.6rem"
+            height="1.6rem"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1"></rect>
+          </svg>
+          <svg
+            aria-hidden="true"
+            class="icon icon-checkmark"
+            width="1.1rem"
+            height="0.7rem"
+            viewBox="0 0 11 7"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="facet-checkbox__text" aria-hidden="true">{{ label }}</span>
+        </label>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  {% comment %} Hidden inputs that actually carry the filter values {% endcomment %}
+  <input type="hidden" name="{{ filter.min_value.param_name }}" id="{{ id_prefix }}-GTE-Hidden" {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}>
+  <input type="hidden" name="{{ filter.max_value.param_name }}" id="{{ id_prefix }}-LTE-Hidden" {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}>
+</price-checkboxes>
+
+<script src="{{ 'price-checkboxes.js' | asset_url }}" defer="defer"></script>

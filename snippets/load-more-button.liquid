@@ -1,0 +1,26 @@
+{% comment %}
+    Renders a load more button for AJAX pagination.
+    Accepts:
+    - paginate: {Object} Paginate object
+{% endcomment %}
+
+{%- if paginate.next -%}
+  <load-more class="load-more-wrapper center" data-next-url="{{ paginate.next.url }}" data-section-id="{{ section.id }}">
+    <button type="button" class="button button--primary load-more-button">
+      <span>
+        {% render 'icon-loading' %}
+        {{ 'products.facets.show_more' | t }}</span>
+      <div class="loading__spinner hidden">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="spinner"
+          viewBox="0 0 66 66"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </button>
+  </load-more>
+{%- endif -%}

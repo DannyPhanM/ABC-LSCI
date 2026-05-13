@@ -77,7 +77,7 @@
   flex-wrap: wrap;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
 }
 
 .price--center {
@@ -133,7 +133,7 @@
   .price--on-sale .price__sale {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
   }
 }
 .black-price {
@@ -145,20 +145,20 @@
   font-weight: 700;
 }
 
-.card__information
-  .price__container
-  .price__sale
-  .price-item.price-item--regular {
+@media(max-width: 767px) {
+  .card__information .price__container .price__sale .price-item.price-item--sale {
+    font-size: 14px;
+  }
+}
+
+.card__information .price__container .price__sale .price-item.price-item--regular {
   font-size: 14px;
   font-weight: 400;
   color: #898989;
 }
 
-.card__information
-  .price__container
-  .price__regular
-  .price-item.price-item--regular {
-  font-size: 16px !important;
+.card__information .price__container .price__regular .price-item.price-item--regular {
+  font-size: 14px !important;
   font-weight: 700;
 }
 

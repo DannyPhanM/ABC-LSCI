@@ -262,7 +262,7 @@
             <form class="facets-vertical-form" id="FacetSortForm">
               {%- if section.settings.enable_count_result == true -%}
                 <div class="product-count-vertical" role="status">
-                  <h2 class="product-count__text text-body">
+                  <p class="product-count__text text-body">
                     <span id="ProductCountDesktop">
                       {%- if search.results_count -%}
                         {{
@@ -278,7 +278,7 @@
                         }}
                       {%- endif -%}
                     </span>
-                  </h2>
+                  </p>
                   {%- render 'loading-spinner' -%}
                 </div>
               {%- endif -%}

@@ -117,7 +117,7 @@ input::-webkit-search-decoration {
   padding: 16px;
 }
 .card__content .full-unstyled-link {
-  font-size: 16px;
+  font-size: 14px;
 }
 .search_pages .card:not(.card--horizontal) > .card__content > .card__badge {
   margin: 0;

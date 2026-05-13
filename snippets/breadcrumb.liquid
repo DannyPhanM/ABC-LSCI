@@ -40,7 +40,7 @@
     }
   }
 {%- endstyle -%}
-{% unless template == 'index' %}
+{% unless template == 'index' or template == 'collection' %}
     <div class="custom-width page-width {% if template == 'product' %}page-width-with-bread_bg{% endif %}">
       <nav class="breadcrumb {% if settings.enable_bread_bg == true %}bread_bg{% endif %}" aria-label="breadcrumbs">
         <a href="{{ routes.root_url }}" class="full-unstyled-link" title="{{ 'custom_data.data_inner.home' | t }}">

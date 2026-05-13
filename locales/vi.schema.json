@@ -8,6 +8,31 @@
  * ------------------------------------------------------------
  */
 {
+  "settings": {
+    "mobile_content_alignment": "Căn chỉnh nội dung di động",
+    "vertical_alignment": "Căn chỉnh theo chiều dọc",
+    "horizontal_alignment": "Căn chỉnh theo chiều ngang"
+  },
+  "options": {
+    "alignment": {
+      "vertical": {
+        "start": "Trên",
+        "center": "Giữa",
+        "end": "Dưới"
+      },
+      "horizontal": {
+        "start": "Trái",
+        "center": "Giữa",
+        "end": "Phải"
+      }
+    }
+  },
+  "content": {
+    "header": {
+      "desktop_content_alignment": "Căn chỉnh nội dung máy tính",
+      "mobile_content_alignment": "Căn chỉnh nội dung di động"
+    }
+  },
   "settings_schema": {
     "colors": {
       "name": "Màu sắc",

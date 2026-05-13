@@ -1,0 +1,23 @@
+{%- liquid
+  assign class_gradient = ''
+  if mobile_vertical_position == 'top'
+    assign class_gradient = class_gradient | append: ' top-to-bottom-gradient'
+  elsif mobile_vertical_position == 'bottom'
+    assign class_gradient = class_gradient | append: ' bottom-to-top-gradient'
+  elsif mobile_vertical_position == 'center'
+    assign class_gradient = class_gradient | append: ' center-gradient'
+  endif
+
+  if desktop_vertical_position == 'top'
+    assign class_gradient = class_gradient | append: ' md:top-to-bottom-gradient'
+  elsif desktop_vertical_position == 'bottom'
+    assign class_gradient = class_gradient | append: ' md:bottom-to-top-gradient'
+  elsif desktop_vertical_position == 'center' and desktop_horizontal_position == 'left'
+    assign class_gradient = class_gradient | append: ' md:left-to-right-gradient'
+  elsif desktop_vertical_position == 'center' and desktop_horizontal_position == 'right'
+    assign class_gradient = class_gradient | append: ' md:right-to-left-gradient'
+  elsif desktop_vertical_position == 'center' and desktop_horizontal_position == 'center'
+    assign class_gradient = class_gradient | append: ' md:center-gradient'
+  endif
+-%}
+{{- class_gradient -}}

@@ -206,7 +206,7 @@
       "clear": "Xóa",
       "clear_all": "Xóa tất cả",
       "from": "Từ",
-      "filter_and_sort": "Lọc và sắp xếp",
+      "filter_and_sort": "BỘ LỌC & SẮP XẾP",
       "filter_by_label": "Bộ lọc:",
       "filter_button": "Bộ lọc",
       "filters_selected": {
@@ -601,6 +601,31 @@
       "number_store": "Cửa hàng",
       "see_map": "Xem bản đồ",
       "have_bag": "Bạn có muốn lấy túi giấy không?"
+    }
+  },
+  "settings": {
+    "mobile_content_alignment": "Căn chỉnh nội dung di động",
+    "vertical_alignment": "Căn chỉnh theo chiều dọc",
+    "horizontal_alignment": "Căn chỉnh theo chiều ngang"
+  },
+  "options": {
+    "alignment": {
+      "vertical": {
+        "start": "Trên",
+        "center": "Giữa",
+        "end": "Dưới"
+      },
+      "horizontal": {
+        "start": "Trái",
+        "center": "Giữa",
+        "end": "Phải"
+      }
+    }
+  },
+  "content": {
+    "header": {
+      "desktop_content_alignment": "Căn chỉnh nội dung máy tính",
+      "mobile_content_alignment": "Căn chỉnh nội dung di động"
     }
   },
   "shopify": {

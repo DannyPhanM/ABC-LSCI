@@ -8,6 +8,31 @@
  * ------------------------------------------------------------
  */
 {
+  "settings": {
+    "mobile_content_alignment": "Mobile content alignment",
+    "vertical_alignment": "Vertical alignment",
+    "horizontal_alignment": "Horizontal alignment"
+  },
+  "options": {
+    "alignment": {
+      "vertical": {
+        "start": "Top",
+        "center": "Center",
+        "end": "Bottom"
+      },
+      "horizontal": {
+        "start": "Left",
+        "center": "Center",
+        "end": "Right"
+      }
+    }
+  },
+  "content": {
+    "header": {
+      "desktop_content_alignment": "Desktop content alignment",
+      "mobile_content_alignment": "Mobile content alignment"
+    }
+  },
   "settings_schema": {
     "global": {
       "settings": {
