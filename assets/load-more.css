@@ -1,0 +1,52 @@
+.load-more-wrapper {
+  margin: 4rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.load-more-button {
+  min-width: 200px;
+  position: relative;
+}
+.load-more-button span {
+  display: flex;
+  align-items: center;
+}
+.load-more-button .loading__spinner {
+  width: 2rem;
+  height: 2rem;
+}
+
+.load-more-button .loading__spinner svg {
+  width: 100%;
+  height: 100%;
+}
+
+.load-more-wrapper.hidden {
+  display: none;
+}
+
+.load-more-button {
+  height: 40px;
+  padding: 12px 20px 13px;
+  border: 1px solid var(--Black, #000);
+  background: var(--White, #FFF);
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+.load-more-button:before,
+.load-more-button:after {
+  content: none;
+}
+.load-more-button:hover {
+  color: #fff;
+}
+.load-more-button:hover svg path {
+  stroke: #fff;
+}
+.load-more-button svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
