@@ -11,6 +11,18 @@
   "sections": {
     "banner": {
       "type": "main-collection-banner",
+      "blocks": {
+        "tag_aA6yeT": {
+          "type": "tag",
+          "settings": {
+            "text": "Tag label",
+            "link": "shopify://collections/all-collections"
+          }
+        }
+      },
+      "block_order": [
+        "tag_aA6yeT"
+      ],
       "custom_css": [],
       "settings": {
         "layout": "full_width",
@@ -20,12 +32,20 @@
         "image_height": "adapt",
         "desktop_custom_height": 700,
         "mobile_custom_height": 150,
-        "hero_layout": "overlay",
         "coll_bgcolor": "#898989",
-        "coll_color": "#ffffff",
+        "color_image": "#191717",
+        "color_no_image": "#000000",
         "coll_overlay": 5,
-        "m_top": 36,
-        "m_bottom": 0
+        "margin_top": "none",
+        "margin_bottom": "none",
+        "margin_top_desktop": "none",
+        "margin_bottom_desktop": "none",
+        "aspect_ratio_desktop": "2:1",
+        "aspect_ratio_mobile": "2:3",
+        "alignment_mobile_vertical": "center",
+        "alignment_mobile_horizontal": "center",
+        "alignment_desktop_vertical": "center",
+        "alignment_desktop_horizontal": "center"
       }
     },
     "product-grid": {
@@ -33,6 +53,7 @@
       "settings": {
         "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
         "products_per_page": 20,
+        "pagination_type": "numeric",
         "columns_desktop": 4,
         "listing_mode": "p_grid",
         "enable_desc": true,
@@ -49,6 +70,8 @@
         "vfilter_open": true,
         "enable_sorting": true,
         "enable_count_result": true,
+        "enable_price_checkbox": false,
+        "price_ranges": "0-1000000, 1000000-2000000, 2000000-5000000, 5000000-0",
         "columns_mobile": "2",
         "padding_top": 0,
         "padding_bottom": 40
