@@ -59,9 +59,9 @@
         "aspect_ratio_desktop": "2:1",
         "aspect_ratio_mobile": "2:3",
         "alignment_mobile_vertical": "center",
-        "alignment_mobile_horizontal": "center",
+        "alignment_mobile_horizontal": "left",
         "alignment_desktop_vertical": "center",
-        "alignment_desktop_horizontal": "center"
+        "alignment_desktop_horizontal": "left"
       }
     },
     "product-grid": {
