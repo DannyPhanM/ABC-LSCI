@@ -230,7 +230,9 @@
       "filter_selected_accessibility": "{{ type }} (Đã chọn {{ count }} bộ lọc)",
       "show_more": "Xem thêm sản phẩm",
       "show_less": "Rút gọn",
-      "filter_and_operator_subtitle": ""
+      "filter_and_operator_subtitle": "",
+      "price_under": "Dưới {{ amount }}",
+      "price_over": "Trên {{ amount }}"
     }
   },
   "templates": {

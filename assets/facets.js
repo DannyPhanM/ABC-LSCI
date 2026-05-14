@@ -176,10 +176,14 @@ class FacetFiltersForm extends HTMLElement {
           ? `.mobile-facets__close-button`
           : `.facets__summary`;
         const newElementToActivate = newFacetDetailsElement.querySelector(newElementSelector);
-        
         const isTextInput = event.target.getAttribute('type') === 'text';
 
-        if (newElementToActivate && !isTextInput) newElementToActivate.focus();
+        if (newElementToActivate && !isTextInput) {
+          // Only focus on desktop to avoid unintended menu closing on mobile
+          if (!newFacetDetailsElement.classList.contains('mobile-facets__details')) {
+            newElementToActivate.focus();
+          }
+        }
       }
     }
   }

@@ -118,7 +118,7 @@
                   assign is_color = true
                 endif
 
-                assign show_more_number = 5
+                assign show_more_number = 10
                 if presentation == 'image'
                   assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
                 else
@@ -225,6 +225,23 @@
                             </div>
                           {% endif %}
                           {% assign visible_index = 0 %}
+                          {%- assign has_active_more = false -%}
+                          {%- assign visible_index_check = 0 -%}
+                          {%- for value in sorted_values -%}
+                            {% liquid
+                              assign wbhide_empty_check = false
+                              if value.count == 0 and value.active == false and hide_empty == true
+                                assign wbhide_empty_check = true
+                              endif
+                            %}
+                            {%- unless wbhide_empty_check -%}
+                              {%- assign visible_index_check = visible_index_check | plus: 1 -%}
+                              {%- if visible_index_check > show_more_number and value.active -%}
+                                {%- assign has_active_more = true -%}
+                              {%- endif -%}
+                            {%- endunless -%}
+                          {%- endfor -%}
+                          {% assign visible_index = 0 %}
                           {%- for value in sorted_values -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
@@ -266,7 +283,7 @@
 
                             {%- if filter.param_name != 'filter.v.availability' -%}
                               <li
-                                class="list-menu__item facets__item{% if visible_index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}{% if wbhide_empty %} hidden{% endif %}"
+                                class="list-menu__item facets__item{% if visible_index > show_more_number and filter_type == 'vertical' and wbhide_empty == false and has_active_more == false %} show-more-item hidden{% endif %}{% if wbhide_empty %} hidden{% endif %}"
                                 {% if is_color %}
                                   data-title="{{ value.label | escape }}"
                                 {% endif %}
@@ -357,7 +374,7 @@
                           {%- endfor -%}
                         </ul>
                       </fieldset>
-                      {%- if visible_index > show_more_number and filter_type == 'vertical' -%}
+                      {%- if visible_index > show_more_number and filter_type == 'vertical' and has_active_more == false -%}
                         <show-more-button>
                           <button
                             class="button-show-more link underlined-link"
@@ -656,7 +673,7 @@
                         </summary>
                         <div
                           id="FacetMobile-{{ forloop.index }}-{{ section.id }}"
-                          class="mobile-facets__submenu gradient"
+                          class="mobile-facets__submenu gradient parent-display"
                         >
                           <button
                             class="hidden mobile-facets__close-button link link--text focus-inset"
@@ -667,7 +684,7 @@
                             {{ filter.label | escape }}
                           </button>
                             <ul
-                              class="{% if is_color %}{% if show_color_text %} color-filter--list{% else %} filter_design{% endif %}{% endif %} mobile-facets__list list-unstyled"
+                              class="{% if is_color %}{% if show_color_text %} color-filter--list{% else %} filter_design{% endif %}{% endif %} mobile-facets__list list-unstyled parent-wrap"
                             role="list"
                           >
                             {%- if filter.param_name == 'filter.v.availability' -%}
@@ -697,6 +714,22 @@
 
                               assign visible_index_mobile = 0
                             -%}
+                            {%- assign has_active_more_mobile = false -%}
+                            {%- assign visible_index_check_mobile = 0 -%}
+                            {%- for value in sorted_values -%}
+                              {% liquid
+                                assign wbhide_empty_check = false
+                                if value.count == 0 and value.active == false and hide_empty == true
+                                  assign wbhide_empty_check = true
+                                endif
+                              %}
+                              {%- unless wbhide_empty_check -%}
+                                {%- assign visible_index_check_mobile = visible_index_check_mobile | plus: 1 -%}
+                                {%- if visible_index_check_mobile > show_more_number and value.active -%}
+                                  {%- assign has_active_more_mobile = true -%}
+                                {%- endif -%}
+                              {%- endunless -%}
+                            {%- endfor -%}
                             {%- for value in sorted_values -%}
                               {% liquid
                                 assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-mobile-' | append: forloop.index
@@ -738,7 +771,7 @@
                               {%- endcapture -%}
 
                               {%- if filter.param_name != 'filter.v.availability' -%}
-                                <li class="mobile-facets__item list-menu__item{% if visible_index_mobile > show_more_number %} show-more-item hidden{% endif %}{% if wbhide_empty %} hidden{% endif %}"
+                                <li class="mobile-facets__item list-menu__item{% if visible_index_mobile > show_more_number and wbhide_empty == false and has_active_more_mobile == false %} show-more-item hidden{% endif %}{% if wbhide_empty %} hidden{% endif %}"
                                   {% if is_color %}
                                     data-title="{{ value.label | escape }}"
                                   {% endif %}
@@ -826,7 +859,7 @@
                                 </li>
                               {%- endif -%}
                             {%- endfor -%}
-                            {%- if visible_index_mobile > show_more_number -%}
+                            {%- if visible_index_mobile > show_more_number and has_active_more_mobile == false -%}
                               <show-more-button>
                                 <button
                                   class="button-show-more link underlined-link"

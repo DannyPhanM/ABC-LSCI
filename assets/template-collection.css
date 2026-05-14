@@ -360,6 +360,16 @@
     max-width: calc(33.33% - var(--grid-mobile-horizontal-spacing)* 2 / 3);
   }
   #product-grid.product-list {
-    rowfa-gap: 26px;
+    row-gap: 26px;
+  }
+}
+
+.collection--empty .button {
+  background: #000;
+}
+
+@media(max-width: 767px) {
+  .product-grid.listt-card {
+    row-gap: 40px;
   }
 }

@@ -26,7 +26,7 @@
   }
 {% endstyle %}
 
-<price-checkboxes class="price-checkboxes-wrapper" data-id-prefix="{{ id_prefix }}">
+<price-checkboxes class="price-checkboxes-wrapper" data-id-prefix="{{ id_prefix }}" data-multiplier="{{ multiplier }}">
   <ul class="facets__list list-unstyled facets-layout-list--text " role="list">
     {%- assign ranges = price_ranges | split: ',' -%}
     {%- for range in ranges -%}
@@ -36,40 +36,31 @@
       {%- assign max = min_max[1] | strip -%}
 
       {%- liquid
+        assign multiplier = 100
         assign label = ''
         if min == '0'
-          assign amount = max | times: 100 | money
-          assign label = 'Dưới ' | append: amount
+          assign amount = max | times: multiplier | money
+          assign label = 'products.facets.price_under' | t: amount: amount
         elsif max == '0'
-          assign amount = min | times: 100 | money
-          assign label = 'Trên ' | append: amount
+          assign amount = min | times: multiplier | money
+          assign label = 'products.facets.price_over' | t: amount: amount
         else
-          assign min_amount = min | times: 100 | money
-          assign max_amount = max | times: 100 | money
-          assign label = min_amount | append: ' - ' | append: max_amount
+          assign min_amount = min | times: multiplier | money
+          assign max_amount = max | times: multiplier | money
+          assign label = 'products.product.volume_pricing.price_range' | t: minimum: min_amount, maximum: max_amount
         endif
 
         assign current_min_value = filter.min_value.value | default: 0
         assign current_max_value = filter.max_value.value | default: 0
         
-        assign min_subunits = min | times: 100
-        assign max_subunits = max | times: 100
+        assign min_subunits = min | times: multiplier
+        assign max_subunits = max | times: multiplier
 
         assign checked = false
         if current_min_value != 0 or current_max_value != 0
-          assign min_in_range = false
-          if min_subunits >= current_min_value
-            assign min_in_range = true
-          endif
-
-          assign max_in_range = false
-          if current_max_value == 0
-            assign max_in_range = true
-          elsif max_subunits != 0 and max_subunits <= current_max_value
-            assign max_in_range = true
-          endif
-
-          if min_in_range and max_in_range
+          if min_subunits >= current_min_value and max_subunits <= current_max_value and max_subunits != 0
+            assign checked = true
+          elsif max == '0' and min_subunits >= current_min_value and current_max_value == 0
             assign checked = true
           endif
         endif
@@ -84,8 +75,8 @@
             id="{{ id_prefix }}-Price-{{ forloop.index }}"
             {% if checked %}checked{% endif %}
             class="price-range-checkbox"
-            data-min="{{ min | times: 100 }}"
-            data-max="{{ max | times: 100 }}"
+            data-min="{{ min | times: multiplier }}"
+            data-max="{{ max | times: multiplier }}"
           >
           <svg
             width="1.6rem"

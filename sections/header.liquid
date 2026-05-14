@@ -130,10 +130,12 @@
     document.addEventListener("DOMContentLoaded", function() {
       const cartButton = document.querySelector('[data-action="mobile_cart"]');
       const cartDrawer = document.querySelector('.header__icon--cart');
-      cartButton.addEventListener('click', function() {
-        const event = new Event('click');
-        cartDrawer.dispatchEvent(event);
-      });
+      if (cartButton && cartDrawer) {
+        cartButton.addEventListener('click', function() {
+          const event = new Event('click');
+          cartDrawer.dispatchEvent(event);
+        });
+      }
     });
   </script>
 {%- endif -%}

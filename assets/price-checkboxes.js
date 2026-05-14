@@ -5,10 +5,29 @@ if (!customElements.get('price-checkboxes')) {
       this.checkboxes = this.querySelectorAll('.price-range-checkbox');
       this.gteInput = this.querySelector('[id$="-GTE-Hidden"]');
       this.lteInput = this.querySelector('[id$="-LTE-Hidden"]');
+      this.multiplier = parseInt(this.dataset.multiplier) || 100;
 
       this.checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', this.onCheckboxChange.bind(this));
       });
+      
+      this.init();
+    }
+
+    init() {
+      // Restore checked state from URL parameters to support disjoint ranges visually
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedOptions = urlParams.getAll('price-range-option');
+      
+      if (selectedOptions.length > 0) {
+        this.checkboxes.forEach(checkbox => {
+          if (selectedOptions.includes(checkbox.value)) {
+            checkbox.checked = true;
+          } else {
+            checkbox.checked = false;
+          }
+        });
+      }
     }
 
     onCheckboxChange(event) {
@@ -31,8 +50,8 @@ if (!customElements.get('price-checkboxes')) {
           }
         });
 
-        this.gteInput.value = min !== 0 && min !== Infinity ? (min / 100).toString() : '';
-        this.lteInput.value = hasNoUpperLimit ? '' : (max / 100).toString();
+        this.gteInput.value = min !== 0 && min !== Infinity ? (min / this.multiplier).toString() : '';
+        this.lteInput.value = hasNoUpperLimit ? '' : (max / this.multiplier).toString();
       } else {
         this.gteInput.value = '';
         this.lteInput.value = '';
