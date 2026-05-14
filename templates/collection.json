@@ -12,6 +12,13 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
+        "tag_nb3VEp": {
+          "type": "tag",
+          "settings": {
+            "text": "Độc Quyền",
+            "link": "shopify://collections/doc-quyen"
+          }
+        },
         "tag_CjzVaz": {
           "type": "tag",
           "settings": {
@@ -28,6 +35,7 @@
         }
       },
       "block_order": [
+        "tag_nb3VEp",
         "tag_CjzVaz",
         "tag_aA6yeT"
       ],
