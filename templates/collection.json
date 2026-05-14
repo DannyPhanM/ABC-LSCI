@@ -12,6 +12,13 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
+        "tag_CjzVaz": {
+          "type": "tag",
+          "settings": {
+            "text": "Bán chạy",
+            "link": "shopify://collections/ban-chay"
+          }
+        },
         "tag_aA6yeT": {
           "type": "tag",
           "settings": {
@@ -21,6 +28,7 @@
         }
       },
       "block_order": [
+        "tag_CjzVaz",
         "tag_aA6yeT"
       ],
       "custom_css": [],
