@@ -48,5 +48,14 @@
 .load-more-button svg {
   width: 20px;
   height: 20px;
+}
+
+.load-more-button svg:first-of-type {
   margin-right: 8px;
 }
+
+.load-more-button svg:last-of-type {
+  margin-left: 8px;
+}
+
+

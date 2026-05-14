@@ -9,7 +9,9 @@
     <button type="button" class="button button--primary load-more-button">
       <span>
         {% render 'icon-loading' %}
-        {{ 'products.facets.show_more' | t }}</span>
+        {{ 'products.facets.show_more' | t }}
+        {% render 'icon-loadmore-next' %}
+      </span>
       <div class="loading__spinner hidden">
         <svg
           aria-hidden="true"

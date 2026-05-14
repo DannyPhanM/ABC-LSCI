@@ -186,13 +186,19 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 24px;
+    margin-top: 32px;
     list-style: none;
     padding: 0;
   }
+
+  .collection-hero-tags {
+  padding: 0;
+}
+
   .collection-hero-tag a {
     display: block;
-    padding: 10px 20px;
+    padding: 8px 12px;
+    white-space: nowrap;
     border: 1px solid #e5e5e5;
     border-radius: 4px;
     text-decoration: none;
@@ -202,9 +208,11 @@
     background: #fff;
     transition: all 0.2s ease;
   }
-  .collection-hero-tag a:hover {
+  .collection-hero-tag a:hover,
+  .collection-hero-tag.is-active a {
     border-color: #000;
-    background: #f9f9f9;
+    background: #000;
+    color: #fff;
   }
   @media screen and (max-width: 991px) {
     .collection-hero-{{ section.id }} .collection_row .row_coll_inner {
@@ -224,11 +232,11 @@
   @media screen and (max-width: 749px) {
     .collection-hero-tags {
       overflow-x: auto;
-      flex-wrap: nowrap;
-      margin-left: -15px;
-      margin-right: -15px;
-      padding-left: 15px;
-      padding-right: 15px;
+      flex-wrap: wrap;
+      margin-left: -8px;
+      margin-right: -8px;
+      padding-left: 8px;
+      padding-right: 8px;
       padding-bottom: 8px;
     }
     .collection-hero-tag a {
@@ -247,9 +255,14 @@
       padding: 0 6rem;
     }
   }
+
+  .collection-hero__inner .page-width {
+    margin: 0;
+    padding: 0;
+  }
+
   .collection-hero__no-image {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding: 40px 48px;
     background-color: #f4f4f4; /* Subtle background for visibility */
     border-radius: 8px;
     min-height: auto !important;
@@ -262,7 +275,11 @@
   }
   @media screen and (max-width: 991px) {
     .collection-hero__no-image {
-      padding: 20px;
+      padding: 0;
+    }
+
+    .collection-hero__inner.collection-hero__no-image .page-width {
+      min-height: 120px;
     }
   }
 {%- endstyle -%}
@@ -421,11 +438,15 @@
     {%- endfor -%}
 
     {%- if has_tags -%}
-      <div class="collection-hero-tags-wrapper page-width">
+      <div class="collection-hero-tags-wrapper">
         <ul class="collection-hero-tags list-unstyled">
           {%- for block in section.blocks -%}
             {%- if block.type == 'tag' and block.settings.text != blank -%}
-              <li class="collection-hero-tag" {{ block.shopify_attributes }}>
+              {%- assign is_active = false -%}
+              {%- if block.settings.link == request.path -%}
+                {%- assign is_active = true -%}
+              {%- endif -%}
+              <li class="collection-hero-tag{% if is_active %} is-active{% endif %}" {{ block.shopify_attributes }}>
                 {%- if block.settings.link != blank -%}
                   <a href="{{ block.settings.link }}" class="full-unstyled-link">
                     {{- block.settings.text | escape -}}

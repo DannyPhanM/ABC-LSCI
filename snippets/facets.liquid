@@ -18,6 +18,7 @@
 
 {%- liquid
   assign sort_by = results.sort_by | default: 'created-descending'
+  assign show_color_text = show_color_text | default: false
   assign total_active_values = 0
   assign default_presentation = 'text'
   if results.url
@@ -117,17 +118,10 @@
                   assign is_color = true
                 endif
 
+                assign show_more_number = 5
                 if presentation == 'image'
-                  assign show_more_number = 5
-                  if is_color
-                    assign show_more_number = 100
-                  endif
                   assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
                 else
-                  assign show_more_number = 5
-                  if is_color
-                    assign show_more_number = 100
-                  endif
                   assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--' | append: presentation
                 endif
               %}
@@ -212,7 +206,7 @@
                           endif
                         -%}
                         <ul
-                          class="{% if is_color %} filter_design{% endif %} {{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled"
+                          class="{% if is_color %}{% if show_color_text %} color-filter--list{% else %} filter_design{% endif %}{% endif %} {{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled"
                           role="list"
                         >
                           {%- if filter.param_name == 'filter.v.availability' -%}
@@ -230,7 +224,7 @@
                               <span>{{ 'custom_data.data_inner.in_stock_only' | t }}</span>
                             </div>
                           {% endif %}
-
+                          {% assign visible_index = 0 %}
                           {%- for value in sorted_values -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
@@ -243,6 +237,10 @@
                               if value.count == 0 and value.active == false and hide_empty == true
                                 assign wbhide_empty = true
                               endif
+
+                              unless wbhide_empty
+                                assign visible_index = visible_index | plus: 1
+                              endunless
                             %}
 
                             {%- capture label_class -%}
@@ -250,7 +248,7 @@
                             {%- endcapture -%}
 
                             {%- capture text_value -%}
-                              {% if is_color == false %}
+                              {% if is_color == false or show_color_text %}
                                 <span class="facet-checkbox__text" aria-hidden="true">
                                   <span class="facet-checkbox__text-label">{{- value.label | escape }}</span>{% if filter_value == true %}<span class="facetcount">[{{- value.count -}}]</span>{% endif %}
                                 </span>
@@ -268,7 +266,7 @@
 
                             {%- if filter.param_name != 'filter.v.availability' -%}
                               <li
-                                class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}"
+                                class="list-menu__item facets__item{% if visible_index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}{% if wbhide_empty %} hidden{% endif %}"
                                 {% if is_color %}
                                   data-title="{{ value.label | escape }}"
                                 {% endif %}
@@ -359,7 +357,7 @@
                           {%- endfor -%}
                         </ul>
                       </fieldset>
-                      {%- if filter.values.size > show_more_number and filter_type == 'vertical' -%}
+                      {%- if visible_index > show_more_number and filter_type == 'vertical' -%}
                         <show-more-button>
                           <button
                             class="button-show-more link underlined-link"
@@ -668,8 +666,8 @@
                             {% render 'icon-arrow' %}
                             {{ filter.label | escape }}
                           </button>
-                          <ul
-                            class="{{ visual_layout_class }} mobile-facets__list list-unstyled {% if is_color %} filter_design{% endif %}"
+                            <ul
+                              class="{% if is_color %}{% if show_color_text %} color-filter--list{% else %} filter_design{% endif %}{% endif %} mobile-facets__list list-unstyled"
                             role="list"
                           >
                             {%- if filter.param_name == 'filter.v.availability' -%}
@@ -696,6 +694,8 @@
                                 assign inactive_filter_values = filter.values | where: 'active', false
                                 assign sorted_values = active_filter_values | concat: inactive_filter_values
                               endif
+
+                              assign visible_index_mobile = 0
                             -%}
                             {%- for value in sorted_values -%}
                               {% liquid
@@ -709,6 +709,11 @@
                                 if value.count == 0 and value.active == false and hide_empty == true
                                   assign wbhide_empty = true
                                 endif
+
+                                unless wbhide_empty
+                                  assign visible_index = visible_index | plus: 1
+                                  assign visible_index_mobile = visible_index_mobile | plus: 1
+                                endunless
                               %}
 
                               {%- capture label_class -%}
@@ -716,7 +721,7 @@
                               {%- endcapture -%}
 
                               {%- capture text_value -%}
-                                {% if is_color == false %}
+                                {% if is_color == false or show_color_text %}
                                   <span class="facet-checkbox__text" aria-hidden="true">
                                     <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> {% if filter_value == true %}<span class="facetcount">[{{- value.count -}}]</span>{% endif %}
                                   </span>
@@ -733,8 +738,7 @@
                               {%- endcapture -%}
 
                               {%- if filter.param_name != 'filter.v.availability' -%}
-                                <li
-                                  class="mobile-facets__item list-menu__item"
+                                <li class="mobile-facets__item list-menu__item{% if visible_index_mobile > show_more_number %} show-more-item hidden{% endif %}{% if wbhide_empty %} hidden{% endif %}"
                                   {% if is_color %}
                                     data-title="{{ value.label | escape }}"
                                   {% endif %}
@@ -822,6 +826,22 @@
                                 </li>
                               {%- endif -%}
                             {%- endfor -%}
+                            {%- if visible_index_mobile > show_more_number -%}
+                              <show-more-button>
+                                <button
+                                  class="button-show-more link underlined-link"
+                                  id="Show-More-{{ forloop.index }}-{{ section.id }}-mobile"
+                                  type="button"
+                                >
+                                  <span class="label-show-more label-text"
+                                    ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t -}}
+                                  </span>
+                                  <span class="label-show-less label-text hidden"
+                                    ><span aria-hidden="true">- </span>{{ 'products.facets.show_less' | t -}}
+                                  </span>
+                                </button>
+                              </show-more-button>
+                            {%- endif %}
                           </ul>
                         </div>
                       </details>

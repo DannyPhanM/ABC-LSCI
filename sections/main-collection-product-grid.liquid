@@ -174,6 +174,7 @@
             hide_empty: section.settings.hide_empty,
             enable_price_checkbox: section.settings.enable_price_checkbox,
             price_ranges: section.settings.price_ranges,
+            show_color_text: section.settings.show_color_text,
             paginate: paginate
           %}
         </aside>
@@ -620,6 +621,13 @@
       "default": true,
       "label": "Open first filter by default",
       "info": "Applicable when collapsible filter enabled."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_color_text",
+      "default": false,
+      "label": "Show color text in filters",
+      "info": "Display color name next to the swatch circle."
     },
 
     {

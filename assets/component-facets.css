@@ -49,6 +49,7 @@ span.facetcount {
   align-items: center;
   gap: 8px;
   color: #000000;
+  padding-right: 1.5px;
 }
 .filter_design li {
   display: inline-block;
@@ -1751,3 +1752,82 @@ input.mobile-facets__checkbox {
   }
 }
 
+.price-checkboxes-wrapper .list-menu__item:not(:last-child) .facet-checkbox {
+  margin-bottom: 14px;
+}
+.facets-layout:not(.facets-layout-list--swatch) .list-menu__item.facets__item .facets__label {
+  padding: 0;
+  min-height: 24px;
+}
+ul.facets-layout:not(.facets-layout-list--swatch).facets__list,
+ul.facets-layout:not(.facets-layout-list--swatch).facets__list--vertical,
+ul.color-filter--list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.facets-layout:not(.facets-layout-list--swatch) .list-menu__item.facets__item .facets__label {
+  margin-bottom: 0 !important;
+}
+.facets-layout:not(.facets-layout-list--swatch) .list-menu__item.facets__item .icon.icon-checkmark {
+  top: 0;
+}
+.facets-layout:not(.facets-layout-list--swatch) .list-menu__item.facets__item input[type="checkbox"] {
+  top: 0;
+}
+.color-filter--list .swatch-input__input {
+  width: 0 !important;
+}
+
+
+/* Color filter list mode */
+.color-filter--list li {
+  display: block;
+  width: 100%;
+}
+.color-filter--list .facet-checkbox {
+  display: flex;
+  align-items: center;
+}
+.color-filter--list .swatch-input-wrapper.input-color {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.color-filter--list .facet-checkbox input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+.color-filter--list .facet-checkbox input[type='checkbox']:checked {
+  box-shadow: 0 0 0 2px rgb(var(--color-background)) inset;
+  border: 1px solid rgb(var(--color-foreground));
+}
+.color-filter--list .facet-checkbox input[type=checkbox]:checked ~ .icon-checkmark {
+  display: none;
+}
+.color-filter--list .swatch-input__label {
+  display: flex;
+  align-items: center;
+}
+
+/* Hide the entire list item if the label inside is hidden via hide_filt */
+.facets__item:has(.hide_filt) {
+  display: none !important;
+}
+
+.color-filter--list .facet-checkbox{
+  padding: 0;
+}
+
+show-more-button {
+  margin-top: 12px;
+  display: block;
+}
