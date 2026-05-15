@@ -12,13 +12,6 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "tag_nb3VEp": {
-          "type": "tag",
-          "settings": {
-            "text": "Độc Quyền",
-            "link": "shopify://collections/doc-quyen"
-          }
-        },
         "tag_CjzVaz": {
           "type": "tag",
           "settings": {
@@ -26,18 +19,41 @@
             "link": "shopify://collections/ban-chay"
           }
         },
+        "tag_nb3VEp": {
+          "type": "tag",
+          "settings": {
+            "text": "Độc Quyền",
+            "link": "shopify://collections/doc-quyen"
+          }
+        },
         "tag_aA6yeT": {
           "type": "tag",
           "settings": {
-            "text": "Tất cả collection",
-            "link": "shopify://collections/all-collections"
+            "text": "Hàng Mới",
+            "link": "shopify://collections/hang-moi"
+          }
+        },
+        "tag_k6fycz": {
+          "type": "tag",
+          "settings": {
+            "text": "Sale",
+            "link": "shopify://collections/sale-item"
+          }
+        },
+        "tag_mUFDJx": {
+          "type": "tag",
+          "settings": {
+            "text": "Gift Card",
+            "link": "shopify://products/abcmart-gift-card"
           }
         }
       },
       "block_order": [
-        "tag_nb3VEp",
         "tag_CjzVaz",
-        "tag_aA6yeT"
+        "tag_nb3VEp",
+        "tag_aA6yeT",
+        "tag_k6fycz",
+        "tag_mUFDJx"
       ],
       "custom_css": [],
       "settings": {
