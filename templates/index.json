@@ -46,8 +46,8 @@
           "settings": {
             "media_type": "image",
             "video_link": "",
-            "image": "shopify://shop_images/HOT_MAY_DEALS.jpg",
-            "mobile_image": "shopify://shop_images/HOT_MAY_DEALS.jpg",
+            "image": "shopify://shop_images/INTO_SUMMER_SALE_banner.jpg",
+            "mobile_image": "shopify://shop_images/INTO_SUMMER_SALE_banner.jpg",
             "overlay": false,
             "subheading": "",
             "enable_hide_subheading": true,
@@ -64,7 +64,7 @@
             "enable_hide_button": false,
             "button_label": "",
             "button_arrow": false,
-            "link": "shopify://collections/hot-may-deals",
+            "link": "shopify://collections/all-collections",
             "button_style": "solid",
             "box_align": "bottom-left",
             "text_alignment": "left",
@@ -281,7 +281,7 @@
         "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
         "layout": "grid",
         "caption": "",
-        "title": "ADIDAS - NEW ARRIVAL",
+        "title": "PICKLEBALL COLLECTION",
         "headcolor": "#df6334",
         "heading_size": "h0",
         "heading_position": "left",
@@ -291,7 +291,7 @@
         "show_section_count": false,
         "timercolor": "#df6334",
         "wb_enddate": "",
-        "collection": "adidas",
+        "collection": "pickleball-collection",
         "products_to_show": 20,
         "columns_desktop": 5,
         "show_row_on_desktop": "1",
@@ -896,7 +896,7 @@
         "show_section_count": false,
         "timercolor": "#df6334",
         "wb_enddate": "",
-        "collection": "asics",
+        "collection": "on",
         "products_per_page": 20,
         "columns_desktop": 5,
         "show_row_on_desktop": "1",
@@ -1039,7 +1039,7 @@
         "featured_collection_cAc9xf": {
           "type": "featured_collection",
           "settings": {
-            "collection": "fila",
+            "collection": "nike",
             "collection_name": ""
           }
         },

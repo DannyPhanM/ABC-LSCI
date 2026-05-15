@@ -3,8 +3,27 @@
 {%- liquid
   assign aspect_image = section.settings.def_image | default: collection.image
   assign show_image = false
-  if section.settings.def_image != blank or section.settings.image_mobile != blank or section.settings.show_collection_image and collection.image
+  if section.settings.def_image != blank or section.settings.image_mobile != blank or collection.image
     assign show_image = true
+  endif
+
+  assign has_tags = false
+  for block in section.blocks
+    if block.type == 'tag' and block.settings.text != blank
+      assign has_tags = true
+      break
+    endif
+  endfor
+
+  assign has_content = false
+  if show_image
+    assign has_content = true
+  elsif section.settings.show_title_breadcrumb
+    assign has_content = true
+  elsif section.settings.show_collection_description and collection.description != blank
+    assign has_content = true
+  elsif has_tags
+    assign has_content = true
   endif
 
   assign hero_layout_class = 'overlay'
@@ -290,6 +309,7 @@
   }
 {%- endstyle -%}
 
+{%- if has_content -%}
 <div class="collection-hero-{{ section.id }}-wrapper">
   <div class="collection-hero-{{ section.id }} {{ hero_layout_class | prepend: 'collection_' }} {{ class_spacing }}">
     <div class="collection-hero {{ hero_layout_class | prepend: 'collection_' }} {% if section.settings.layout == 'full_width' %}section-full-nospace{% else %}page-width{% endif %}">
@@ -309,27 +329,29 @@
         {% endif %}
 
         <div class="collection-hero__text-wrapper {{ class_content_alignment }} {% if show_image %} coll_content_width{% endif %} {% if hero_layout_class == 'overlay' and section.settings.coll_overlay > 0 and show_image %}{{ classes_gradient }}{% endif %}">
-          <h1 class="collection-hero__title">
-            <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-            {{- collection.title | escape -}}
-          </h1>
+          {%- if section.settings.show_title_breadcrumb -%}
+            <h1 class="collection-hero__title">
+              <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+              {{- collection.title | escape -}}
+            </h1>
 
-          <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
-            <a href="{{ routes.root_url }}" class="full-unstyled-link" title="{{ 'custom_data.data_inner.home' | t }}">
-              {{- 'custom_data.data_inner.home' | t -}}
-            </a>
-            {% if template contains 'collection' and collection.handle %}
-              <span aria-hidden="true">{% render 'icon-breadcrumb' %}</span>
-              {% if current_tags %}
-                {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
-                {{ collection.title | link_to: url }}
+            <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+              <a href="{{ routes.root_url }}" class="full-unstyled-link" title="{{ 'custom_data.data_inner.home' | t }}">
+                {{- 'custom_data.data_inner.home' | t -}}
+              </a>
+              {% if template contains 'collection' and collection.handle %}
                 <span aria-hidden="true">{% render 'icon-breadcrumb' %}</span>
-                <span>{{ current_tags | join: ' + ' }}</span>
-              {% else %}
-                <span>{{ collection.title }}</span>
+                {% if current_tags %}
+                  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                  {{ collection.title | link_to: url }}
+                  <span aria-hidden="true">{% render 'icon-breadcrumb' %}</span>
+                  <span>{{ current_tags | join: ' + ' }}</span>
+                {% else %}
+                  <span>{{ collection.title }}</span>
+                {% endif %}
               {% endif %}
-            {% endif %}
-          </nav>
+            </nav>
+          {%- endif -%}
 
           {%- if section.settings.show_collection_description == true and collection.description.size > 0 -%}
             <div class="collection-hero__description rte">{{ collection.description }}</div>
@@ -379,7 +401,7 @@
                   }}
                 {%- endif -%}
               </div>
-            {%- elsif section.settings.show_collection_image and collection.image -%}
+            {%- elsif collection.image -%}
               <div class="collection-hero__image-container">
                 {%- liquid
                   assign desktop_image_class = 'collection-hero__image'
@@ -434,15 +456,6 @@
       </div>
     </div>
 
-    {% comment %} Collection Tags Section {% endcomment %}
-    {%- assign has_tags = false -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'tag' and block.settings.text != blank -%}
-        {%- assign has_tags = true -%}
-        {%- break -%}
-      {%- endif -%}
-    {%- endfor -%}
-
     {%- if has_tags -%}
       <div class="collection-hero-tags-wrapper">
         <ul class="collection-hero-tags list-unstyled">
@@ -468,6 +481,7 @@
     {%- endif -%}
   </div>
 </div>
+{%- endif -%}
 {% schema %}
 {
   "name": "t:sections.main-collection-banner.name",
@@ -505,10 +519,9 @@
     },
     {
       "type": "checkbox",
-      "id": "show_collection_image",
-      "default": false,
-      "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
-      "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+      "id": "show_title_breadcrumb",
+      "default": true,
+      "label": "Show title and breadcrumb"
     },
     {
       "type": "checkbox",

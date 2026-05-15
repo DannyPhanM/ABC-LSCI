@@ -11,61 +11,18 @@
   "sections": {
     "banner": {
       "type": "main-collection-banner",
-      "blocks": {
-        "tag_CjzVaz": {
-          "type": "tag",
-          "settings": {
-            "text": "Bán chạy",
-            "link": "shopify://collections/ban-chay"
-          }
-        },
-        "tag_nb3VEp": {
-          "type": "tag",
-          "settings": {
-            "text": "Độc Quyền",
-            "link": "shopify://collections/doc-quyen"
-          }
-        },
-        "tag_aA6yeT": {
-          "type": "tag",
-          "settings": {
-            "text": "Hàng Mới",
-            "link": "shopify://collections/hang-moi"
-          }
-        },
-        "tag_k6fycz": {
-          "type": "tag",
-          "settings": {
-            "text": "Sale",
-            "link": "shopify://collections/sale-item"
-          }
-        },
-        "tag_mUFDJx": {
-          "type": "tag",
-          "settings": {
-            "text": "Gift Card",
-            "link": "shopify://products/abcmart-gift-card"
-          }
-        }
-      },
-      "block_order": [
-        "tag_CjzVaz",
-        "tag_nb3VEp",
-        "tag_aA6yeT",
-        "tag_k6fycz",
-        "tag_mUFDJx"
-      ],
       "custom_css": [],
       "settings": {
         "layout": "full_width",
         "def_image": "{{ collection.metafields.custom.banner_collection.value }}",
         "show_collection_image": false,
-        "show_collection_description": true,
+        "show_title_breadcrumb": false,
+        "show_collection_description": false,
         "image_height": "adapt",
         "desktop_custom_height": 700,
         "mobile_custom_height": 150,
         "coll_bgcolor": "#898989",
-        "color_image": "#191717",
+        "color_image": "#ffffff",
         "color_no_image": "#000000",
         "coll_overlay": 5,
         "margin_top": "none",
@@ -75,9 +32,9 @@
         "aspect_ratio_desktop": "2:1",
         "aspect_ratio_mobile": "2:3",
         "alignment_mobile_vertical": "center",
-        "alignment_mobile_horizontal": "left",
+        "alignment_mobile_horizontal": "center",
         "alignment_desktop_vertical": "center",
-        "alignment_desktop_horizontal": "left"
+        "alignment_desktop_horizontal": "center"
       }
     },
     "product-grid": {
@@ -85,7 +42,7 @@
       "settings": {
         "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
         "products_per_page": 20,
-        "pagination_type": "load_more",
+        "pagination_type": "numeric",
         "columns_desktop": 4,
         "listing_mode": "p_grid",
         "enable_desc": true,
@@ -100,10 +57,10 @@
         "hide_empty": true,
         "collapse_vfilter": true,
         "vfilter_open": true,
-        "show_color_text": true,
+        "show_color_text": false,
         "enable_sorting": true,
         "enable_count_result": true,
-        "enable_price_checkbox": true,
+        "enable_price_checkbox": false,
         "price_ranges": "0-1000000, 1000000-2000000, 2000000-5000000, 5000000-0",
         "columns_mobile": "2",
         "padding_top": 0,

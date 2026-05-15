@@ -16,12 +16,8 @@
         "show_collection_image": false,
         "show_collection_description": false,
         "image_height": "adapt",
-        "hero_layout": "overlay",
         "coll_bgcolor": "#000000",
-        "coll_color": "#000000",
-        "coll_overlay": 20,
-        "m_top": 0,
-        "m_bottom": 0
+        "coll_overlay": 20
       }
     },
     "product-grid": {

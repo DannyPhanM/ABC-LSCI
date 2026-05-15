@@ -168,7 +168,7 @@ media-gallery .slider-buttons .slider-counter {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 99;
     background: rgb(var(--color-background));
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     transform: translateY(100%);
