@@ -338,6 +338,7 @@
                 vfilter_open: section.settings.vfilter_open,
                 filter_value: section.settings.filter_value,
                 hide_empty: section.settings.hide_empty,
+                show_color_text: section.settings.show_color_text,
                 paginate: paginate
               %}
             </aside>
@@ -619,6 +620,13 @@
       "default": true,
       "label": "Open first filter by default",
       "info": "Applicable when collapsible filter enabled."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_color_text",
+      "default": false,
+      "label": "Show color text in filters",
+      "info": "Display color name next to the swatch circle."
     },
 
     {
