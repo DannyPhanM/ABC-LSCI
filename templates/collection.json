@@ -15,7 +15,6 @@
       "settings": {
         "layout": "full_width",
         "def_image": "{{ collection.metafields.custom.banner_collection.value }}",
-        "show_collection_image": false,
         "show_title_breadcrumb": false,
         "show_collection_description": false,
         "image_height": "adapt",
@@ -42,7 +41,7 @@
       "settings": {
         "color_scheme": "scheme-c19d686c-b3d1-443f-82fd-6b82763da764",
         "products_per_page": 20,
-        "pagination_type": "numeric",
+        "pagination_type": "load_more",
         "columns_desktop": 4,
         "listing_mode": "p_grid",
         "enable_desc": true,
@@ -60,7 +59,7 @@
         "show_color_text": false,
         "enable_sorting": true,
         "enable_count_result": true,
-        "enable_price_checkbox": false,
+        "enable_price_checkbox": true,
         "price_ranges": "0-1000000, 1000000-2000000, 2000000-5000000, 5000000-0",
         "columns_mobile": "2",
         "padding_top": 0,
