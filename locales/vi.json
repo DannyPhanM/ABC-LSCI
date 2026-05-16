@@ -228,7 +228,7 @@
       "to": "Đến",
       "clear_filter": "Xóa bộ lọc",
       "filter_selected_accessibility": "{{ type }} (Đã chọn {{ count }} bộ lọc)",
-      "show_more": "Xem thêm sản phẩm",
+      "show_more": "Xem thêm",
       "show_less": "Rút gọn",
       "filter_and_operator_subtitle": "",
       "price_under": "Dưới {{ amount }}",

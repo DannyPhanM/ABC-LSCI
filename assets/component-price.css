@@ -177,3 +177,8 @@
   color: rgb(var(--color-foreground));
   font-size: calc(var(--font-body-scale) * 16px) !important;
 }
+@media(min-width: 992px) {
+  .card__information .price__container .price__regular .price-item.price-item--regular {
+    font-size: 16px !important;
+  }
+}

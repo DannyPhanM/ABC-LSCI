@@ -89,7 +89,7 @@
                     {% assign min = filter.min_value.value %}
                     {% assign max = filter.max_value.value %}
                     {%- if min != null or max != null -%}
-                      <facet-remove>
+                      <facet-remove class="active-facets__button--price">
                         <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
                           <span class="active-facets__button-inner">
                             {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
@@ -461,7 +461,7 @@
                   {% assign min = filter.min_value.value %}
                   {% assign max = filter.max_value.value %}
                   {%- if min != null or max != null -%}
-                    <facet-remove>
+                    <facet-remove class="active-facets__button--price">
                       <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
                         <span class="active-facets__button-inner">
                           {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
@@ -1000,7 +1000,7 @@
         {% assign min = filter.min_value.value %}
         {% assign max = filter.max_value.value %}
         {%- if min != null or max != null -%}
-          <facet-remove>
+          <facet-remove class="active-facets__button--price">
             <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
               <span class="active-facets__button-inner">
                 {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
@@ -1111,7 +1111,7 @@
               {% assign min = filter.min_value.value %}
               {% assign max = filter.max_value.value %}
               {%- if min != null or max != null -%}
-                <facet-remove>
+                <facet-remove class="active-facets__button--price">
                   <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
                     <span class="active-facets__button-inner">
                       {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
